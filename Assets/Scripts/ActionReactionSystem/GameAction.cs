@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class GameAction
 {
+    //在ActionSystem的Flow中按顺序解析并执行
+
     //执行动作之前反应
     public List<GameAction> PreReactions { get; private set; } = new();
 

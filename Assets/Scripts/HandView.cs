@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;                 // 引入 DOTween 动画库
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Splines;          // 引入 Unity 的 Spline 系统
 
@@ -12,6 +13,7 @@ public class HandView : MonoBehaviour
     private readonly List<CardView> cards = new();
     // 存储所有手牌 (CardView)，只读引用，内部可添加
 
+
     /// <summary>
     /// 向手牌中添加一张卡，并更新所有卡的位置与朝向
     /// </summary>
@@ -20,6 +22,35 @@ public class HandView : MonoBehaviour
         cards.Add(cardView);  // 把卡加入手牌
         yield return UpdateCardPositions(0.15f); // 用 0.15 秒的动画重新排列
     }
+
+
+
+    /// <summary>
+    /// 移除手牌中card对应的CardView并返回该CardView
+    /// </summary>
+    public CardView RemoveCard(Card card)
+    {
+        CardView cardView = GetCardView(card);
+        if (cardView == null) return null;
+
+        cards.Remove(cardView);
+        //cards列表元素变化后,执行协程重新计算各卡牌位置
+        StartCoroutine(UpdateCardPositions(0.15f));
+        return cardView;
+    }
+
+
+
+    /// <summary>
+    /// 辅助函数,从Card(Model)中找到其对应的CardView(View)
+    /// </summary>
+    public CardView GetCardView(Card card)
+    {
+        //Where中Lambda表达式用于寻找满足条件的第一个
+        return cards.Where(cardView => cardView.Card == card).FirstOrDefault();
+    }
+
+
 
     /// <summary>
     /// 根据当前卡牌数量，重新计算并更新它们在样条曲线上的位置和朝向
