@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardSystem : MonoBehaviour
+public class CardSystem : Singleton<CardSystem>
 {
     [SerializeField] private HandView handView;
 
@@ -19,8 +19,12 @@ public class CardSystem : MonoBehaviour
     //注册及取消注册Performer与Reaction
     private void OnEnable()
     {
+        //注册Performer,指明执行该行动的协程
         ActionSystem.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);
         ActionSystem.AttachPerformer<DiscardAllCardsGA>(DiscardAllCardsPerformer);
+        //注册Reaction,指明在对什么行动做出反应
+        ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPreAction, ReactionTiming.PRE);
+        ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
 
 
@@ -28,10 +32,32 @@ public class CardSystem : MonoBehaviour
     {
         ActionSystem.DetachPerformer<DrawCardsGA>();
         ActionSystem.DetachPerformer<DiscardAllCardsGA>();
+        ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPreAction, ReactionTiming.PRE);
+        ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
+    }
+
+
+    /// <summary>
+    /// 初始化牌堆
+    /// </summary>
+    /// <param name="deckData">传入卡牌数据列表</param>
+    public void Setup(List<CardData> deckData)
+    {
+        foreach (var cardData in deckData)
+        {
+            Card card = new(cardData);
+            drawPile.Add(card);
+        }
     }
 
 
     //Performers
+
+    /// <summary>
+    /// 抽牌
+    /// </summary>
+    /// <param name="drawCardsGA">注意该GameAction含有属性Amount</param>
+    /// <returns></returns>
     private IEnumerator DrawCardsPerformer(DrawCardsGA drawCardsGA)
     {
         //抽牌数量不能超过手牌数
@@ -65,7 +91,24 @@ public class CardSystem : MonoBehaviour
         hand.Clear();
     }
 
-    
+
+    //注意上面的Performers不主动执行,而是作为reaction
+    //Reactions
+    private void EnemyTurnPreAction(EnemyTurnGA enemyTurnGA)
+    {
+        DiscardAllCardsGA discardAllCardsGA = new();
+        ActionSystem.Instance.AddReaction(discardAllCardsGA);
+    }
+
+
+    private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
+    {
+        //注意这里创建GA时初始化了抽牌数量,那么注册的反应也只会抽对应牌的数量
+        DrawCardsGA drawCardsGA = new(5);
+        ActionSystem.Instance.AddReaction(drawCardsGA);
+    }
+
+
     private IEnumerator DrawCard()
     {
         //ListExtensions中的List扩展方法

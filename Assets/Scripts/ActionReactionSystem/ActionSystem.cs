@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// ActionSystem与其他System密切相连,其注册都是在这些Systen中完成的
+/// </summary>
 public class ActionSystem : Singleton<ActionSystem>
 {
     //反应队列,确保反应有序执行(只是一个临时指针)
