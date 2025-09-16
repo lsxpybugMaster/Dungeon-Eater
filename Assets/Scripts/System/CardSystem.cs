@@ -22,6 +22,8 @@ public class CardSystem : Singleton<CardSystem>
         //注册Performer,指明执行该行动的协程
         ActionSystem.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);
         ActionSystem.AttachPerformer<DiscardAllCardsGA>(DiscardAllCardsPerformer);
+        ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);
+        
         //注册Reaction,指明在对什么行动做出反应
         ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPreAction, ReactionTiming.PRE);
         ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
@@ -32,6 +34,8 @@ public class CardSystem : Singleton<CardSystem>
     {
         ActionSystem.DetachPerformer<DrawCardsGA>();
         ActionSystem.DetachPerformer<DiscardAllCardsGA>();
+        ActionSystem.DetachPerformer<PlayCardGA>();
+
         ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPreAction, ReactionTiming.PRE);
         ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
@@ -89,6 +93,12 @@ public class CardSystem : Singleton<CardSystem>
             yield return DiscardCard(cardView);
         }
         hand.Clear();
+    }
+
+
+    private IEnumerator PlayCardPerformer(PlayCardGA playCardGA)
+    {
+        yield return null;
     }
 
 
