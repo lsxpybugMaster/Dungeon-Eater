@@ -144,6 +144,9 @@ MonoBehaviour:
   description: {fileID: 3694238573633128912}
   mana: {fileID: 2336293735869219675}
   imageSR: {fileID: 2769922044296027973}
+  dropLayer:
+    serializedVersion: 2
+    m_Bits: 64
   wrapper: {fileID: 6242056809136906495}
 --- !u!1 &4095710472790630851
 GameObject:

@@ -10,7 +10,9 @@ public class CardSystem : Singleton<CardSystem>
     private readonly List<Card> drawPile = new();
 
     private readonly List<Card> discardPile = new();
-
+    /// <summary>
+    /// 手牌牌堆
+    /// </summary>
     private readonly List<Card> hand = new();
 
     [SerializeField] private Transform drawPilePoint;
@@ -84,6 +86,7 @@ public class CardSystem : Singleton<CardSystem>
 
     }
 
+
     private IEnumerator DiscardAllCardsPerformer(DiscardAllCardsGA discardAllCardsGA)
     {
         foreach (var card in hand)
@@ -98,7 +101,22 @@ public class CardSystem : Singleton<CardSystem>
 
     private IEnumerator PlayCardPerformer(PlayCardGA playCardGA)
     {
-        yield return null;
+        hand.Remove(playCardGA.Card);
+        //删除卡牌后卡牌位置更新,同时返回删除的卡片
+        CardView cardView = handView.RemoveCard(playCardGA.Card);
+        yield return DiscardCard(cardView);
+
+        //解析该卡牌的全部Effect并"执行"(因为不会立刻执行)
+        foreach(var effect in playCardGA.Card.Effects)
+        {
+
+            PerformEffectGA performEffectGA = new(effect);
+            //注意现在是在Performer中,若想执行其他Action必须使用AddReaction 
+
+            Debug.Log("Perform");
+
+            ActionSystem.Instance.AddReaction(performEffectGA);
+        }
     }
 
 
@@ -145,7 +163,7 @@ public class CardSystem : Singleton<CardSystem>
     private IEnumerator DiscardCard(CardView cardView)
     {
         cardView.transform.DOScale(Vector3.zero, 0.15f);
-        Tween tween = cardView.transform.DOMove(drawPilePoint.position, 0.15f);
+        Tween tween = cardView.transform.DOMove(discardPilePoint.position, 0.15f);
         yield return tween.WaitForCompletion();
         Destroy(cardView.gameObject);
     }

@@ -12,6 +12,9 @@ public class CardView : MonoBehaviour
     [SerializeField] private TMP_Text mana;
     
     [SerializeField] private SpriteRenderer imageSR;
+
+    //卡牌作用区碰撞体的LayerMask
+    [SerializeField] private LayerMask dropLayer;
     
     /// <summary>
     /// 卡牌游戏对象
@@ -95,9 +98,13 @@ public class CardView : MonoBehaviour
     {
         //有动作在执行时,禁止玩家交互卡牌
         if (!Interactions.Instance.PlayerCanInteract()) return;
-        if (Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, 10f))
-        {
-            //执行卡牌功能
+        //注意必须卡牌在对应作用区使用才会真正作用
+        //要使用3D碰撞体!!!!!!
+        if (Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, 10f, dropLayer))
+        {        
+            //执行卡牌功能,该GA初始化时需额外传入参数,为所要删除的卡牌
+            PlayCardGA playCardGA = new(Card);
+            ActionSystem.Instance.Perform(playCardGA);
         }
         else
         {
@@ -107,5 +114,6 @@ public class CardView : MonoBehaviour
         }
         Interactions.Instance.PlayerIsDragging = false;
     }
+
     #endregion
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using SerializeReferenceEditor;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,4 +14,6 @@ public class CardData : ScriptableObject
     [field: SerializeField] public string Description { get; private set; }
     [field: SerializeField] public int Mana { get; private set; }
     [field: SerializeField] public Sprite Image { get; private set; }
+    //卡牌功能分解为Effect (使用了第三方库以在编辑器中显示)
+    [field: SerializeReference, SR] public List<Effect> Effects { get; private set; }
 }
