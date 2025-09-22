@@ -106,14 +106,16 @@ public class CardSystem : Singleton<CardSystem>
         CardView cardView = handView.RemoveCard(playCardGA.Card);
         yield return DiscardCard(cardView);
 
+        //减少对应的法力值
+        SpendManaGA spendManaGA = new(playCardGA.Card.Mana);
+        ActionSystem.Instance.AddReaction(spendManaGA);
+
         //解析该卡牌的全部Effect并"执行"(因为不会立刻执行)
         foreach(var effect in playCardGA.Card.Effects)
         {
 
             PerformEffectGA performEffectGA = new(effect);
             //注意现在是在Performer中,若想执行其他Action必须使用AddReaction 
-
-            Debug.Log("Perform");
 
             ActionSystem.Instance.AddReaction(performEffectGA);
         }

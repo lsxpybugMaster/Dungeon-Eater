@@ -13,6 +13,8 @@ public class MatchSetupSystem : MonoBehaviour
     {
         CardSystem.Instance.Setup(deckData);
 
+        ManaSystem.Instance.Setup();
+
         //第一次抽牌不需要作为回合结束的反应,直接执行
         DrawCardsGA drawCardsGA = new(5);
         ActionSystem.Instance.Perform(drawCardsGA);

@@ -100,7 +100,9 @@ public class CardView : MonoBehaviour
         if (!Interactions.Instance.PlayerCanInteract()) return;
         //注意必须卡牌在对应作用区使用才会真正作用
         //要使用3D碰撞体!!!!!!
-        if (Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, 10f, dropLayer))
+        //同时注意检查资源是否够
+        if ( ManaSystem.Instance.HasEnoughMana(Card.Mana)
+        && Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, 10f, dropLayer))
         {        
             //执行卡牌功能,该GA初始化时需额外传入参数,为所要删除的卡牌
             PlayCardGA playCardGA = new(Card);
