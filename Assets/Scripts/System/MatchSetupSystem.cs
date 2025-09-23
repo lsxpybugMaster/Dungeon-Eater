@@ -7,11 +7,16 @@ using UnityEngine;
 /// </summary>
 public class MatchSetupSystem : MonoBehaviour
 {
-    [SerializeField] private List<CardData> deckData;
+    /// <summary>
+    /// 包含英雄的初始卡组等信息
+    /// </summary>
+    [SerializeField] private HeroData heroData;
 
     void Start()
     {
-        CardSystem.Instance.Setup(deckData);
+        HeroSystem.Instance.Setup(heroData);
+
+        CardSystem.Instance.Setup(heroData.Deck);
 
         ManaSystem.Instance.Setup();
 
