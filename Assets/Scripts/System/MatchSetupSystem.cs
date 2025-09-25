@@ -12,9 +12,13 @@ public class MatchSetupSystem : MonoBehaviour
     /// </summary>
     [SerializeField] private HeroData heroData;
 
+    [SerializeField] private List<EnemyData> enemyDatas;
+
     void Start()
     {
         HeroSystem.Instance.Setup(heroData);
+        //初始化敌人信息
+        EnemySystem.Instance.Setup(enemyDatas);
 
         CardSystem.Instance.Setup(heroData.Deck);
 
