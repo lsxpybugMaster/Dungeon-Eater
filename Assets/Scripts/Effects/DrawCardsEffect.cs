@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DrawCardsEffect : Effect
 {
@@ -6,7 +6,7 @@ public class DrawCardsEffect : Effect
 
     public override GameAction GetGameAction()
     {
-        //DrawCardsEffect��ӦDrawCardsGA
+        //DrawCardsEffect对应DrawCardsGA
         DrawCardsGA drawCardsGA = new(drawAmount);
         return drawCardsGA;
     }

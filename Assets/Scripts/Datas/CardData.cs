@@ -15,5 +15,10 @@ public class CardData : ScriptableObject
     [field: SerializeField] public int Mana { get; private set; }
     [field: SerializeField] public Sprite Image { get; private set; }
     //卡牌功能分解为Effect (使用了第三方库以在编辑器中显示)
-    [field: SerializeReference, SR] public List<Effect> Effects { get; private set; }
+
+    //手动操作的Effect仅有一个
+    [field: SerializeReference, SR] public Effect ManualTargetEffect { get; private set; } = null;
+    //有许多自动决定目标对象的Effect
+    [field: SerializeField] public List<AutoTargetEffect> OtherEffects { get; private set; }
+    
 }

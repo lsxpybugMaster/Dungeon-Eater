@@ -8,6 +8,9 @@ public class EnemySystem : Singleton<EnemySystem>
     //管理游戏中敌人对象
     [SerializeField] private EnemyBoardView enemyBoardView;
 
+    //提供敌人列表供其他模块调用
+    public List<EnemyView> Enemies => enemyBoardView.EnemyViews;
+
     /*
         Action注册: 
         1. 在Performer中声明逻辑
@@ -17,6 +20,7 @@ public class EnemySystem : Singleton<EnemySystem>
     {
         ActionSystem.AttachPerformer<EnemyTurnGA>(EnemyTurnPerformer);
         ActionSystem.AttachPerformer<AttackHeroGA>(AttackHeroPerformer);
+        ActionSystem.AttachPerformer<KillEnemyGA>(KillEnemyPerformer);
     }
 
 
@@ -24,6 +28,7 @@ public class EnemySystem : Singleton<EnemySystem>
     {
         ActionSystem.DetachPerformer<EnemyTurnGA>();
         ActionSystem.DetachPerformer<AttackHeroGA>();
+        ActionSystem.DetachPerformer<KillEnemyGA>();
     }
 
 
@@ -61,5 +66,10 @@ public class EnemySystem : Singleton<EnemySystem>
         DealDamageGA dealDamageGA = new(attacker.AttackPower, new(){ HeroSystem.Instance.HeroView });
 
         ActionSystem.Instance.AddReaction(dealDamageGA);
+    }
+
+    private IEnumerator KillEnemyPerformer(KillEnemyGA killEnemyGA)
+    {
+        yield return enemyBoardView.RemoveEnemy(killEnemyGA.EnemyView);
     }
 }
