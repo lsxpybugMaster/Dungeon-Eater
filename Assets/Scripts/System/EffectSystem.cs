@@ -1,9 +1,9 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 管理与Effect有关的Performer注册相关
+/// 绠＄悊涓嶦ffect鏈夊叧鐨凱erformer娉ㄥ唽鐩稿叧
 /// </summary>
 public class EffectSystem : MonoBehaviour
 {
@@ -17,9 +17,10 @@ public class EffectSystem : MonoBehaviour
         ActionSystem.DetachPerformer<PerformEffectGA>();
     }
 
+    //鍦–ardSystem.PlayCardPerformer涓幏鍙栫殑Target
     private IEnumerator PerformEffectPerformer(PerformEffectGA performEffectGA)
     {
-        GameAction effectAction = performEffectGA.Effect.GetGameAction();
+        GameAction effectAction = performEffectGA.Effect.GetGameAction(performEffectGA.Targets);
         ActionSystem.Instance.AddReaction(effectAction);
         yield return null;
     }

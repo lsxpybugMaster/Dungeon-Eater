@@ -5,9 +5,13 @@ using UnityEngine;
 public class DealDamageEffect : Effect
 {
     [SerializeField] private int damageAmount;
-    public override GameAction GetGameAction()
+    /// <summary>
+    /// 从外部传入效果对应的目标
+    /// </summary>
+    /// <param name="targets"></param>
+    /// <returns></returns>
+    public override GameAction GetGameAction(List<CombatantView> targets)
     {
-        List<CombatantView> targets = new(EnemySystem.Instance.Enemies);
         //创建GA并返回
         DealDamageGA dealDamageGA = new(damageAmount, targets);
 

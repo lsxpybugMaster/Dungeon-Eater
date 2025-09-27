@@ -69,18 +69,27 @@ public class CardView : MonoBehaviour
         //有动作在执行时,禁止玩家交互卡牌
         if (!Interactions.Instance.PlayerCanInteract()) return;
         
-        Interactions.Instance.PlayerIsDragging = true;
-        
-        //显示手牌
-        wrapper.SetActive(true);
-        //隐藏卡牌展示UI
-        CardViewHoverSystem.Instance.Hide();
-        
-        dragStartPosition = transform.position;
-        dragStartRotation = transform.rotation;
+        if (Card.ManualTargetEffect != null)
+        {
+            //如果是需要手动控制的，需要显示箭头
+            ManualTargetSystem.Instance.StartTargeting(transform.position);
+        }
+        else
+        {
+            Interactions.Instance.PlayerIsDragging = true;
 
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-        transform.position = MouseUtil.GetMousePositionInWorldSpace(-1);
+            //显示手牌
+            wrapper.SetActive(true);
+            //隐藏卡牌展示UI
+            CardViewHoverSystem.Instance.Hide();
+
+            dragStartPosition = transform.position;
+            dragStartRotation = transform.rotation;
+
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            transform.position = MouseUtil.GetMousePositionInWorldSpace(-1);
+        }
+        
     }
 
 
@@ -89,6 +98,9 @@ public class CardView : MonoBehaviour
         //有动作在执行时,禁止玩家交互卡牌
         if (!Interactions.Instance.PlayerCanInteract()) return;
         
+        //如果显示了箭头,我们不需要再拖动卡牌了
+        if (Card.ManualTargetEffect != null) return;
+
         //使卡牌位置时刻跟随鼠标位置,实现拖拽功能
         transform.position = MouseUtil.GetMousePositionInWorldSpace(-1);
     }
@@ -98,23 +110,38 @@ public class CardView : MonoBehaviour
     {
         //有动作在执行时,禁止玩家交互卡牌
         if (!Interactions.Instance.PlayerCanInteract()) return;
-        //注意必须卡牌在对应作用区使用才会真正作用
-        //要使用3D碰撞体!!!!!!
-        //同时注意检查资源是否够
-        if ( ManaSystem.Instance.HasEnoughMana(Card.Mana)
-        && Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, 10f, dropLayer))
-        {        
-            //执行卡牌功能,该GA初始化时需额外传入参数,为所要删除的卡牌
-            PlayCardGA playCardGA = new(Card);
-            ActionSystem.Instance.Perform(playCardGA);
+        
+        if (Card.ManualTargetEffect != null)
+        {
+            //如果是通过箭头进行卡牌功能触发,则不再使用射线检测而直接从箭头脚本返回目标
+            EnemyView target = ManualTargetSystem.Instance.EndTargeting(MouseUtil.GetMousePositionInWorldSpace(-1));
+
+            if(target != null && ManaSystem.Instance.HasEnoughMana(Card.Mana))
+            {
+                PlayCardGA playCardGA = new(Card, target);
+                ActionSystem.Instance.Perform(playCardGA);
+            }
         }
         else
         {
-            //玩家松手时,卡牌并未落在其能实现功能的位置,因此需要回到手牌中显示
-            transform.position = dragStartPosition;
-            transform.rotation = dragStartRotation;
+            //注意必须卡牌在对应作用区使用才会真正作用
+            //要使用3D碰撞体!!!!!!
+            //同时注意检查资源是否够
+            if (ManaSystem.Instance.HasEnoughMana(Card.Mana)
+            && Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, 10f, dropLayer))
+            {
+                //执行卡牌功能,该GA初始化时需额外传入参数,为所要删除的卡牌
+                PlayCardGA playCardGA = new(Card);
+                ActionSystem.Instance.Perform(playCardGA);
+            }
+            else
+            {
+                //玩家松手时,卡牌并未落在其能实现功能的位置,因此需要回到手牌中显示
+                transform.position = dragStartPosition;
+                transform.rotation = dragStartRotation;
+            }
+            Interactions.Instance.PlayerIsDragging = false;
         }
-        Interactions.Instance.PlayerIsDragging = false;
     }
 
     #endregion

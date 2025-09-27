@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using ActionSystemTest;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -91,7 +92,6 @@ public class CardSystem : Singleton<CardSystem>
     {
         foreach (var card in hand)
         {
-            discardPile.Add(card);
             CardView cardView = handView.RemoveCard(card);
             yield return DiscardCard(cardView);
         }
@@ -110,11 +110,20 @@ public class CardSystem : Singleton<CardSystem>
         SpendManaGA spendManaGA = new(playCardGA.Card.Mana);
         ActionSystem.Instance.AddReaction(spendManaGA);
 
-        //解析该卡牌的全部Effect并"执行"(因为不会立刻执行)
-        foreach(var effect in playCardGA.Card.Effects)
+        //解析该卡牌的手动指示目标Effect
+        if (playCardGA.Card.ManualTargetEffect != null)
         {
+            PerformEffectGA performEffectGA = new(playCardGA.Card.ManualTargetEffect, new() { playCardGA.ManualTarget });
+            ActionSystem.Instance.AddReaction(performEffectGA);
+        }
+        //注意手动指示目标Effect和其余Effect不冲突,因此这里无需if-else
 
-            PerformEffectGA performEffectGA = new(effect);
+        //解析该卡牌的其余Effect并"执行"(因为不会立刻执行)
+        foreach (var effectWrapper in playCardGA.Card.OtherEffects)
+        {
+            List<CombatantView> targets = effectWrapper.TargetMode.GetTargets();
+
+            PerformEffectGA performEffectGA = new(effectWrapper.Effect, targets);
             //注意现在是在Performer中,若想执行其他Action必须使用AddReaction 
 
             ActionSystem.Instance.AddReaction(performEffectGA);
@@ -164,6 +173,8 @@ public class CardSystem : Singleton<CardSystem>
     /// <returns></returns>
     private IEnumerator DiscardCard(CardView cardView)
     {
+        //在这里弃牌,确保数据层与显示层一致
+        discardPile.Add(cardView.Card);
         cardView.transform.DOScale(Vector3.zero, 0.15f);
         Tween tween = cardView.transform.DOMove(discardPilePoint.position, 0.15f);
         yield return tween.WaitForCompletion();

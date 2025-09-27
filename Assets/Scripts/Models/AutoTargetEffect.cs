@@ -1,4 +1,4 @@
-using SerializeReferenceEditor;
+﻿using SerializeReferenceEditor;
 using UnityEngine;
 
 [System.Serializable]

@@ -1,10 +1,12 @@
+锘縰sing System.Collections.Generic;
+
 [System.Serializable]
 public abstract class Effect
 {
-    //效果对象能够执行GA
+    //鏁堟灉瀵硅薄鑳藉鎵цGA
     /// <summary>
-    /// 将效果转换为GameAction
+    /// 灏嗘晥鏋滆浆鎹负GameAction
     /// </summary>
     /// <returns></returns>
-    public abstract GameAction GetGameAction();
+    public abstract GameAction GetGameAction(List<CombatantView> targets);
 }
