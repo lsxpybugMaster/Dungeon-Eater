@@ -63,7 +63,7 @@ public class EnemySystem : Singleton<EnemySystem>
 
         //造成伤害作为公共功能,应当封装为GameAction
         //new(){ HeroSystem.Instance.HeroView } 创建了一个List,初始化元素为HeroSystem.Instance.HeroView
-        DealDamageGA dealDamageGA = new(attacker.AttackPower, new(){ HeroSystem.Instance.HeroView });
+        DealDamageGA dealDamageGA = new(attacker.AttackPower, new(){ HeroSystem.Instance.HeroView }, attackHeroGA.Caster);
 
         ActionSystem.Instance.AddReaction(dealDamageGA);
     }

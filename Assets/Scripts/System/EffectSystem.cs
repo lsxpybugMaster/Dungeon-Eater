@@ -20,7 +20,7 @@ public class EffectSystem : MonoBehaviour
     //在CardSystem.PlayCardPerformer中获取的Target
     private IEnumerator PerformEffectPerformer(PerformEffectGA performEffectGA)
     {
-        GameAction effectAction = performEffectGA.Effect.GetGameAction(performEffectGA.Targets);
+        GameAction effectAction = performEffectGA.Effect.GetGameAction(performEffectGA.Targets, HeroSystem.Instance.HeroView);
         ActionSystem.Instance.AddReaction(effectAction);
         yield return null;
     }

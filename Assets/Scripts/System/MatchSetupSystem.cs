@@ -14,6 +14,8 @@ public class MatchSetupSystem : MonoBehaviour
 
     [SerializeField] private List<EnemyData> enemyDatas;
 
+    [SerializeField] private PerkData perkData;
+ 
     void Start()
     {
         HeroSystem.Instance.Setup(heroData);
@@ -21,6 +23,8 @@ public class MatchSetupSystem : MonoBehaviour
         EnemySystem.Instance.Setup(enemyDatas);
 
         CardSystem.Instance.Setup(heroData.Deck);
+        //初始化天赋
+        PerkSystem.Instance.AddPerk(new Perk(perkData));
 
         ManaSystem.Instance.Setup();
 
