@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//在MatchUpSystem中初始化
 public class PerkSystem : Singleton<PerkSystem>
 {
     private readonly List<Perk> perks = new();

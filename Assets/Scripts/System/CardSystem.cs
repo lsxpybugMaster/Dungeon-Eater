@@ -27,9 +27,6 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.AttachPerformer<DiscardAllCardsGA>(DiscardAllCardsPerformer);
         ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);
         
-        //注册Reaction,指明在对什么行动做出反应
-        ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPreAction, ReactionTiming.PRE);
-        ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
 
 
@@ -39,8 +36,6 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.DetachPerformer<DiscardAllCardsGA>();
         ActionSystem.DetachPerformer<PlayCardGA>();
 
-        ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPreAction, ReactionTiming.PRE);
-        ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
 
 
@@ -132,20 +127,7 @@ public class CardSystem : Singleton<CardSystem>
 
 
     //注意上面的Performers不主动执行,而是作为reaction
-    //Reactions
-    private void EnemyTurnPreAction(EnemyTurnGA enemyTurnGA)
-    {
-        DiscardAllCardsGA discardAllCardsGA = new();
-        ActionSystem.Instance.AddReaction(discardAllCardsGA);
-    }
 
-
-    private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
-    {
-        //注意这里创建GA时初始化了抽牌数量,那么注册的反应也只会抽对应牌的数量
-        DrawCardsGA drawCardsGA = new(5);
-        ActionSystem.Instance.AddReaction(drawCardsGA);
-    }
 
 
     private IEnumerator DrawCard()

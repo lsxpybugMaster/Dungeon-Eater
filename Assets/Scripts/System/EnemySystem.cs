@@ -46,6 +46,14 @@ public class EnemySystem : Singleton<EnemySystem>
         //到了敌人的回合,遍历每个敌人并执行逻辑
         foreach (var enemy in enemyBoardView.EnemyViews)
         {
+            //结算燃烧状态
+            int burnStacks = enemy.GetStatusEffectStacks(StatusEffectType.BURN);
+            if (burnStacks > 0)
+            {
+                ApplyBurnGA applyBurnGA = new(burnStacks, enemy);
+                ActionSystem.Instance.AddReaction(applyBurnGA);
+            }
+            
             AttackHeroGA attackHeroGA = new(enemy);
             ActionSystem.Instance.AddReaction(attackHeroGA);
         }
