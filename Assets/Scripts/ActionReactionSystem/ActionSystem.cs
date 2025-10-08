@@ -13,6 +13,8 @@ public class ActionSystem : Singleton<ActionSystem>
     private List<GameAction> reactions = null;
     public bool IsPerforming { get; private set; } = false;
 
+
+    // 【注意】 static 字段和类本身关联，不跟随某个实例的生命周期。 即这些字段不会随着场景更改而消失!
     /*
      * 订阅字典,任何类型的GameAction作为键值, 索引其对应的Action列表
      * Action接受GameAction参数不返回值
@@ -201,6 +203,7 @@ public class ActionSystem : Singleton<ActionSystem>
             subs.Add(type, new());
             subs[type].Add(wrappedReaction);
         }
+
     }
 
 
@@ -215,6 +218,7 @@ public class ActionSystem : Singleton<ActionSystem>
             void wrappedReaction(GameAction action) => reaction((T)action);
             subs[type].Remove(wrappedReaction);
         }
+
     }
 
 }

@@ -18,13 +18,16 @@ public class MatchSetupSystem : MonoBehaviour
  
     void Start()
     {
+
         HeroSystem.Instance.Setup(heroData);
         //初始化敌人信息
         EnemySystem.Instance.Setup(enemyDatas);
 
         CardSystem.Instance.Setup(heroData.Deck);
-        //初始化天赋
-        PerkSystem.Instance.AddPerk(new Perk(perkData));
+
+        // 这部分是持久化数据,目前不应放在该位置
+        // 初始化天赋
+        // PerkSystem.Instance.AddPerk(new Perk(perkData));
 
         ManaSystem.Instance.Setup();
 

@@ -23,8 +23,7 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         if (state == 1 && Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene(1);
-            state = 0;
+            ReturnToMain();  
         }
     }
 
@@ -32,6 +31,14 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         SceneManager.LoadScene((int)Scene.BATTLE);
         state = 1;
+    }
+
+    public void ReturnToMain()
+    {
+        //初始化
+        OnReturnToMenu?.Invoke();
+        SceneManager.LoadScene(1);
+        state = 0;
     }
 
 

@@ -25,6 +25,7 @@ public class CardSystem : Singleton<CardSystem>
         //注册Performer,指明执行该行动的协程
         ActionSystem.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);
         ActionSystem.AttachPerformer<DiscardAllCardsGA>(DiscardAllCardsPerformer);
+        Debug.Log("ActionSystem.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);");
         ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);
         
     }
@@ -34,8 +35,8 @@ public class CardSystem : Singleton<CardSystem>
     {
         ActionSystem.DetachPerformer<DrawCardsGA>();
         ActionSystem.DetachPerformer<DiscardAllCardsGA>();
+        Debug.Log("ActionSystem.DetachPerformer<DiscardAllCardsGA>();");
         ActionSystem.DetachPerformer<PlayCardGA>();
-
     }
 
 
@@ -64,6 +65,8 @@ public class CardSystem : Singleton<CardSystem>
     {
         //抽牌数量不能超过手牌数
         int actualAmount = Mathf.Min(drawCardsGA.Amount, drawPile.Count);
+
+
         //还未抽到的牌数,如果不为0,后面需要洗牌
         int notDrawnAmount = drawCardsGA.Amount - actualAmount;
         for (int i = 0; i < actualAmount; i++)
@@ -132,6 +135,8 @@ public class CardSystem : Singleton<CardSystem>
 
     private IEnumerator DrawCard()
     {
+        //Debug.Log($"Draw BEFORE: draw:{drawPile.Count}, discard:{discardPile.Count}, hand:{hand.Count}");
+
         //ListExtensions中的List扩展方法
         Card card = drawPile.Draw();
         hand.Add(card);
@@ -142,6 +147,8 @@ public class CardSystem : Singleton<CardSystem>
 
     private void RefillDeck()
     {
+        //Debug.Log($"Refill: move {discardPile.Count} cards to drawPile");
+
         //把discardPile中的卡牌加到drawPile末尾
         drawPile.AddRange(discardPile);
         discardPile.Clear();
@@ -155,6 +162,8 @@ public class CardSystem : Singleton<CardSystem>
     /// <returns></returns>
     private IEnumerator DiscardCard(CardView cardView)
     {
+        //Debug.Log($"Discard AFTER: draw:{drawPile.Count}, discard:{discardPile.Count}, hand:{hand.Count}");
+
         //在这里弃牌,确保数据层与显示层一致
         discardPile.Add(cardView.Card);
         cardView.transform.DOScale(Vector3.zero, 0.15f);
