@@ -13,7 +13,7 @@ public class EnemyView : CombatantView
         AttackPower = enemyData.AttackPower;
         UpdateAttackText();
         //别忘记调用基类的初始化方法
-        SetupBase(enemyData.Health, enemyData.Image);
+        SetupBase(enemyData.Health, enemyData.Health, enemyData.Image);
     }
 
     private void UpdateAttackText()

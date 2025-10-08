@@ -25,7 +25,6 @@ public class CardSystem : Singleton<CardSystem>
         //注册Performer,指明执行该行动的协程
         ActionSystem.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);
         ActionSystem.AttachPerformer<DiscardAllCardsGA>(DiscardAllCardsPerformer);
-        Debug.Log("ActionSystem.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);");
         ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);
         
     }
@@ -35,7 +34,6 @@ public class CardSystem : Singleton<CardSystem>
     {
         ActionSystem.DetachPerformer<DrawCardsGA>();
         ActionSystem.DetachPerformer<DiscardAllCardsGA>();
-        Debug.Log("ActionSystem.DetachPerformer<DiscardAllCardsGA>();");
         ActionSystem.DetachPerformer<PlayCardGA>();
     }
 

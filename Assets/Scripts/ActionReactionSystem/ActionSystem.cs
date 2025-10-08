@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -33,6 +32,17 @@ public class ActionSystem : Singleton<ActionSystem>
     private static Dictionary<Type, Func<GameAction, IEnumerator>> performers = new();
 
 
+    //存储包装器,确保能够正确删除
+    private static Dictionary<Delegate, Action<GameAction>> reactionMap = new();
+
+
+    // NOTE 谨慎应用static变量,它们的生命周期需要手动管理
+    private void OnDestroy()
+    {
+        preSubs.Clear();
+        postSubs.Clear();
+        performers.Clear();
+    }
 
     /// <summary>
     /// 执行一个游戏动作的公开入口方法。外部代码通过调用此方法来触发一个动作。
@@ -192,17 +202,24 @@ public class ActionSystem : Singleton<ActionSystem>
         //选取对应的反应时机字典
         Dictionary<Type, List<Action<GameAction>>> subs = timing == ReactionTiming.PRE ? preSubs : postSubs;
 
-        void wrappedReaction(GameAction action) => reaction((T)action);
+        Action<GameAction> wrapped = (a) => reaction((T)a);
+        reactionMap[reaction] = wrapped;
 
-        if(subs.ContainsKey(type))
-        {
-            subs[type].Add(wrappedReaction);
-        }
-        else
-        {
-            subs.Add(type, new());
-            subs[type].Add(wrappedReaction);
-        }
+        if (!subs.ContainsKey(type))
+            subs[type] = new();
+
+        subs[type].Add(wrapped);
+        //void wrappedReaction(GameAction action) => reaction((T)action);
+
+        //if(subs.ContainsKey(type))
+        //{
+        //    subs[type].Add(wrappedReaction);
+        //}
+        //else
+        //{
+        //    subs.Add(type, new());
+        //    subs[type].Add(wrappedReaction);
+        //}
 
     }
 
@@ -213,11 +230,21 @@ public class ActionSystem : Singleton<ActionSystem>
         
         Dictionary<Type, List<Action<GameAction>>> subs = timing == ReactionTiming.PRE ? preSubs : postSubs;
         
-        if(subs.ContainsKey(type))
+        // wrapped 直接从字典中获取,确保能够真正删除
+        if (reactionMap.TryGetValue(reaction, out var wrapped))
         {
-            void wrappedReaction(GameAction action) => reaction((T)action);
-            subs[type].Remove(wrappedReaction);
+            if (subs.ContainsKey(type))
+                subs[type].Remove(wrapped);
+
+            reactionMap.Remove(reaction);
         }
+
+        // 原来的代码无法真正删除wrapped
+        //if(subs.ContainsKey(type))
+        //{
+        //    void wrappedReaction(GameAction action) => reaction((T)action);
+        //    subs[type].Remove(wrappedReaction);
+        //}
 
     }
 

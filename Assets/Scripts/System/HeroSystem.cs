@@ -13,39 +13,42 @@ public class HeroSystem : Singleton<HeroSystem>
     private void OnEnable()
     {
         //注册Reaction,指明在对什么行动做出反应
-        Debug.Log("Sub");
         ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPreAction, ReactionTiming.PRE);
         ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
 
     private void OnDisable()
     {
-        Debug.Log("UnSub");
         ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPreAction, ReactionTiming.PRE);
         ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
 
-    public void Setup(HeroData heroData)
+    public void Setup(HeroState heroState, HeroData heroData)
     {
-        HeroView.Setup(heroData);
+        HeroView.Setup(heroState, heroData);
     }
+
+
+    /// <summary>
+    /// 对应Setup,将数据返回
+    /// </summary>
+    public void SaveData()
+    {
+        HeroView.SaveData();
+    }
+
 
     //Reactions
     private void EnemyTurnPreAction(EnemyTurnGA enemyTurnGA)
     {
-        Debug.Log("EnemyTurnPreAction");
-
         DiscardAllCardsGA discardAllCardsGA = new();
 
-        //ActionSystem.Instance.Perform(discardAllCardsGA);
         ActionSystem.Instance.AddReaction(discardAllCardsGA);
     }
 
 
     private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
     {
-        Debug.Log("EnemyTurnPostReaction");
-
         int burnStacks = HeroView.GetStatusEffectStacks(StatusEffectType.BURN);
         if (burnStacks > 0)
         {
@@ -55,7 +58,9 @@ public class HeroSystem : Singleton<HeroSystem>
 
         //注意这里创建GA时初始化了抽牌数量,那么注册的反应也只会抽对应牌的数量
         DrawCardsGA drawCardsGA = new(5);
-        
+
+        // 【注意】此时正在Perform EnemyTurnGA, 如果 Perform drawCardsGA 会由于冲突直接不执行!
+        // 所以在 Performer 中只能 通过添加 Reaction 执行动作
         //ActionSystem.Instance.Perform(drawCardsGA);
         ActionSystem.Instance.AddReaction(drawCardsGA);
     }

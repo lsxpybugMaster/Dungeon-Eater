@@ -21,6 +21,7 @@ public class EnemySystem : Singleton<EnemySystem>
         ActionSystem.AttachPerformer<EnemyTurnGA>(EnemyTurnPerformer);
         ActionSystem.AttachPerformer<AttackHeroGA>(AttackHeroPerformer);
         ActionSystem.AttachPerformer<KillEnemyGA>(KillEnemyPerformer);
+        ActionSystem.AttachPerformer<KillAllEnemyGA>(KillAllEnemyPerformer);
     }
 
 
@@ -29,6 +30,7 @@ public class EnemySystem : Singleton<EnemySystem>
         ActionSystem.DetachPerformer<EnemyTurnGA>();
         ActionSystem.DetachPerformer<AttackHeroGA>();
         ActionSystem.DetachPerformer<KillEnemyGA>();
+        ActionSystem.DetachPerformer<KillAllEnemyGA>();
     }
 
 
@@ -79,5 +81,23 @@ public class EnemySystem : Singleton<EnemySystem>
     private IEnumerator KillEnemyPerformer(KillEnemyGA killEnemyGA)
     {
         yield return enemyBoardView.RemoveEnemy(killEnemyGA.EnemyView);
+    }
+
+
+    /// <summary>
+    /// 杀死全部敌人的反应写在这里
+    /// </summary>
+    /// <param name="killAllEnemyGA"></param>
+    /// <returns></returns>
+    private IEnumerator KillAllEnemyPerformer(KillAllEnemyGA killAllEnemyGA)
+    {
+        Debug.Log("PLAYER WIN!!");
+
+        yield return new WaitForSeconds(1);
+
+        //同层次逻辑直接声明Reaction,不同层逻辑则注册反应进行解耦
+        //继续执行
+        ShowWinUIGA showWinUIGA = new ShowWinUIGA();
+        ActionSystem.Instance.AddReaction(showWinUIGA);
     }
 }

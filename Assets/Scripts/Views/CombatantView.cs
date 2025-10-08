@@ -21,9 +21,10 @@ public class CombatantView : MonoBehaviour
     //记录状态的堆叠数量
     private Dictionary<StatusEffectType, int> statusEffects = new();
 
-    protected void SetupBase(int health, Sprite image)
+    protected void SetupBase(int health, int maxhealth, Sprite image)
     {
-        MaxHealth = CurrentHealth = health;
+        MaxHealth = maxhealth;
+        CurrentHealth = health;
         spriteRenderer.sprite = image;
         UpdateHealthText();
     }

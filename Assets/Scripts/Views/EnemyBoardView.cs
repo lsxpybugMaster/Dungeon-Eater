@@ -5,11 +5,14 @@ using UnityEngine;
 
 /// <summary>
 /// 管理游戏中的所有敌人
+/// 敌人全部死亡后, 判断胜利
 /// </summary>
 public class EnemyBoardView : MonoBehaviour
 {
     //存储所有敌人位置对象
     [SerializeField] private List<Transform> slots;
+
+    [SerializeField] private MatchSetupSystem matchSetupSystem;
 
     /// <summary>
     /// 存储所有敌人对象
@@ -32,5 +35,13 @@ public class EnemyBoardView : MonoBehaviour
         Tween tween = enemyView.transform.DOScale(Vector3.zero, 0.25f);
         yield return tween.WaitForCompletion();
         Destroy(enemyView.gameObject);
+
+        // 删除了最后一个敌人, 判断胜利
+        if (EnemyViews.Count == 0)
+        {
+            KillAllEnemyGA killAllEnemyGA = new KillAllEnemyGA();
+            //仍旧需要使用反应  因为代码在KillEnemyPerformer中
+            ActionSystem.Instance.AddReaction(killAllEnemyGA);
+        }
     }
 }
