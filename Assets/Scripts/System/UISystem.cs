@@ -9,12 +9,15 @@ public class UISystem : MonoBehaviour
 
     private void OnEnable()
     {
-        ActionSystem.AttachPerformer<ShowWinUIGA>(ShowWinUIPerformer);
+        //ActionSystem.AttachPerformer<ShowWinUIGA>(ShowWinUIPerformer);
+        //监听事件
+        ActionSystem.SubscribeReaction<KillAllEnemyGA>(ShowWinUI, ReactionTiming.POST);
     }
 
     private void OnDisable()
     {
-        ActionSystem.DetachPerformer<ShowWinUIGA>();
+        //ActionSystem.DetachPerformer<ShowWinUIGA>();
+        ActionSystem.UnsubscribeReaction<KillAllEnemyGA>(ShowWinUI, ReactionTiming.POST);
     }
 
     public void Show()
@@ -33,9 +36,17 @@ public class UISystem : MonoBehaviour
         victoryUI.gameObject.SetActive(false);
     }
 
-    private IEnumerator ShowWinUIPerformer(ShowWinUIGA showWinUIGA)
+    private void ShowWinUI(KillAllEnemyGA killAllEnemyGA)
     {
         Show();
-        yield return null;
+        // 显示完UI更换游戏模式，以禁用输入 
+        //TODO: 这行代码的职责与调用其的函数和脚本不匹配
+        GameManager.Instance.ChangeGameState(GameState.BattleVictory);
     }
+
+    //private IEnumerator ShowWinUIPerformer(ShowWinUIGA showWinUIGA)
+    //{
+    //    Show();
+    //    yield return null;
+    //}
 }

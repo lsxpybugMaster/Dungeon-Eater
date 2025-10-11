@@ -6,7 +6,7 @@ using UnityEngine;
 /// 初始化系统(如开局发牌）
 /// 现在还管理整个关卡
 /// </summary>
-public class MatchSetupSystem : MonoBehaviour
+public class BattleControlSystem : MonoBehaviour
 {
     /// <summary>
     /// 包含英雄的初始卡组等信息
@@ -37,15 +37,20 @@ public class MatchSetupSystem : MonoBehaviour
         ActionSystem.Instance.Perform(drawCardsGA);
     }
 
+    /// <summary>
+    /// 玩家获得胜利后的逻辑处理
+    /// </summary>
+    private void BattleWin()
+    {
+
+    }
+
     //切换场景时执行
     private void OnDestroy()
     {
         HeroSystem.Instance?.SaveData();
+        //在这里切换游戏模式:
+        GameManager.Instance?.ChangeGameState(GameState.Exploring);
     }
-
-    //战斗结束,执行玩家胜利逻辑
-    public void BattleFinish()
-    {
-        Debug.Log("PLAYER WIN");
-    }    
+  
 }

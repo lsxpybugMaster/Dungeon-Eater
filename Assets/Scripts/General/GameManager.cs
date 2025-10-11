@@ -10,6 +10,14 @@ public enum Scene
 {
     BATTLE
 }
+
+public enum GameState
+{
+    Exploring,      //关卡选择
+    Battle,         //战斗
+    BattleVictory,  //胜利结算 ==> 禁用玩家战斗
+}
+
 /// <summary>
 /// 核心系统,跨场景而存在
 /// </summary>
@@ -24,6 +32,8 @@ public class GameManager : PersistentSingleton<GameManager>
 
     // 保存持久化数据 【注意】纯C#类需要实例化再用
     public HeroState HeroState { get; private set; } = new();
+
+    public GameState GameState { get; private set; }
 
     protected override void Awake()
     {
@@ -41,6 +51,18 @@ public class GameManager : PersistentSingleton<GameManager>
         }
     }
 
+
+    /// <summary>
+    /// 使用setter统一管理对游戏模式的更改,之后想修改直接修改这里
+    /// </summary>
+    /// <param name="gameState"></param>
+    public void ChangeGameState(GameState gameState)
+    {
+        Debug.Log("Change game state to" +  gameState.ToString());
+        GameState = gameState;
+    }
+
+
     public void ToBattle()
     {
         SceneManager.LoadScene((int)Scene.BATTLE);
@@ -54,6 +76,4 @@ public class GameManager : PersistentSingleton<GameManager>
         SceneManager.LoadScene(1);
         state = 0;
     }
-
-
 }

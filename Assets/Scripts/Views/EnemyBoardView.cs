@@ -12,7 +12,8 @@ public class EnemyBoardView : MonoBehaviour
     //存储所有敌人位置对象
     [SerializeField] private List<Transform> slots;
 
-    [SerializeField] private MatchSetupSystem matchSetupSystem;
+    //使用Action-Reaction机制,无需引用
+    //[SerializeField] private MatchSetupSystem matchSetupSystem;
 
     /// <summary>
     /// 存储所有敌人对象

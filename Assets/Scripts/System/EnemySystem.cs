@@ -80,6 +80,7 @@ public class EnemySystem : Singleton<EnemySystem>
 
     private IEnumerator KillEnemyPerformer(KillEnemyGA killEnemyGA)
     {
+        //这里有是否杀死全部敌人完成战斗的判断
         yield return enemyBoardView.RemoveEnemy(killEnemyGA.EnemyView);
     }
 
@@ -93,11 +94,11 @@ public class EnemySystem : Singleton<EnemySystem>
     {
         Debug.Log("PLAYER WIN!!");
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
 
         //同层次逻辑直接声明Reaction,不同层逻辑则注册反应进行解耦
-        //继续执行
-        ShowWinUIGA showWinUIGA = new ShowWinUIGA();
-        ActionSystem.Instance.AddReaction(showWinUIGA);
+        // 显示胜利UI
+        // ShowWinUIGA showWinUIGA = new ShowWinUIGA();
+        // ActionSystem.Instance.AddReaction(showWinUIGA);
     }
 }
