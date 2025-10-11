@@ -44,14 +44,14 @@ public class CardView : MonoBehaviour
     //将交互判断鉴权提出
     bool CanHover()
     {
-        return !Interactions.Instance.PlayerCanHover() 
-            || GameManager.Instance.GameState == GameState.BattleVictory;
+        return Interactions.Instance.PlayerCanHover() 
+            && GameManager.Instance.GameState != GameState.BattleVictory;
     }
 
     bool CanInterAct()
     {
-        return !Interactions.Instance.PlayerCanInteract()
-            || GameManager.Instance.GameState == GameState.BattleVictory;
+        return Interactions.Instance.PlayerCanInteract()
+            && GameManager.Instance.GameState != GameState.BattleVictory;
     }
 
     #region 鼠标悬浮系统
@@ -60,7 +60,7 @@ public class CardView : MonoBehaviour
     {
         //玩家在拖动卡牌时,不执行后续逻辑
         //胜利结算时不执行后续逻辑
-        if (CanHover()) return;
+        if (!CanHover()) return;
         wrapper.SetActive(false);
         Vector3 pos = new(transform.position.x, -2, 0);
         CardViewHoverSystem.Instance.Show(Card, pos);
@@ -69,7 +69,7 @@ public class CardView : MonoBehaviour
     void OnMouseExit()
     {
         //玩家在拖动卡牌时,不执行后续逻辑
-        if (CanHover()) return;
+        if (!CanHover()) return;
         CardViewHoverSystem.Instance.Hide();
         wrapper.SetActive(true);
     }
@@ -80,7 +80,7 @@ public class CardView : MonoBehaviour
     void OnMouseDown()
     {
         //有动作在执行时,禁止玩家交互卡牌
-        if (CanInterAct()) return;
+        if (!CanInterAct()) return;
         
         if (Card.ManualTargetEffect != null)
         {
@@ -109,7 +109,7 @@ public class CardView : MonoBehaviour
     void OnMouseDrag()
     {
         //有动作在执行时,禁止玩家交互卡牌
-        if (CanInterAct()) return;
+        if (!CanInterAct()) return;
         
         //如果显示了箭头,我们不需要再拖动卡牌了
         if (Card.ManualTargetEffect != null) return;
@@ -122,7 +122,7 @@ public class CardView : MonoBehaviour
     void OnMouseUp()
     {
         //有动作在执行时,禁止玩家交互卡牌
-        if (CanInterAct()) return;
+        if (!CanInterAct()) return;
         
         if (Card.ManualTargetEffect != null)
         {

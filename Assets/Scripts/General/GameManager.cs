@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public enum Scene
 {
-    BATTLE
+    MAP, BATTLE,
 }
 
 public enum GameState
@@ -23,32 +23,38 @@ public enum GameState
 /// </summary>
 public class GameManager : PersistentSingleton<GameManager>
 {
-    private int state = 0;
-
-    public static event Action OnReturnToMenu;
-
     // 外部数据引用
     [SerializeField] private HeroData heroData;
+
+    // 属性
+    public GameState GameState { get; private set; }
 
     // 保存持久化数据 【注意】纯C#类需要实例化再用
     public HeroState HeroState { get; private set; } = new();
 
-    public GameState GameState { get; private set; }
+    // 初始化事件,GameManager初始化完毕后立刻通知其他脚本执行
+    public static event Action OnGameManagerInitialized;
 
     protected override void Awake()
     {
         //先继承跨场景单例的Awake
         base.Awake();
+    }
 
+    //防止对象还未创建
+    private void Start()
+    {
         HeroState.Init(heroData);
+        GlobalUI.Instance.Setup(HeroState);
+
+        //通知其他注册了该事件的脚本进行初始化,以此确保该脚本的执行在它们前面
+        Debug.Log("Invoke");
+        OnGameManagerInitialized?.Invoke();
     }
 
     private void Update()
     {
-        if (state == 1 && Input.GetKeyDown(KeyCode.Space))
-        {
-            ReturnToMain();  
-        }
+
     }
 
 
@@ -63,17 +69,20 @@ public class GameManager : PersistentSingleton<GameManager>
     }
 
 
-    public void ToBattle()
+    //管理场景切换
+
+    public void ToBattleScene()
     {
-        SceneManager.LoadScene((int)Scene.BATTLE);
-        state = 1;
+        ChangeGameState(GameState.Battle);
+        SceneManager.LoadScene((int)Scene.BATTLE);    
     }
 
-    public void ReturnToMain()
+
+    public void ToMapScene()
     {
-        //初始化
-        OnReturnToMenu?.Invoke();
-        SceneManager.LoadScene(1);
-        state = 0;
+        HeroSystem.Instance?.SaveData();
+        //在这里切换游戏模式:
+        ChangeGameState(GameState.Exploring);
+        SceneManager.LoadScene((int)Scene.MAP);
     }
 }

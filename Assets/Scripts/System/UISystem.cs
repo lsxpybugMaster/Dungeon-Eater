@@ -1,23 +1,26 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
-public class UISystem : MonoBehaviour
+
+public class UISystem : Singleton<UISystem>
 {
     [SerializeField] private CanvasGroup victoryUI;
+    [SerializeField] private Button backToMapBtn;
 
-    private void OnEnable()
-    {
-        //ActionSystem.AttachPerformer<ShowWinUIGA>(ShowWinUIPerformer);
-        //监听事件
-        ActionSystem.SubscribeReaction<KillAllEnemyGA>(ShowWinUI, ReactionTiming.POST);
-    }
+    //判断UI能否交互的验证函数
+    public bool CanInteract() => GameManager.Instance.GameState != GameState.BattleVictory;
 
-    private void OnDisable()
+    private void Start()
     {
-        //ActionSystem.DetachPerformer<ShowWinUIGA>();
-        ActionSystem.UnsubscribeReaction<KillAllEnemyGA>(ShowWinUI, ReactionTiming.POST);
+        //给回到地图的按钮绑定函数
+        backToMapBtn.onClick.AddListener(() =>
+        {
+            GameManager.Instance.ToMapScene();
+        });        
     }
 
     public void Show()
@@ -36,17 +39,8 @@ public class UISystem : MonoBehaviour
         victoryUI.gameObject.SetActive(false);
     }
 
-    private void ShowWinUI(KillAllEnemyGA killAllEnemyGA)
+    public void ShowWinUI()
     {
         Show();
-        // 显示完UI更换游戏模式，以禁用输入 
-        //TODO: 这行代码的职责与调用其的函数和脚本不匹配
-        GameManager.Instance.ChangeGameState(GameState.BattleVictory);
     }
-
-    //private IEnumerator ShowWinUIPerformer(ShowWinUIGA showWinUIGA)
-    //{
-    //    Show();
-    //    yield return null;
-    //}
 }

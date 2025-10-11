@@ -29,7 +29,7 @@ public class CombatantView : MonoBehaviour
         UpdateHealthText();
     }
 
-    private void UpdateHealthText()
+    protected virtual void UpdateHealthText()
     {
         healthText.text = "HP: " + CurrentHealth;
     }

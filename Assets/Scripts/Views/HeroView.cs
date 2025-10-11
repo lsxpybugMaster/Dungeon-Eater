@@ -19,4 +19,12 @@ public class HeroView : CombatantView
         //保存数据
         GameManager.Instance.HeroState.Save(CurrentHealth, MaxHealth);
     }
+
+    //英雄除了更新CombatantView的UI,还需更新全局UI
+    protected override void UpdateHealthText()
+    {
+        base.UpdateHealthText();
+        //TODO: 以后调整这种不优雅的更新UI方式
+        GlobalUI.Instance.UpdateHeroHp(CurrentHealth, MaxHealth);
+    }
 }

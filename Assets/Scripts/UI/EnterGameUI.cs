@@ -10,8 +10,6 @@ public class EnterGameUI : MonoBehaviour
     private void OnEnable()
     {
         EnterGameBtn.onClick.AddListener(EnterGame);
-
-        //GameManager.OnReturnToMenu +=  
     }
 
     private void OnDisable()
@@ -21,6 +19,6 @@ public class EnterGameUI : MonoBehaviour
 
     public void EnterGame()
     {
-        GameManager.Instance.ToBattle();
+        GameManager.Instance.ToBattleScene();
     }
 }
