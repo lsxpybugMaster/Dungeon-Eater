@@ -1,5 +1,6 @@
 ﻿using ActionSystemTest;
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,19 @@ public class CardSystem : Singleton<CardSystem>
 
     [SerializeField] private Transform drawPilePoint;
     [SerializeField] private Transform discardPilePoint;
+    
+
+    //NOTE: 每当牌堆改变时与UI交互
+    public event Action<int, int> OnPileChanged;
+    // 只读属性,供UI显示信息
+    public int DrawPileCount => drawPile.Count;
+    public int DiscardPileCount => discardPile.Count;
+    //后期可能需要使用
+    public IReadOnlyList<Card> DrawPile => drawPile;
+    public IReadOnlyList<Card> DiscardPile => discardPile;
+
+    public int PlayerCards { get; private set; }
+
 
     //注册及取消注册Performer与Reaction
     private void OnEnable()
@@ -25,8 +39,7 @@ public class CardSystem : Singleton<CardSystem>
         //注册Performer,指明执行该行动的协程
         ActionSystem.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);
         ActionSystem.AttachPerformer<DiscardAllCardsGA>(DiscardAllCardsPerformer);
-        ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);
-        
+        ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);   
     }
 
 
@@ -44,6 +57,7 @@ public class CardSystem : Singleton<CardSystem>
     /// <param name="deckData">传入卡牌数据列表</param>
     public void Setup(List<CardData> deckData)
     {
+        PlayerCards = deckData.Count;
         foreach (var cardData in deckData)
         {
             Card card = new(cardData);
@@ -133,23 +147,27 @@ public class CardSystem : Singleton<CardSystem>
 
     private IEnumerator DrawCard()
     {
-        //Debug.Log($"Draw BEFORE: draw:{drawPile.Count}, discard:{discardPile.Count}, hand:{hand.Count}");
 
         //ListExtensions中的List扩展方法
         Card card = drawPile.Draw();
         hand.Add(card);
         CardView cardView = CardViewCreator.Instance.CreateCardView(card, drawPilePoint.position, drawPilePoint.rotation);
         yield return handView.AddCard(cardView);
+
+        //NOTE: 激活事件,通知UI更新
+        OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
     }
      
 
     private void RefillDeck()
     {
-        //Debug.Log($"Refill: move {discardPile.Count} cards to drawPile");
+        Debug.Log("重新洗牌!");
 
         //把discardPile中的卡牌加到drawPile末尾
         drawPile.AddRange(discardPile);
         discardPile.Clear();
+
+        OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
     }
 
 
@@ -160,13 +178,13 @@ public class CardSystem : Singleton<CardSystem>
     /// <returns></returns>
     private IEnumerator DiscardCard(CardView cardView)
     {
-        //Debug.Log($"Discard AFTER: draw:{drawPile.Count}, discard:{discardPile.Count}, hand:{hand.Count}");
-
         //在这里弃牌,确保数据层与显示层一致
         discardPile.Add(cardView.Card);
         cardView.transform.DOScale(Vector3.zero, 0.15f);
         Tween tween = cardView.transform.DOMove(discardPilePoint.position, 0.15f);
         yield return tween.WaitForCompletion();
         Destroy(cardView.gameObject);
+
+        OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
     }
 }

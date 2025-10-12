@@ -7,6 +7,9 @@ using UnityEngine.Splines;          // 引入 Unity 的 Spline 系统
 
 public class HandView : MonoBehaviour
 {
+    //手牌之间的展示间隔
+    [SerializeField][Range(0,0.2f)] private float cardInterval = 0.1f;
+
     [SerializeField] private SplineContainer splineContainer;
     // Inspector 面板里指定的样条容器 (SplineContainer)，用来决定卡牌排列路径
 
@@ -60,7 +63,7 @@ public class HandView : MonoBehaviour
         if (cards.Count == 0) yield break;  // 没有卡牌时直接退出
 
         // 卡牌之间在曲线参数上的间隔（这里固定为 0.1）
-        float cardSpacing = 1f / 10f;
+        float cardSpacing = cardInterval;
 
         // 第一张卡的起始位置（以 0.5 为中心，左右对称分布）
         float firstCardPosition = 0.5f - (cards.Count - 1) * cardSpacing / 2;

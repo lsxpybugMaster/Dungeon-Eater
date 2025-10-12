@@ -28,7 +28,6 @@ public class GlobalUI : PersistentSingleton<GlobalUI>
 
     public void UpdateHeroHp(int hpAmount, int maxHpAmount)
     {
-        print($"{hpAmount} , {maxHpAmount} ");
         heroHpTMP.text = hpAmount.ToString() + "/" + maxHpAmount.ToString();
     }
 }

@@ -11,8 +11,24 @@ public class UISystem : Singleton<UISystem>
     [SerializeField] private CanvasGroup victoryUI;
     [SerializeField] private Button backToMapBtn;
 
+    //NOTE: 引用其他UI子系统
+    [SerializeField] private CardPileCountUI cardPileCountUI;
+
     //判断UI能否交互的验证函数
     public bool CanInteract() => GameManager.Instance.GameState != GameState.BattleVictory;
+
+    //统一注册需要更新UI的事件
+    private void OnEnable()
+    {
+        CardSystem.Instance.OnPileChanged += OnPileCountChanged;
+    }
+
+    private void OnDisable()
+    {
+        //IMPORTANT: 判空防御
+        if (CardSystem.Instance)
+            CardSystem.Instance.OnPileChanged -= OnPileCountChanged;
+    }
 
     private void Start()
     {
@@ -22,6 +38,11 @@ public class UISystem : Singleton<UISystem>
             GameManager.Instance.ToMapScene();
         });        
     }
+
+    public void OnPileCountChanged(int drawCount, int disCardCount)
+    {
+        cardPileCountUI.UpdataPileUI(drawCount, disCardCount);
+    }    
 
     public void Show()
     {

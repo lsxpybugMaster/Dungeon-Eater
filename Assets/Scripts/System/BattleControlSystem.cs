@@ -46,6 +46,10 @@ public class BattleControlSystem : MonoBehaviour
         }
     }
 
+    //IMPORTANT: 整个战斗场景的初始化入口:
+    /* 持久化数据初始化
+     * 不变数据初始化
+     */
     private void SetupBattle()
     {
         Debug.Log("SETUPBATTLE");

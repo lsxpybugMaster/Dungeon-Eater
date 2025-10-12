@@ -62,6 +62,7 @@ public class EnemySystem : Singleton<EnemySystem>
         yield return null;
     }
 
+
     private IEnumerator AttackHeroPerformer(AttackHeroGA attackHeroGA)
     {
         EnemyView attacker = attackHeroGA.Attacker;
@@ -78,6 +79,7 @@ public class EnemySystem : Singleton<EnemySystem>
         ActionSystem.Instance.AddReaction(dealDamageGA);
     }
 
+
     private IEnumerator KillEnemyPerformer(KillEnemyGA killEnemyGA)
     {
         //这里有是否杀死全部敌人完成战斗的判断
@@ -92,7 +94,6 @@ public class EnemySystem : Singleton<EnemySystem>
     /// <returns></returns>
     private IEnumerator KillAllEnemyPerformer(KillAllEnemyGA killAllEnemyGA)
     {
-        Debug.Log("PLAYER WIN!!");
 
         yield return new WaitForSeconds(0.5f);
 

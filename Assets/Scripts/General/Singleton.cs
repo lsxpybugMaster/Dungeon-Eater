@@ -35,7 +35,8 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     protected virtual void OnApplicationQuit()
     {
         Instance = null;           // 清空静态实例引用
-        Destroy(gameObject);       // 销毁对象（这里不是必须的，但可以确保干净退出）
+        //BUG: Destroy的执行有可能会报错
+        //Destroy(gameObject);       // 销毁对象（这里不是必须的，但可以确保干净退出）
     }
 }
 

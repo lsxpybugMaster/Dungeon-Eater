@@ -61,6 +61,7 @@ public class CardView : MonoBehaviour
         //玩家在拖动卡牌时,不执行后续逻辑
         //胜利结算时不执行后续逻辑
         if (!CanHover()) return;
+
         wrapper.SetActive(false);
         Vector3 pos = new(transform.position.x, -2, 0);
         CardViewHoverSystem.Instance.Show(Card, pos);
@@ -71,6 +72,7 @@ public class CardView : MonoBehaviour
         //玩家在拖动卡牌时,不执行后续逻辑
         if (!CanHover()) return;
         CardViewHoverSystem.Instance.Hide();
+
         wrapper.SetActive(true);
     }
     #endregion

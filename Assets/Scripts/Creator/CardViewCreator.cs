@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CardViewCreator : Singleton<CardViewCreator>
 {
+    //对卡牌大小进行缩放
+    [SerializeField] [Range(0,2f)] private float cardSize;
     //是CardView而非GameObject
     [SerializeField] private CardView cardViewPrefab;
 
@@ -14,7 +16,7 @@ public class CardViewCreator : Singleton<CardViewCreator>
         
         //生成卡牌时的放大效果
         cardView.transform.localScale = Vector3.zero;
-        cardView.transform.DOScale(Vector3.one, 0.15f);
+        cardView.transform.DOScale(Vector3.one * cardSize , 0.15f);
         //初始化卡牌显示类的相关数据
         cardView.Setup(card);
         return cardView;
