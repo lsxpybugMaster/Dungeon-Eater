@@ -30,6 +30,7 @@ public class CardSystem : Singleton<CardSystem>
     public IReadOnlyList<Card> DrawPile => drawPile;
     public IReadOnlyList<Card> DiscardPile => discardPile;
 
+    //FIXME: 临时使用,计算玩家卡牌数量
     public int PlayerCards { get; private set; }
 
 
@@ -58,6 +59,7 @@ public class CardSystem : Singleton<CardSystem>
     public void Setup(List<CardData> deckData)
     {
         PlayerCards = deckData.Count;
+        //初始填满抽牌堆
         foreach (var cardData in deckData)
         {
             Card card = new(cardData);
@@ -75,13 +77,18 @@ public class CardSystem : Singleton<CardSystem>
     /// <returns></returns>
     private IEnumerator DrawCardsPerformer(DrawCardsGA drawCardsGA)
     {
-        //抽牌数量不能超过手牌数
-        int actualAmount = Mathf.Min(drawCardsGA.Amount, drawPile.Count);
+        int amount = drawCardsGA.Amount;
 
-
+        //从目前牌堆能抽出的最多数量
+        int drawFromCurrentPileAmount = Mathf.Min(amount, drawPile.Count);
         //还未抽到的牌数,如果不为0,后面需要洗牌
-        int notDrawnAmount = drawCardsGA.Amount - actualAmount;
-        for (int i = 0; i < actualAmount; i++)
+        int notDrawnAmount = amount - drawFromCurrentPileAmount;
+        //确保抽的牌数不会比总的手牌还多,避免空指针
+        notDrawnAmount = Mathf.Min(notDrawnAmount, discardPile.Count);
+        //实际抽的牌数为: drawFromCurrentPileAmount + notDrawnAmount
+
+        //从抽牌堆抽牌
+        for (int i = 0; i < drawFromCurrentPileAmount; i++)
         {
             yield return DrawCard();
         }
@@ -109,6 +116,11 @@ public class CardSystem : Singleton<CardSystem>
     }
 
 
+    /// <summary>
+    /// 卡牌功能执行函数
+    /// </summary>
+    /// <param name="playCardGA"></param>
+    /// <returns></returns>
     private IEnumerator PlayCardPerformer(PlayCardGA playCardGA)
     {
         hand.Remove(playCardGA.Card);
