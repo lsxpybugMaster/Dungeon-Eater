@@ -52,14 +52,16 @@ public class BattleControlSystem : MonoBehaviour
      */
     private void SetupBattle()
     {
-        Debug.Log("SETUPBATTLE");
-        //传入了由GameManager维护的持久化数据
-        HeroSystem.Instance.Setup(GameManager.Instance.HeroState, heroData);
+        HeroState heroState = GameManager.Instance.HeroState;
+
+        //OPTIMIZE: 现在HeroState完全封装了HeroData!!
+        HeroSystem.Instance.Setup(heroState);
 
         //初始化敌人信息
         EnemySystem.Instance.Setup(enemyDatas);
 
-        CardSystem.Instance.Setup(heroData.Deck);
+        //现在要传入持久化数据了
+        CardSystem.Instance.Setup(heroState.Deck);
 
         // 这部分是持久化数据,目前不应放在该位置
         // 初始化天赋

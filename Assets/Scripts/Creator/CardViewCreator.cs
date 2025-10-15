@@ -10,6 +10,13 @@ public class CardViewCreator : Singleton<CardViewCreator>
     //是CardView而非GameObject
     [SerializeField] private CardView cardViewPrefab;
 
+    /// <summary>
+    /// 生成卡牌视图
+    /// </summary>
+    /// <param name="card"></param>
+    /// <param name="position"></param>
+    /// <param name="rotation"></param>
+    /// <returns></returns>
     public CardView CreateCardView(Card card, Vector3 position, Quaternion rotation)
     {
         CardView cardView = Instantiate(cardViewPrefab, position, rotation);

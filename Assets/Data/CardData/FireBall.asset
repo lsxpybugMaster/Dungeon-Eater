@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
   m_Name: FireBall
   m_EditorClassIdentifier: 
+  <Id>k__BackingField: 3f1ab0a5-8c9d-442f-9bb9-89478310290f
   <Description>k__BackingField: Deal 1d10 damage
   <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 21300000, guid: 244a920166e9a41468580b0f277dc575, type: 3}

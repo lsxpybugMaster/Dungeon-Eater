@@ -12,6 +12,22 @@ public class TestSystem : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(ActionSystem.Instance.IsPerforming);
+        if (Input.GetKeyUp(KeyCode.P))
+        {
+            CardData d = CardDatabase.GetRandomCard();
+            Card cd = new Card(d);
+
+            CardViewCreator.Instance.CreateCardView(cd,Vector3.zero,Quaternion.identity);
+        }
     }
 }
+//TODO:
+//BUG:
+//FIXME:
+//OPTIMIZE:
+//NOTE:
+//DISCUSS:
+//STEP:
+//IMPORTANT:
+//IDEA:
+//DELETE:

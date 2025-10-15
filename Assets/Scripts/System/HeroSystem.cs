@@ -23,9 +23,9 @@ public class HeroSystem : Singleton<HeroSystem>
         ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
 
-    public void Setup(HeroState heroState, HeroData heroData)
+    public void Setup(HeroState heroState)
     {
-        HeroView.Setup(heroState, heroData);
+        HeroView.Setup(heroState);
     }
 
 

@@ -9,9 +9,9 @@ public class HeroView : CombatantView
     /// </summary>
     /// <param name="heroState"></param>
     // 可持久化部分使用heroState,其余正常
-    public void Setup(HeroState heroState, HeroData heroData)
+    public void Setup(HeroState heroState)
     {
-        SetupBase(heroState.CurrentHealth, heroState.MaxHealth, heroData.Image);
+        SetupBase(heroState.CurrentHealth, heroState.MaxHealth, heroState.HeroSprite);
     }
 
     public void SaveData()
