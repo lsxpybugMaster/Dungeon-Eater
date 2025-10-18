@@ -25,6 +25,6 @@ public class HeroView : CombatantView
     {
         base.UpdateHealthText();
         //TODO: 以后调整这种不优雅的更新UI方式
-        GlobalUI.Instance.UpdateHeroHp(CurrentHealth, MaxHealth);
+        GameManager.Instance.GlobalUI.UpdateHeroHp(CurrentHealth, MaxHealth);
     }
 }

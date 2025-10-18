@@ -1,47 +1,53 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¿ç³¡¾°³Ö¾Ã»¯µÄÊı¾İ, ×îĞ¡»¯Î¬»¤¿ªÏú
-/// ¼´Êµ¼ÊÉÏµÄÍæ¼ÒÈ«¾ÖÊı¾İ
+/// è·¨åœºæ™¯æŒä¹…åŒ–çš„æ•°æ®, æœ€å°åŒ–ç»´æŠ¤å¼€é”€
+/// å³å®é™…ä¸Šçš„ç©å®¶å…¨å±€æ•°æ®
+/// å°½å¯èƒ½ä¿è¯ä»…å«æ•°æ®éƒ¨åˆ†, æ•°æ®æ“ä½œéƒ¨åˆ†äº¤ç»™GameManager
 /// </summary>
 [System.Serializable]
 public class HeroState
 {
-    //DISCUSS: ÎªÁËÍêÈ«·â×°HeroData,ÎÒÃÇÊ¹ÓÃHeroState¹ÜÀíHeroDataµÄ²»±äÊı¾İ²¿·Ö,È·±£ÆäËûÏµÍ³½öÖªµÀHeroData´æÔÚ
+    //DISCUSS: ä¸ºäº†å®Œå…¨å°è£…HeroData,æˆ‘ä»¬ä½¿ç”¨HeroStateç®¡ç†HeroDataçš„ä¸å˜æ•°æ®éƒ¨åˆ†,ç¡®ä¿å…¶ä»–ç³»ç»Ÿä»…çŸ¥é“HeroDataå­˜åœ¨
     public HeroData BaseData {  get; private set; }
 
-    //------------------------Êı¾İ¸üĞÂÊÂ¼ş---------------------------
-    public event Action<int> OnDeckSizeChanged;
-
-    //------------------------¶¯Ì¬Êı¾İ---------------------------
+    //------------------------åŠ¨æ€æ•°æ®---------------------------
     public int MaxHealth { get; private set; }
     public int CurrentHealth { get; private set; }
 
     /// <summary>
-    /// Íæ¼Ò¾ÖÍâ¿¨×éĞÅÏ¢ÔÚ´Ë
+    /// ç©å®¶å±€å¤–å¡ç»„ä¿¡æ¯åœ¨æ­¤
     /// </summary>
     public List<CardData> Deck { get; private set; }
 
-    //------------------------³Ö¾Ã»¯Êı¾İ---------------------------
+    //------------------------æŒä¹…åŒ–æ•°æ®---------------------------
     public Sprite HeroSprite => BaseData.Image;
 
     public int DeckSize => Deck.Count;
 
 
-    //½ö³õÊ¼»¯Ò»´Î³õÊ¼Êı¾İ
-    public void Init(HeroData heroData)
+    //ä»…åˆå§‹åŒ–ä¸€æ¬¡åˆå§‹æ•°æ®
+    public HeroState(HeroData heroData)
     {
         BaseData = heroData;
 
         MaxHealth = heroData.Health;
         CurrentHealth = heroData.Health;
-        Deck = heroData.Deck;
+           
+        //IMPORTANT: C# ä¸­ '=' æ°¸è¿œæ˜¯æµ…æ‹·è´
+
+        //æ³¨æ„éœ€è¦æ·±æ‹·è´!
+        Deck = new List<CardData>(heroData.Deck);
+        //BUG: è¿™æ˜¯æµ…æ‹·è´!
+        // Deck = heroData.Deck;
     }
 
-    //¼°Ê±½ÓÊÜ¸üĞÂµÄÁÙÊ±Êı¾İ
+
+
+    //åŠæ—¶æ¥å—æ›´æ–°çš„ä¸´æ—¶æ•°æ®
     public void Save(int currentHealth, int maxHealth)
     {
         MaxHealth = maxHealth;
@@ -50,20 +56,25 @@ public class HeroState
 
 
     /// <summary>
-    /// ÏòÅÆ×éÌí¼Ó¿¨ÅÆ
+    /// å‘ç‰Œç»„æ·»åŠ å¡ç‰Œ
     /// </summary>
     public void AddCardToDeck(CardData cardData)
     {
-        OnDeckSizeChanged?.Invoke(DeckSize);
+        DebugUtil.Magenta("Add Card!");
+        Deck.Add(cardData);
     }
 
 
     /// <summary>
-    /// ÏòÅÆ×éÉ¾³ı¿¨ÅÆ
+    /// å‘ç‰Œç»„åˆ é™¤å¡ç‰Œ
     /// </summary>
     public void RemoveCardFromDeck(CardData cardData)
     {
-        OnDeckSizeChanged?.Invoke(DeckSize);
+        if (Deck.Contains(cardData))
+        {
+            Deck.Remove(cardData);
+        }
+        else Debug.LogError("æœªå‘ç°åº”è¯¥åˆ é™¤çš„å¡ç‰Œ");
     }
 
 }

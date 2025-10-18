@@ -20,6 +20,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         // 如果已经有实例存在，销毁当前重复对象，保证单例唯一
         if (Instance != null)
         {
+            Debug.Log("重复的新实例,销毁!");
             Destroy(gameObject);
             return;
         }

@@ -6,8 +6,10 @@ using UnityEngine;
 /// <summary>
 /// 跨场景显示的全局UI
 /// </summary>
-public class GlobalUI : PersistentSingleton<GlobalUI>
+//OPTIMIZE: 以前是跨场景单例,现在由GameManager管理并持久化
+public class GlobalUI : MonoBehaviour 
 {
+
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private TMP_Text heroHpTMP;
     [SerializeField] private TMP_Text deckSizeTMP;
@@ -20,21 +22,21 @@ public class GlobalUI : PersistentSingleton<GlobalUI>
     /// <summary>
     /// 初始化基本信息
     /// </summary>
-    public void Setup(HeroState heroState)
+    public void Setup(HeroState heroState, PlayerDeckController playerDeckController)
     {
         UpdateHeroHp(heroState.CurrentHealth, heroState.MaxHealth);
         UpdateDeckSize(heroState.DeckSize);
 
-        SubscribeEvent(heroState);
+        SubscribeEvent(playerDeckController);
     }
 
 
     //订阅事件统一写在这里
-    private void SubscribeEvent(HeroState heroState)
+    private void SubscribeEvent(PlayerDeckController playerDeckController)
     {
         // 防御性注册
-        heroState.OnDeckSizeChanged -= UpdateDeckSize;
-        heroState.OnDeckSizeChanged += UpdateDeckSize;
+        playerDeckController.OnDeckSizeChanged -= UpdateDeckSize;
+        playerDeckController.OnDeckSizeChanged += UpdateDeckSize;
     }
 
     //TODO: 将生命更新后的对应逻辑挂载到ActionSystem中

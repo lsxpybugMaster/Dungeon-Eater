@@ -3164,7 +3164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!225 &1726526957
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3191,6 +3191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 1726526957}
   heroHpTMP: {fileID: 1106747946}
+  deckSizeTMP: {fileID: 0}
 --- !u!114 &1726526959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3469,6 +3470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: aba8c53e6792dc2458c464dc64205a6a, type: 2}
+  globalUIPrefab: {fileID: 9107211176504271497, guid: 10750dad63e8fa44d9e53a5827738a52, type: 3}
 --- !u!4 &1840230839
 Transform:
   m_ObjectHideFlags: 0

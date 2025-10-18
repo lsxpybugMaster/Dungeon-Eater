@@ -18,6 +18,7 @@ public enum GameState
     BattleVictory,  //胜利结算 ==> 禁用玩家战斗
 }
 
+// GameManager 负责生命周期管理（初始化、场景切换、销毁）。
 /// <summary>
 /// 核心系统,跨场景而存在
 /// </summary>
@@ -25,12 +26,19 @@ public class GameManager : PersistentSingleton<GameManager>
 {
     // 外部数据引用
     [SerializeField] private HeroData heroData;
+    [SerializeField] private GlobalUI globalUIPrefab;
 
-    // 属性
+    //STEP: 属性
     public GameState GameState { get; private set; }
 
-    // 保存持久化数据 【注意】纯C#类需要实例化再用
-    public HeroState HeroState { get; private set; } = new();
+    //STEP: 保存持久化数据 【注意】纯C#类需要实例化再用
+    public HeroState HeroState { get; private set; }
+
+    //STEP: 保存功能模块(纯C#类)
+    public PlayerDeckController PlayerDeckController { get; private set; }
+
+    //STEP: 保存跨场景Mono实例
+    public GlobalUI GlobalUI { get; private set; }
 
     // 初始化事件,GameManager初始化完毕后立刻通知其他脚本执行
     public static event Action OnGameManagerInitialized;
@@ -44,18 +52,32 @@ public class GameManager : PersistentSingleton<GameManager>
     //防止对象还未创建
     private void Start()
     {
-        HeroState.Init(heroData);
-        GlobalUI.Instance.Setup(HeroState);
+
+        HeroState = new HeroState(heroData);
+
+        //注意初始化顺序
+        PlayerDeckController = new PlayerDeckController(HeroState);
+
+        //初始化全局UI对象
+        BindGlobalUI();
 
         //通知其他注册了该事件的脚本进行初始化,以此确保该脚本的执行在它们前面
         Debug.Log("Invoke");
         OnGameManagerInitialized?.Invoke();
     }
 
-    private void Update()
-    {
 
-    }
+    //NOTE: 为了确保所有场景仅有一个GUI,目前只能创建一次GUI了,意味着不能在场景直接调试UI对象了,需要在Prefab中修改
+    private void BindGlobalUI()
+    {
+        if (GlobalUI == null)
+        {     
+           Debug.LogWarning("需要初始化UI");
+           GlobalUI = Instantiate(globalUIPrefab);           
+        }
+        DontDestroyOnLoad(GlobalUI.gameObject);
+        GlobalUI.Setup(HeroState,PlayerDeckController);
+    }    
 
 
     /// <summary>
