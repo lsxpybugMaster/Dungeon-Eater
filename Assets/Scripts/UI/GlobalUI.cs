@@ -1,12 +1,12 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// ¿ç³¡¾°ÏÔÊ¾µÄÈ«¾ÖUI
+/// è·¨åœºæ™¯æ˜¾ç¤ºçš„å…¨å±€UI
 /// </summary>
-//OPTIMIZE: ÒÔÇ°ÊÇ¿ç³¡¾°µ¥Àı,ÏÖÔÚÓÉGameManager¹ÜÀí²¢³Ö¾Ã»¯
+//OPTIMIZE: ä»¥å‰æ˜¯è·¨åœºæ™¯å•ä¾‹,ç°åœ¨ç”±GameManagerç®¡ç†å¹¶æŒä¹…åŒ–
 public class GlobalUI : MonoBehaviour 
 {
 
@@ -20,7 +20,7 @@ public class GlobalUI : MonoBehaviour
     }
 
     /// <summary>
-    /// ³õÊ¼»¯»ù±¾ĞÅÏ¢
+    /// åˆå§‹åŒ–åŸºæœ¬ä¿¡æ¯
     /// </summary>
     public void Setup(HeroState heroState, PlayerDeckController playerDeckController)
     {
@@ -31,15 +31,15 @@ public class GlobalUI : MonoBehaviour
     }
 
 
-    //¶©ÔÄÊÂ¼şÍ³Ò»Ğ´ÔÚÕâÀï
+    //è®¢é˜…äº‹ä»¶ç»Ÿä¸€å†™åœ¨è¿™é‡Œ
     private void SubscribeEvent(PlayerDeckController playerDeckController)
     {
-        // ·ÀÓùĞÔ×¢²á
+        // é˜²å¾¡æ€§æ³¨å†Œ
         playerDeckController.OnDeckSizeChanged -= UpdateDeckSize;
         playerDeckController.OnDeckSizeChanged += UpdateDeckSize;
     }
 
-    //TODO: ½«ÉúÃü¸üĞÂºóµÄ¶ÔÓ¦Âß¼­¹ÒÔØµ½ActionSystemÖĞ
+    //TODO: å°†ç”Ÿå‘½æ›´æ–°åçš„å¯¹åº”é€»è¾‘æŒ‚è½½åˆ°ActionSystemä¸­
     public void UpdateHeroHp(int hpAmount, int maxHpAmount)
     {
         heroHpTMP.text = hpAmount.ToString() + "/" + maxHpAmount.ToString();
