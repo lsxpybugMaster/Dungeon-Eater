@@ -58,13 +58,13 @@ public class CardSystem : Singleton<CardSystem>
     /// </summary>
     /// <param name="deckData">传入卡牌数据列表</param>
     //IMPORTANT: 我们管理的是Card!! 不要使用CardData
-    public void Setup(List<CardData> deckData)
+    public void Setup(List<Card> deckData)
     {
         PlayerCards = deckData.Count;
         //初始填满抽牌堆
-        foreach (var cardData in deckData)
+        foreach (var herocard in deckData)
         {
-            Card card = new(cardData);
+            Card card = new(herocard.data);
             drawPile.Add(card);
         }
     }

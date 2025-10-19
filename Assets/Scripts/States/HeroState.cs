@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ActionSystemTest;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,7 @@ public class HeroState
     /// <summary>
     /// 玩家局外卡组信息在此
     /// </summary>
-    public List<CardData> Deck { get; private set; }
+    public List<Card> Deck { get; private set; }
 
     //------------------------持久化数据---------------------------
     public Sprite HeroSprite => BaseData.Image;
@@ -36,13 +37,25 @@ public class HeroState
 
         MaxHealth = heroData.Health;
         CurrentHealth = heroData.Health;
-           
-        //IMPORTANT: C# 中 '=' 永远是浅拷贝
 
-        //注意需要深拷贝!
-        Deck = new List<CardData>(heroData.Deck);
-        //BUG: 这是浅拷贝!
-        // Deck = heroData.Deck;
+        //别忘记初始化!
+        Deck = new List<Card>();
+
+        //DISCUSS: 我们实际上应当保管Card作为动态数据,否则会修改CardData
+        foreach (var cardData in heroData.Deck)
+        {
+            Card card = new(cardData);
+            Deck.Add(card);
+        }
+
+
+        //IMPORTANT: C# 中 '=' 永远是浅拷贝
+        /* 
+         * 注意需要深拷贝!
+         * Deck = new List<CardData>(heroData.Deck);
+         * 这是浅拷贝! Deck修改heroData.Deck也会被修改
+         * Deck = heroData.Deck;
+        */
     }
 
 
@@ -61,18 +74,19 @@ public class HeroState
     public void AddCardToDeck(CardData cardData)
     {
         DebugUtil.Magenta("Add Card!");
-        Deck.Add(cardData);
+        Card card = new(cardData);
+        Deck.Add(card);
     }
 
 
     /// <summary>
     /// 向牌组删除卡牌
     /// </summary>
-    public void RemoveCardFromDeck(CardData cardData)
+    public void RemoveCardFromDeck(Card card)
     {
-        if (Deck.Contains(cardData))
+        if (Deck.Contains(card))
         {
-            Deck.Remove(cardData);
+            Deck.Remove(card);
         }
         else Debug.LogError("未发现应该删除的卡牌");
     }

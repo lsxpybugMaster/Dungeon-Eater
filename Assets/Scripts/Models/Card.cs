@@ -12,7 +12,7 @@ public class Card
     //需要生成隐藏字段，自动属性
     public int Mana { get; private set;}
 
-    private readonly CardData data;
+    public readonly CardData data;
 
     public Card(CardData cardData)
     {

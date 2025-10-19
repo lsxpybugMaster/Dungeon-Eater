@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class DeckUI : MonoBehaviour, IUIMove
 {
     //NOTE: 组合优于继承,该UI能够移动
     private UIMoveComponent uiMoveComponent;
+
+    //IMPORTANT: 预制体一定要先Instantiate!!
+    [SerializeField] private GameObject cardUIPrefab;
+    [SerializeField] private GameObject cardUIRoot; //UI放置位置
 
     private void Awake()
     {
@@ -20,6 +25,9 @@ public class DeckUI : MonoBehaviour, IUIMove
         {
             MoveUI();
         }
+        if (Input.GetKeyDown(KeyCode.L)){
+            Show(GameManager.Instance.HeroState.Deck);
+        }
     }
 
     /// <summary>
@@ -28,5 +36,24 @@ public class DeckUI : MonoBehaviour, IUIMove
     public void MoveUI()
     {
         uiMoveComponent.SwitchModeMoveUI();
+    }
+
+    /// <summary>
+    /// 根据外部传入的卡牌数据展示对应卡牌
+    /// </summary>
+    private void InstantiateCardUIPrefab(Card card)
+    {
+        GameObject mygo = Instantiate(cardUIPrefab);
+        //挂载到指定父节点下管理
+        mygo.transform.SetParent(cardUIRoot.transform);
+        mygo.GetComponent<CardUI>().Setup(card);
+    }
+
+    public void Show(List<Card> cards)
+    {
+        foreach (var card in cards)
+        {
+            InstantiateCardUIPrefab(card);
+        }
     }
 }

@@ -30,9 +30,10 @@ public class PlayerDeckController
     }
 
 
-    public void RemoveCardFromDeck(CardData cardData)
+    //IDEA: 考虑到可能对手牌进行更改,我们传入需要删除的卡牌实例进行删除
+    public void RemoveCardFromDeck(Card card)
     {
-        heroState.RemoveCardFromDeck(cardData);
+        heroState.RemoveCardFromDeck(card);
         OnDeckSizeChanged?.Invoke(heroState.DeckSize);
     }
 }
