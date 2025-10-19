@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DeckUI : MonoBehaviour, IUIMove
 {
-    //NOTE: 组合由于继承,该UI能够移动
+    //NOTE: 组合优于继承,该UI能够移动
     private UIMoveComponent uiMoveComponent;
 
     private void Awake()
@@ -16,7 +16,10 @@ public class DeckUI : MonoBehaviour, IUIMove
 
     private void Update()
     {
-
+        if (Input.GetMouseButtonDown(2))
+        {
+            MoveUI();
+        }
     }
 
     /// <summary>

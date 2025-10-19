@@ -57,6 +57,7 @@ public class CardSystem : Singleton<CardSystem>
     /// 初始化牌堆
     /// </summary>
     /// <param name="deckData">传入卡牌数据列表</param>
+    //IMPORTANT: 我们管理的是Card!! 不要使用CardData
     public void Setup(List<CardData> deckData)
     {
         PlayerCards = deckData.Count;
