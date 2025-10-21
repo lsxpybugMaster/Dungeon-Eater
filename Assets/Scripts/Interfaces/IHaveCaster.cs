@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IHaveCaster
 {
-   CombatantView Caster { get; }
+    CombatantView Caster { get; }
 }

@@ -4,13 +4,13 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
-/// 跨场景显示的全局UI
+/// 顶部的UI
 /// </summary>
-//OPTIMIZE: 以前是跨场景单例,现在由GameManager管理并持久化
-public class GlobalUI : MonoBehaviour 
+public class TopUI : MonoBehaviour 
 {
+    //UI预制体
+    [SerializeField] private DeckUI deckUIPrefab;
 
-    [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private TMP_Text heroHpTMP;
     [SerializeField] private TMP_Text deckSizeTMP;
 

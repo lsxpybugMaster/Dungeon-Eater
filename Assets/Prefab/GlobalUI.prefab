@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 9107211176504271497}
   - component: {fileID: 3005520521971597402}
   m_Layer: 5
-  m_Name: UIHUD
+  m_Name: GlobalUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -483,7 +483,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2000
   m_TargetDisplay: 0
 --- !u!114 &8053840326210437114
 MonoBehaviour:
@@ -537,6 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e14db9f4c4bc42a49a76a85ef446507d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deckUIPrefab: {fileID: 8003606737888279171, guid: 255fa1c4519cba84fb55edb2d8da09b6, type: 3}
   canvasGroup: {fileID: 3005520521971597402}
   heroHpTMP: {fileID: 3569437354454832880}
   deckSizeTMP: {fileID: 3223691255367107096}

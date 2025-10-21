@@ -26,7 +26,9 @@ public class GameManager : PersistentSingleton<GameManager>
 {
     // 外部数据引用
     [SerializeField] private HeroData heroData;
-    [SerializeField] private GlobalUI globalUIPrefab;
+    [SerializeField] private TopUI globalUIPrefab;
+    [SerializeField] private PersistUIController persistUIControllerPrefab;
+
 
     //STEP: 属性
     public GameState GameState { get; private set; }
@@ -38,7 +40,8 @@ public class GameManager : PersistentSingleton<GameManager>
     public PlayerDeckController PlayerDeckController { get; private set; }
 
     //STEP: 保存跨场景Mono实例
-    public GlobalUI GlobalUI { get; private set; }
+    public TopUI GlobalUI { get; private set; }
+    public PersistUIController PersistUIController { get; private set; }
 
     // 初始化事件,GameManager初始化完毕后立刻通知其他脚本执行
     public static event Action OnGameManagerInitialized;
@@ -70,14 +73,22 @@ public class GameManager : PersistentSingleton<GameManager>
     //NOTE: 为了确保所有场景仅有一个GUI,目前只能创建一次GUI了,意味着不能在场景直接调试UI对象了,需要在Prefab中修改
     private void BindGlobalUI()
     {
-        if (GlobalUI == null)
-        {     
-           Debug.LogWarning("需要初始化UI");
-           GlobalUI = Instantiate(globalUIPrefab);           
+        //if (GlobalUI == null)
+        //{     
+        //   Debug.LogWarning("需要初始化UI");
+        //   GlobalUI = Instantiate(globalUIPrefab);           
+        //}
+        //DontDestroyOnLoad(GlobalUI.gameObject);
+        //GlobalUI.Setup(HeroState,PlayerDeckController);
+
+        if (PersistUIController == null)
+        {
+            PersistUIController = Instantiate(persistUIControllerPrefab);
         }
-        DontDestroyOnLoad(GlobalUI.gameObject);
-        GlobalUI.Setup(HeroState,PlayerDeckController);
-    }    
+        //持久化绑定
+        DontDestroyOnLoad(PersistUIController.gameObject);
+        PersistUIController.Setup(HeroState, PlayerDeckController);
+    }
 
 
     /// <summary>
