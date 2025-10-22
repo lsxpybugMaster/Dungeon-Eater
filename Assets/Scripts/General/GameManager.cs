@@ -62,7 +62,7 @@ public class GameManager : PersistentSingleton<GameManager>
         PlayerDeckController = new PlayerDeckController(HeroState);
 
         //初始化全局UI对象
-        BindGlobalUI();
+        InitPersistUI();
 
         //通知其他注册了该事件的脚本进行初始化,以此确保该脚本的执行在它们前面
         Debug.Log("Invoke");
@@ -71,7 +71,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
 
     //NOTE: 为了确保所有场景仅有一个GUI,目前只能创建一次GUI了,意味着不能在场景直接调试UI对象了,需要在Prefab中修改
-    private void BindGlobalUI()
+    private void InitPersistUI()
     {
         //if (GlobalUI == null)
         //{     

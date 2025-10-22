@@ -10,19 +10,19 @@ using UnityEngine;
 public class PersistUIController : MonoBehaviour
 {
     //UI引用
-    
+    [SerializeField] private DeckUI deckUI;
+    [SerializeField] private TopUI topUI;
 
-    private void Start()
-    {
-
-    }
+    public DeckUI DeckUI => deckUI;
+    public TopUI TopUI => topUI;
 
     /// <summary>
     /// 初始化基本信息
     /// </summary>
+    //NOTE: 这部分由GameManager调用 
     public void Setup(HeroState heroState, PlayerDeckController playerDeckController)
     {
-        DebugUtil.Cyan("HELLO");   
+         topUI.Setup(heroState, playerDeckController);
     }
    
 }

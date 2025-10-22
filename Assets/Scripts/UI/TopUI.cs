@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 顶部的UI
 /// </summary>
-public class TopUI : MonoBehaviour 
+public class TopUI : MonoBehaviour, IAmPersistUI
 {
-    //UI预制体
-    [SerializeField] private DeckUI deckUIPrefab;
-
     [SerializeField] private TMP_Text heroHpTMP;
     [SerializeField] private TMP_Text deckSizeTMP;
+    private Button showDeckBtn;
 
     private void Start()
     {
@@ -24,10 +23,17 @@ public class TopUI : MonoBehaviour
     /// </summary>
     public void Setup(HeroState heroState, PlayerDeckController playerDeckController)
     {
+        GetComponents();
+
         UpdateHeroHp(heroState.CurrentHealth, heroState.MaxHealth);
         UpdateDeckSize(heroState.DeckSize);
 
         SubscribeEvent(playerDeckController);
+    }
+
+    private void GetComponents()
+    {
+        showDeckBtn.GetComponent<Button>();
     }
 
 

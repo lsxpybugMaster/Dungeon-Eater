@@ -12,6 +12,12 @@ public class HeroView : CombatantView
     public void Setup(HeroState heroState)
     {
         SetupBase(heroState.CurrentHealth, heroState.MaxHealth, heroState.HeroSprite);
+
+        // 注册UI响应
+        OnHealthChanged += (cur, max) =>
+        {
+            GameManager.Instance.PersistUIController.TopUI.UpdateHeroHp(cur, max);
+        };
     }
 
     public void SaveData()
@@ -20,11 +26,12 @@ public class HeroView : CombatantView
         GameManager.Instance.HeroState.Save(CurrentHealth, MaxHealth);
     }
 
-    //英雄除了更新CombatantView的UI,还需更新全局UI
-    protected override void UpdateHealthText()
-    {
-        base.UpdateHealthText();
-        //TODO: 以后调整这种不优雅的更新UI方式
-        GameManager.Instance.GlobalUI.UpdateHeroHp(CurrentHealth, MaxHealth);
-    }
+    ////英雄除了更新CombatantView的UI,还需更新全局UI
+    //protected override void UpdateHealthText()
+    //{
+    //    base.UpdateHealthText();
+    //    //TODO: 以后调整这种不优雅的更新UI方式
+    //    //GameManager.Instance.PersistUIController.TopUI.UpdateHeroHp(CurrentHealth, MaxHealth);
+    //    //GameManager.Instance.GlobalUI.UpdateHeroHp(CurrentHealth, MaxHealth);
+    //}
 }

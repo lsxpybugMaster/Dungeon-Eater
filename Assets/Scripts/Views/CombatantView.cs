@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -21,6 +22,10 @@ public class CombatantView : MonoBehaviour
     //记录状态的堆叠数量
     private Dictionary<StatusEffectType, int> statusEffects = new();
 
+    //IDEA: 数据的改变事件,一般是由UI响应的
+    public event Action<int, int> OnHealthChanged;
+
+
     protected void SetupBase(int health, int maxhealth, Sprite image)
     {
         MaxHealth = maxhealth;
@@ -32,6 +37,8 @@ public class CombatantView : MonoBehaviour
     protected virtual void UpdateHealthText()
     {
         healthText.text = "HP: " + CurrentHealth;
+        //IDEA: 引发事件
+        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
     }
 
     /// <summary>

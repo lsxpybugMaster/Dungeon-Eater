@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 //IDEA: 将其也作为跨场景UI(因为调用其show函数的按钮在GlobalUI上)
-public class DeckUI : MonoBehaviour, IUIMove
+public class DeckUI : MonoBehaviour, IUIMove, IAmPersistUI
 {
     //NOTE: 组合优于继承,该UI能够移动
     private UIMoveComponent uiMoveComponent;
@@ -12,6 +12,11 @@ public class DeckUI : MonoBehaviour, IUIMove
     //IMPORTANT: 预制体一定要先Instantiate!!
     [SerializeField] private GameObject cardUIPrefab;
     [SerializeField] private GameObject cardUIRoot; //UI放置位置
+
+    public void Setup()
+    {
+
+    }
 
     private void Awake()
     {
