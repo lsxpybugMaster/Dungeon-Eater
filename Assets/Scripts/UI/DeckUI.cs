@@ -15,7 +15,7 @@ public class DeckUI : MonoBehaviour, IUIMove, IAmPersistUI
 
     public void Setup()
     {
-
+        // Show();
     }
 
     private void Awake()
@@ -27,13 +27,6 @@ public class DeckUI : MonoBehaviour, IUIMove, IAmPersistUI
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(2))
-        {
-            MoveUI();
-        }
-        if (Input.GetKeyDown(KeyCode.L)){
-            Show(GameManager.Instance.HeroState.Deck);
-        }
     }
 
     /// <summary>
@@ -41,7 +34,13 @@ public class DeckUI : MonoBehaviour, IUIMove, IAmPersistUI
     /// </summary>
     public void MoveUI()
     {
+        //说明要进入,更新UI
+        if (uiMoveComponent.isInOriginPos)
+        {
+            Show();
+        }
         uiMoveComponent.SwitchModeMoveUI();
+        
     }
 
     /// <summary>
@@ -55,8 +54,18 @@ public class DeckUI : MonoBehaviour, IUIMove, IAmPersistUI
         mygo.GetComponent<CardUI>().Setup(card);
     }
 
-    public void Show(List<Card> cards)
+    public void Show()
     {
+        //TODO: 使用对象池等修改逻辑
+        //预先清空之前的预制体
+        for (int i = cardUIRoot.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(cardUIRoot.transform.GetChild(i).gameObject);
+        }
+
+        Debug.Log("SHOW UI");
+
+        List<Card> cards = GameManager.Instance.HeroState.Deck;
         foreach (var card in cards)
         {
             InstantiateCardUIPrefab(card);

@@ -58,7 +58,7 @@ public class HeroState
         */
     }
 
-
+    
 
     //及时接受更新的临时数据
     public void Save(int currentHealth, int maxHealth)

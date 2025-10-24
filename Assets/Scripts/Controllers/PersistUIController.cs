@@ -22,7 +22,15 @@ public class PersistUIController : MonoBehaviour
     //NOTE: 这部分由GameManager调用 
     public void Setup(HeroState heroState, PlayerDeckController playerDeckController)
     {
-         topUI.Setup(heroState, playerDeckController);
+
+        //topUI初始化时需要绑定按钮
+        topUI.Setup(heroState, playerDeckController, () =>
+        {
+            deckUI.MoveUI();
+        });
+        Debug.Log("绑定按钮");
+
+        deckUI.Setup();
     }
    
 }

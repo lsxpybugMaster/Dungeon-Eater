@@ -19,13 +19,15 @@ public class UIMoveComponent : MonoBehaviour
     private Vector2 OriginPosition;
     private Vector2 TargetPosition;
     private RectTransform rectTransform;
-    public bool MoveIn {get; private set;}
+
+    // 用于控制是否是进入(一般进入是要带一些逻辑的) 
+    public bool isInOriginPos {get; private set;}
     [SerializeField] private RectTransform TargetDirection; //为了方便使用,费点空间。
     [SerializeField] private float duration;
 
     private void Awake()
     {
-        MoveIn = false;
+        isInOriginPos = true;
         rectTransform = GetComponent<RectTransform>();
         //NOTE: 记录锚点坐标,移动UI锚点更佳
         OriginPosition = rectTransform.anchoredPosition;
@@ -47,9 +49,9 @@ public class UIMoveComponent : MonoBehaviour
     /// </summary>
     public void SwitchModeMoveUI()
     {
-        Vector2 tar = MoveIn?  OriginPosition : TargetPosition;
+        Vector2 tar = isInOriginPos?  TargetPosition : OriginPosition;
         MoveUITo(tar, duration);
-        MoveIn = !MoveIn;
+        isInOriginPos = !isInOriginPos;
     }
 
     private void MoveUITo(Vector2 targetAnchorPos, float duration)

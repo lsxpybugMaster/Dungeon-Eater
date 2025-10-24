@@ -497,7 +497,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &1032496073514261203
 MonoBehaviour:
@@ -713,7 +713,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 1080}
-  m_SizeDelta: {x: 1900, y: 1040}
+  m_SizeDelta: {x: 1900, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &71757529988732786
 CanvasRenderer:
@@ -829,7 +829,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -30}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4888081498333899926
@@ -944,7 +944,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: -17}
+  m_SizeDelta: {x: 20, y: 0.000061035}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &5778397223714037901
 CanvasRenderer:
@@ -1048,7 +1048,7 @@ GameObject:
   - component: {fileID: 1331834652107818526}
   - component: {fileID: 7784811886159498266}
   m_Layer: 5
-  m_Name: GlobalUI
+  m_Name: TopUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1151,6 +1151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroHpTMP: {fileID: 3385467217578255230}
   deckSizeTMP: {fileID: 8243072590382763209}
+  showDeckBtn: {fileID: 5565986516431615801}
 --- !u!225 &7784811886159498266
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1463,7 +1464,6 @@ GameObject:
   - component: {fileID: 5124367164767692804}
   - component: {fileID: 5606119329382799948}
   - component: {fileID: 8117591195660704631}
-  - component: {fileID: 3110051059452081062}
   - component: {fileID: 4380482316228560888}
   m_Layer: 5
   m_Name: Canvas_ToplineUI
@@ -1555,20 +1555,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3110051059452081062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7287144036120082321}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e14db9f4c4bc42a49a76a85ef446507d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heroHpTMP: {fileID: 0}
-  deckSizeTMP: {fileID: 0}
 --- !u!225 &4380482316228560888
 CanvasGroup:
   m_ObjectHideFlags: 0

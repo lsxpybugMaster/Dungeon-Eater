@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,17 +12,19 @@ public class TopUI : MonoBehaviour, IAmPersistUI
 {
     [SerializeField] private TMP_Text heroHpTMP;
     [SerializeField] private TMP_Text deckSizeTMP;
-    private Button showDeckBtn;
+    [SerializeField] private Button showDeckBtn;
 
     private void Start()
     {
 
     }
 
+ 
+
     /// <summary>
     /// 初始化基本信息
     /// </summary>
-    public void Setup(HeroState heroState, PlayerDeckController playerDeckController)
+    public void Setup(HeroState heroState, PlayerDeckController playerDeckController, Action onShowDeckBtnClick)
     {
         GetComponents();
 
@@ -29,13 +32,25 @@ public class TopUI : MonoBehaviour, IAmPersistUI
         UpdateDeckSize(heroState.DeckSize);
 
         SubscribeEvent(playerDeckController);
+
+        BindButton(onShowDeckBtnClick);
+    }
+
+
+    //传入函数委托并绑定按钮
+    public void BindButton(Action onShowDeckBtnClick)
+    {
+        showDeckBtn.onClick.RemoveAllListeners();
+        if (onShowDeckBtnClick != null)
+        {
+            showDeckBtn.onClick.AddListener(() => onShowDeckBtnClick());
+        }
     }
 
     private void GetComponents()
     {
         showDeckBtn.GetComponent<Button>();
     }
-
 
     //订阅事件统一写在这里
     private void SubscribeEvent(PlayerDeckController playerDeckController)
