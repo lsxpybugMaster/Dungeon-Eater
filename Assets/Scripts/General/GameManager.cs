@@ -25,7 +25,6 @@ public enum GameState
 public class GameManager : PersistentSingleton<GameManager>
 {
     // 外部数据引用
-    [SerializeField] private HeroData heroData;
     [SerializeField] private TopUI globalUIPrefab;
     [SerializeField] private PersistUIController persistUIControllerPrefab;
 
@@ -35,6 +34,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     //STEP: 保存持久化数据 【注意】纯C#类需要实例化再用
     public HeroState HeroState { get; private set; }
+    public MapState MapState { get; private set; }
 
     //STEP: 保存功能模块(纯C#类)
     public PlayerDeckController PlayerDeckController { get; private set; }
@@ -55,8 +55,9 @@ public class GameManager : PersistentSingleton<GameManager>
     //防止对象还未创建
     private void Start()
     {
-
-        HeroState = new HeroState(heroData);
+        //数据部分由State类自己获取
+        HeroState = new HeroState();
+        MapState = new MapState();
 
         //注意初始化顺序
         PlayerDeckController = new PlayerDeckController(HeroState);

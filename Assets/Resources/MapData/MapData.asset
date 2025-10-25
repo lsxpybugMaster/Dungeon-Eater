@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ed9a14e7ecfcd49b122ab37fa1b426, type: 3}
+  m_Name: MapData
+  m_EditorClassIdentifier: 
+  <levels>k__BackingField:
+  - rid: 8501354094988886018
+  - rid: 8501354094988886019
+  - rid: 8501354094988886020
+  references:
+    version: 2
+    RefIds:
+    - rid: 8501354094988886018
+      type: {class: LevelData, ns: , asm: Assembly-CSharp}
+      data:
+        maxGrids: 10
+        enemyGrids: 0
+    - rid: 8501354094988886019
+      type: {class: LevelData, ns: , asm: Assembly-CSharp}
+      data:
+        maxGrids: 20
+        enemyGrids: 0
+    - rid: 8501354094988886020
+      type: {class: LevelData, ns: , asm: Assembly-CSharp}
+      data:
+        maxGrids: 30
+        enemyGrids: 0

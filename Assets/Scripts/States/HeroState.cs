@@ -9,7 +9,6 @@ using UnityEngine;
 /// 即实际上的玩家全局数据
 /// 尽可能保证仅含数据部分, 数据操作部分交给GameManager
 /// </summary>
-[System.Serializable]
 public class HeroState
 {
     //DISCUSS: 为了完全封装HeroData,我们使用HeroState管理HeroData的不变数据部分,确保其他系统仅知道HeroData存在
@@ -31,23 +30,24 @@ public class HeroState
 
 
     //仅初始化一次初始数据
-    public HeroState(HeroData heroData)
+    public HeroState()
     {
-        BaseData = heroData;
+        //直接获取数据,不再通过Gamemanager传入
+        //BaseData = Resources.Load<HeroData>();
+        LoadDataFromResources("HerosData/Knight");
 
-        MaxHealth = heroData.Health;
-        CurrentHealth = heroData.Health;
+        MaxHealth = BaseData.Health;
+        CurrentHealth = BaseData.Health;
 
         //别忘记初始化!
         Deck = new List<Card>();
 
         //DISCUSS: 我们实际上应当保管Card作为动态数据,否则会修改CardData
-        foreach (var cardData in heroData.Deck)
+        foreach (var cardData in BaseData.Deck)
         {
             Card card = new(cardData);
             Deck.Add(card);
         }
-
 
         //IMPORTANT: C# 中 '=' 永远是浅拷贝
         /* 
@@ -58,7 +58,11 @@ public class HeroState
         */
     }
 
-    
+    void LoadDataFromResources(string path)
+    {
+        BaseData = ResourceLoader.LoadSafe<HeroData>(path);
+    }
+
 
     //及时接受更新的临时数据
     public void Save(int currentHealth, int maxHealth)

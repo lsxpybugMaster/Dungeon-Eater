@@ -22,6 +22,7 @@ public class EnemyBoardView : MonoBehaviour
 
     public void AddEnemy(EnemyData enemyData)
     {
+        //Debug.Log(EnemyViews.Count);
         Transform slot = slots[EnemyViews.Count];
         //生成对象实例 + 挂载在父对象上 
         EnemyView enemyView = EnemyViewCreator.Instance.CreateEnemyView(enemyData, slot.position, slot.rotation);

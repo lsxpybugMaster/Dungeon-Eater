@@ -32,18 +32,20 @@ public class BattleControlSystem : MonoBehaviour
         ActionSystem.UnsubscribeReaction<KillAllEnemyGA>(BattleWin, ReactionTiming.POST);
     }
 
+    private bool hasSetup = false;
 
     void Start()
     {
-        //FIXME: HACK方法,防止Battle场景初次进入时出错
-        if (GameManager.Instance.HeroState.CurrentHealth == 0)
-        {
-            Debug.LogWarning("GameManager.Instance.HeroState is not init NOW!");        
-        }
-        else
-        {
+        /*
+            问题:
+            一般游戏时先进入title,此时GameManger实例化,并按序初始化Systems
+            然而如果直接进入Battle,可能由于脚本执行顺序问题,BattleSystem提早初始化,然后GameManger实例化后出现了:
+          //BUG: 重复初始化问题
+         */
+
+        //防止初次进入Battle场景时该脚本早于GameManager初始化
+        if (!hasSetup) 
             SetupBattle();
-        }
     }
 
     //IMPORTANT: 整个战斗场景的初始化入口:
@@ -52,6 +54,9 @@ public class BattleControlSystem : MonoBehaviour
      */
     private void SetupBattle()
     {
+        Debug.Log("SETUPBATTLE");
+        hasSetup = true; 
+
         HeroState heroState = GameManager.Instance.HeroState;
 
         //OPTIMIZE: 现在HeroState完全封装了HeroData!!

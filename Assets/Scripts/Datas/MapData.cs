@@ -21,4 +21,5 @@ public class LevelData
 public class MapData : ScriptableObject
 {
     [field: SerializeReference, SR] public LevelData[] levels { get; private set; }
+
 }
