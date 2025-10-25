@@ -9,10 +9,10 @@ using UnityEngine;
 /// 即实际上的玩家全局数据
 /// 尽可能保证仅含数据部分, 数据操作部分交给GameManager
 /// </summary>
-public class HeroState
+public class HeroState : BaseState<HeroData>
 {
-    //DISCUSS: 为了完全封装HeroData,我们使用HeroState管理HeroData的不变数据部分,确保其他系统仅知道HeroData存在
-    public HeroData BaseData {  get; private set; }
+    //DISCUSS: 为了完全封装HeroData,我们使用HeroState管理HeroData的不变数据部分,确保其他系统仅知道HeroState存在
+    //OPTIMIZE: 现在使用泛型抽象基类 BaseState 负责管理数据初始化以及以后可能的重复部分
 
     //------------------------动态数据---------------------------
     public int MaxHealth { get; private set; }
@@ -34,6 +34,8 @@ public class HeroState
     {
         //直接获取数据,不再通过Gamemanager传入
         //BaseData = Resources.Load<HeroData>();
+        
+        //继承基类后, 可以直接传入数据位置进行初始化
         LoadDataFromResources("HerosData/Knight");
 
         MaxHealth = BaseData.Health;
@@ -56,11 +58,6 @@ public class HeroState
          * 这是浅拷贝! Deck修改heroData.Deck也会被修改
          * Deck = heroData.Deck;
         */
-    }
-
-    void LoadDataFromResources(string path)
-    {
-        BaseData = ResourceLoader.LoadSafe<HeroData>(path);
     }
 
 

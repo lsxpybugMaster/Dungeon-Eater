@@ -5,8 +5,8 @@ using UnityEngine;
 /// <summary>
 /// 定义State相关类的基本功能
 /// </summary>
-public interface IDataState<T>
+public interface IDataState
 {
     //从Unity提供的Resources文件获取数据信息
-    T LoadDataFromResources(string path);
+    void LoadDataFromResources(string path);
 }
