@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-
 
 public enum Scene
 {
@@ -21,6 +17,7 @@ public enum GameState
 // GameManager 负责生命周期管理（初始化、场景切换、销毁）。
 /// <summary>
 /// 核心系统,跨场景而存在
+//IDEA: 尽可能只管理引用及初始化,不要涉及具体逻辑
 /// </summary>
 public class GameManager : PersistentSingleton<GameManager>
 {
@@ -32,12 +29,19 @@ public class GameManager : PersistentSingleton<GameManager>
     //STEP: 属性
     public GameState GameState { get; private set; }
 
+    //TODO: 将这些临时属性统一管理成state
+    public int SEED;
+
     //STEP: 保存持久化数据 【注意】纯C#类需要实例化再用
     public HeroState HeroState { get; private set; }
     public MapState MapState { get; private set; }
 
     //STEP: 保存功能模块(纯C#类)
     public PlayerDeckController PlayerDeckController { get; private set; }
+    /// <summary>
+    /// 全局随机数生成器,支持配发随机流
+    /// </summary>
+    public RNGSystem RogueController { get; private set; } 
 
     //STEP: 保存跨场景Mono实例
     public TopUI GlobalUI { get; private set; }
@@ -55,12 +59,17 @@ public class GameManager : PersistentSingleton<GameManager>
     //防止对象还未创建
     private void Start()
     {
+        //TODO: 优化这部分表达
+        SEED = SEED == 0 ? UnityEngine.Random.Range(0, int.MaxValue) : SEED;
+        RogueController = new RNGSystem(SEED);
+
         //数据部分由State类自己获取
         HeroState = new HeroState();
         MapState = new MapState();
 
         //注意初始化顺序
         PlayerDeckController = new PlayerDeckController(HeroState);
+        
 
         //初始化全局UI对象
         InitPersistUI();
@@ -74,14 +83,6 @@ public class GameManager : PersistentSingleton<GameManager>
     //NOTE: 为了确保所有场景仅有一个GUI,目前只能创建一次GUI了,意味着不能在场景直接调试UI对象了,需要在Prefab中修改
     private void InitPersistUI()
     {
-        //if (GlobalUI == null)
-        //{     
-        //   Debug.LogWarning("需要初始化UI");
-        //   GlobalUI = Instantiate(globalUIPrefab);           
-        //}
-        //DontDestroyOnLoad(GlobalUI.gameObject);
-        //GlobalUI.Setup(HeroState,PlayerDeckController);
-
         if (PersistUIController == null)
         {
             PersistUIController = Instantiate(persistUIControllerPrefab);

@@ -58,6 +58,8 @@ public class BattleControlSystem : MonoBehaviour
         hasSetup = true; 
 
         HeroState heroState = GameManager.Instance.HeroState;
+        if (heroState == null)
+            Debug.LogError("HeroState is NULL");
 
         //OPTIMIZE: 现在HeroState完全封装了HeroData!!
         HeroSystem.Instance.Setup(heroState);

@@ -11,7 +11,7 @@ using UnityEngine;
 public class LevelData
 {
     public int maxGrids;
-    public int enemyGrids;
+    public int shopGrids;
 }
 
 /// <summary>
