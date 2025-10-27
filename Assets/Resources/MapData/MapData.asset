@@ -22,15 +22,15 @@ MonoBehaviour:
     - rid: 8501354094988886018
       type: {class: LevelData, ns: , asm: Assembly-CSharp}
       data:
-        maxGrids: 15
+        levelInfostr: RRRRDDLLLLUU
         shopGrids: 3
     - rid: 8501354094988886019
       type: {class: LevelData, ns: , asm: Assembly-CSharp}
       data:
-        maxGrids: 20
+        levelInfostr: 
         shopGrids: 0
     - rid: 8501354094988886020
       type: {class: LevelData, ns: , asm: Assembly-CSharp}
       data:
-        maxGrids: 30
+        levelInfostr: 
         shopGrids: 0

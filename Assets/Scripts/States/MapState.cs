@@ -24,7 +24,6 @@ public class MapState : BaseState<MapData>
     public List<MapGrid> GetMap => Map;
 
     //------------------------持久化数据---------------------------
-    public int LevelSize => BaseData.levels[currentLevel].maxGrids;
 
     public MapState()
     {

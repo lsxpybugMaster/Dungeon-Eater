@@ -16,10 +16,6 @@ public class TestSystem : MonoBehaviour
         {
             AddCard();
         }
-        if (Input.GetKeyUp(KeyCode.M))
-        {
-            Debug.Log(GameManager.Instance.MapState.LevelSize);
-        }
     }
 
     private void AddCard()

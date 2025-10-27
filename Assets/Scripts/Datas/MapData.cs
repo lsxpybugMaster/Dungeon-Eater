@@ -10,7 +10,15 @@ using UnityEngine;
 [System.Serializable]
 public class LevelData
 {
-    public int maxGrids;
+    /// <summary>
+    /// 存储关卡数据 UDLR
+    /// </summary>
+    /*
+        RRRRD
+        U   D
+        ULLLL
+     */
+    public string levelInfostr; 
     public int shopGrids;
 }
 

@@ -23,25 +23,32 @@ public class MapGenerator
 
     /// <summary>
     /// 生成基本的随机地图,先以一维数组形式返回
+    /// //TODO: 目前地图的形状是固定的,所以生成的部分有随机有预设 
     /// </summary>
     /// <param name="levelIndex"></param>
     /// <returns></returns>
     public List<MapGrid> GenerateLevel(int levelIndex)
     {
         var levelConfig = baseData.levels[levelIndex];
-        int totalGrids = levelConfig.maxGrids;
+
+        string mapInfo = levelConfig.levelInfostr;
+
+        int totalGrids = mapInfo.Length;
+
         int shopGrids = levelConfig.shopGrids;
 
         List<MapGrid> grids = new(totalGrids);
         //后面生成时判重
         HashSet<int> used = new();
 
+        //首先做初始化: 默认房间类型,以及匹配方向
         for (int i = 0; i < totalGrids; i++)
         {
             grids.Add(new MapGrid
             {
                 gridIndex = i,
-                gridType = GridType.Enemy
+                gridType = GridType.Enemy,
+                nextDirection = mapInfo[i],
             });
         }
 

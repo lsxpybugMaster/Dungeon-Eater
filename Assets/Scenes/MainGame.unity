@@ -485,6 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapGridPrefab: {fileID: 791191169030326697, guid: 70ddeeb115f1c524090b213d860c4d96, type: 3}
+  gridInterval: 1.5
 --- !u!4 &2025387056
 Transform:
   m_ObjectHideFlags: 0
@@ -739,7 +740,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3570153713745908659, guid: 0d924eef13ca0be4d962b27c1d6779aa, type: 3}
       propertyPath: SEED
-      value: 123
+      value: 42
       objectReference: {fileID: 0}
     - target: {fileID: 4217460852059356405, guid: 0d924eef13ca0be4d962b27c1d6779aa, type: 3}
       propertyPath: m_Name
