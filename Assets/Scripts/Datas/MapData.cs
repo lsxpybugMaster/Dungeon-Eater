@@ -1,6 +1,7 @@
 ﻿using SerializeReferenceEditor;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -18,7 +19,11 @@ public class LevelData
         U   D
         ULLLL
      */
-    public string levelInfostr; 
+    [Tooltip("关卡配置代码格式:L4R4U2D3, 也可使用原始格式")]
+    public string levelSetCode;
+    //NOTE: 该字符串在编辑器中便被解析成为可分析的字符串
+    public string levelInfostr;
+
     public int shopGrids;
 }
 
@@ -30,4 +35,19 @@ public class MapData : ScriptableObject
 {
     [field: SerializeReference, SR] public LevelData[] levels { get; private set; }
 
+
+#if UNITY_EDITOR
+    // 在编辑器中修改字段时自动触发,以下功能仅是为了在编辑器中编辑方便
+    private void OnValidate()
+    {
+        if (levels == null) return;
+        foreach (var level in levels)
+        {
+            if (level != null)
+            {
+                level.levelInfostr = StringUtil.ParseLevelString(level.levelSetCode);
+            }
+        }
+    }
+#endif
 }

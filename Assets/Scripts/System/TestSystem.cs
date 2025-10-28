@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class TestSystem : MonoBehaviour
 {
-
     private void Start()
     {
-     
+
+        Debug.Log(StringUtil.ParseLevelString("L4U3"));       
     }
 
     private void Update()

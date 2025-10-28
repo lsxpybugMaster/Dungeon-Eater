@@ -21,10 +21,8 @@ public class MapState : BaseState<MapData>
     //IMPORTANT: 我们的持久化地图就在里面
     public List<MapGrid> Map {  get; private set; } //当前的地图
 
-    public List<MapGrid> GetMap => Map;
-
     //------------------------持久化数据---------------------------
-
+    //NOTE: 全局仅执行一次
     public MapState()
     {
         //自己去获取数据文件,不再由GameManager管理
@@ -34,17 +32,9 @@ public class MapState : BaseState<MapData>
         currentStep = 0;
 
         GenerateMap();
-
-        //Debug.Log($"SIZE: {Map.Count}");
-        //string dbg = "";
-        //foreach (var i in Map)
-        //{
-        //    dbg += i.gridType.ToString() + ',';
-        //}
-        //Debug.Log(dbg);
-        MapViewCreator.Instance.CreateMap(GetMap);
     }
 
+    //生成动态地图数据
     public void GenerateMap()
     {
         var generator = new MapGenerator(BaseData);

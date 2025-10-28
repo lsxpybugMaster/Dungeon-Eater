@@ -7,6 +7,10 @@ public class MapControlSystem : MonoBehaviour
     private bool hasSetup = false;
 
     private MapState mapState;
+
+    [SerializeField] private MapViewCreator mapViewcreator;
+
+    public MapViewCreator MapViewCreator => mapViewcreator;
    
     void Start()
     {
@@ -29,7 +33,9 @@ public class MapControlSystem : MonoBehaviour
 
     private void SetupMap()
     {
+        Debug.Log("≥ı ºªØµÿÕº");
         mapState = GameManager.Instance.MapState;
+        MapViewCreator.CreateMap(mapState.Map);
         hasSetup = true;
     }
 

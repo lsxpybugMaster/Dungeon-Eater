@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapViewCreator : Singleton<MapViewCreator>
-{
+public class MapViewCreator : MonoBehaviour {
+
     [SerializeField] private MapGridView mapGridPrefab;
     [SerializeField] private float gridInterval; //控制地图格子生成之间的距离
 
@@ -32,6 +32,7 @@ public class MapViewCreator : Singleton<MapViewCreator>
         }
     }
 
+    //NOTE: 每次初始化时都要生成一次
     public void CreateMap(List<MapGrid> gridList)
     {
         Vector3 lastPos = transform.position;
