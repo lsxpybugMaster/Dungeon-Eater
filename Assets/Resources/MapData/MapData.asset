@@ -22,8 +22,8 @@ MonoBehaviour:
     - rid: 8501354094988886018
       type: {class: LevelData, ns: , asm: Assembly-CSharp}
       data:
-        levelSetCode: R2U2R2D2R2D2L2D2L2U2L2U2
-        levelInfostr: RRUURRDDRRDDLLDDLLUULLUU
+        levelSetCode: R4D3L4U3
+        levelInfostr: RRRRDDDLLLLUUU
         shopGrids: 3
     - rid: 8501354094988886019
       type: {class: LevelData, ns: , asm: Assembly-CSharp}

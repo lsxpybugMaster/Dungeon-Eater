@@ -5,13 +5,21 @@ using UnityEngine;
 public class MapViewCreator : MonoBehaviour {
 
     [SerializeField] private MapGridView mapGridPrefab;
-    [SerializeField] private float gridInterval; //控制地图格子生成之间的距离
+    [SerializeField] private Transform mapGridParent; //生成的格子挂载在哪里
+    private float gridGenerateInterval; //控制地图格子生成之间的距离
+    private float girdSize;
 
-    /* DISCUSS: 任何供外部调用的初始化（例如 Setup、Init、LoadData）所依赖的变量，都不要在 Start 初始化。
-        应该放在：字段声明时 或 Awake() 中*/
+    private void Awake()
+    {
+        gridGenerateInterval = MapControlSystem.Instance.GridSize + MapControlSystem.Instance.GridInterval;
+        girdSize = MapControlSystem.Instance.GridSize;
+    }
+
+    
     void Start()
     {
-        
+        /* //DISCUSS: 任何供外部调用的初始化（例如 Setup、Init、LoadData）所依赖的变量，都不要在 Start 初始化。
+          应该放在：字段声明时 或 Awake() 中*/
     }
 
     // Update is called once per frame
@@ -41,9 +49,11 @@ public class MapViewCreator : MonoBehaviour {
         {
             MapGridView mygo = Instantiate(mapGridPrefab, lastPos, Quaternion.identity);
             mygo.Setup(grid.gridType);
+            mygo.transform.SetParent(mapGridParent);
+            mygo.transform.localScale = Vector3.one * girdSize;
 
             //根据地图方格中数据判断下一个方格生成在哪里
-            UpdateLastPos(ref lastPos, grid.nextDirection, gridInterval);
+            UpdateLastPos(ref lastPos, grid.nextDirection, gridGenerateInterval);
         }
 
     }

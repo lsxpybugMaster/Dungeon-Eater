@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapControlSystem : MonoBehaviour
+/// <summary>
+/// 负责初始化地图,以及存储一些地图配置信息(在编辑器中编辑的)
+/// </summary>
+public class MapControlSystem : Singleton<MapControlSystem>
 {
     private bool hasSetup = false;
 
@@ -10,7 +13,15 @@ public class MapControlSystem : MonoBehaviour
 
     [SerializeField] private MapViewCreator mapViewcreator;
 
+    [Header("地图的相关编辑器配置数据")]
+    [SerializeField] private float gridInterval;
+    [SerializeField] private float gridSize;
+
     public MapViewCreator MapViewCreator => mapViewcreator;
+
+    //封装需要暴露的字段为属性
+    public float GridInterval => gridInterval;
+    public float GridSize => gridSize;
    
     void Start()
     {
