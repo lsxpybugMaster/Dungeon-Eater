@@ -10,6 +10,7 @@ public class MapControlSystem : Singleton<MapControlSystem>
     private bool hasSetup = false;
 
     private MapState mapState;
+    private MapDicesSystem dicesSystem;
 
     [SerializeField] private MapViewCreator mapViewcreator;
 
@@ -46,7 +47,10 @@ public class MapControlSystem : Singleton<MapControlSystem>
     {
         Debug.Log("≥ı ºªØµÿÕº");
         mapState = GameManager.Instance.MapState;
+        dicesSystem = MapDicesSystem.Instance;
         MapViewCreator.CreateMap(mapState.Map);
+        
+        dicesSystem.SetUp();
         hasSetup = true;
     }
 

@@ -20,7 +20,8 @@ public class MapState : BaseState<MapData>
     public int currentStep { get; private set; }
     //IMPORTANT: 我们的持久化地图就在里面
     public List<MapGrid> Map {  get; private set; } //当前的地图
-
+    public List<MapDiceView> MapDiceList { get; private set; } //当前地图对应的骰子
+ 
     //------------------------持久化数据---------------------------
     //NOTE: 全局仅执行一次
     public MapState()
@@ -32,12 +33,26 @@ public class MapState : BaseState<MapData>
         currentStep = 0;
 
         GenerateMap();
+        //GenerateDiceState();
     }
 
     //生成动态地图数据
-    public void GenerateMap()
+    private void GenerateMap()
     {
         var generator = new MapGenerator(BaseData);
         Map = generator.GenerateLevel(currentLevel);
+    }
+
+
+    public void GenerateDiceState()
+    {
+        if (Map == null || Map.Count == 0)
+            Debug.LogError("MAPSIZE == 0!!!");
+        List<int> diceIndices = RandomUtil.GetUniqueRandomIndexes(0, Map.Count, 3);
+        MapDiceList = new List<MapDiceView>(3);
+        for (int i = 0; i < MapDiceList.Count; i++)
+        {
+            MapDiceList[i].Index = diceIndices[i];
+        }
     }
 }

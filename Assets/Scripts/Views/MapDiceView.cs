@@ -14,8 +14,13 @@ public class MapDiceView : MonoBehaviour
     [SerializeField] private float hover_and_rotate_speed = 60f;
 
     private bool isMoveHovering = false;
+
+    //IoC, 因此Index需要完全暴露给上层
+    public int Index { get;  set; }
+
     //NOTE: 基于事件的控制反转IoC
-    public event Action<MapDiceView> OnClicked;
+    public event Action<MapDiceView> OnDiceClicked;
+
 
     private void Update()
     {
@@ -31,6 +36,12 @@ public class MapDiceView : MonoBehaviour
     }
 
     private void OnMouseDown()
+    {
+        //STEP: 通过IoC将逻辑上传,由上面的系统管理逻辑
+        OnDiceClicked.Invoke(this);
+    }
+
+    public void Move()
     {
         float x = transform.position.x;
         transform.DOMoveX(x + 2, 0.5f);
