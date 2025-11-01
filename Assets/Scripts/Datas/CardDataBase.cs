@@ -1,29 +1,29 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// È«¾Ö¿¨ÅÆÊı¾İ¿â£º
-/// ¸ºÔğ¹ÜÀíËùÓĞ CardData µÄ²éÕÒ¡¢»º´æÓëËæ»ú»ñÈ¡¡£
-/// ¶ÔÍâÌá¹©Ö»¶Á½Ó¿Ú£¬½ûÖ¹Íâ²¿Ö±½ÓĞŞ¸Ä»ò·ÃÎÊµ×²ãÁĞ±í¡£
+/// å…¨å±€å¡ç‰Œæ•°æ®åº“ï¼š
+/// è´Ÿè´£ç®¡ç†æ‰€æœ‰ CardData çš„æŸ¥æ‰¾ã€ç¼“å­˜ä¸éšæœºè·å–ã€‚
+/// å¯¹å¤–æä¾›åªè¯»æ¥å£ï¼Œç¦æ­¢å¤–éƒ¨ç›´æ¥ä¿®æ”¹æˆ–è®¿é—®åº•å±‚åˆ—è¡¨ã€‚
 /// </summary>
 [CreateAssetMenu(menuName = "Database/CardDatabase")]
 public class CardDatabase : ScriptableObject
 {
-    // Íâ²¿ÅäÖÃ¿¨ÅÆ×ÜÊı¾İ
+    // å¤–éƒ¨é…ç½®å¡ç‰Œæ€»æ•°æ®
     [SerializeField] private List<CardData> allCards = new();
 
-    // Ë÷Òı¿¨ÅÆ
+    // ç´¢å¼•å¡ç‰Œ
     private Dictionary<string, CardData> idLookup;
 
-    // --------------------- ³õÊ¼»¯ ---------------------
+    // --------------------- åˆå§‹åŒ– ---------------------
     public void Init()
     {
-        if (idLookup != null) return; // ±ÜÃâÖØ¸´³õÊ¼»¯
+        if (idLookup != null) return; // é¿å…é‡å¤åˆå§‹åŒ–
 
         idLookup = new Dictionary<string, CardData>();
-        //²»¿¼ÂÇ´óĞ¡Ğ´µÄ²éÕÒ
+        //ä¸è€ƒè™‘å¤§å°å†™çš„æŸ¥æ‰¾
 
         foreach (var card in allCards)
         {
@@ -38,7 +38,7 @@ public class CardDatabase : ScriptableObject
         Debug.Log($"[CardDatabase] Initialized with {allCards.Count} cards.");
     }
 
-    // --------------------- µ¥Àı·ÃÎÊ ---------------------
+    // --------------------- å•ä¾‹è®¿é—® ---------------------
     private static CardDatabase _instance;
     public static CardDatabase Instance
     {
@@ -56,9 +56,9 @@ public class CardDatabase : ScriptableObject
         }
     }
 
-    // --------------------- ²éÑ¯½Ó¿Ú ---------------------
+    // --------------------- æŸ¥è¯¢æ¥å£ ---------------------
 
-    /// <summary> Í¨¹ı¿¨ÅÆID²éÕÒÄ£°å </summary>
+    /// <summary> é€šè¿‡å¡ç‰ŒIDæŸ¥æ‰¾æ¨¡æ¿ </summary>
     public static CardData GetById(string id)
     {
         return Instance.idLookup.TryGetValue(id, out var card)
@@ -67,13 +67,13 @@ public class CardDatabase : ScriptableObject
     }
 
 
-    // --------------------- Ëæ»ú½Ó¿Ú ---------------------
+    // --------------------- éšæœºæ¥å£ ---------------------
 
-    /// <summary> Ëæ»ú³éÈ¡Ò»ÕÅ¿¨ÅÆ </summary>
-    /// ´«ÈëµÄº¯ÊıĞÎÊ½ bool func(CardData)
+    /// <summary> éšæœºæŠ½å–ä¸€å¼ å¡ç‰Œ </summary>
+    /// ä¼ å…¥çš„å‡½æ•°å½¢å¼ bool func(CardData)
     public static CardData GetRandomCard(Func<CardData, bool> filter = null)
     {
-        //È·¶¨Ëæ»úµÄ·¶Î§
+        //ç¡®å®šéšæœºçš„èŒƒå›´
         var pool = filter == null ? Instance.allCards : Instance.allCards.Where(filter).ToList();
         if (pool.Count == 0) return null;
 
@@ -82,6 +82,6 @@ public class CardDatabase : ScriptableObject
     }
 
 
-    /// <summary> »ñÈ¡ËùÓĞ¿¨ÅÆ£¨Ö»¶Á£© </summary>
+    /// <summary> è·å–æ‰€æœ‰å¡ç‰Œï¼ˆåªè¯»ï¼‰ </summary>
     public static IReadOnlyList<CardData> AllCards => Instance.allCards;
 }

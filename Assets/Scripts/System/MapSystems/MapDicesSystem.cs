@@ -12,11 +12,11 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
 
     public void SetUp()
     {
-        GameManager.Instance.MapState.GenerateDiceState();
-        Debug.Log("MapDicesSystem.SETUP");
-        List<MapDiceView> mapDiceList = GameManager.Instance.MapState.MapDiceList;
+        Debug.Log("Begin: To Get MapDiceList");
+        var mapDiceList = GameManager.Instance.MapState.MapDiceList;
         if (mapDiceList.Count == 0)
             Debug.LogError("mapDiceList.Count == 0");
+        Debug.Log($"GameManager.Instance.MapState.MapDiceList: {GameManager.Instance.MapState.MapDiceList.Count}");
         //生成骰子并绑定事件
         int idx = 0;
         foreach (var mapDice in mapDiceList)

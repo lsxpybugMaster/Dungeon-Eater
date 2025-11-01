@@ -18,9 +18,12 @@ public class MapState : BaseState<MapData>
     //------------------------动态数据---------------------------
     public int currentLevel { get; private set; }
     public int currentStep { get; private set; }
-    //IMPORTANT: 我们的持久化地图就在里面
+
+    public int mapDices { get; private set; }
+
+    //IMPORTANT: 我们的持久化地图就在里面,存储的都是Model(MVC=>M)
     public List<MapGrid> Map {  get; private set; } //当前的地图
-    public List<MapDiceView> MapDiceList { get; private set; } //当前地图对应的骰子
+    public List<MapDice> MapDiceList { get; private set; } //当前地图对应的骰子
  
     //------------------------持久化数据---------------------------
     //NOTE: 全局仅执行一次
@@ -31,9 +34,15 @@ public class MapState : BaseState<MapData>
 
         currentLevel = 0;
         currentStep = 0;
+        initNewLevel(currentLevel);
 
         GenerateMap();
-        //GenerateDiceState();
+        GenerateDiceState();
+    }
+
+    public void initNewLevel(int curLevel)
+    {
+        mapDices = BaseData.levels[curLevel].mapDices;
     }
 
     //生成动态地图数据
@@ -46,13 +55,21 @@ public class MapState : BaseState<MapData>
 
     public void GenerateDiceState()
     {
+        //NOTE: C# new List<T>(n) 只是预分配 capacity 与C++ Vector不同
         if (Map == null || Map.Count == 0)
-            Debug.LogError("MAPSIZE == 0!!!");
-        List<int> diceIndices = RandomUtil.GetUniqueRandomIndexes(0, Map.Count, 3);
-        MapDiceList = new List<MapDiceView>(3);
-        for (int i = 0; i < MapDiceList.Count; i++)
+            Debug.LogError("Cannot find Map or Map Count is 0");
+
+        List<int> diceIndices = RandomUtil.GetUniqueRandomIndexes(0, Map.Count, mapDices);
+        
+        MapDiceList = new List<MapDice>();
+
+        for (int i = 0; i < diceIndices.Count; i++)
         {
-            MapDiceList[i].Index = diceIndices[i];
+            //注意初始化列表的方法
+            var dice = new MapDice();
+            dice.Index = diceIndices[i];
+            MapDiceList.Add(dice);
         }
+        Debug.Log($"MapDiceList.count: {MapDiceList.Count} ");
     }
 }

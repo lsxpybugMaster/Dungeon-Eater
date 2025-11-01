@@ -25,6 +25,8 @@ public class LevelData
     public string levelInfostr;
 
     public int shopGrids;
+    [Header("控制行动的骰子个数")]
+    public int mapDices; 
 }
 
 /// <summary>

@@ -6,7 +6,9 @@ using UnityEngine;
 
 /// <summary>
 /// 地图上的骰子,主要控制玩家的地图探索
+/// 
 /// </summary>
+//NOTE: MapDiceView(V) MapDice(M) MapController(IoC)
 //DISCUSS: 点击骰子后触发的功能还是上报给上层计算好
 //STEP: 控制反转（Inversion of Control, IoC）" 下层模块不依赖上层模块，控制流程交由外部统一管理。"
 public class MapDiceView : MonoBehaviour
