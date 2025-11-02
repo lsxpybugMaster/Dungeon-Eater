@@ -1,8 +1,8 @@
-using NUnit.Framework;
+锘縰sing NUnit.Framework;
 
 public class RandomUtilTests
 {
-    //NOTE: 其不是严格的单元测试
+    //NOTE: 鍏朵笉鏄弗鏍肩殑鍗曞厓娴嬭瘯
     [Test]
     public void RandomUtil_Prints_Correct()
     {

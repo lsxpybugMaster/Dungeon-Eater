@@ -1,38 +1,42 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¹ÜÀíµØÍ¼µÄËùÓĞ÷»×Ó,¸ºÔğ³õÊ¼»¯÷»×Ó
+/// ç®¡ç†åœ°å›¾çš„æ‰€æœ‰éª°å­,è´Ÿè´£åˆå§‹åŒ–éª°å­
 /// </summary>
+//IMPORTANT: éª°å­çš„æœ€é¡¶å±‚
 public class MapDicesSystem : Singleton<MapDicesSystem>
 {
     [SerializeField] private MapDiceView mapDicePrefab;    
     
 
-    public void SetUp()
+    public void SetUp(List<MapDice> mapDiceList)
     {
-        Debug.Log("Begin: To Get MapDiceList");
-        var mapDiceList = GameManager.Instance.MapState.MapDiceList;
-        if (mapDiceList.Count == 0)
-            Debug.LogError("mapDiceList.Count == 0");
-        Debug.Log($"GameManager.Instance.MapState.MapDiceList: {GameManager.Instance.MapState.MapDiceList.Count}");
-        //Éú³É÷»×Ó²¢°ó¶¨ÊÂ¼ş
+        //IDEA: èƒ½"æ³¨å…¥"å°±ä¸è¦"å…¨å±€è®¿é—®"  é—®è‡ªå·±: å¦‚æœæˆ‘å¤åˆ¶è¿™ä¸ª System åˆ°å¦ä¸€ä¸ªé¡¹ç›®æˆ–æµ‹è¯•åœºæ™¯ï¼Œå®ƒè¿˜èƒ½ç‹¬ç«‹å·¥ä½œå—?
+        //OPTIMIZE: æ—¢ç„¶MapDicesSystemæ˜¯è¢«MapControlSystemè°ƒç”¨çš„æ¨¡å—,é‚£ä¹ˆæœ€å¥½ä½¿ç”¨DIå°†mapListæ³¨å…¥
+        if (mapDiceList.Count == 0 || mapDiceList == null)
+            Debug.LogError("mapDiceList.Count == 0 or mapDiceList is null");
+    
+        //ç”Ÿæˆéª°å­å¹¶ç»‘å®šäº‹ä»¶
         int idx = 0;
         foreach (var mapDice in mapDiceList)
         {
-            Debug.Log("Éú³É÷»×Ó");
             MapDiceView mygo = Instantiate(mapDicePrefab);
-            mygo.Index = mapDiceList[idx++].Index;
-            mygo.transform.position = transform.position + new Vector3(idx, 0, 0);
-            //STEP: »ùÓÚÊÂ¼şµÄIoC
+            mygo.MapDice = mapDiceList[idx++];
+            //TODO: ç»‘å®šä½ç½®
+            mygo.transform.position = mygo.MapDice.start_pos; //åœ¨mapViewcreator.CreateMapWithDiceåˆå§‹åŒ–äº†start_pos
+            //STEP: åŸºäºäº‹ä»¶çš„IoC é€šè¿‡äº‹ä»¶ç»‘å®šéª°å­
             mygo.OnDiceClicked += HandleDiceClicked;
         }
     }
 
     private void HandleDiceClicked(MapDiceView mapDiceView)
     {
-        Debug.Log($"µã»÷ÁË÷»×Ó, ÷»×ÓidÎª: {mapDiceView.Index}");
+        Debug.Log($"ç‚¹å‡»äº†éª°å­, éª°å­idä¸º: {mapDiceView.MapDice.Index}");
+        int res = DiceRollUtil.D6();
+        DebugUtil.Cyan($"ROLL: {res}");
+        mapDiceView.MoveToTarget(res);
     }
 
     void Start()

@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 负责初始化地图,以及存储一些地图配置信息(在编辑器中编辑的)
 /// </summary>
+//IMPORTANT: 整个Map的底层
 public class MapControlSystem : Singleton<MapControlSystem>
 {
     private bool hasSetup = false;
@@ -48,9 +49,10 @@ public class MapControlSystem : Singleton<MapControlSystem>
         Debug.Log("初始化地图");
         mapState = GameManager.Instance.MapState;
         dicesSystem = MapDicesSystem.Instance;
-        MapViewCreator.CreateMap(mapState.Map);
-        
-        dicesSystem.SetUp();
+        //每次重新进入都需要生成地图,同时初始化骰子位置
+        mapViewcreator.CreateMapWithDice(mapState.Map, mapState.MapDiceList);
+     
+        dicesSystem.SetUp(mapState.MapDiceList);
         hasSetup = true;
     }
 

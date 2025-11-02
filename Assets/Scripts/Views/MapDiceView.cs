@@ -17,12 +17,11 @@ public class MapDiceView : MonoBehaviour
 
     private bool isMoveHovering = false;
 
-    //IoC, 因此Index需要完全暴露给上层
-    public int Index { get;  set; }
+    //IoC, 因此数据MapDice需要完全暴露给上层
+    public MapDice MapDice { get; set; }
 
     //NOTE: 基于事件的控制反转IoC
     public event Action<MapDiceView> OnDiceClicked;
-
 
     private void Update()
     {
@@ -41,6 +40,21 @@ public class MapDiceView : MonoBehaviour
     {
         //STEP: 通过IoC将逻辑上传,由上面的系统管理逻辑
         OnDiceClicked.Invoke(this);
+    }
+
+    public void MoveToTarget(int x)
+    {
+        float movestep = MapControlSystem.Instance.GridSize + MapControlSystem.Instance.GridInterval;
+
+        Sequence seq = DOTween.Sequence();
+
+        for (int i = 0; i < x; i++)
+        {
+            float nextX = transform.position.x + (i + 1) * movestep; // 每次向右
+            seq.Append(transform.DOMoveX(nextX, 0.5f));       // 按顺序添加动画
+        }
+
+        seq.Play();
     }
 
     public void Move()

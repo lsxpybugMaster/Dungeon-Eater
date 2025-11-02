@@ -9,10 +9,14 @@ public class MapViewCreator : MonoBehaviour {
     private float gridGenerateInterval; //控制地图格子生成之间的距离
     private float girdSize;
 
+    [SerializeField] private Transform mapStartPoint; //地图起始点
+
     private void Awake()
     {
         gridGenerateInterval = MapControlSystem.Instance.GridSize + MapControlSystem.Instance.GridInterval;
         girdSize = MapControlSystem.Instance.GridSize;
+
+        mapStartPoint = transform;
     }
 
     
@@ -40,21 +44,35 @@ public class MapViewCreator : MonoBehaviour {
         }
     }
 
-    //NOTE: 每次初始化时都要生成一次
-    public void CreateMap(List<MapGrid> gridList)
+    //NOTE: 每次初始化时都要生成一次, 现在还需控制骰子生成位置
+    public void CreateMapWithDice(List<MapGrid> gridList, List<MapDice> mapDices)
     {
-        Vector3 lastPos = transform.position;
+        Vector3 lastPos = mapStartPoint.position;
 
-        foreach (var grid in gridList)
+        Dictionary<int, MapDice> diceDict = new Dictionary<int, MapDice>();
+        foreach (var dice in mapDices)
         {
+            diceDict[dice.Index] = dice;
+        }
+
+        for (int i = 0; i < gridList.Count; i++)
+        {
+            var grid = gridList[i];
+
             MapGridView mygo = Instantiate(mapGridPrefab, lastPos, Quaternion.identity);
             mygo.Setup(grid.gridType);
             mygo.transform.SetParent(mapGridParent);
             mygo.transform.localScale = Vector3.one * girdSize;
 
+            //如果当前格子与dice中某id一致,那么该位置会被写入dice供后续生成绑定
+            if (diceDict.TryGetValue(i, out MapDice dice))
+            {
+                dice.start_pos = lastPos;
+            }
+              
             //根据地图方格中数据判断下一个方格生成在哪里
             UpdateLastPos(ref lastPos, grid.nextDirection, gridGenerateInterval);
         }
-
+        
     }
 }

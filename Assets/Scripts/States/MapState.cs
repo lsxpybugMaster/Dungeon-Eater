@@ -19,11 +19,14 @@ public class MapState : BaseState<MapData>
     public int currentLevel { get; private set; }
     public int currentStep { get; private set; }
 
+    /// <summary>
+    /// 当前关卡的mapDice最大数量
+    /// </summary>
     public int mapDices { get; private set; }
 
     //IMPORTANT: 我们的持久化地图就在里面,存储的都是Model(MVC=>M)
     public List<MapGrid> Map {  get; private set; } //当前的地图
-    public List<MapDice> MapDiceList { get; private set; } //当前地图对应的骰子
+    public List<MapDice> MapDiceList { get; set; } //当前地图对应的骰子,可以被Map编辑
  
     //------------------------持久化数据---------------------------
     //NOTE: 全局仅执行一次
@@ -70,6 +73,5 @@ public class MapState : BaseState<MapData>
             dice.Index = diceIndices[i];
             MapDiceList.Add(dice);
         }
-        Debug.Log($"MapDiceList.count: {MapDiceList.Count} ");
     }
 }
