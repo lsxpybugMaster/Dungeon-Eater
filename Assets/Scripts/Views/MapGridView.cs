@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MapGridView : MonoBehaviour
 {
     private SpriteRenderer sr;
+
+    public TMP_Text indexText;
 
     public void Setup(GridType type)
     {
@@ -13,5 +16,10 @@ public class MapGridView : MonoBehaviour
             sr.color = Color.red;
         else
             sr.color = Color.yellow;
+    }
+
+    public void SetIndex(int index)
+    {
+        indexText.text = index.ToString();
     }
 }

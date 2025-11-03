@@ -33,19 +33,39 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
 
     private void HandleDiceClicked(MapDiceView mapDiceView)
     {
-        Debug.Log($"点击了骰子, 骰子id为: {mapDiceView.MapDice.Index}");
         int res = DiceRollUtil.D6();
-        DebugUtil.Cyan($"ROLL: {res}");
-        mapDiceView.MoveToTarget(res);
+        //分析骰子的移动,形成指令      
+        int id = mapDiceView.MapDice.Index;
+        //TODO: 这里必须从全局获取Map吗？
+        var map = GameManager.Instance.MapState.Map;
+
+        //模拟移动,并未真实移动
+        MoveDataOnMap(id, res, map, out string moveCommand, out int newId);
+        //给下层传入命令,具体的移动MapDicesSystem无需了解
+        mapDiceView.MoveToTarget(moveCommand);
     }
 
-    void Start()
-    {
-        
-    }
 
-    void Update()
+    /// <summary>
+    /// 模拟移动 
+    /// 传入当前id,以及移动的步数,返回移动所需的路径(字符串)和新的id
+    /// </summary>
+    /// <returns>返回新的id</returns>
+    private void MoveDataOnMap(int idx, int step, List<MapGrid> map, out string moveStr, out int newIdx)
     {
-        
+        moveStr = "";
+
+        int mapSize = map.Count;
+
+        while (step-- > 0)
+        {
+            //先从id获取下一次位置,再去更新id
+            char direct = map[idx].nextDirection;
+            moveStr += direct;
+
+            idx = (idx + 1) % mapSize;
+        }
+
+        newIdx = idx;
     }
 }

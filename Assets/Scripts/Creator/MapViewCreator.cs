@@ -6,6 +6,7 @@ public class MapViewCreator : MonoBehaviour {
 
     [SerializeField] private MapGridView mapGridPrefab;
     [SerializeField] private Transform mapGridParent; //生成的格子挂载在哪里
+    //这两个字段是为了便于引用单例MapControlSystem属性
     private float gridGenerateInterval; //控制地图格子生成之间的距离
     private float girdSize;
 
@@ -13,9 +14,8 @@ public class MapViewCreator : MonoBehaviour {
 
     private void Awake()
     {
-        gridGenerateInterval = MapControlSystem.Instance.GridSize + MapControlSystem.Instance.GridInterval;
         girdSize = MapControlSystem.Instance.GridSize;
-
+        gridGenerateInterval = MapControlSystem.Instance.Step;
         mapStartPoint = transform;
     }
 
@@ -61,6 +61,7 @@ public class MapViewCreator : MonoBehaviour {
 
             MapGridView mygo = Instantiate(mapGridPrefab, lastPos, Quaternion.identity);
             mygo.Setup(grid.gridType);
+            mygo.SetIndex(i);
             mygo.transform.SetParent(mapGridParent);
             mygo.transform.localScale = Vector3.one * girdSize;
 

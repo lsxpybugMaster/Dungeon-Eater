@@ -18,13 +18,28 @@ public class MapControlSystem : Singleton<MapControlSystem>
     [Header("地图的相关编辑器配置数据")]
     [SerializeField] private float gridInterval;
     [SerializeField] private float gridSize;
+    [SerializeField] private float mapDiceMoveSpeed;
+    private float step;
 
     public MapViewCreator MapViewCreator => mapViewcreator;
+    
 
     //封装需要暴露的字段为属性
     public float GridInterval => gridInterval;
     public float GridSize => gridSize;
-   
+    public float MapDiceMoveSpeed => mapDiceMoveSpeed;
+
+    /// <summary>
+    /// 实际生成/在格子中移动的距离
+    /// </summary>
+    public float Step => step;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        step = gridSize + gridInterval;
+    }
+
     void Start()
     {
         //防止初次进入Battle场景时该脚本早于GameManager初始化,导致重复执行setup函数

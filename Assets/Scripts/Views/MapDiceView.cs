@@ -42,25 +42,22 @@ public class MapDiceView : MonoBehaviour
         OnDiceClicked.Invoke(this);
     }
 
-    public void MoveToTarget(int x)
+    /// <summary>
+    /// 上层模块传入字符串控制移动逻辑
+    /// </summary>
+    /// <param name="directions">目前是U,D,L,R</param>
+    public void MoveToTarget(string directions)
     {
-        float movestep = MapControlSystem.Instance.GridSize + MapControlSystem.Instance.GridInterval;
-
+        float movestep = MapControlSystem.Instance.Step;
+        //准备动画序列
         Sequence seq = DOTween.Sequence();
 
-        for (int i = 0; i < x; i++)
+        foreach (char direct in directions)
         {
-            float nextX = transform.position.x + (i + 1) * movestep; // 每次向右
-            seq.Append(transform.DOMoveX(nextX, 0.5f));       // 按顺序添加动画
-        }
+           
+        }  
 
         seq.Play();
-    }
-
-    public void Move()
-    {
-        float x = transform.position.x;
-        transform.DOMoveX(x + 2, 0.5f);
     }
 
     //注意要求有碰撞体才能运行
