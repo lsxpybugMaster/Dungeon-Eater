@@ -8,8 +8,8 @@ using UnityEngine;
 //IMPORTANT: 骰子的最顶层
 public class MapDicesSystem : Singleton<MapDicesSystem>
 {
-    [SerializeField] private MapDiceView mapDicePrefab;    
-    
+    [SerializeField] private MapDiceView mapDicePrefab;
+    [SerializeField] private Transform mapDiceRoot;
 
     public void SetUp(List<MapDice> mapDiceList)
     {
@@ -26,10 +26,18 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
             mygo.MapDice = mapDiceList[idx++];
             //TODO: 绑定位置
             mygo.transform.position = mygo.MapDice.start_pos; //在mapViewcreator.CreateMapWithDice初始化了start_pos
+            
+            mygo.transform.SetParent(mapDiceRoot);
             //STEP: 基于事件的IoC 通过事件绑定骰子
             mygo.OnDiceClicked += HandleDiceClicked;
+            mygo.OnDiceMoveFinished += HandleClickMoveFinished;
         }
     }
+
+    /*
+        IoC 流程：
+        Dice被点击事件 => HandleDiceClicked => Dice移动 => Dice移动完成 => HandleClickMoveFinished
+     */
 
     private void HandleDiceClicked(MapDiceView mapDiceView)
     {
@@ -42,7 +50,14 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
         //模拟移动,并未真实移动
         MoveDataOnMap(id, res, map, out string moveCommand, out int newId);
         //给下层传入命令,具体的移动MapDicesSystem无需了解
+        mapDiceView.SetIndex(newId);
         mapDiceView.MoveToTarget(moveCommand);
+    }
+
+    public void HandleClickMoveFinished(MapDiceView mapDiceView)
+    {
+        Debug.Log($"移动完成,所在位置:{mapDiceView.MapDice.Index}");
+        
     }
 
 

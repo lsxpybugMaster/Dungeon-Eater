@@ -38,6 +38,8 @@ public class MapControlSystem : Singleton<MapControlSystem>
     {
         base.Awake();
         step = gridSize + gridInterval;
+        if (mapDiceMoveSpeed <= 0)
+            Debug.LogError("非法的或未初始化mapDiceMoveSpeed");
     }
 
     void Start()

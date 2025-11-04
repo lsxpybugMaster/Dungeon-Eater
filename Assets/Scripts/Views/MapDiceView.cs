@@ -16,16 +16,28 @@ public class MapDiceView : MonoBehaviour
     [SerializeField] private float hover_and_rotate_speed = 60f;
 
     private bool isMoveHovering = false;
+    //BUG: 不能在这里直接初始化
+    private float stepMoveSpeed;
+    private float step;
 
     //IoC, 因此数据MapDice需要完全暴露给上层
     public MapDice MapDice { get; set; }
+    public void SetIndex(int index) => MapDice.Index = index;
 
     //NOTE: 基于事件的控制反转IoC
     public event Action<MapDiceView> OnDiceClicked;
+    public event Action<MapDiceView> OnDiceMoveFinished;
+
 
     private void Update()
     {
         OnMouseHover();   
+    }
+
+    private void OnEnable()
+    {
+        stepMoveSpeed = MapControlSystem.Instance.MapDiceMoveSpeed;
+        step = MapControlSystem.Instance.Step;
     }
 
     private void OnMouseHover()
@@ -52,11 +64,21 @@ public class MapDiceView : MonoBehaviour
         //准备动画序列
         Sequence seq = DOTween.Sequence();
 
-        foreach (char direct in directions)
+        Vector3 tarPos = transform.position;
+        foreach (char ch in directions.ToUpper())
         {
-           
-        }  
+            tarPos += GL.Direct[ch] * step;
+            seq.Append(
+                transform.DOMove(tarPos, stepMoveSpeed)
+                /* 后续补充方向
+                .SetEase(Ease.InOutQuad)
+                .OnComplete(() => OnStepReached?.Invoke(nextPos))
+                */
+            );
+        }
 
+        //NOTE: 及时通知上层模块已经到达位置
+        seq.OnComplete(() => OnDiceMoveFinished?.Invoke(this));
         seq.Play();
     }
 
