@@ -17,7 +17,7 @@ public class MapState : BaseState<MapData>
 
     //------------------------动态数据---------------------------
     public int currentLevel { get; private set; }
-    public int currentStep { get; private set; }
+    public int currentStep { get; private set; } //TODO: 暂时未用
 
     /// <summary>
     /// 当前关卡的mapDice最大数量

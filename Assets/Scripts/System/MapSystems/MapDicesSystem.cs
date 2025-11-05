@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 管理地图的所有骰子,负责初始化骰子
+/// 管理地图的所有骰子,负责初始化骰子,控制骰子移动,解析骰子移动结果
 /// </summary>
 //IMPORTANT: 骰子的最顶层
 public class MapDicesSystem : Singleton<MapDicesSystem>
 {
     [SerializeField] private MapDiceView mapDicePrefab;
     [SerializeField] private Transform mapDiceRoot;
+    private bool isDiceMoving = false; //如果有骰子在移动,则不能移动其他骰子
+
+    private MapDiceFactory diceFactory;
 
     public void SetUp(List<MapDice> mapDiceList)
     {
@@ -17,20 +20,31 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
         //OPTIMIZE: 既然MapDicesSystem是被MapControlSystem调用的模块,那么最好使用DI将mapList注入
         if (mapDiceList.Count == 0 || mapDiceList == null)
             Debug.LogError("mapDiceList.Count == 0 or mapDiceList is null");
-    
+
         //生成骰子并绑定事件
-        int idx = 0;
+        //int idx = 0;
+
+        //初始化工厂
+        diceFactory = new MapDiceFactory(mapDicePrefab, mapDiceRoot);
+
         foreach (var mapDice in mapDiceList)
         {
-            MapDiceView mygo = Instantiate(mapDicePrefab);
-            mygo.MapDice = mapDiceList[idx++];
-            //TODO: 绑定位置
-            mygo.transform.position = mygo.MapDice.start_pos; //在mapViewcreator.CreateMapWithDice初始化了start_pos
+            //OPTIMIZE: 使用工厂类实例化
+            diceFactory.Create(
+                mapDice,
+                HandleDiceClicked,
+                HandleClickMoveFinished
+            );
+
+            //MapDiceView mygo = Instantiate(mapDicePrefab);
+            //mygo.MapDice = mapDiceList[idx++];
+            ////TODO: 绑定位置
+            //mygo.transform.position = mygo.MapDice.start_pos; //在mapViewcreator.CreateMapWithDice初始化了start_pos
             
-            mygo.transform.SetParent(mapDiceRoot);
-            //STEP: 基于事件的IoC 通过事件绑定骰子
-            mygo.OnDiceClicked += HandleDiceClicked;
-            mygo.OnDiceMoveFinished += HandleClickMoveFinished;
+            //mygo.transform.SetParent(mapDiceRoot);
+            ////STEP: 基于事件的IoC 通过事件绑定骰子
+            //mygo.OnDiceClicked += HandleDiceClicked;
+            //mygo.OnDiceMoveFinished += HandleClickMoveFinished;
         }
     }
 
@@ -41,6 +55,10 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
 
     private void HandleDiceClicked(MapDiceView mapDiceView)
     {
+        if (isDiceMoving) return;
+
+        isDiceMoving = true;
+
         int res = DiceRollUtil.D6();
         //分析骰子的移动,形成指令      
         int id = mapDiceView.MapDice.Index;
@@ -56,8 +74,13 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
 
     public void HandleClickMoveFinished(MapDiceView mapDiceView)
     {
-        Debug.Log($"移动完成,所在位置:{mapDiceView.MapDice.Index}");
-        
+        isDiceMoving = false;
+
+        //结算目标位置的格子信息
+        int id = mapDiceView.MapDice.Index;
+        MapGrid mapGrid = GameManager.Instance.MapState.Map[0];
+
+        Debug.Log($"进入 {mapGrid.gridType}");
     }
 
 

@@ -63,7 +63,6 @@ public class MapControlSystem : Singleton<MapControlSystem>
 
     private void SetupMap()
     {
-        Debug.Log("初始化地图");
         mapState = GameManager.Instance.MapState;
         dicesSystem = MapDicesSystem.Instance;
         //每次重新进入都需要生成地图,同时初始化骰子位置
@@ -72,5 +71,4 @@ public class MapControlSystem : Singleton<MapControlSystem>
         dicesSystem.SetUp(mapState.MapDiceList);
         hasSetup = true;
     }
-
 }

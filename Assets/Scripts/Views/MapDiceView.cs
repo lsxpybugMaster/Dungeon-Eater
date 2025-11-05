@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -14,6 +15,7 @@ using UnityEngine;
 public class MapDiceView : MonoBehaviour
 {
     [SerializeField] private float hover_and_rotate_speed = 60f;
+    [SerializeField] private TMP_Text diceRollText;
 
     private bool isMoveHovering = false;
     //BUG: 不能在这里直接初始化
@@ -28,6 +30,9 @@ public class MapDiceView : MonoBehaviour
     public event Action<MapDiceView> OnDiceClicked;
     public event Action<MapDiceView> OnDiceMoveFinished;
 
+    //如果为0则清除字符串
+    private void SetDiceRollText(int x) => diceRollText.text = (x == 0) ? "" : x.ToString();
+  
 
     private void Update()
     {
@@ -60,7 +65,8 @@ public class MapDiceView : MonoBehaviour
     /// <param name="directions">目前是U,D,L,R</param>
     public void MoveToTarget(string directions)
     {
-        float movestep = MapControlSystem.Instance.Step;
+        int diceRoll = directions.Length;
+        SetDiceRollText(diceRoll);
         //准备动画序列
         Sequence seq = DOTween.Sequence();
 
@@ -70,6 +76,7 @@ public class MapDiceView : MonoBehaviour
             tarPos += GL.Direct[ch] * step;
             seq.Append(
                 transform.DOMove(tarPos, stepMoveSpeed)
+                .OnComplete(() => SetDiceRollText(--diceRoll))
                 /* 后续补充方向
                 .SetEase(Ease.InOutQuad)
                 .OnComplete(() => OnStepReached?.Invoke(nextPos))
