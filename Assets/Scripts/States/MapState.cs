@@ -68,9 +68,8 @@ public class MapState : BaseState<MapData>
 
         for (int i = 0; i < diceIndices.Count; i++)
         {
-            //注意初始化列表的方法
-            var dice = new MapDice();
-            dice.Index = diceIndices[i];
+            //注意初始化列表的方法, 注意充分利用构造函数
+            var dice = new MapDice(diceIndices[i]);
             MapDiceList.Add(dice);
         }
     }

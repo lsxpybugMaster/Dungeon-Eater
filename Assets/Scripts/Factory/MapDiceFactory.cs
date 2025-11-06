@@ -25,6 +25,9 @@ public class MapDiceFactory
 
         view.OnDiceClicked += onClicked;
         view.OnDiceMoveFinished += onMoveFinished;
+
+        //DISCUSS: 这里再次调用Init是因为要保证工厂类职责单一,仅负责注入
+        view.Init();
         return view;
     }
 }

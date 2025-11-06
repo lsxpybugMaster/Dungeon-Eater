@@ -9,11 +9,13 @@ using UnityEngine;
 /// 地图上的骰子,主要控制玩家的地图探索
 /// 
 /// </summary>
-//NOTE: MapDiceView(V) MapDice(M) MapController(IoC)
-//DISCUSS: 点击骰子后触发的功能还是上报给上层计算好
-//STEP: 控制反转（Inversion of Control, IoC）" 下层模块不依赖上层模块，控制流程交由外部统一管理。"
+//MapDiceView(V) MapDice(M) MapController(IoC)
+//控制反转（Inversion of Control, IoC）" 下层模块不依赖上层模块，控制流程交由外部统一管理。"
+//IMPORTANT: 既然是View, 那么就不要再额外创建MapData副本,所有数据修改都由Data控制
 public class MapDiceView : MonoBehaviour
 {
+   
+
     [SerializeField] private float hover_and_rotate_speed = 60f;
     [SerializeField] private TMP_Text diceRollText;
 
@@ -24,25 +26,32 @@ public class MapDiceView : MonoBehaviour
 
     //IoC, 因此数据MapDice需要完全暴露给上层
     public MapDice MapDice { get; set; }
-    public void SetIndex(int index) => MapDice.Index = index;
 
     //NOTE: 基于事件的控制反转IoC
     public event Action<MapDiceView> OnDiceClicked;
     public event Action<MapDiceView> OnDiceMoveFinished;
 
-    //如果为0则清除字符串
-    private void SetDiceRollText(int x) => diceRollText.text = (x == 0) ? "" : x.ToString();
-  
+    //更新骰子在地图上位置
+    public void SetIndex(int index) => MapDice.Index = index;
+
+
+    public void UpdateDiceRollText()
+    {
+        Debug.Log($"视图层: {MapDice.Point}");
+        diceRollText.text = MapDice.Point.ToString();
+    }
 
     private void Update()
     {
         OnMouseHover();   
     }
 
-    private void OnEnable()
+    //NOTE: 实例化后调用
+    public void Init()
     {
         stepMoveSpeed = MapControlSystem.Instance.MapDiceMoveSpeed;
         step = MapControlSystem.Instance.Step;
+        UpdateDiceRollText();
     }
 
     private void OnMouseHover()
@@ -66,17 +75,18 @@ public class MapDiceView : MonoBehaviour
     public void MoveToTarget(string directions)
     {
         int diceRoll = directions.Length;
-        SetDiceRollText(diceRoll);
+
         //准备动画序列
         Sequence seq = DOTween.Sequence();
 
         Vector3 tarPos = transform.position;
+        int dbg = 1;
         foreach (char ch in directions.ToUpper())
         {
             tarPos += GL.Direct[ch] * step;
             seq.Append(
                 transform.DOMove(tarPos, stepMoveSpeed)
-                .OnComplete(() => SetDiceRollText(--diceRoll))
+                .OnComplete(() => {Debug.Log($"==========={dbg}========="); MapDice.DecreasePoint(1); UpdateDiceRollText(); })
                 /* 后续补充方向
                 .SetEase(Ease.InOutQuad)
                 .OnComplete(() => OnStepReached?.Invoke(nextPos))

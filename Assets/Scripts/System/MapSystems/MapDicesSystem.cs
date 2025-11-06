@@ -59,22 +59,30 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
 
         isDiceMoving = true;
 
-        int res = DiceRollUtil.D6();
         //分析骰子的移动,形成指令      
+        
+        //首先获取底层骰子的信息
         int id = mapDiceView.MapDice.Index;
+
+        int step = mapDiceView.MapDice.Point;
+
         //TODO: 这里必须从全局获取Map吗？
         var map = GameManager.Instance.MapState.Map;
 
         //模拟移动,并未真实移动
-        MoveDataOnMap(id, res, map, out string moveCommand, out int newId);
+        MoveDataOnMap(id, step, map, out string moveCommand, out int newId);
         //给下层传入命令,具体的移动MapDicesSystem无需了解
         mapDiceView.SetIndex(newId);
         mapDiceView.MoveToTarget(moveCommand);
     }
 
+
     public void HandleClickMoveFinished(MapDiceView mapDiceView)
     {
         isDiceMoving = false;
+
+        mapDiceView.MapDice.SetPoint();
+        mapDiceView.UpdateDiceRollText();
 
         //结算目标位置的格子信息
         int id = mapDiceView.MapDice.Index;
