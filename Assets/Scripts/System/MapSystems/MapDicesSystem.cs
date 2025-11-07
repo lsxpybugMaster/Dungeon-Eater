@@ -81,14 +81,19 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
     {
         isDiceMoving = false;
 
-        mapDiceView.MapDice.SetPoint();
-        mapDiceView.UpdateDiceRollText();
+        mapDiceView.MapDice.SetPoint(); 
 
         //结算目标位置的格子信息
         int id = mapDiceView.MapDice.Index;
-        MapGrid mapGrid = GameManager.Instance.MapState.Map[0];
+        MapGrid mapGrid = GameManager.Instance.MapState.Map[id];
 
         Debug.Log($"进入 {mapGrid.gridType}");
+    }
+
+    //TODO: 临时逻辑
+    private void SwitchMode()
+    {
+        
     }
 
 

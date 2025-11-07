@@ -765,7 +765,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e757ff0a8d3174f40885a125d2ddf3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnterGameBtn: {fileID: 7536282309370147912}
+  swtichModeBtn: {fileID: 0}
+  modeInfoTMP: {fileID: 0}
 --- !u!223 &2876006489647039420
 Canvas:
   m_ObjectHideFlags: 0
@@ -803,7 +804,7 @@ GameObject:
   - component: {fileID: 8302273042198741385}
   - component: {fileID: 822136744306801071}
   m_Layer: 5
-  m_Name: Canvas_Map
+  m_Name: MapUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

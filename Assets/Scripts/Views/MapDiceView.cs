@@ -35,10 +35,9 @@ public class MapDiceView : MonoBehaviour
     public void SetIndex(int index) => MapDice.Index = index;
 
 
-    public void UpdateDiceRollText()
+    public void UpdateDiceRollText(int pt)
     {
-        Debug.Log($"视图层: {MapDice.Point}");
-        diceRollText.text = MapDice.Point.ToString();
+        diceRollText.text = pt.ToString();
     }
 
     private void Update()
@@ -51,7 +50,18 @@ public class MapDiceView : MonoBehaviour
     {
         stepMoveSpeed = MapControlSystem.Instance.MapDiceMoveSpeed;
         step = MapControlSystem.Instance.Step;
-        UpdateDiceRollText();
+        
+        //初始化
+        diceRollText.text = MapDice.Point.ToString();
+
+        //绑定MapDice.Point的更新事件
+        MapDice.OnPointChanged += UpdateDiceRollText;
+    }
+
+    //NOTE: 需要主动解绑事件,避免出现内存泄漏
+    private void OnDestroy()
+    {
+        MapDice.OnPointChanged -= UpdateDiceRollText;
     }
 
     private void OnMouseHover()
@@ -80,13 +90,13 @@ public class MapDiceView : MonoBehaviour
         Sequence seq = DOTween.Sequence();
 
         Vector3 tarPos = transform.position;
-        int dbg = 1;
+
         foreach (char ch in directions.ToUpper())
         {
             tarPos += GL.Direct[ch] * step;
             seq.Append(
                 transform.DOMove(tarPos, stepMoveSpeed)
-                .OnComplete(() => {Debug.Log($"==========={dbg}========="); MapDice.DecreasePoint(1); UpdateDiceRollText(); })
+                .OnComplete(() => MapDice.DecreasePoint(1))
                 /* 后续补充方向
                 .SetEase(Ease.InOutQuad)
                 .OnComplete(() => OnStepReached?.Invoke(nextPos))
@@ -96,6 +106,8 @@ public class MapDiceView : MonoBehaviour
 
         //NOTE: 及时通知上层模块已经到达位置
         seq.OnComplete(() => OnDiceMoveFinished?.Invoke(this));
+        //初始点数就要-1以确保最后到达位置时为0
+        MapDice.DecreasePoint(1);
         seq.Play();
     }
 

@@ -24,8 +24,8 @@ MonoBehaviour:
       data:
         levelSetCode: r3u2r5d3l3dl5u2
         levelInfostr: RRRUURRRRRDDDLLLDLLLLLUU
-        shopGrids: 3
-        mapDices: 3
+        shopGrids: 5
+        mapDices: 2
     - rid: 8501354094988886019
       type: {class: LevelData, ns: , asm: Assembly-CSharp}
       data:
@@ -36,7 +36,7 @@ MonoBehaviour:
     - rid: 8501354094988886020
       type: {class: LevelData, ns: , asm: Assembly-CSharp}
       data:
-        levelSetCode: L
-        levelInfostr: L
+        levelSetCode: r3u2r5d3l3dl5u2
+        levelInfostr: RRRUURRRRRDDDLLLDLLLLLUU
         shopGrids: 0
         mapDices: 0

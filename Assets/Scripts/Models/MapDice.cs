@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,16 +13,22 @@ public class MapDice
     
     // 骰子当前点数,点击后其移动这些距离
     public int Point { get; private set;}
-    public void SetPoint() => Point = DiceRollUtil.D6();
+
+    // 事件,用于其他模块捕捉数据变化并更新
+    public event Action<int> OnPointChanged;
+
+    public void SetPoint()
+    { 
+        Point = DiceRollUtil.D6(); 
+        OnPointChanged?.Invoke(Point);
+    }
+
     public void DecreasePoint(int pt)
     {
         Point -= pt;
-        Debug.Log($"数据层: {Point}");
-        if (Point < 0)
-        {
-            Point = 0;
-            Debug.LogError("Point数据被修改为负值");
-        }
+        //由于数值更新逻辑,Point可能会更新至-1,这时候为了展示时合理,置回0
+        if (Point < 0) Point = 0;
+        OnPointChanged?.Invoke(Point);
     }
 
 
