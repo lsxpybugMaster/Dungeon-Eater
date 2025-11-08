@@ -87,14 +87,10 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
         int id = mapDiceView.MapDice.Index;
         MapGrid mapGrid = GameManager.Instance.MapState.Map[id];
 
-        Debug.Log($"进入 {mapGrid.gridType}");
+        //依据房间类型通知MapControlSystem进行游戏模式的切换
+        ChangeRoomSystem.ChangeRoom(mapGrid.gridType);
     }
 
-    //TODO: 临时逻辑
-    private void SwitchMode()
-    {
-        
-    }
 
 
     /// <summary>

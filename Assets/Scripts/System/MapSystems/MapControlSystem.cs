@@ -14,7 +14,10 @@ public class MapControlSystem : Singleton<MapControlSystem>
     private MapState mapState;
     private MapDicesSystem dicesSystem;
 
+    [Header("管理的子模块")]
     [SerializeField] private MapViewCreator mapViewcreator;
+    [SerializeField] private MapUI mapUI;
+    // [SerializeField] private ChangeRoomSystem changeRoomSystem;
 
     [Header("地图的相关编辑器配置数据")]
     [SerializeField] private float gridInterval;
@@ -57,10 +60,12 @@ public class MapControlSystem : Singleton<MapControlSystem>
         GameManager.OnGameManagerInitialized += SetupMap;
     }
 
+
     private void OnDisable()
     {
         GameManager.OnGameManagerInitialized -= SetupMap;
     }
+
 
     private void SetupMap()
     {
@@ -72,4 +77,6 @@ public class MapControlSystem : Singleton<MapControlSystem>
         dicesSystem.SetUp(mapState.MapDiceList);
         hasSetup = true;
     }
+
+
 }
