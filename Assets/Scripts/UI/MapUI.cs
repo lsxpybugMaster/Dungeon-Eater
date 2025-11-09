@@ -13,19 +13,28 @@ public class MapUI : MonoBehaviour
 
     private void OnEnable()
     {
-        ChangeRoomSystem.OnRoomChanged += BindClickAction;
+        //现在由事件总线管理
+        //ChangeRoomSystem.OnRoomChanged += BindClickAction;
+        EventBus.Subscribe<RoomChangedEvent>(OnRoomChanged);
+        
         swtichModeBtn.onClick.AddListener(OnClick);
     }
 
     private void OnDisable()
     {
-        ChangeRoomSystem.OnRoomChanged -= BindClickAction;
+        EventBus.UnSubscribe<RoomChangedEvent>(OnRoomChanged);
+
         swtichModeBtn.onClick.RemoveListener(OnClick);
     }
 
     private void OnClick()
     {
         currentButtonClickAction?.Invoke();
+    }
+
+    private void OnRoomChanged(RoomChangedEvent e)
+    {
+        BindClickAction(e.gridType.ToString(), ChangeRoomSystem.actions[e.gridType]);
     }
 
     public void BindClickAction(string settings, Action onClick)

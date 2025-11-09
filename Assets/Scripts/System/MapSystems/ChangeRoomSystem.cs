@@ -9,9 +9,10 @@ using UnityEngine;
 /// </summary>
 public class ChangeRoomSystem : MonoBehaviour
 {
-    private static Dictionary<GridType, Action> actions = new Dictionary<GridType, Action>();
+    public static Dictionary<GridType, Action> actions = new Dictionary<GridType, Action>();
 
-    public static event Action<string,Action> OnRoomChanged;
+    //由事件总线管理
+    //public static event Action<string,Action> OnRoomChanged;
 
     private void Awake()
     {
@@ -23,27 +24,18 @@ public class ChangeRoomSystem : MonoBehaviour
         }
     }
 
-    public static void ChangeRoom(GridType gridType)
-    {
-        Debug.Log($"Args: {gridType.ToString()},{actions[gridType]}");
-        OnRoomChanged.Invoke(gridType.ToString(), actions[gridType]);
-        //actions[gridType].Invoke();
-        //mapUI.BindClickAction(gridType.ToString(), );
-    }
-
     public void ChangeToBattleRoom()
     {
-        Debug.Log("ChangeToBattleMode");
+        GameManager.Instance.ToBattleMode();
     }
 
     public void ChangeToShopRoom()
     {
-        Debug.Log("ChangeToShopMode");
+        GameManager.Instance.ToShopMode();
     }
 
     public void ChangeToEventRoom()
     {
-        Debug.Log("ChangeToEventMode");
+        //not implemented
     }
-
 }

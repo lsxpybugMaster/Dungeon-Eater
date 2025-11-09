@@ -17,7 +17,19 @@ using UnityEngine;
             this.typename = t;
         }
     }
+    
+    //具体注册:
+    EventBus.Subscribe<MyEvent>()
+
+    //函数:
+    private void OnWhat(MyEvent e){
+    
+    }
+
+    实例参考:
+        RoomChangedEvent
 */
+
 public static class EventBus
 {
     private static readonly Dictionary<Type, Delegate> eventTable = new();

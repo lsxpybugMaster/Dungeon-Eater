@@ -12,6 +12,7 @@ public enum GameState
     Exploring,      //关卡选择
     Battle,         //战斗
     BattleVictory,  //胜利结算 ==> 禁用玩家战斗
+    Shopping,       //进入商店界面 ==> 禁用地图交互
 }
 
 // GameManager 负责生命周期管理（初始化、场景切换、销毁）。
@@ -104,17 +105,28 @@ public class GameManager : PersistentSingleton<GameManager>
     }
 
 
-    //管理场景切换
+    //管理模式切换(不一定导致场景切换)
 
-    public void ToBattleScene()
+    public void ToBattleMode()
     {
         ChangeGameState(GameState.Battle);
         SceneManager.LoadScene((int)Scene.BATTLE);    
     }
 
-
-    public void ToMapScene()
+    public void ToShopMode()
     {
+        DebugUtil.Cyan("进入到商店!");
+        ChangeGameState(GameState.Shopping);
+    }
+
+    public void ToMapMode()
+    {
+        // 相同场景间切换
+        if (GameState == GameState.Shopping)
+        {
+            ChangeGameState(GameState.Exploring);
+            return;
+        }
         HeroSystem.Instance?.SaveData();
         //在这里切换游戏模式:
         ChangeGameState(GameState.Exploring);

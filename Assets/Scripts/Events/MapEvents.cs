@@ -1,8 +1,8 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//存储与Map逻辑有关的事件结构体,用于EventBus
+//瀛樺偍涓嶮ap閫昏緫鏈夊叧鐨勪簨浠剁粨鏋勪綋,鐢ㄤ簬EventBus
 public struct RoomChangedEvent
 {
     public GridType gridType;

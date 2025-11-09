@@ -35,7 +35,7 @@ public class UISystem : Singleton<UISystem>
         //给回到地图的按钮绑定函数
         backToMapBtn.onClick.AddListener(() =>
         {
-            GameManager.Instance.ToMapScene();
+            GameManager.Instance.ToMapMode();
         });        
     }
 
