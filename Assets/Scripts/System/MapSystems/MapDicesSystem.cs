@@ -11,8 +11,10 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
     [SerializeField] private MapDiceView mapDicePrefab;
     [SerializeField] private Transform mapDiceRoot;
     private bool isDiceMoving = false; //如果有骰子在移动,则不能移动其他骰子
+    private int rollDiceTimesLeft = 1; //一般的,一轮最多可以roll1次骰子
 
     private MapDiceFactory diceFactory;
+
 
     public void SetUp(List<MapDice> mapDiceList)
     {
@@ -55,7 +57,9 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
 
     private void HandleDiceClicked(MapDiceView mapDiceView)
     {
-        if (isDiceMoving) return;
+        if (isDiceMoving || rollDiceTimesLeft <= 0) return;
+
+        rollDiceTimesLeft--;
 
         isDiceMoving = true;
 

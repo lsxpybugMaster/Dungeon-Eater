@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,15 +6,15 @@ using UnityEngine;
 //NOTE: MapDiceView(V) MapDice(M) MapDicesSystem (IoC)
 public class MapDice 
 {
-    //TODO: Ä¿Ç°Ö»´æÈ¡Index,Ö®ºó¿ÉÄÜ´æÈ¡ÆäËû·´Ó¦
-    //IMPORTANT: MapDice ×÷ÎªÊı¾İ²ã, Ó¦¸Ã·â×°Ò»ÇĞÊı¾İ²Ù×÷²¢Ö»ÔÊĞíÆäËûÄ£¿éµ÷ÓÃÕâĞ©²Ù×÷!
+    //TODO: ç›®å‰åªå­˜å–Index,ä¹‹åå¯èƒ½å­˜å–å…¶ä»–ååº”
+    //IMPORTANT: MapDice ä½œä¸ºæ•°æ®å±‚, åº”è¯¥å°è£…ä¸€åˆ‡æ•°æ®æ“ä½œå¹¶åªå…è®¸å…¶ä»–æ¨¡å—è°ƒç”¨è¿™äº›æ“ä½œ!
 
     public int Index { get; set;}
     
-    // ÷»×Óµ±Ç°µãÊı,µã»÷ºóÆäÒÆ¶¯ÕâĞ©¾àÀë
+    // éª°å­å½“å‰ç‚¹æ•°,ç‚¹å‡»åå…¶ç§»åŠ¨è¿™äº›è·ç¦»
     public int Point { get; private set;}
 
-    // ÊÂ¼ş,ÓÃÓÚÆäËûÄ£¿é²¶×½Êı¾İ±ä»¯²¢¸üĞÂ
+    // äº‹ä»¶,ç”¨äºå…¶ä»–æ¨¡å—æ•æ‰æ•°æ®å˜åŒ–å¹¶æ›´æ–°
     public event Action<int> OnPointChanged;
 
     public void SetPoint()
@@ -26,19 +26,19 @@ public class MapDice
     public void DecreasePoint(int pt)
     {
         Point -= pt;
-        //ÓÉÓÚÊıÖµ¸üĞÂÂß¼­,Point¿ÉÄÜ»á¸üĞÂÖÁ-1,ÕâÊ±ºòÎªÁËÕ¹Ê¾Ê±ºÏÀí,ÖÃ»Ø0
+        //ç”±äºæ•°å€¼æ›´æ–°é€»è¾‘,Pointå¯èƒ½ä¼šæ›´æ–°è‡³-1,è¿™æ—¶å€™ä¸ºäº†å±•ç¤ºæ—¶åˆç†,ç½®å›0
         if (Point < 0) Point = 0;
         OnPointChanged?.Invoke(Point);
     }
 
 
-    //½ö¸ºÔğ¼ÇÂ¼×î³õµÄÎ»ÖÃ±ãÓÚ³õÊ¼»¯,ºóĞø²»¸üĞÂ! ÒòÎªÓĞIndex¾ÍÄÜÍÆ³öÕæÕıÎ»ÖÃ¡£
+    //ä»…è´Ÿè´£è®°å½•æœ€åˆçš„ä½ç½®ä¾¿äºåˆå§‹åŒ–,åç»­ä¸æ›´æ–°! å› ä¸ºæœ‰Indexå°±èƒ½æ¨å‡ºçœŸæ­£ä½ç½®ã€‚
     public Vector3 start_pos { get; set;}
 
     public MapDice(int index)
     {
         Index = index;
-        SetPoint(); //³õÊ¼»¯Ê±×Ô¶¯È·¶¨÷»×ÓµÄµãÊı
+        SetPoint(); //åˆå§‹åŒ–æ—¶è‡ªåŠ¨ç¡®å®šéª°å­çš„ç‚¹æ•°
     }
 
 }

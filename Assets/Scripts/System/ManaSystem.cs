@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ public class ManaSystem : Singleton<ManaSystem>
     private int currentMana = MAX_MANA;
 
     /// <summary>
-    /// ³õÊ¼»¯ÄÜÁ¿
+    /// åˆå§‹åŒ–èƒ½é‡
     /// </summary>
     public void Setup()
     {
@@ -55,7 +55,7 @@ public class ManaSystem : Singleton<ManaSystem>
         yield return null;
     }
 
-    //×¢ÒâÕâÊÇ¸ö·´Ó¦¶ø·ÇPerformer!!!
+    //æ³¨æ„è¿™æ˜¯ä¸ªååº”è€ŒéPerformer!!!
     private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
     {
         RefillManaGA refillManaGA = new();

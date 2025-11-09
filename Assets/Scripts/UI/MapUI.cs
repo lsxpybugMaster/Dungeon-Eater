@@ -34,7 +34,7 @@ public class MapUI : MonoBehaviour
 
     private void OnRoomChanged(RoomChangedEvent e)
     {
-        BindClickAction(e.gridType.ToString(), ChangeRoomSystem.actions[e.gridType]);
+        BindClickAction(e.gridType.ToString(), ChangeRoomUtil.GridActions[e.gridType]);
     }
 
     public void BindClickAction(string settings, Action onClick)

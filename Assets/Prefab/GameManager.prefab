@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3857e0ea5d0dbf548aaa08e59099b540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroData: {fileID: 11400000, guid: aba8c53e6792dc2458c464dc64205a6a, type: 2}
   globalUIPrefab: {fileID: 9107211176504271497, guid: 10750dad63e8fa44d9e53a5827738a52, type: 3}
   persistUIControllerPrefab: {fileID: 3847000970675050835, guid: e08e480831709f94c845e3020b818361, type: 3}
+  SEED: 42

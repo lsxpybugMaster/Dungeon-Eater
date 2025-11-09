@@ -23,7 +23,6 @@ public enum GameState
 public class GameManager : PersistentSingleton<GameManager>
 {
     // 外部数据引用
-    [SerializeField] private TopUI globalUIPrefab;
     [SerializeField] private PersistUIController persistUIControllerPrefab;
 
 

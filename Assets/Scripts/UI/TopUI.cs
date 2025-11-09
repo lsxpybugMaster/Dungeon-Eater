@@ -12,14 +12,20 @@ public class TopUI : MonoBehaviour, IAmPersistUI
 {
     [SerializeField] private TMP_Text heroHpTMP;
     [SerializeField] private TMP_Text deckSizeTMP;
+    //TODO: 调试用,最后删除
+    [SerializeField] private TMP_Text debugTMP;
     [SerializeField] private Button showDeckBtn;
 
     private void Start()
     {
-
+     
     }
 
- 
+    private void Update()
+    {
+        //TODO: 调试用,最后删除
+        debugTMP.text = GameManager.Instance.GameState.ToString();
+    }
 
     /// <summary>
     /// 初始化基本信息

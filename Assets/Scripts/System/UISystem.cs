@@ -1,4 +1,4 @@
-
+ï»¿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,13 +11,13 @@ public class UISystem : Singleton<UISystem>
     [SerializeField] private CanvasGroup victoryUI;
     [SerializeField] private Button backToMapBtn;
 
-    //NOTE: ÒıÓÃÆäËûUI×ÓÏµÍ³
+    //NOTE: å¼•ç”¨å…¶ä»–UIå­ç³»ç»Ÿ
     [SerializeField] private CardPileCountUI cardPileCountUI;
 
-    //ÅĞ¶ÏUIÄÜ·ñ½»»¥µÄÑéÖ¤º¯Êı
+    //åˆ¤æ–­UIèƒ½å¦äº¤äº’çš„éªŒè¯å‡½æ•°
     public bool CanInteract() => GameManager.Instance.GameState != GameState.BattleVictory;
 
-    //Í³Ò»×¢²áĞèÒª¸üĞÂUIµÄÊÂ¼ş
+    //ç»Ÿä¸€æ³¨å†Œéœ€è¦æ›´æ–°UIçš„äº‹ä»¶
     private void OnEnable()
     {
         CardSystem.Instance.OnPileChanged += OnPileCountChanged;
@@ -25,14 +25,14 @@ public class UISystem : Singleton<UISystem>
 
     private void OnDisable()
     {
-        //IMPORTANT: ÅĞ¿Õ·ÀÓù
+        //IMPORTANT: åˆ¤ç©ºé˜²å¾¡
         if (CardSystem.Instance)
             CardSystem.Instance.OnPileChanged -= OnPileCountChanged;
     }
 
     private void Start()
     {
-        //¸ø»Øµ½µØÍ¼µÄ°´Å¥°ó¶¨º¯Êı
+        //ç»™å›åˆ°åœ°å›¾çš„æŒ‰é’®ç»‘å®šå‡½æ•°
         backToMapBtn.onClick.AddListener(() =>
         {
             GameManager.Instance.ToMapMode();

@@ -7,34 +7,31 @@ using UnityEngine;
 /// 管理房间切换中间的逻辑,在玩家移动到新格子后执行
 /// 主要由C# Action 字典组成
 /// </summary>
-public class ChangeRoomSystem : MonoBehaviour
+public static class ChangeRoomUtil
 {
-    public static Dictionary<GridType, Action> actions = new Dictionary<GridType, Action>();
+    public static Dictionary<GridType, Action> GridActions { get; private set; } = new();
 
     //由事件总线管理
     //public static event Action<string,Action> OnRoomChanged;
 
-    private void Awake()
+    // 静态构造函数确保仅初始化一次
+    static ChangeRoomUtil()
     {
-        // 只初始化一次
-        if (actions.Count == 0)
-        {
-            actions[GridType.Enemy] = ChangeToBattleRoom;
-            actions[GridType.Shop] = ChangeToShopRoom;
-        }
+        GridActions[GridType.Enemy] = ChangeToBattleRoom;
+        GridActions[GridType.Shop] = ChangeToShopRoom;      
     }
 
-    public void ChangeToBattleRoom()
+    private static void ChangeToBattleRoom()
     {
         GameManager.Instance.ToBattleMode();
     }
 
-    public void ChangeToShopRoom()
+    private static void ChangeToShopRoom()
     {
         GameManager.Instance.ToShopMode();
     }
 
-    public void ChangeToEventRoom()
+    private static void ChangeToEventRoom()
     {
         //not implemented
     }
