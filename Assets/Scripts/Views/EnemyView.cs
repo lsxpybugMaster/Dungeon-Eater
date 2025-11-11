@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/*
+    AISystem?
+    EnemySystem                     EnemyView        EnemyAI                               (Global) Intend
+    + List<EnemyView>               + EnemyAI                                                                
+    + EnemyView.AI.GetAction()      - ShowIntend()   + EnemyActionTable(ScriptableObject)
+                                                     - GetAction(EnemyView.state,Player.state)
+ */
+
 public class EnemyView : CombatantView
 {
     [SerializeField] private TMP_Text attackText;

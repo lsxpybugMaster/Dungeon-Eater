@@ -56,6 +56,7 @@ public class EnemySystem : Singleton<EnemySystem>
                 ActionSystem.Instance.AddReaction(applyBurnGA);
             }
             
+            //IMPORTANT: 在这里执行敌人逻辑
             AttackHeroGA attackHeroGA = new(enemy);
             ActionSystem.Instance.AddReaction(attackHeroGA);
         }
