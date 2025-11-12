@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-/*
-    AISystem?
-    EnemySystem                     EnemyView        EnemyAI                               (Global) Intend
-    + List<EnemyView>               + EnemyAI                                                                
-    + EnemyView.AI.GetAction()      - ShowIntend()   + EnemyActionTable(ScriptableObject)
-                                                     - GetAction(EnemyView.state,Player.state)
- */
 
+//TODO: 重构代码,EnemyView现在管理EnemyAI,违背单一职责原则
 public class EnemyView : CombatantView
 {
     [SerializeField] private TMP_Text attackText;
 
+    [field: SerializeField] public EnemyAI EnemyAI { get; private set; } 
+
     public int AttackPower { get; set; }
+
     public void Setup(EnemyData enemyData)
     {
         AttackPower = enemyData.AttackPower;
         UpdateAttackText();
         //别忘记调用基类的初始化方法
         SetupBase(enemyData.Health, enemyData.Health, enemyData.Image);
+        
+        //TODO: 测试代码
+        EnemyAI.BindEnemy(this);
     }
 
     private void UpdateAttackText()

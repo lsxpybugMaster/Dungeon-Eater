@@ -1,12 +1,11 @@
-using System;
+锘縰sing System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
 public class AttackIntend : EnemyIntend
 {
-    //独立于接口的外部参数手动配置
+    //鐙珛浜庢帴鍙ｇ殑澶栭儴鍙傛暟鎵嬪姩閰嶇疆
     [SerializeField] private int damage;
     public override GameAction GetGameAction(EnemyView enemy)
     {

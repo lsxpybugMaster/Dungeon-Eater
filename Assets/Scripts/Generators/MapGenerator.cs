@@ -32,7 +32,6 @@ public class MapGenerator
         var levelConfig = baseData.levels[levelIndex];
 
         string mapInfo = levelConfig.levelInfostr;
-        Debug.Log(mapInfo);
 
         int totalGrids = mapInfo.Length;
 

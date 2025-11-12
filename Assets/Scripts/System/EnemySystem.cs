@@ -55,14 +55,23 @@ public class EnemySystem : Singleton<EnemySystem>
                 ApplyBurnGA applyBurnGA = new(burnStacks, enemy);
                 ActionSystem.Instance.AddReaction(applyBurnGA);
             }
-            
+
             //IMPORTANT: 在这里执行敌人逻辑
-            AttackHeroGA attackHeroGA = new(enemy);
-            ActionSystem.Instance.AddReaction(attackHeroGA);
+            //AttackHeroGA attackHeroGA = new(enemy);
+            //ActionSystem.Instance.AddReaction(attackHeroGA);
+
+            //TODO: 加入AI系统后的尝试
+            DoEnemyIntend(enemy);
         }
         yield return null;
     }
 
+    //执行敌人的行动
+    private void DoEnemyIntend(EnemyView enemyView)
+    {
+        GameAction enemyAction = enemyView.EnemyAI.GetEnemyIntend();
+        ActionSystem.Instance.AddReaction(enemyAction);
+    }
 
     private IEnumerator AttackHeroPerformer(AttackHeroGA attackHeroGA)
     {

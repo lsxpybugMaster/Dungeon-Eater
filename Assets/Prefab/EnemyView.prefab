@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5929200642271972602}
   - component: {fileID: 7321645585242613148}
   - component: {fileID: 2587713483086101352}
+  - component: {fileID: -7165988732030249010}
   m_Layer: 7
   m_Name: EnemyView
   m_TagString: Untagged
@@ -51,6 +52,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7970261331200338542}
   statusEffectsUI: {fileID: 9119045368338667106}
   attackText: {fileID: 7887096142159912693}
+  <EnemyAI>k__BackingField: {fileID: -7165988732030249010}
 --- !u!65 &2587713483086101352
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -72,6 +74,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 0.01}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7165988732030249010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7123705789341899973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcdcefb6f7b5b604d92275682f7ac893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7194659324419478763
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,13 +1,15 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//°ü×°GameAction,×÷ÎªµĞÈËÒâÍ¼,³ÉÎªAIĞĞÎªĞòÁĞµÄÒ»¸ö½Úµã
+//åŒ…è£…GameAction,ä½œä¸ºæ•Œäººæ„å›¾,æˆä¸ºAIè¡Œä¸ºåºåˆ—çš„ä¸€ä¸ªèŠ‚ç‚¹
+//IDEA: æ³¨æ„ä¸Effectè¿›è¡Œç±»åˆ«,äºŒè€…ååˆ†ç›¸ä¼¼,éƒ½æ˜¯å¯¹GameActionçš„å°è£…
+//éœ€è¦ [Serializable]
 
 [Serializable]
 public abstract class EnemyIntend 
 {
-    //´«ÈëµĞÈË,·µ»Ø¶ÔÓ¦µÄAction
+    //ä¼ å…¥æ•Œäºº,è¿”å›å¯¹åº”çš„Action
     public abstract GameAction GetGameAction(EnemyView enemy);
 }

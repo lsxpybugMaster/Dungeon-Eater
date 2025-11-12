@@ -48,7 +48,7 @@ public class MapControlSystem : Singleton<MapControlSystem>
 
     void Start()
     {
-        //防止初次进入Battle场景时该脚本早于GameManager初始化,导致重复执行setup函数
+        //防止初次进入Map场景时该脚本早于GameManager初始化,导致重复执行setup函数
         if (!hasSetup)
             SetupMap();
     }
@@ -67,11 +67,21 @@ public class MapControlSystem : Singleton<MapControlSystem>
     }
 
 
+    //BUG:其执行两次,导致第一次执行时顺序出错
     private void SetupMap()
     {
+
         mapState = GameManager.Instance.MapState;
         dicesSystem = MapDicesSystem.Instance;
         //每次重新进入都需要生成地图,同时初始化骰子位置
+     
+        //NOTE: 防止出现上面的问题
+        if (mapState == null)
+        {
+            Debug.LogWarning("mapState == null,  SetupMap早于GameManager.mapState初始化");
+            return;
+        } 
+            
         mapViewcreator.CreateMapWithDice(mapState.Map, mapState.MapDiceList);
      
         dicesSystem.SetUp(mapState.MapDiceList);
