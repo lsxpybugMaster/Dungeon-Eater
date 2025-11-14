@@ -9,7 +9,8 @@ public class EnemyView : CombatantView
 {
     [SerializeField] private TMP_Text attackText;
 
-    [field: SerializeField] public EnemyAI EnemyAI { get; private set; } 
+    [field: SerializeField] public EnemyAI EnemyAI { get; private set; }
+    [field: SerializeField] public EnemyAIData AI { get; private set; }
 
     public int AttackPower { get; set; }
 

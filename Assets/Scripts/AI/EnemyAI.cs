@@ -13,9 +13,10 @@ public class EnemyAI : MonoBehaviour
 {
     protected EnemyView enemy;
 
-    [field: SerializeReference, SR] public List<EnemyIntend> IntendTable { get; private set; }
+    [SerializeField] private EnemyAIData AI;
 
     //下面代码的用作基本测试
+    //由EnemyView调用,初始化EnemyAI
     public void BindEnemy(EnemyView enemy)
     {
         this.enemy = enemy;
@@ -29,8 +30,8 @@ public class EnemyAI : MonoBehaviour
         }
 
         //使用外部配置的IntendTable的可配置"简单行为树"
-        int idx = Random.Range(0, IntendTable.Count);
-        return IntendTable[idx].GetGameAction(enemy);
+        int idx = Random.Range(0, AI.IntendTable.Count);
+        return AI.IntendTable[idx].GetGameAction(enemy);
 
         //GameAction emenyAction;
         ////散装行为树
@@ -41,7 +42,7 @@ public class EnemyAI : MonoBehaviour
         //}
         //else
         //{
-        //    emenyAction = new AddStatusEffectGA(StatusEffectType.AMROR, 5, new(){ enemy });
+        //    emenyAction = new AddStatusEffectGA(StatusEffectType.AMROR, 5, new() { enemy });
         //}
         //return emenyAction;
     }

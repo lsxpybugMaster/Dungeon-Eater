@@ -86,6 +86,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcdcefb6f7b5b604d92275682f7ac893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <IntendTable>k__BackingField:
+  - rid: 5386319732835090432
+  - rid: 5386319732835090434
+  - rid: 5386319779208364034
+  references:
+    version: 2
+    RefIds:
+    - rid: 5386319732835090432
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        damage: 0
+    - rid: 5386319732835090434
+      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 0
+        stackCount: 10
+    - rid: 5386319779208364034
+      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 1
+        stackCount: 2
 --- !u!1 &7194659324419478763
 GameObject:
   m_ObjectHideFlags: 0

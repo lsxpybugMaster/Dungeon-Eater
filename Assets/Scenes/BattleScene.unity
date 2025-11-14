@@ -3214,44 +3214,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: -7165988732030249010, guid: 2851df662008b18478118f770144962c, type: 3}
-      propertyPath: managedReferences[5386319732835090432]
-      value: Assembly-CSharp AttackIntend
-      objectReference: {fileID: 0}
-    - target: {fileID: -7165988732030249010, guid: 2851df662008b18478118f770144962c, type: 3}
-      propertyPath: managedReferences[5386319732835090433]
-      value: Assembly-CSharp AttackIntend
-      objectReference: {fileID: 0}
-    - target: {fileID: -7165988732030249010, guid: 2851df662008b18478118f770144962c, type: 3}
-      propertyPath: managedReferences[5386319732835090434]
+      propertyPath: managedReferences[5386319779208364032]
       value: Assembly-CSharp AddStatusEffectIntend
       objectReference: {fileID: 0}
     - target: {fileID: -7165988732030249010, guid: 2851df662008b18478118f770144962c, type: 3}
       propertyPath: <IntendTable>k__BackingField.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7165988732030249010, guid: 2851df662008b18478118f770144962c, type: 3}
+      propertyPath: <IntendTable>k__BackingField.Array.data[2]
+      value: 5386319779208364032
+      objectReference: {fileID: 0}
+    - target: {fileID: -7165988732030249010, guid: 2851df662008b18478118f770144962c, type: 3}
+      propertyPath: managedReferences[5386319779208364032].stackCount
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -7165988732030249010, guid: 2851df662008b18478118f770144962c, type: 3}
-      propertyPath: <IntendTable>k__BackingField.Array.data[0]
-      value: 5386319732835090432
-      objectReference: {fileID: 0}
-    - target: {fileID: -7165988732030249010, guid: 2851df662008b18478118f770144962c, type: 3}
-      propertyPath: <IntendTable>k__BackingField.Array.data[1]
-      value: 5386319732835090434
-      objectReference: {fileID: 0}
-    - target: {fileID: -7165988732030249010, guid: 2851df662008b18478118f770144962c, type: 3}
-      propertyPath: managedReferences[5386319732835090432].damage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7165988732030249010, guid: 2851df662008b18478118f770144962c, type: 3}
-      propertyPath: managedReferences[5386319732835090433].damage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -7165988732030249010, guid: 2851df662008b18478118f770144962c, type: 3}
-      propertyPath: managedReferences[5386319732835090434].stackCount
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: -7165988732030249010, guid: 2851df662008b18478118f770144962c, type: 3}
-      propertyPath: managedReferences[5386319732835090434].statusEffectType
-      value: 0
+      propertyPath: managedReferences[5386319779208364032].statusEffectType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5929200642271972602, guid: 2851df662008b18478118f770144962c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3297,16 +3277,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyView
       objectReference: {fileID: 0}
+    - target: {fileID: 7123705789341899973, guid: 2851df662008b18478118f770144962c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7194659324419478763, guid: 2851df662008b18478118f770144962c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 164794161984429577, guid: 2851df662008b18478118f770144962c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2851df662008b18478118f770144962c, type: 3}
 --- !u!1 &1726526956
 GameObject:
