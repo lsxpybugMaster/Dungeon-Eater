@@ -10,7 +10,6 @@ public class EnemyView : CombatantView
     [SerializeField] private TMP_Text attackText;
 
     [field: SerializeField] public EnemyAI EnemyAI { get; private set; }
-    [field: SerializeField] public EnemyAIData AI { get; private set; }
 
     public int AttackPower { get; set; }
 
@@ -20,9 +19,9 @@ public class EnemyView : CombatantView
         UpdateAttackText();
         //别忘记调用基类的初始化方法
         SetupBase(enemyData.Health, enemyData.Health, enemyData.Image);
-        
-        //TODO: 测试代码
-        EnemyAI.BindEnemy(this);
+       
+        //对EnemyAI进行依赖注入
+        EnemyAI.BindEnemy(this, enemyData.IntendTable);
     }
 
     private void UpdateAttackText()

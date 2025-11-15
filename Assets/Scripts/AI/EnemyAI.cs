@@ -13,13 +13,15 @@ public class EnemyAI : MonoBehaviour
 {
     protected EnemyView enemy;
 
-    [SerializeField] private EnemyAIData AI;
+    private List<EnemyIntend> IntendTable { get; set; }
 
     //下面代码的用作基本测试
     //由EnemyView调用,初始化EnemyAI
-    public void BindEnemy(EnemyView enemy)
+    public void BindEnemy(EnemyView enemy, List<EnemyIntend> intendTable)
     {
         this.enemy = enemy;
+        //TODO: 目前无法修改IntendTable(否则会修改SO数据)
+        IntendTable = intendTable;
     }
     
     public GameAction GetEnemyIntend()
@@ -29,21 +31,10 @@ public class EnemyAI : MonoBehaviour
             Debug.LogError("EnemyAI没有绑定enemy!");
         }
 
-        //使用外部配置的IntendTable的可配置"简单行为树"
-        int idx = Random.Range(0, AI.IntendTable.Count);
-        return AI.IntendTable[idx].GetGameAction(enemy);
-
-        //GameAction emenyAction;
-        ////散装行为树
-        //int randomActionCode = Random.Range(0, 100);
-        //if (randomActionCode < 50)
-        //{
-        //    emenyAction = new AttackHeroGA(enemy);
-        //}
-        //else
-        //{
-        //    emenyAction = new AddStatusEffectGA(StatusEffectType.AMROR, 5, new() { enemy });
-        //}
-        //return emenyAction;
+        // 使用外部配置的IntendTable的可配置"简单行为树"
+        int idx = Random.Range(0, IntendTable.Count);
+        
+        // 获取GA时传入了enemy信息,则行为树可以使用enemy数据
+        return IntendTable[idx].GetGameAction(enemy);
     }
 }

@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class AttackIntend : EnemyIntend
 {
-    //独立于接口的外部参数手动配置
-    [SerializeField] private int damage;
+    //伤害由Enemy.AttackPower决定
     public override GameAction GetGameAction(EnemyView enemy)
     {
         AttackHeroGA attackHeroGA = new(enemy);
