@@ -14,7 +14,14 @@ public class EnemyData : ScriptableObject
 
     // AI逻辑数据
     [field: SerializeReference, SR]
-    public List<EnemyIntend> IntendTable { get; private set; }
+    public List<EnemyIntendNode> ConditionedIntendTable { get; private set; }
 
 
+    [field: SerializeReference, SR]
+    public List<EnemyIntendNode> RandomIntendTable { get; private set; }
+    /*
+        简单行为树逻辑:
+        条件行为: 按顺序判断，依次执行直到第一个事件执行成功
+        随机行为: 如果条件行为没有选出事件,则在随机行为中按概率抽取行为(概率和为1)
+     */
 }

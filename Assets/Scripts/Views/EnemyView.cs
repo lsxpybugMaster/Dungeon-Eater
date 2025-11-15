@@ -21,7 +21,7 @@ public class EnemyView : CombatantView
         SetupBase(enemyData.Health, enemyData.Health, enemyData.Image);
        
         //对EnemyAI进行依赖注入
-        EnemyAI.BindEnemy(this, enemyData.IntendTable);
+        EnemyAI.BindEnemy(this, enemyData.ConditionedIntendTable, enemyData.RandomIntendTable);
     }
 
     private void UpdateAttackText()

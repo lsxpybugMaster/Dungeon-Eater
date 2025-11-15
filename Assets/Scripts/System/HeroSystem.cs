@@ -41,6 +41,8 @@ public class HeroSystem : Singleton<HeroSystem>
     //Reactions
     private void EnemyTurnPreAction(EnemyTurnGA enemyTurnGA)
     {
+        Debug.Log("Before Enemy Turn");
+
         DiscardAllCardsGA discardAllCardsGA = new();
 
         ActionSystem.Instance.AddReaction(discardAllCardsGA);
@@ -49,6 +51,9 @@ public class HeroSystem : Singleton<HeroSystem>
 
     private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
     {
+        Debug.Log("After Enemy Turn");
+        //在这里显示敌人意图
+
         int burnStacks = HeroView.GetStatusEffectStacks(StatusEffectType.BURN);
         if (burnStacks > 0)
         {
