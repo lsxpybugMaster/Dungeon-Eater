@@ -22,6 +22,7 @@ public class EnemySystem : Singleton<EnemySystem>
         ActionSystem.AttachPerformer<AttackHeroGA>(AttackHeroPerformer);
         ActionSystem.AttachPerformer<KillEnemyGA>(KillEnemyPerformer);
         ActionSystem.AttachPerformer<KillAllEnemyGA>(KillAllEnemyPerformer);
+        ActionSystem.AttachPerformer<DecideEnemyIntendGA>(DecideEnemyIntendPerformer);
     }
 
 
@@ -31,6 +32,7 @@ public class EnemySystem : Singleton<EnemySystem>
         ActionSystem.DetachPerformer<AttackHeroGA>();
         ActionSystem.DetachPerformer<KillEnemyGA>();
         ActionSystem.DetachPerformer<KillAllEnemyGA>();
+        ActionSystem.DetachPerformer<DecideEnemyIntendGA>();
     }
 
 
@@ -48,7 +50,7 @@ public class EnemySystem : Singleton<EnemySystem>
         //到了敌人的回合,遍历每个敌人并执行逻辑
         foreach (var enemy in enemyBoardView.EnemyViews)
         {
-            //结算燃烧状态
+            //-------------------------结算当前状态-----------------------------
             int burnStacks = enemy.GetStatusEffectStacks(StatusEffectType.BURN);
             if (burnStacks > 0)
             {
@@ -56,11 +58,9 @@ public class EnemySystem : Singleton<EnemySystem>
                 ActionSystem.Instance.AddReaction(applyBurnGA);
             }
 
-            //IMPORTANT: 在这里执行敌人逻辑
             //AttackHeroGA attackHeroGA = new(enemy);
             //ActionSystem.Instance.AddReaction(attackHeroGA);
-
-            //TODO: 加入AI系统后的尝试
+            //-------------------------执行AI系统-----------------------------
             DoEnemyIntend(enemy);
         }
         yield return null;
@@ -69,9 +69,22 @@ public class EnemySystem : Singleton<EnemySystem>
     //执行敌人的行动
     private void DoEnemyIntend(EnemyView enemyView)
     {
-        GameAction enemyAction = enemyView.EnemyAI.GetEnemyIntend();
+        GameAction enemyAction = enemyView.EnemyAI.GetEnemyAction();
         ActionSystem.Instance.AddReaction(enemyAction);
     }
+
+
+    private IEnumerator DecideEnemyIntendPerformer(DecideEnemyIntendGA decideEnemyIntendGA)
+    {
+        //显示敌人意图(同时计算出敌人意图)
+        foreach (var enemy in Enemies)
+        {
+            EnemyIntend intend = enemy.EnemyAI.GetPrepareEnemyIntend();
+            Debug.Log(intend.ToString());
+        }
+        yield return null;
+    }   
+    
 
     private IEnumerator AttackHeroPerformer(AttackHeroGA attackHeroGA)
     {

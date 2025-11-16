@@ -28,7 +28,6 @@ public class PersistUIController : MonoBehaviour
         {
             deckUI.MoveUI();
         });
-        Debug.Log("绑定按钮");
 
         deckUI.Setup();
     }

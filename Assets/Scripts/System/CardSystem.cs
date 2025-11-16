@@ -175,8 +175,6 @@ public class CardSystem : Singleton<CardSystem>
 
     private void RefillDeck()
     {
-        Debug.Log("重新洗牌!");
-
         //把discardPile中的卡牌加到drawPile末尾
         drawPile.AddRange(discardPile);
         discardPile.Clear();

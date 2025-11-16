@@ -35,6 +35,33 @@ public class ActionSystem : Singleton<ActionSystem>
     //存储包装器,确保能够正确删除
     private static Dictionary<Delegate, Action<GameAction>> reactionMap = new();
 
+    #region 支持多GA执行
+    //初始化AS系统时,注册一个扩展GA,其支持跳过Flow的isPerforming锁,将多个GA依序打包执行
+    private void OnEnable()
+    {
+        AttachPerformer<PerformAllGA>(PerformAllPerformer);
+    }
+
+    private void OnDisable()
+    {
+        DetachPerformer<PerformAllGA>();
+    }
+
+    //注意可能导致的Perform冲突问题
+    private IEnumerator PerformAllPerformer(PerformAllGA seqGA)
+    {
+        foreach (var ga in seqGA.GetSequence())
+        {
+            bool done = false;
+
+            StartCoroutine(Flow(ga, () => done = true));
+
+            while (!done)
+                yield return null;
+        }
+    }
+    #endregion
+
 
     // NOTE 谨慎应用static变量,它们的生命周期需要手动管理
     private void OnDestroy()

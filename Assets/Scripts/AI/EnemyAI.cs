@@ -1,4 +1,5 @@
 ﻿using SerializeReferenceEditor;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,12 @@ public class EnemyAI : MonoBehaviour
 {
     protected EnemyView enemy;
 
+    //基于事件通知EnemyView (IoC)
+    public event Action<EnemyIntend> OnEnemyAIUpdated;
+    public event Action OnEnemyAIDone;
+
+    private EnemyIntend enemyNextIntend;
+
     private List<EnemyIntendNode> CondIntendTable { get; set; }
     private List<EnemyIntendNode> RandIntendTable { get; set; }
 
@@ -26,7 +33,12 @@ public class EnemyAI : MonoBehaviour
         RandIntendTable = RandomIntendTable;
     }
     
-    public virtual GameAction GetEnemyIntend()
+
+    /// <summary>
+    /// 在该函数中提前获取行为, 用于UI显示, 同时保留行为信息, 到达敌人回合时直接使用
+    /// </summary>
+    /// <returns></returns>
+    protected virtual EnemyIntend DecideEnemyIntend()
     {
         if (enemy == null)
         {
@@ -34,20 +46,51 @@ public class EnemyAI : MonoBehaviour
         }
 
         // 使用外部配置的IntendTable的可配置"简单行为树"
-        
+
         //------------------- 条件行为判断阶段 ----------------------
         // 获取GA时传入了enemy信息,则行为树可以使用enemy数据
         foreach (var IntendNode in CondIntendTable)
         {
             // 判断条件
-            if ((IntendNode.Condition == null || IntendNode.Condition.Evaluate(enemy)) && Random.value < IntendNode.P)
+            if ((IntendNode.Condition == null || IntendNode.Condition.Evaluate(enemy)) && UnityEngine.Random.value < IntendNode.P)
             {
-                return IntendNode.Intend.GetGameAction(enemy);
+                return IntendNode.Intend;
             }
         }
 
         //--------------------- 行为判断阶段 ----------------------
-        int idx = Random.Range(0, RandIntendTable.Count);
-        return RandIntendTable[idx].Intend.GetGameAction(enemy);
+        int idx = UnityEngine.Random.Range(0, RandIntendTable.Count);
+        return RandIntendTable[idx].Intend;
+    }
+
+
+    /// <summary>
+    /// 计算并获取敌人意图,一般不会执行
+    /// </summary>
+    /// <returns></returns>
+    public EnemyIntend GetPrepareEnemyIntend()
+    {
+        enemyNextIntend = DecideEnemyIntend();
+        //通知父模块
+        OnEnemyAIUpdated?.Invoke(enemyNextIntend);
+        return enemyNextIntend;
+    }
+
+
+    /// <summary>
+    /// 获取计算好的敌人行为,直接执行
+    /// 从DecideEnemyIntend中确定了enemyNextIntend,解析出GameAction去具体执行
+    /// </summary>
+    /// <returns></returns>
+    public GameAction GetEnemyAction()
+    {
+        if (enemyNextIntend == null)
+        {
+            Debug.LogWarning("enemyNextIntend == null");
+            enemyNextIntend = DecideEnemyIntend();
+        }
+        //通知父模块
+        OnEnemyAIDone?.Invoke();
+        return enemyNextIntend.GetGameAction(enemy);
     }
 }

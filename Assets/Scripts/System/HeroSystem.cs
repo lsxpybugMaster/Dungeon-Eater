@@ -41,7 +41,6 @@ public class HeroSystem : Singleton<HeroSystem>
     //Reactions
     private void EnemyTurnPreAction(EnemyTurnGA enemyTurnGA)
     {
-        Debug.Log("Before Enemy Turn");
 
         DiscardAllCardsGA discardAllCardsGA = new();
 
@@ -51,8 +50,6 @@ public class HeroSystem : Singleton<HeroSystem>
 
     private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
     {
-        Debug.Log("After Enemy Turn");
-        //在这里显示敌人意图
 
         int burnStacks = HeroView.GetStatusEffectStacks(StatusEffectType.BURN);
         if (burnStacks > 0)
@@ -61,12 +58,21 @@ public class HeroSystem : Singleton<HeroSystem>
             ActionSystem.Instance.AddReaction(applyBurnGA);
         }
 
+        //------------------------------抽牌事件--------------------------------------
+
         //注意这里创建GA时初始化了抽牌数量,那么注册的反应也只会抽对应牌的数量
         DrawCardsGA drawCardsGA = new(5);
-
-        // 【注意】此时正在Perform EnemyTurnGA, 如果 Perform drawCardsGA 会由于冲突直接不执行!
-        // 所以在 Performer 中只能 通过添加 Reaction 执行动作
-        //ActionSystem.Instance.Perform(drawCardsGA);
+        /*
+          【注意】此时正在Perform EnemyTurnGA, 如果 Perform drawCardsGA 会由于冲突直接不执行!
+           所以在 Performer 中只能 通过添加 Reaction 执行动作
+           ActionSystem.Instance.Perform(drawCardsGA);
+        */
         ActionSystem.Instance.AddReaction(drawCardsGA);
+
+
+        //------------------------敌人AI意图计算及获取事件------------------------------
+        DecideEnemyIntendGA decideEnemyIntendGA = new DecideEnemyIntendGA();
+        ActionSystem.Instance.AddReaction(decideEnemyIntendGA);
+
     }
 }

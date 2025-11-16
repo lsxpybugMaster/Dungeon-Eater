@@ -54,7 +54,6 @@ public class BattleControlSystem : MonoBehaviour
      */
     private void SetupBattle()
     {
-        Debug.Log("SETUPBATTLE");
         hasSetup = true; 
 
         HeroState heroState = GameManager.Instance.HeroState;
@@ -76,9 +75,26 @@ public class BattleControlSystem : MonoBehaviour
 
         ManaSystem.Instance.Setup();
 
-        //第一次抽牌不需要作为回合结束的反应,直接执行
-        DrawCardsGA drawCardsGA = new(5);
-        ActionSystem.Instance.Perform(drawCardsGA);
+        OtherSetupLogic();
+    }
+
+    /// <summary>
+    /// 由于一些逻辑需要玩家回合结束才能实现,所以开局时需要手动调用
+    /// </summary>
+    private void OtherSetupLogic()
+    {
+        /* //Important:
+             Reaction 里的 GA 是“同一个主 GA 的一部分链式动作”，不会冲突。
+             Setup 阶段的连续 Perform 是“独立的多个行动”，会触发并发冲突。
+            所以不能按顺序声明两个Perform
+        */
+
+        var performAllGA = new PerformAllGA(
+            new DrawCardsGA(5),
+            new DecideEnemyIntendGA()
+        );
+
+        ActionSystem.Instance.Perform(performAllGA);
     }
 
     /// <summary>

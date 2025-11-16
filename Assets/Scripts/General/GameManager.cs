@@ -75,7 +75,6 @@ public class GameManager : PersistentSingleton<GameManager>
         InitPersistUI();
 
         //通知其他注册了该事件的脚本进行初始化,以此确保该脚本的执行在它们前面
-        Debug.Log("Invoke");
         OnGameManagerInitialized?.Invoke();
     }
 
