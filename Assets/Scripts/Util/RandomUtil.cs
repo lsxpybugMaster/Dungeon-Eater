@@ -1,26 +1,26 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Ìá¹©Ëæ»úÊıÉú³É¹¤¾ß
+/// æä¾›éšæœºæ•°ç”Ÿæˆå·¥å…·
 /// </summary>
 public static class RandomUtil
 {
     /// <summary>
-    /// ÔÚÖ¸¶¨·¶Î§ÄÚÉú³É n ¸ö²»ÖØ¸´µÄËæ»úÕûÊıË÷Òı¡£
+    /// åœ¨æŒ‡å®šèŒƒå›´å†…ç”Ÿæˆ n ä¸ªä¸é‡å¤çš„éšæœºæ•´æ•°ç´¢å¼•ã€‚
     /// </summary>
-    /// <param name="min">×îĞ¡Öµ£¨°üº¬£©</param>
-    /// <param name="max">×î´óÖµ£¨²»°üº¬£©</param>
-    /// <param name="count">ÒªÉú³ÉµÄÊıÁ¿</param>
-    /// <returns>²»ÖØ¸´Ë÷ÒıÁĞ±í</returns>
+    /// <param name="min">æœ€å°å€¼ï¼ˆåŒ…å«ï¼‰</param>
+    /// <param name="max">æœ€å¤§å€¼ï¼ˆä¸åŒ…å«ï¼‰</param>
+    /// <param name="count">è¦ç”Ÿæˆçš„æ•°é‡</param>
+    /// <returns>ä¸é‡å¤ç´¢å¼•åˆ—è¡¨</returns>
     public static List<int> GetUniqueRandomIndexes(int min, int max, int count)
     {
         if (max <= min)
-            throw new ArgumentException("max ±ØĞë´óÓÚ min¡£");
+            throw new ArgumentException("max å¿…é¡»å¤§äº minã€‚");
         if (count > max - min)
-            throw new ArgumentException("Éú³ÉÊıÁ¿²»ÄÜ³¬¹ı·¶Î§³¤¶È¡£");
+            throw new ArgumentException("ç”Ÿæˆæ•°é‡ä¸èƒ½è¶…è¿‡èŒƒå›´é•¿åº¦ã€‚");
 
         List<int> result = new List<int>(count);
         HashSet<int> used = new HashSet<int>();

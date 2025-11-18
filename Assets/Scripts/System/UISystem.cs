@@ -12,7 +12,7 @@ public class UISystem : Singleton<UISystem>
     [SerializeField] private Button backToMapBtn;
 
     //NOTE: 引用其他UI子系统
-    [SerializeField] private CardPileCountUI cardPileCountUI;
+    [SerializeField] private CardPileUI cardPileCountUI;
 
     //判断UI能否交互的验证函数
     public bool CanInteract() => GameManager.Instance.GameState != GameState.BattleVictory;

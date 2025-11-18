@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //纯Tag
-public interface IUIMove
+public interface IUIMove<T>
 {
     //需要给外部暴露接口
     /// <summary>
     /// 将UIMoveComponent模块中的SwitchModeMoveUI暴露
     /// </summary>
-    public void MoveUI();
+    public void MoveUIWithLogic(T args);
 }
 
 //IDEA: 尝试实现一个组件 "组合优于继承"

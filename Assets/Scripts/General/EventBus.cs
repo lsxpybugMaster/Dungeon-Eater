@@ -1,14 +1,14 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /*
- *  È«¾ÖÊÂ¼şÖĞĞÄ
-    ÇáÁ¿»¯µÄActionSystem
-    ÓÃÓÚÈ«¾ÖÊÂ¼ş¹ÜÀí£¨²»ÏñActionSystem¹ÜÀí¸´ÔÓµÄ·´Ó¦Á´£©
+ *  å…¨å±€äº‹ä»¶ä¸­å¿ƒ
+    è½»é‡åŒ–çš„ActionSystem
+    ç”¨äºå…¨å±€äº‹ä»¶ç®¡ç†ï¼ˆä¸åƒActionSystemç®¡ç†å¤æ‚çš„ååº”é“¾ï¼‰
  
-    //NOTE: ×¢²á¸ÃÊÂ¼ş×ÜÏßĞèÒªÊ×ÏÈ¶¨ÒåÊÂ¼şÀàĞÍ(struct)
+    //NOTE: æ³¨å†Œè¯¥äº‹ä»¶æ€»çº¿éœ€è¦é¦–å…ˆå®šä¹‰äº‹ä»¶ç±»å‹(struct)
     public struct MyEvent
     {
         public T typename;
@@ -18,15 +18,15 @@ using UnityEngine;
         }
     }
     
-    //¾ßÌå×¢²á:
+    //å…·ä½“æ³¨å†Œ:
     EventBus.Subscribe<MyEvent>()
 
-    //º¯Êı:
+    //å‡½æ•°:
     private void OnWhat(MyEvent e){
     
     }
 
-    ÊµÀı²Î¿¼:
+    å®ä¾‹å‚è€ƒ:
         RoomChangedEvent
 */
 
@@ -38,7 +38,7 @@ public static class EventBus
     {
         if (!eventTable.ContainsKey(typeof(T)))
         {
-            // ³õÊ¼»¯nullÈ·±£×ª»»Ê±²»»á³ö´í
+            // åˆå§‹åŒ–nullç¡®ä¿è½¬æ¢æ—¶ä¸ä¼šå‡ºé”™
             eventTable[typeof(T)] = null;
         }
         eventTable[typeof(T)] = (Action<T>)eventTable[typeof(T)] + listener;
@@ -52,7 +52,7 @@ public static class EventBus
         }
     }
 
-    //¹ã²¥ÊÂ¼ş evt ½«²ÎÊı·â×° ¸øÎ¯ÍĞ½øĞĞµ÷ÓÃ
+    //å¹¿æ’­äº‹ä»¶ evt å°†å‚æ•°å°è£… ç»™å§”æ‰˜è¿›è¡Œè°ƒç”¨
     public static void Publish<T>(T evt)
     {
         if (eventTable.TryGetValue(typeof(T), out var act)) 

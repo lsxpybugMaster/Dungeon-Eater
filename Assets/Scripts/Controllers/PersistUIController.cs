@@ -26,10 +26,15 @@ public class PersistUIController : MonoBehaviour
         //topUI初始化时需要绑定按钮
         topUI.Setup(heroState, playerDeckController, () =>
         {
-            deckUI.MoveUI();
+            deckUI.MoveUIWithLogic(null); //使用默认的牌组
         });
 
         deckUI.Setup();
     }
-   
+
+    public void ResetUp()
+    {
+
+    }
+
 }

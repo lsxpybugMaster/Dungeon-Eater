@@ -5,6 +5,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PileType
+{
+    DrawPile,
+    DisCardPile,
+    HandPile,
+}
+
 public class CardSystem : Singleton<CardSystem>
 {
     [SerializeField] private HandView handView;
@@ -30,9 +37,15 @@ public class CardSystem : Singleton<CardSystem>
     public IReadOnlyList<Card> DrawPile => drawPile;
     public IReadOnlyList<Card> DiscardPile => discardPile;
 
-    //FIXME: 临时使用,计算玩家卡牌数量
-    public int PlayerCards { get; private set; }
-
+    //返回战斗模式下手牌
+    public List<Card> GetDeck()
+    {
+        var deck = new List<Card>(drawPile.Count + discardPile.Count + hand.Count);
+        deck.AddRange(drawPile);
+        deck.AddRange(discardPile);
+        deck.AddRange(hand);
+        return deck;
+    }
 
     //注册及取消注册Performer与Reaction
     private void OnEnable()
@@ -60,12 +73,28 @@ public class CardSystem : Singleton<CardSystem>
     //IMPORTANT: 我们管理的是Card!! 不要使用CardData
     public void Setup(List<Card> deckData)
     {
-        PlayerCards = deckData.Count;
         //初始填满抽牌堆
         foreach (var herocard in deckData)
         {
             Card card = new(herocard.data);
             drawPile.Add(card);
+        }
+    }
+
+    /// <summary>
+    /// 在局内增加卡牌至指定牌堆(与全局的卡牌堆不同)
+    /// </summary>
+    public void AddCardToPile(Card card, PileType pileType)
+    {
+
+        switch(pileType)
+        {
+            case PileType.DrawPile:
+                drawPile.Add(card); break;
+            case PileType.DisCardPile:
+                discardPile.Add(card); break;
+            case PileType.HandPile:
+                discardPile.Add(card); break;
         }
     }
 

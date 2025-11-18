@@ -25,9 +25,8 @@ public class GameManager : PersistentSingleton<GameManager>
     // 外部数据引用
     [SerializeField] private PersistUIController persistUIControllerPrefab;
 
-
     //STEP: 属性
-    public GameState GameState { get; private set; }
+    [field: SerializeField] public GameState GameState { get; private set; } // private set; }
 
     //TODO: 将这些临时属性统一管理成state
     public int SEED;
