@@ -14,6 +14,7 @@ public class PlayerDeckController
     //------------------------数据更新事件---------------------------
     public event Action<int> OnDeckSizeChanged;
 
+    public int DeckSize => heroState.DeckSize;
 
     public PlayerDeckController(HeroState heroState)
     {

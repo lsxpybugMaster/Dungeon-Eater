@@ -87,7 +87,7 @@ public class GameManager : PersistentSingleton<GameManager>
         }
         //持久化绑定
         DontDestroyOnLoad(PersistUIController.gameObject);
-        PersistUIController.Setup(HeroState, PlayerDeckController);
+        PersistUIController.Setup(HeroState, GameState);
     }
 
 

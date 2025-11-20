@@ -29,10 +29,14 @@ public class CardSystem : Singleton<CardSystem>
     
 
     //NOTE: 每当牌堆改变时与UI交互
-    public event Action<int, int> OnPileChanged;
+    public event Action<int, int> OnPileChanged; //上面这个仅限抽牌堆弃牌堆
+    public event Action<int> OnBattleDeckChanged; //注意这个事件是全部牌堆改变
+
     // 只读属性,供UI显示信息
     public int DrawPileCount => drawPile.Count;
     public int DiscardPileCount => discardPile.Count;
+
+    public int DeckCount => drawPile.Count + discardPile.Count + hand.Count;
     //后期可能需要使用
     public IReadOnlyList<Card> DrawPile => drawPile;
     public IReadOnlyList<Card> DiscardPile => discardPile;
@@ -41,7 +45,7 @@ public class CardSystem : Singleton<CardSystem>
     //返回战斗模式下手牌
     public List<Card> GetDeck()
     {
-        var deck = new List<Card>(drawPile.Count + discardPile.Count + hand.Count);
+        var deck = new List<Card>(DeckCount);
         deck.AddRange(drawPile);
         deck.AddRange(discardPile);
         deck.AddRange(hand);
@@ -67,6 +71,8 @@ public class CardSystem : Singleton<CardSystem>
 
         //及时更新,确保UI与逻辑同步
         OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
+        //TopUI也要同步
+        OnBattleDeckChanged?.Invoke(DeckCount);
     }
 
     /*

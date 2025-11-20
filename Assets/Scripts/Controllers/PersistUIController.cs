@@ -20,10 +20,10 @@ public class PersistUIController : MonoBehaviour
     /// 初始化基本信息
     /// </summary>
     //NOTE: 这部分由GameManager调用 
-    public void Setup(HeroState heroState, PlayerDeckController playerDeckController)
+    public void Setup(HeroState heroState, GameState gameState)
     {
         //topUI初始化时需要绑定按钮
-        topUI.Setup(heroState, playerDeckController, () =>
+        topUI.Setup(heroState, gameState, () =>
         {
             deckUI.MoveUIWithLogic(null); //使用默认的牌组
         });
@@ -37,6 +37,7 @@ public class PersistUIController : MonoBehaviour
     public void ResetUp(GameState gameState)
     {
         DebugUtil.Yellow($"重新初始化,当前模式: {gameState}");
+        topUI.ResetUp(gameState);
     }
 
 }

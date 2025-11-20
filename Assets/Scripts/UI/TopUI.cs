@@ -16,8 +16,6 @@ public class TopUI : MonoBehaviour, IAmPersistUI
     [SerializeField] private TMP_Text debugTMP;
     [SerializeField] private Button showDeckBtn;
 
-    private Action<int> cardPileChangeEvent;
-
     private void Start()
     {
      
@@ -32,24 +30,24 @@ public class TopUI : MonoBehaviour, IAmPersistUI
     /// <summary>
     /// 初始化基本信息
     /// </summary>
-    public void Setup(HeroState heroState, PlayerDeckController playerDeckController, Action onShowDeckBtnClick)
+    public void Setup(HeroState heroState, GameState gameState, Action onShowDeckBtnClick)
     {
         GetComponents();
 
         UpdateHeroHp(heroState.CurrentHealth, heroState.MaxHealth);
         UpdateDeckSize(heroState.DeckSize);
 
-        SubscribeEvent(playerDeckController);
-
         BindButton(onShowDeckBtnClick);
+
+        ResetUp(gameState);
     }
 
     /// <summary>
     /// 依据场景的切换进行重新初始化(去显示两套数据)
     /// </summary>
-    public void ResetUp(Action<int> whichPileEvent)
+    public void ResetUp(GameState gameState)
     {
-        
+        SubscribeEventAndInit(gameState);
     }
 
 
@@ -68,13 +66,39 @@ public class TopUI : MonoBehaviour, IAmPersistUI
         showDeckBtn.GetComponent<Button>();
     }
 
-    //订阅事件统一写在这里
-    private void SubscribeEvent(PlayerDeckController playerDeckController)
+    //订阅事件统一写在这里 + 显式更新
+    private void SubscribeEventAndInit(GameState gameState)
     {
-        // 防御性注册
-        playerDeckController.OnDeckSizeChanged -= UpdateDeckSize;
-        playerDeckController.OnDeckSizeChanged += UpdateDeckSize;
+        //根据不同模式注册不同事件
+        if (gameState == GameState.Exploring)
+        {
+            Debug.Log("GLO");
+            var globalDeck = GameManager.Instance.PlayerDeckController;
+            globalDeck.OnDeckSizeChanged -= UpdateDeckSize;
+            globalDeck.OnDeckSizeChanged += UpdateDeckSize;
+            //绑定全局牌堆
+            //显式更新
+        }
+        else if (gameState == GameState.Battle)
+        {
+            Debug.Log("BAT");
+            var tempDeck = CardSystem.Instance;
+            tempDeck.OnBattleDeckChanged -= UpdateDeckSize;
+            tempDeck.OnBattleDeckChanged += UpdateDeckSize;
+            //绑定战斗牌堆
+            //显式更新
+        }
+        else Debug.Log($"SubscribeEvent 检测到错误的模式: {gameState.ToString()}");
+
+        UpdateDeckSize(GameManager.Instance.HeroState.DeckSize);
     }
+
+    //private void SubscribeEvent(PlayerDeckController playerDeckController)
+    //{
+    //    // 防御性注册
+    //    playerDeckController.OnDeckSizeChanged -= UpdateDeckSize;
+    //    playerDeckController.OnDeckSizeChanged += UpdateDeckSize;
+    //}
     
 
     //TODO: 将生命更新后的对应逻辑挂载到ActionSystem中
