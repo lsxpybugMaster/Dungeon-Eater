@@ -37,6 +37,7 @@ public class CardSystem : Singleton<CardSystem>
     public IReadOnlyList<Card> DrawPile => drawPile;
     public IReadOnlyList<Card> DiscardPile => discardPile;
 
+
     //返回战斗模式下手牌
     public List<Card> GetDeck()
     {
@@ -47,13 +48,45 @@ public class CardSystem : Singleton<CardSystem>
         return deck;
     }
 
+
+    /// <summary>
+    /// 在局内增加卡牌至指定牌堆(与全局的卡牌堆不同)
+    /// </summary>
+    public void AddCardToPile(Card card, PileType pileType)
+    {
+
+        switch (pileType)
+        {
+            case PileType.DrawPile:
+                drawPile.   Add(card); break;
+            case PileType.DisCardPile:
+                discardPile.Add(card); break;
+            case PileType.HandPile:
+                discardPile.Add(card); break;
+        }
+
+        //及时更新,确保UI与逻辑同步
+        OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
+    }
+
+    /*
+    //NOTE: Performer执行逻辑
+       如果内部包含跨帧逻辑：
+        +  yield 动画
+        +  yield 子协程
+        +  yield 回调等待
+       如果内部没有跨帧：
+        +  在最后添加 yield return null;
+     */
+
     //注册及取消注册Performer与Reaction
     private void OnEnable()
     {
         //注册Performer,指明执行该行动的协程
         ActionSystem.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);
         ActionSystem.AttachPerformer<DiscardAllCardsGA>(DiscardAllCardsPerformer);
-        ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);   
+        ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);
+        ActionSystem.AttachPerformer<AddCardGA>(AddCardPerformer);
 
     }
 
@@ -63,6 +96,7 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.DetachPerformer<DrawCardsGA>();
         ActionSystem.DetachPerformer<DiscardAllCardsGA>();
         ActionSystem.DetachPerformer<PlayCardGA>();
+        ActionSystem.DetachPerformer<AddCardGA>();
     }
 
 
@@ -81,23 +115,11 @@ public class CardSystem : Singleton<CardSystem>
         }
     }
 
-    /// <summary>
-    /// 在局内增加卡牌至指定牌堆(与全局的卡牌堆不同)
-    /// </summary>
-    public void AddCardToPile(Card card, PileType pileType)
+    private IEnumerator AddCardPerformer(AddCardGA addCardGA)
     {
-
-        switch(pileType)
-        {
-            case PileType.DrawPile:
-                drawPile.Add(card); break;
-            case PileType.DisCardPile:
-                discardPile.Add(card); break;
-            case PileType.HandPile:
-                discardPile.Add(card); break;
-        }
+        AddCardToPile(addCardGA.whichCard, addCardGA.whichPileToAdd);
+        yield return null;
     }
-
 
     //Performers
 
@@ -146,7 +168,7 @@ public class CardSystem : Singleton<CardSystem>
         hand.Clear();
     }
 
-
+    //IMPORTANT: 所有卡牌的功能在这里执行
     /// <summary>
     /// 卡牌功能执行函数
     /// </summary>

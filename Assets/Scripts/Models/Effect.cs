@@ -1,5 +1,11 @@
 ﻿using System.Collections.Generic;
 
+/*
+    将GameAction + 外部参数封装并暴露给编辑器
+    Effect 可以用于在外部配置GA
+    可以应用于卡牌的数据配置
+    Intend同理
+ */
 [System.Serializable]
 public abstract class Effect
 {

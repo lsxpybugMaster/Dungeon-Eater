@@ -35,7 +35,7 @@ public class GameManager : PersistentSingleton<GameManager>
     public HeroState HeroState { get; private set; }
     public MapState MapState { get; private set; }
 
-    //STEP: 保存功能模块(纯C#类)
+    //STEP:保存功能模块(纯C#类)
     public PlayerDeckController PlayerDeckController { get; private set; }
     /// <summary>
     /// 全局随机数生成器,支持配发随机流
@@ -107,12 +107,14 @@ public class GameManager : PersistentSingleton<GameManager>
     public void ToBattleMode()
     {
         ChangeGameState(GameState.Battle);
-        SceneManager.LoadScene((int)Scene.BATTLE);    
+        SceneManager.LoadScene((int)Scene.BATTLE);
+
+        //大模式切换,通知其他
+        PersistUIController.ResetUp(GameState);
     }
 
     public void ToShopMode()
     {
-        DebugUtil.Cyan("进入到商店!");
         ChangeGameState(GameState.Shopping);
     }
 
@@ -128,5 +130,8 @@ public class GameManager : PersistentSingleton<GameManager>
         //在这里切换游戏模式:
         ChangeGameState(GameState.Exploring);
         SceneManager.LoadScene((int)Scene.MAP);
+
+        //大模式切换,通知其他
+        PersistUIController.ResetUp(GameState);
     }
 }

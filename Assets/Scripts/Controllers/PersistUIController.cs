@@ -22,7 +22,6 @@ public class PersistUIController : MonoBehaviour
     //NOTE: 这部分由GameManager调用 
     public void Setup(HeroState heroState, PlayerDeckController playerDeckController)
     {
-
         //topUI初始化时需要绑定按钮
         topUI.Setup(heroState, playerDeckController, () =>
         {
@@ -32,9 +31,12 @@ public class PersistUIController : MonoBehaviour
         deckUI.Setup();
     }
 
-    public void ResetUp()
+    /// <summary>
+    /// 重新初始化信息(因为MainScene与BattleScene的两套数据不同)
+    /// </summary>
+    public void ResetUp(GameState gameState)
     {
-
+        DebugUtil.Yellow($"重新初始化,当前模式: {gameState}");
     }
 
 }

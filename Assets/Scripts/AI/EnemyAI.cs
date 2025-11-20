@@ -1,9 +1,7 @@
-﻿using SerializeReferenceEditor;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+
 
 /*
     类似行为树? 存储敌人的对应GameAction(或相关封装)

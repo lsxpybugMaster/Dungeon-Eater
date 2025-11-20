@@ -16,6 +16,8 @@ public class TopUI : MonoBehaviour, IAmPersistUI
     [SerializeField] private TMP_Text debugTMP;
     [SerializeField] private Button showDeckBtn;
 
+    private Action<int> cardPileChangeEvent;
+
     private void Start()
     {
      
@@ -42,6 +44,14 @@ public class TopUI : MonoBehaviour, IAmPersistUI
         BindButton(onShowDeckBtnClick);
     }
 
+    /// <summary>
+    /// 依据场景的切换进行重新初始化(去显示两套数据)
+    /// </summary>
+    public void ResetUp(Action<int> whichPileEvent)
+    {
+        
+    }
+
 
     //传入函数委托并绑定按钮
     public void BindButton(Action onShowDeckBtnClick)
@@ -65,6 +75,7 @@ public class TopUI : MonoBehaviour, IAmPersistUI
         playerDeckController.OnDeckSizeChanged -= UpdateDeckSize;
         playerDeckController.OnDeckSizeChanged += UpdateDeckSize;
     }
+    
 
     //TODO: 将生命更新后的对应逻辑挂载到ActionSystem中
     public void UpdateHeroHp(int hpAmount, int maxHpAmount)
@@ -73,6 +84,7 @@ public class TopUI : MonoBehaviour, IAmPersistUI
     }
 
 
+    /// <param name="size"></param>
     public void UpdateDeckSize(int size)
     {
         deckSizeTMP.text = size.ToString();
