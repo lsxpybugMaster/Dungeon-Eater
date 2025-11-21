@@ -51,3 +51,6 @@ TagManager:
   - name: MapDice
     uniqueID: 1511278271
     locked: 0
+  - name: Card
+    uniqueID: 1587572507
+    locked: 0

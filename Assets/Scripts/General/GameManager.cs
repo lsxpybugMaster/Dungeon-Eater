@@ -65,13 +65,12 @@ public class GameManager : PersistentSingleton<GameManager>
         //数据部分由State类自己获取
         HeroState = new HeroState();
         MapState = new MapState();
+        
+        //初始化全局UI对象
+        InitPersistUI(); 
 
         //注意初始化顺序
         PlayerDeckController = new PlayerDeckController(HeroState);
-        
-
-        //初始化全局UI对象
-        InitPersistUI();
 
         //通知其他注册了该事件的脚本进行初始化,以此确保该脚本的执行在它们前面
         OnGameManagerInitialized?.Invoke();
@@ -87,7 +86,7 @@ public class GameManager : PersistentSingleton<GameManager>
         }
         //持久化绑定
         DontDestroyOnLoad(PersistUIController.gameObject);
-        PersistUIController.Setup(HeroState, GameState);
+        PersistUIController.Setup(HeroState);
     }
 
 
@@ -110,7 +109,7 @@ public class GameManager : PersistentSingleton<GameManager>
         SceneManager.LoadScene((int)Scene.BATTLE);
 
         //大模式切换,通知其他
-        PersistUIController.ResetUp(GameState);
+        PersistUIController.ResetUp();
     }
 
     public void ToShopMode()
@@ -132,6 +131,6 @@ public class GameManager : PersistentSingleton<GameManager>
         SceneManager.LoadScene((int)Scene.MAP);
 
         //大模式切换,通知其他
-        PersistUIController.ResetUp(GameState);
+        PersistUIController.ResetUp();
     }
 }

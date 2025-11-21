@@ -26,11 +26,10 @@ public class CardSystem : Singleton<CardSystem>
 
     [SerializeField] private Transform drawPilePoint;
     [SerializeField] private Transform discardPilePoint;
+    [SerializeField] private Transform showNewCardPoint;
     
-
     //NOTE: 每当牌堆改变时与UI交互
     public event Action<int, int> OnPileChanged; //上面这个仅限抽牌堆弃牌堆
-    public event Action<int> OnBattleDeckChanged; //注意这个事件是全部牌堆改变
 
     // 只读属性,供UI显示信息
     public int DrawPileCount => drawPile.Count;
@@ -41,6 +40,20 @@ public class CardSystem : Singleton<CardSystem>
     public IReadOnlyList<Card> DrawPile => drawPile;
     public IReadOnlyList<Card> DiscardPile => discardPile;
 
+    /// <summary>
+    /// 初始化牌堆
+    /// </summary>
+    /// <param name="deckData">传入卡牌数据列表</param>
+    //IMPORTANT: 我们管理的是Card!! 不要使用CardData
+    public void Setup(List<Card> deckData)
+    {
+        //初始填满抽牌堆
+        foreach (var herocard in deckData)
+        {
+            Card card = new(herocard.data);
+            drawPile.Add(card);
+        }
+    }
 
     //返回战斗模式下手牌
     public List<Card> GetDeck()
@@ -72,7 +85,12 @@ public class CardSystem : Singleton<CardSystem>
         //及时更新,确保UI与逻辑同步
         OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
         //TopUI也要同步
-        OnBattleDeckChanged?.Invoke(DeckCount);
+        DoWhenDeckChanged();
+    }
+
+    private void DoWhenDeckChanged()
+    {
+        GameManager.Instance.PersistUIController.TopUI.UpdateDeckSize(DeckCount);
     }
 
     /*
@@ -106,25 +124,37 @@ public class CardSystem : Singleton<CardSystem>
     }
 
 
-    /// <summary>
-    /// 初始化牌堆
-    /// </summary>
-    /// <param name="deckData">传入卡牌数据列表</param>
-    //IMPORTANT: 我们管理的是Card!! 不要使用CardData
-    public void Setup(List<Card> deckData)
-    {
-        //初始填满抽牌堆
-        foreach (var herocard in deckData)
-        {
-            Card card = new(herocard.data);
-            drawPile.Add(card);
-        }
-    }
-
     private IEnumerator AddCardPerformer(AddCardGA addCardGA)
     {
+        var card = addCardGA.whichCard;
+        var pile = addCardGA.whichPileToAdd;
+
+        //创建一个展示卡牌(仅动画效果)
+        CardView cardView = CardViewCreator.Instance.CreateCardView(card, 
+            showNewCardPoint.position, 
+            showNewCardPoint.rotation, 
+            showMode: true
+        );
+        
+        // 根据添加的位置(抽牌堆,弃牌堆,手牌堆) 确定效果类型
+        if (pile == PileType.HandPile)
+        {
+            yield return null;
+        }
+
+        //效果:卡牌变小并向对应的位置移动
+        yield return new WaitForSeconds(0.25f);
+
+        Vector3 pos = pile == PileType.DrawPile ? drawPilePoint.position : discardPilePoint.position;
+        cardView.transform.DOScale(Vector3.zero, 0.15f);
+        Tween tween = cardView.transform.DOMove(pos, 0.15f);
+
+        yield return tween.WaitForCompletion();
+
+        Destroy(cardView.gameObject);
+
+        //实际逻辑上的添加
         AddCardToPile(addCardGA.whichCard, addCardGA.whichPileToAdd);
-        yield return null;
     }
 
     //Performers

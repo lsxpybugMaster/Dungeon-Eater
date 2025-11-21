@@ -27,6 +27,7 @@ public class CardView : MonoBehaviour
 
     private Quaternion dragStartRotation;
 
+    private BoxCollider2D cardTrigger;
 
     /// <summary>
     /// 根据卡牌数据更新信息
@@ -39,6 +40,18 @@ public class CardView : MonoBehaviour
         description.text = card.Description;
         mana.text = card.Mana.ToString();
         imageSR.sprite = card.Image;
+
+        cardTrigger = GetComponent<BoxCollider2D>();
+    }
+
+    public void EnableCardInteraction()
+    {
+        cardTrigger.enabled = true;
+    }
+
+    public void DisableCardInteraction()
+    {
+        cardTrigger.enabled = false;
     }
 
     //将交互判断鉴权提出

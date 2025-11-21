@@ -395,7 +395,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1116290362
+--- !u!1 &1396231435
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -403,8 +403,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1116290364}
-  - component: {fileID: 1116290363}
+  - component: {fileID: 1396231436}
+  - component: {fileID: 1396231437}
   m_Layer: 0
   m_Name: TestSystem
   m_TagString: Untagged
@@ -412,33 +412,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1116290363
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1116290362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d974e5fd84119d44aad72fdd39fd979e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1116290364
+--- !u!4 &1396231436
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1116290362}
+  m_GameObject: {fileID: 1396231435}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2054398821}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1396231437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396231435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d974e5fd84119d44aad72fdd39fd979e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1799819892
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,6 +754,7 @@ Transform:
   - {fileID: 894045685}
   - {fileID: 67976904}
   - {fileID: 1799819893}
+  - {fileID: 1396231436}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &648577020301140244
@@ -1118,6 +1119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   persistUIControllerPrefab: {fileID: 3847000970675050835, guid: e08e480831709f94c845e3020b818361, type: 3}
+  <GameState>k__BackingField: 0
   SEED: 42
 --- !u!114 &7536282309370147912
 MonoBehaviour:
@@ -1303,7 +1305,6 @@ SceneRoots:
   - {fileID: 1814279326}
   - {fileID: 1917112967}
   - {fileID: 1413040179464688424}
-  - {fileID: 1116290364}
   - {fileID: 6080131522138562904}
   - {fileID: 9146952925994485202}
   - {fileID: 1034864925}

@@ -11,8 +11,6 @@ public class PlayerDeckController
     //由GameManager负责初始化
     private HeroState heroState;
 
-    //------------------------数据更新事件---------------------------
-    public event Action<int> OnDeckSizeChanged;
 
     public int DeckSize => heroState.DeckSize;
 
@@ -27,7 +25,7 @@ public class PlayerDeckController
     public void AddCardToDeck(CardData cardData)
     {
         heroState.AddCardToDeck(cardData);
-        OnDeckSizeChanged?.Invoke(heroState.DeckSize);
+        DoWhenUpdateCard(); 
     }
 
 
@@ -35,6 +33,11 @@ public class PlayerDeckController
     public void RemoveCardFromDeck(Card card)
     {
         heroState.RemoveCardFromDeck(card);
-        OnDeckSizeChanged?.Invoke(heroState.DeckSize);
+        DoWhenUpdateCard();
+    }
+
+    private void DoWhenUpdateCard()
+    {
+        GameManager.Instance.PersistUIController.TopUI.UpdateDeckSize(heroState.DeckSize);
     }
 }
