@@ -37,7 +37,7 @@ public class PersistUIController : MonoBehaviour
     public void ResetUp(GameState gameState)
     {
         DebugUtil.Yellow($"重新初始化,当前模式: {gameState}");
-        topUI.ResetUp(gameState);
+        // topUI.ResetUp(gameState);
     }
 
 }
