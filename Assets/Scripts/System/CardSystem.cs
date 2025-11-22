@@ -39,6 +39,7 @@ public class CardSystem : Singleton<CardSystem>
     //后期可能需要使用
     public IReadOnlyList<Card> DrawPile => drawPile;
     public IReadOnlyList<Card> DiscardPile => discardPile;
+    public IReadOnlyList<Card> HandPile => hand;
 
     /// <summary>
     /// 初始化牌堆
@@ -75,11 +76,11 @@ public class CardSystem : Singleton<CardSystem>
         switch (pileType)
         {
             case PileType.DrawPile:
-                drawPile.   Add(card); break;
+                drawPile.Add(card); break;
             case PileType.DisCardPile:
                 discardPile.Add(card); break;
             case PileType.HandPile:
-                discardPile.Add(card); break;
+                hand.Add(card); break;
         }
 
         //及时更新,确保UI与逻辑同步
@@ -111,7 +112,6 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.AttachPerformer<DiscardAllCardsGA>(DiscardAllCardsPerformer);
         ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);
         ActionSystem.AttachPerformer<AddCardGA>(AddCardPerformer);
-
     }
 
 
@@ -135,29 +135,38 @@ public class CardSystem : Singleton<CardSystem>
             showNewCardPoint.rotation, 
             showMode: true
         );
-        
+
+        //展示卡牌的时间
+        yield return new WaitForSeconds(0.4f);
+
         // 根据添加的位置(抽牌堆,弃牌堆,手牌堆) 确定效果类型
         if (pile == PileType.HandPile)
         {
-            yield return null;
+            //继续减小卡牌大小(原来是显示级大小)
+            cardView.transform.DOScale(Vector3.one * 0.7f , 0.15f);
+            // 将卡牌添加到手牌
+            yield return handView.AddCard(cardView);
+
+            cardView.EnableCardInteraction();
         }
+        else
+        {
+            //效果:卡牌变小并向对应的位置移动
+            Vector3 pos = pile == PileType.DrawPile ? drawPilePoint.position : discardPilePoint.position;
+            cardView.transform.DOScale(Vector3.zero, 0.15f);
+            Tween tween = cardView.transform.DOMove(pos, 0.15f);
 
-        //效果:卡牌变小并向对应的位置移动
-        yield return new WaitForSeconds(0.25f);
+            yield return tween.WaitForCompletion();
 
-        Vector3 pos = pile == PileType.DrawPile ? drawPilePoint.position : discardPilePoint.position;
-        cardView.transform.DOScale(Vector3.zero, 0.15f);
-        Tween tween = cardView.transform.DOMove(pos, 0.15f);
-
-        yield return tween.WaitForCompletion();
-
-        Destroy(cardView.gameObject);
+            Destroy(cardView.gameObject);
+        }
 
         //实际逻辑上的添加
         AddCardToPile(addCardGA.whichCard, addCardGA.whichPileToAdd);
     }
 
     //Performers
+
 
     /// <summary>
     /// 抽牌
@@ -190,7 +199,6 @@ public class CardSystem : Singleton<CardSystem>
                 yield return DrawCard();
             }
         }
-
     }
 
 
@@ -203,6 +211,7 @@ public class CardSystem : Singleton<CardSystem>
         }
         hand.Clear();
     }
+
 
     //IMPORTANT: 所有卡牌的功能在这里执行
     /// <summary>
@@ -248,7 +257,6 @@ public class CardSystem : Singleton<CardSystem>
 
     private IEnumerator DrawCard()
     {
-
         //ListExtensions中的List扩展方法
         Card card = drawPile.Draw();
         hand.Add(card);
@@ -268,6 +276,7 @@ public class CardSystem : Singleton<CardSystem>
 
         OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
     }
+
 
 
     /// <summary>
