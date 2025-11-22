@@ -37,6 +37,7 @@ public class HeroSystem : Singleton<HeroSystem>
         HeroView.SaveData();
     }
 
+    //TODO: 移除逻辑
 
     //Reactions
     private void EnemyTurnPreAction(EnemyTurnGA enemyTurnGA)
@@ -45,6 +46,12 @@ public class HeroSystem : Singleton<HeroSystem>
         DiscardAllCardsGA discardAllCardsGA = new();
 
         ActionSystem.Instance.AddReaction(discardAllCardsGA);
+
+        //-----------------------------清空敌人状态------------------------------------
+        foreach (var enemy in EnemySystem.Instance.Enemies)
+        {
+            enemy.UpdateEffectStacks();
+        }
     }
 
 
@@ -58,6 +65,11 @@ public class HeroSystem : Singleton<HeroSystem>
             ActionSystem.Instance.AddReaction(applyBurnGA);
         }
 
+
+        //------------------------敌人AI意图计算及获取事件------------------------------
+        DecideEnemyIntendGA decideEnemyIntendGA = new DecideEnemyIntendGA();
+        ActionSystem.Instance.AddReaction(decideEnemyIntendGA);
+
         //------------------------------抽牌事件--------------------------------------
 
         //注意这里创建GA时初始化了抽牌数量,那么注册的反应也只会抽对应牌的数量
@@ -70,9 +82,8 @@ public class HeroSystem : Singleton<HeroSystem>
         ActionSystem.Instance.AddReaction(drawCardsGA);
 
 
-        //------------------------敌人AI意图计算及获取事件------------------------------
-        DecideEnemyIntendGA decideEnemyIntendGA = new DecideEnemyIntendGA();
-        ActionSystem.Instance.AddReaction(decideEnemyIntendGA);
+        //------------------------------清空玩家状态-------------------------------------
+        HeroView.UpdateEffectStacks();
 
     }
 }

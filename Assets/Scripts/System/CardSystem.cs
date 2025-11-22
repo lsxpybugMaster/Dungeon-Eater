@@ -1,5 +1,4 @@
-﻿using ActionSystemTest;
-using DG.Tweening;
+﻿using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -137,13 +136,13 @@ public class CardSystem : Singleton<CardSystem>
         );
 
         //展示卡牌的时间
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(Config.Instance.freezeTime);
 
         // 根据添加的位置(抽牌堆,弃牌堆,手牌堆) 确定效果类型
         if (pile == PileType.HandPile)
         {
             //继续减小卡牌大小(原来是显示级大小)
-            cardView.transform.DOScale(Vector3.one * 0.7f , 0.15f);
+            cardView.transform.DOScale(Vector3.one * Config.Instance.cardSize , Config.Instance.moveTime);
             // 将卡牌添加到手牌
             yield return handView.AddCard(cardView);
 
@@ -153,8 +152,8 @@ public class CardSystem : Singleton<CardSystem>
         {
             //效果:卡牌变小并向对应的位置移动
             Vector3 pos = pile == PileType.DrawPile ? drawPilePoint.position : discardPilePoint.position;
-            cardView.transform.DOScale(Vector3.zero, 0.15f);
-            Tween tween = cardView.transform.DOMove(pos, 0.15f);
+            cardView.transform.DOScale(Vector3.zero, Config.Instance.moveTime);
+            Tween tween = cardView.transform.DOMove(pos, Config.Instance.moveTime);
 
             yield return tween.WaitForCompletion();
 
@@ -288,8 +287,8 @@ public class CardSystem : Singleton<CardSystem>
     {
         //在这里弃牌,确保数据层与显示层一致
         discardPile.Add(cardView.Card);
-        cardView.transform.DOScale(Vector3.zero, 0.15f);
-        Tween tween = cardView.transform.DOMove(discardPilePoint.position, 0.15f);
+        cardView.transform.DOScale(Vector3.zero, Config.Instance.moveTime);
+        Tween tween = cardView.transform.DOMove(discardPilePoint.position, Config.Instance.moveTime);
         yield return tween.WaitForCompletion();
         Destroy(cardView.gameObject);
 

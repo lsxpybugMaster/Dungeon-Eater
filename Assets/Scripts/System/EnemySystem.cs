@@ -90,10 +90,10 @@ public class EnemySystem : Singleton<EnemySystem>
     {
         EnemyView attacker = attackHeroGA.Attacker;
         //向前进一小段距离
-        Tween tween = attacker.transform.DOMoveX(attacker.transform.position.x - 1f, 0.15f);
+        Tween tween = attacker.transform.DOMoveX(attacker.transform.position.x - 1f, Config.Instance.attackTime);
         yield return tween.WaitForCompletion();
         //退回原位
-        attacker.transform.DOMoveX(attacker.transform.position.x + 1f, 0.15f);
+        attacker.transform.DOMoveX(attacker.transform.position.x + 1f, Config.Instance.attackTime);
 
         //造成伤害作为公共功能,应当封装为GameAction
         //new(){ HeroSystem.Instance.HeroView } 创建了一个List,初始化元素为HeroSystem.Instance.HeroView
@@ -118,7 +118,7 @@ public class EnemySystem : Singleton<EnemySystem>
     private IEnumerator KillAllEnemyPerformer(KillAllEnemyGA killAllEnemyGA)
     {
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(Config.Instance.logicBetweentime);
 
         //同层次逻辑直接声明Reaction,不同层逻辑则注册反应进行解耦
         // 显示胜利UI

@@ -102,11 +102,29 @@ public class CombatantView : MonoBehaviour
         }
         statusEffectsUI.UpdateStatusEffectUI(type, GetStatusEffectStacks(type));
     }
+    
+
+    //直接清空Effect
+    public void ClearStatusEffect(StatusEffectType type)
+    {
+        if (statusEffects.ContainsKey(type))
+        {
+            statusEffects[type] = 0;
+        }
+        statusEffectsUI.UpdateStatusEffectUI(type, GetStatusEffectStacks(type));
+    }
 
 
     public int GetStatusEffectStacks(StatusEffectType type)
     {
         if (statusEffects.ContainsKey(type)) return statusEffects[type];
         else return 0;
+    }
+
+    //每轮结束/开始时自动结算一些Buff
+    public void UpdateEffectStacks()
+    {
+        //结算护甲效果
+        ClearStatusEffect(StatusEffectType.AMROR);
     }
 }

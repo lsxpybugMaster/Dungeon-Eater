@@ -10,6 +10,8 @@ public class HandView : MonoBehaviour
     //手牌之间的展示间隔
     [SerializeField][Range(0,0.2f)] private float cardInterval = 0.1f;
 
+    [SerializeField] private float updateCardPostionTime = 0.15f;
+
     [SerializeField] private SplineContainer splineContainer;
     // Inspector 面板里指定的样条容器 (SplineContainer)，用来决定卡牌排列路径
 
@@ -23,7 +25,7 @@ public class HandView : MonoBehaviour
     public IEnumerator AddCard(CardView cardView)
     {
         cards.Add(cardView);  // 把卡加入手牌
-        yield return UpdateCardPositions(0.15f); // 用 0.15 秒的动画重新排列
+        yield return UpdateCardPositions(updateCardPostionTime); // 用 0.15 秒的动画重新排列
     }
 
 
@@ -38,7 +40,7 @@ public class HandView : MonoBehaviour
 
         cards.Remove(cardView);
         //cards列表元素变化后,执行协程重新计算各卡牌位置
-        StartCoroutine(UpdateCardPositions(0.15f));
+        StartCoroutine(UpdateCardPositions(updateCardPostionTime));
         return cardView;
     }
 

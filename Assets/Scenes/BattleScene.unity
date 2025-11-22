@@ -2751,7 +2751,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4217460852059356405, guid: 0d924eef13ca0be4d962b27c1d6779aa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1642352309}
   m_SourcePrefab: {fileID: 100100000, guid: 0d924eef13ca0be4d962b27c1d6779aa, type: 3}
 --- !u!1 &1461735289
 GameObject:
@@ -3118,8 +3121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea1c436ea65d204fb5cc14799e81e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardSize: 0.7
-  cardShowSize: 0.8
   cardViewPrefab: {fileID: 7887162032003757299, guid: 63de2a990e9942744b994958d9168465, type: 3}
 --- !u!1 &1616976886
 GameObject:
@@ -3155,6 +3156,30 @@ Transform:
   - {fileID: 1983473295}
   m_Father: {fileID: 159015750}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1642352306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4217460852059356405, guid: 0d924eef13ca0be4d962b27c1d6779aa, type: 3}
+  m_PrefabInstance: {fileID: 1393413418}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1642352309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642352306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc706a0d48e6340bfe57698ff3d004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardSize: 0.7
+  cardShowSize: 0.8
+  freezeTime: 0.4
+  moveTime: 0.15
+  scaleTime: 0.15
+  attackTime: 0.15
+  logicBetweentime: 0.5
 --- !u!1 &1671130620
 GameObject:
   m_ObjectHideFlags: 0
@@ -5284,8 +5309,8 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3493248039483164083}
   m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1587572507
+  m_SortingLayer: 3
   m_SortingOrder: 99
   m_SortAtRoot: 0
 --- !u!114 &7865019975947931684
