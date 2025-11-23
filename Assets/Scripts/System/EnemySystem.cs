@@ -18,7 +18,6 @@ public class EnemySystem : Singleton<EnemySystem>
      */
     private void OnEnable()
     {
-        ActionSystem.AttachPerformer<EnemyTurnGA>(EnemyTurnPerformer);
         ActionSystem.AttachPerformer<AttackHeroGA>(AttackHeroPerformer);
         ActionSystem.AttachPerformer<KillEnemyGA>(KillEnemyPerformer);
         ActionSystem.AttachPerformer<KillAllEnemyGA>(KillAllEnemyPerformer);
@@ -27,8 +26,7 @@ public class EnemySystem : Singleton<EnemySystem>
 
 
     private void OnDisable()
-    {
-        ActionSystem.DetachPerformer<EnemyTurnGA>();
+    {     
         ActionSystem.DetachPerformer<AttackHeroGA>();
         ActionSystem.DetachPerformer<KillEnemyGA>();
         ActionSystem.DetachPerformer<KillAllEnemyGA>();
@@ -44,30 +42,8 @@ public class EnemySystem : Singleton<EnemySystem>
         }
     }
 
-
-    private IEnumerator EnemyTurnPerformer(EnemyTurnGA enemyTurnGA)
-    {
-        //到了敌人的回合,遍历每个敌人并执行逻辑
-        foreach (var enemy in enemyBoardView.EnemyViews)
-        {
-            //-------------------------结算当前状态-----------------------------
-            int burnStacks = enemy.GetStatusEffectStacks(StatusEffectType.BURN);
-            if (burnStacks > 0)
-            {
-                ApplyBurnGA applyBurnGA = new(burnStacks, enemy);
-                ActionSystem.Instance.AddReaction(applyBurnGA);
-            }
-
-            //AttackHeroGA attackHeroGA = new(enemy);
-            //ActionSystem.Instance.AddReaction(attackHeroGA);
-            //-------------------------执行AI系统-----------------------------
-            DoEnemyIntend(enemy);
-        }
-        yield return null;
-    }
-
     //执行敌人的行动
-    private void DoEnemyIntend(EnemyView enemyView)
+    public void DoEnemyIntend(EnemyView enemyView)
     {
         GameAction enemyAction = enemyView.EnemyAI.GetEnemyAction();
         ActionSystem.Instance.AddReaction(enemyAction);
@@ -80,7 +56,6 @@ public class EnemySystem : Singleton<EnemySystem>
         foreach (var enemy in Enemies)
         {
             EnemyIntend intend = enemy.EnemyAI.GetPrepareEnemyIntend();
-            Debug.Log(intend.ToString());
         }
         yield return null;
     }   
