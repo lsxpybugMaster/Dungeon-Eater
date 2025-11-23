@@ -18,6 +18,7 @@ MonoBehaviour:
   <ConditionedIntendTable>k__BackingField: []
   <RandomIntendTable>k__BackingField:
   - rid: 5386319821270941696
+  - rid: 5386319980480430088
   references:
     version: 2
     RefIds:
@@ -34,3 +35,15 @@ MonoBehaviour:
     - rid: 5386319821270941697
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data: 
+    - rid: 5386319980480430088
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 5386319980480430089
+        P: 0
+    - rid: 5386319980480430089
+      type: {class: HealIntend, ns: , asm: Assembly-CSharp}
+      data:
+        healAmount: 10

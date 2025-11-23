@@ -125,8 +125,19 @@ public class CardSystem : Singleton<CardSystem>
 
     private IEnumerator AddCardPerformer(AddCardGA addCardGA)
     {
-        var card = addCardGA.whichCard;
-        var pile = addCardGA.whichPileToAdd;
+        var card   = addCardGA.whichCard;
+        var pile   = addCardGA.whichPileToAdd;
+        var caster = addCardGA.Caster;
+
+        int drct = caster is HeroView ? 1 : -1; 
+
+        //前摇动画
+        yield return MotionUtil.Dash(
+            caster.transform,
+            new Vector2(drct * 1f, 0),
+            Config.Instance.attackTime
+        );
+
 
         //创建一个展示卡牌(仅动画效果)
         CardView cardView = CardViewCreator.Instance.CreateCardView(card, 

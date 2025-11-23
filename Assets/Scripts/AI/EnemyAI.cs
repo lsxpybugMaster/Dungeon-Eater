@@ -84,7 +84,6 @@ public class EnemyAI : MonoBehaviour
     {
         if (enemyNextIntend == null)
         {
-            Debug.LogWarning("enemyNextIntend == null");
             enemyNextIntend = DecideEnemyIntend();
         }
         //通知父模块

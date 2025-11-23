@@ -76,6 +76,14 @@ public class CombatantView : MonoBehaviour
         UpdateHealthText();
     }
 
+    //回复生命,不能过量回复
+    public void Heal(int curePoint)
+    {
+        //防止过量回复
+        CurrentHealth = Math.Min(CurrentHealth + curePoint, MaxHealth);
+        UpdateHealthText();
+    }
+
     public void AddStatusEffect(StatusEffectType type, int stackCount)
     {
         if (statusEffects.ContainsKey(type))

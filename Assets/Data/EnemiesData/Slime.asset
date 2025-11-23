@@ -17,8 +17,10 @@ MonoBehaviour:
   <AttackPower>k__BackingField: 5
   <ConditionedIntendTable>k__BackingField:
   - rid: 5386319798658924564
+  - rid: 5386319980480430085
   <RandomIntendTable>k__BackingField:
   - rid: 5386319798658924563
+  - rid: 5386319980480430080
   references:
     version: 2
     RefIds:
@@ -52,3 +54,32 @@ MonoBehaviour:
     - rid: 5386319798658924570
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data: 
+    - rid: 5386319980480430080
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 5386319980480430081
+        P: 0
+    - rid: 5386319980480430081
+      type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
+      data:
+        cardData: {fileID: 11400000, guid: 82282b7cd3517274cbdb53f43717089a, type: 2}
+        pileType: 1
+    - rid: 5386319980480430085
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: 5386319980480430086
+        Intend:
+          rid: 5386319980480430090
+        P: 0.9
+    - rid: 5386319980480430086
+      type: {class: HPCondition, ns: , asm: Assembly-CSharp}
+      data:
+        threshold: 0.5
+    - rid: 5386319980480430090
+      type: {class: HealIntend, ns: , asm: Assembly-CSharp}
+      data:
+        healAmount: 10

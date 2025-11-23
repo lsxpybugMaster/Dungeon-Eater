@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /*
@@ -26,13 +27,18 @@ public class StatusEffectsSystem : MonoBehaviour
     {
         foreach (var target in addStatusEffectGA.Targets)
         {
-            //TODO: 打包成动画系统
             //向上跳一小段距离
-            Tween tween = target.transform.DOMoveY(target.transform.position.y + 0.5f, 0.1f);
-            yield return tween.WaitForCompletion(); 
-            //退回原位
-            target.transform.DOMoveY(target.transform.position.y - 0.5f, 0.1f);
+            //Tween tween = target.transform.DOMoveY(target.transform.position.y + 0.5f, 0.1f);
+            //yield return tween.WaitForCompletion();
+            ////退回原位
+            //target.transform.DOMoveY(target.transform.position.y - 0.5f, 0.1f);
 
+            //直接调用打包好的动画工具
+            yield return MotionUtil.Dash(
+                target.transform,
+                new Vector2(0, 0.8f),
+                Config.Instance.attackTime
+            );
 
             target.AddStatusEffect(addStatusEffectGA.StatusEffectType, addStatusEffectGA.StackCount); 
             // yield return null;
