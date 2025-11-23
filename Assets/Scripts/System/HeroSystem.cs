@@ -70,7 +70,7 @@ public class HeroSystem : Singleton<HeroSystem>
         DecideEnemyIntendGA decideEnemyIntendGA = new DecideEnemyIntendGA();
         ActionSystem.Instance.AddReaction(decideEnemyIntendGA);
 
-        //------------------------------抽牌事件--------------------------------------
+        //--------------------------------抽牌事件-------------------------------------
 
         //注意这里创建GA时初始化了抽牌数量,那么注册的反应也只会抽对应牌的数量
         DrawCardsGA drawCardsGA = new(5);
@@ -82,7 +82,7 @@ public class HeroSystem : Singleton<HeroSystem>
         ActionSystem.Instance.AddReaction(drawCardsGA);
 
 
-        //------------------------------清空玩家状态-------------------------------------
+        //------------------------------清空玩家状态------------------------------------
         HeroView.UpdateEffectStacks();
 
     }
