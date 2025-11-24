@@ -25,4 +25,4 @@ MonoBehaviour:
     - rid: 5386319847114145792
       type: {class: DealRandomDmgEffect, ns: , asm: Assembly-CSharp}
       data:
-        diceString: 1d8
+        diceString: 1d10

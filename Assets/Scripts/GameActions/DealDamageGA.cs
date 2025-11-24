@@ -10,6 +10,9 @@ public class DealDamageGA : GameAction, IHaveCaster
 
     public CombatantView Caster { get; private set; }
 
+    //在执行DealDamage前需要PreReaction判定,如果判定失败则停止该反应
+    public bool ShouldCancel { get; set; } = false; 
+
     public DealDamageGA(int amount, List<CombatantView> targets, CombatantView caster)
     {
         Amount = amount;

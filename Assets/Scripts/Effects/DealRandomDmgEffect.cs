@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +19,10 @@ public class DealRandomDmgEffect : Effect
     public override GameAction GetGameAction(List<CombatantView> targets, CombatantView caster)
     {
         int dmg = DiceRollUtil.DfromString(diceString);
-        Debug.Log($"RandDmg: {dmg}");
+
+        //添加检定结果到UI显示中
+        BattleInfoUI.Instance.AddThrowResult(dmg, diceString);
+
         //创建GA并返回
         DealDamageGA dealDamageGA = new(dmg, targets, caster);
 
