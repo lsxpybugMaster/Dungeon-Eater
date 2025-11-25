@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,17 +7,16 @@ public class OtherPerformSystem : MonoBehaviour
 {
     private void OnEnable()
     {
-        ActionSystem.AttachPerformer<UpdateBattleInfoGA>(UpdateBattleInfoPerformer);
+        //ActionSystem.AttachPerformer<UpdateBattleInfoGA>(UpdateBattleInfoPerformer);
     }
 
     private void OnDisable()
     {
-        ActionSystem.DetachPerformer<UpdateBattleInfoGA>();
+        //ActionSystem.DetachPerformer<UpdateBattleInfoGA>();
     }
 
-    private IEnumerator UpdateBattleInfoPerformer(UpdateBattleInfoGA updateBattleInfoGA)
-    {
-        BattleInfoUI.Instance.AddThrowResult(updateBattleInfoGA.Roll, updateBattleInfoGA.Dice);
+    private IEnumerator UpdateBattleInfoPerformer(UpdateBattleInfoGA ga)
+    {     
         yield return null;
     }
 

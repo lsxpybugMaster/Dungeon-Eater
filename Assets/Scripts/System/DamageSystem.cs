@@ -29,9 +29,12 @@ public class DamageSystem : MonoBehaviour
         if (d20 < 10)
         {
             dealDamageGA.ShouldCancel = true;
-            BattleInfoUI.Instance.AddFailedResult(d20, 10, "20");
+
+            //更新信息到文本
+            BattleInfoUI.Instance.AddFailedResult(d20, 20, "20");
+
         }
-        else BattleInfoUI.Instance.AddThrowResult(d20, "20");
+        else BattleInfoUI.Instance.AddSuccessResult(d20, 20, "20");
     }
 
 
