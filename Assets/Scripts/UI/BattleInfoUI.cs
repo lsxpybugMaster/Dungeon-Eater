@@ -55,12 +55,12 @@ public class BattleInfoUI : Singleton<BattleInfoUI>
     /// </summary>
     public void AddSuccessResult(int ans, int dc, string originCommand)
     {
-        AddLine($"Throws: {ans}({originCommand}) > {dc}");       
+        AddLine($"<color=green>Success!: {ans}({originCommand}) > {dc}</color>");       
     }
 
 
     public void AddFailedResult(int ans, int dc, string originCommand)
     {
-        AddLine($"<color=red>Failed: {ans}({originCommand}) < {dc} </color>");
+        AddLine($"<color=red>Failed!: {ans}({originCommand}) < {dc} </color>");
     }
 }
