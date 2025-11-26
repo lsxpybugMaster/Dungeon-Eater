@@ -53,14 +53,14 @@ public class BattleInfoUI : Singleton<BattleInfoUI>
     /// <summary>
     /// 检定掷骰
     /// </summary>
-    public void AddSuccessResult(int ans, int dc, string originCommand)
+    public void AddSuccessResult(int ans, int dc, string originCommand, CombatantView caster)
     {
-        AddLine($"<color=green>Success!: {ans}({originCommand}) > {dc}</color>");       
+        AddLine($"[{caster.gameObject.name}] <color=green>Success!: {ans}({originCommand}) > {dc}</color>");       
     }
 
 
-    public void AddFailedResult(int ans, int dc, string originCommand)
+    public void AddFailedResult(int ans, int dc, string originCommand, CombatantView caster)
     {
-        AddLine($"<color=red>Failed!: {ans}({originCommand}) < {dc} </color>");
+        AddLine($"[{caster.gameObject.name}] <color=red>Failed!: {ans}({originCommand}) < {dc} </color>");
     }
 }

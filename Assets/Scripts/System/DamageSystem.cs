@@ -35,29 +35,31 @@ public class DamageSystem : MonoBehaviour
     //处理攻击掷骰(为处理伤害事件的预先反应)
     private void DealAttackRoll(DealDamageGA dealDamageGA)
     {
-        int d20 = DiceRollUtil.D20();
-        if (d20 < 10)
-        {
-            dealDamageGA.ShouldCancel = true;
+        //int d20 = DiceRollUtil.D20();
+        //if (d20 < 10)
+        //{
+        //    dealDamageGA.ShouldCancel = true;
 
-            //更新信息到文本
-            BattleInfoUI.Instance.AddFailedResult(d20, 20, "20");
+        //    //更新信息到文本
+        //    BattleInfoUI.Instance.AddFailedResult(d20, 20, "20");
 
-        }
-        else BattleInfoUI.Instance.AddSuccessResult(d20, 20, "20");
+        //}
+        //else BattleInfoUI.Instance.AddSuccessResult(d20, 20, "20");
     }
 
     private IEnumerator MissGAPerformer(MissGA ga)
     {
-        var hero = ga.Caster;
-        yield return MotionUtil.Dash(hero.transform, new Vector2(0, 5), Config.Instance.attackTime);
+        var caster = ga.Caster;
+        int drct = caster is HeroView ? 1 : -1;
+        yield return MotionUtil.Dash(caster.transform, drct * new Vector2(0, 5), Config.Instance.attackTime);
     }
 
 
     private IEnumerator NormalAttackPerformer(NormalAttackGA ga)
     {
-        var hero = ga.Caster;
-        yield return MotionUtil.Dash(hero.transform, new Vector2(1, 0), Config.Instance.attackTime);
+        var caster = ga.Caster;
+        int drct = caster is HeroView ? 1 : -1;
+        yield return MotionUtil.Dash(caster.transform, drct * new Vector2(1, 0), Config.Instance.attackTime);
         yield return DealDamage(ga);
     }
 
@@ -130,7 +132,7 @@ public class DamageSystem : MonoBehaviour
         //决定事件
         if (attackDice < 10)
         {
-            BattleInfoUI.Instance.AddFailedResult(attackDice, 10, "20");
+            BattleInfoUI.Instance.AddFailedResult(attackDice, 10, "20", ga.Caster);
 
             ActionSystem.Instance.AddReaction(new MissGA(ga.Targets, ga.Caster));
 
@@ -138,7 +140,7 @@ public class DamageSystem : MonoBehaviour
         }
 
         //添加检定结果到UI显示中
-        BattleInfoUI.Instance.AddSuccessResult(attackDice, 10, "20");
+        BattleInfoUI.Instance.AddSuccessResult(attackDice, 10, "20", ga.Caster);
         int damageDice = DiceRollUtil.DfromString(ga.DiceStr);
         BattleInfoUI.Instance.AddThrowResult(damageDice, ga.DiceStr);
 
