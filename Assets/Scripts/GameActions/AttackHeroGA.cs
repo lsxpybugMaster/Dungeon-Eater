@@ -10,9 +10,12 @@ public class AttackHeroGA : GameAction, IHaveCaster
      //来自接口
      public CombatantView Caster { get; private set; }
 
-     public AttackHeroGA(EnemyView attacker)
+     public EnemySkill SkillType { get; private set; }
+
+     public AttackHeroGA(EnemyView attacker, EnemySkill skillType)
      {
          Attacker = attacker;
          Caster = Attacker;
+         SkillType = skillType;
      }
 }

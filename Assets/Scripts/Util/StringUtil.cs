@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public static class StringUtil
 {
@@ -56,5 +54,11 @@ public static class StringUtil
         sb.Append(new string(c, count == 0? 1 : count));
 
         return sb.ToString();
+    }
+
+    //是否是只含数值的字符串
+    public static bool IsFixedAmountString(string str)
+    {
+        return Regex.IsMatch(str.Trim(), @"^\d+$");
     }
 }

@@ -61,24 +61,13 @@ public class EnemySystem : Singleton<EnemySystem>
     }   
     
 
-    private IEnumerator AttackHeroPerformer(AttackHeroGA attackHeroGA)
+    private IEnumerator AttackHeroPerformer(AttackHeroGA ga)
     {
-        EnemyView attacker = attackHeroGA.Attacker;
+        EnemyView attacker = ga.Attacker;
 
-        //DISCUSS: 动画逻辑写在哪里?
-
-        //造成伤害作为公共功能,应当封装为GameAction
-        //new(){ HeroSystem.Instance.HeroView } 创建了一个List,初始化元素为HeroSystem.Instance.HeroView
-        //DealDamageGA dealDamageGA = new(attacker.AttackPower, new(){ HeroSystem.Instance.HeroView }, attackHeroGA.Caster);
-        //ActionSystem.Instance.AddReaction(dealDamageGA);
-
-        //OPTIMIZE: 改用dealAttackGA
-        DealAttackGA dealAttackGA = new(
-            attacker.AttackPower.ToString(),
-            new() { HeroSystem.Instance.HeroView },
-            attackHeroGA.Caster
-        );
-
+        // 在这里分发敌人攻击(轻击, 重击等共通逻辑)
+        
+        DealAttackGA dealAttackGA = new(attacker.AttackPower.ToString(),new() { HeroSystem.Instance.HeroView },ga.Caster);
         ActionSystem.Instance.AddReaction(dealAttackGA);
 
         yield return null;
