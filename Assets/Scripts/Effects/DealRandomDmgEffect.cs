@@ -19,17 +19,6 @@ public class DealRandomDmgEffect : Effect
     public override GameAction GetGameAction(List<CombatantView> targets, CombatantView caster)
     {
         DealAttackGA dealAttackGA = new(diceString, targets, caster);
-        return dealAttackGA;
-        
-        
-        //int dmg = DiceRollUtil.DfromString(diceString);
-
-        ////添加检定结果到UI显示中
-        //BattleInfoUI.Instance.AddThrowResult(dmg, diceString);
-
-        ////创建GA并返回
-        //DealDamageGA dealDamageGA = new(dmg, targets, caster);
-
-        //return dealDamageGA;
+        return dealAttackGA;            
     }
 }

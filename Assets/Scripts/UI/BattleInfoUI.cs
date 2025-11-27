@@ -59,8 +59,18 @@ public class BattleInfoUI : Singleton<BattleInfoUI>
     }
 
 
+    public void AddGaintSuccessResult(int ans, CombatantView caster)
+    {
+        AddLine($"[{caster.gameObject.name}] <color=orange>Gaint Success! ({ans}) </color>");
+    }
+
     public void AddFailedResult(int ans, int dc, string originCommand, CombatantView caster)
     {
         AddLine($"[{caster.gameObject.name}] <color=red>Failed!: {ans}({originCommand}) < {dc} </color>");
+    }
+
+    public void AddFixedResult(int ans, CombatantView caster)
+    {
+        AddLine($"[{caster.gameObject.name}] <color=blue>Deal {ans} damage</color>");
     }
 }

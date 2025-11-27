@@ -17,9 +17,10 @@ public class DamageSystem : MonoBehaviour
         ActionSystem.AttachPerformer<DealAttackGA>(DealAttackPerformer);
         ActionSystem.AttachPerformer<NormalAttackGA>(NormalAttackPerformer);
         ActionSystem.AttachPerformer<MissGA>(MissGAPerformer);
+        ActionSystem.AttachPerformer<CriticalHitGA>(CriticalHitPerformer);
 
-        ActionSystem.AttachPerformer<DealDamageGA>(DealDamagePerformer);
-        ActionSystem.SubscribeReaction<DealDamageGA>(DealAttackRoll, ReactionTiming.PRE);
+        ActionSystem.AttachPerformer<DealFixedAttackGA>(FixedAttackPerformer);
+        ActionSystem.SubscribeReaction<DealFixedAttackGA>(DealBeforeFixedAttack, ReactionTiming.PRE);
     }
 
     void OnDisable()
@@ -27,47 +28,56 @@ public class DamageSystem : MonoBehaviour
         ActionSystem.DetachPerformer<DealAttackGA>();
         ActionSystem.DetachPerformer<NormalAttackGA>();
         ActionSystem.DetachPerformer<MissGA>();
+        ActionSystem.DetachPerformer<CriticalHitGA>();
 
-        ActionSystem.DetachPerformer<DealDamageGA>();
-        ActionSystem.UnsubscribeReaction<DealDamageGA>(DealAttackRoll, ReactionTiming.PRE);
+        ActionSystem.DetachPerformer<DealFixedAttackGA>();
+        ActionSystem.UnsubscribeReaction<DealFixedAttackGA>(DealBeforeFixedAttack, ReactionTiming.PRE);
     }
+
+    private IEnumerator AttackAnim(CombatantView caster, Vector2 direction, float attackTime)
+    {
+        int drct = caster is HeroView ? 1 : -1;
+        yield return MotionUtil.Dash(caster.transform, drct * direction, attackTime);
+    }
+
 
     //处理攻击掷骰(为处理伤害事件的预先反应)
-    private void DealAttackRoll(DealDamageGA dealDamageGA)
+    private void DealBeforeFixedAttack(DealFixedAttackGA ga)
     {
-        //int d20 = DiceRollUtil.D20();
-        //if (d20 < 10)
-        //{
-        //    dealDamageGA.ShouldCancel = true;
-
-        //    //更新信息到文本
-        //    BattleInfoUI.Instance.AddFailedResult(d20, 20, "20");
-
-        //}
-        //else BattleInfoUI.Instance.AddSuccessResult(d20, 20, "20");
+        BattleInfoUI.Instance.AddFixedResult(ga.FixedDamage,ga.Caster);
     }
+
 
     private IEnumerator MissGAPerformer(MissGA ga)
     {
-        var caster = ga.Caster;
-        int drct = caster is HeroView ? 1 : -1;
-        yield return MotionUtil.Dash(caster.transform, drct * new Vector2(0, 5), Config.Instance.attackTime);
+        yield return AttackAnim(ga.Caster, new Vector2(0,2.5f), Config.Instance.attackTime);
     }
 
 
     private IEnumerator NormalAttackPerformer(NormalAttackGA ga)
     {
-        var caster = ga.Caster;
-        int drct = caster is HeroView ? 1 : -1;
-        yield return MotionUtil.Dash(caster.transform, drct * new Vector2(1, 0), Config.Instance.attackTime);
-        yield return DealDamage(ga);
+        yield return AttackAnim(ga.Caster, new Vector2(1, 0), Config.Instance.attackTime);
+        yield return DealDamage(ga.Targets, ga.Damage);
     }
 
-    public IEnumerator DealDamage(DealAttackGA dealAttackGA)
+
+    public IEnumerator CriticalHitPerformer(CriticalHitGA ga)
     {
-        foreach (var target in dealAttackGA.Targets)
+        yield return AttackAnim(ga.Caster, new Vector2(2, 0), Config.Instance.attackTime);
+        yield return DealDamage(ga.Targets, ga.Damage);
+    }
+
+    //处理固定伤害的事件
+    private IEnumerator FixedAttackPerformer(DealFixedAttackGA ga)
+    {
+        yield return DealDamage(ga.Targets, ga.FixedDamage);
+    }
+
+    public IEnumerator DealDamage(List<CombatantView> targets, int damage)
+    {
+        foreach (var target in targets)
         {
-            target.Damage(dealAttackGA.Damage);
+            target.Damage(damage);
 
             Instantiate(damageVFX, target.transform.position, Quaternion.identity);
             yield return new WaitForSeconds(0.15f);
@@ -76,38 +86,6 @@ public class DamageSystem : MonoBehaviour
             {
                 //enemyView即Enemy类
                 if (target is EnemyView enemyView)
-                {
-                    KillEnemyGA killEnemyGA = new(enemyView);
-                    ActionSystem.Instance.AddReaction(killEnemyGA);
-                }
-                else
-                {
-                    //Game Over
-                }
-            }
-        }
-    }
-
-    //处理伤害的事件
-    private IEnumerator DealDamagePerformer(DealDamageGA dealDamageGA)
-    {
-        //if (dealDamageGA.ShouldCancel)
-        //{
-        //    Debug.LogWarning("造成伤害的事件被强行停止了!");
-        //    yield break;
-        //}
-
-        foreach (var target in dealDamageGA.Targets)
-        {
-            target.Damage(dealDamageGA.Amount);
-
-            Instantiate(damageVFX, target.transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(0.15f);
-
-            if (target.CurrentHealth <= 0)
-            {
-                //enemyView即Enemy类
-                if(target is EnemyView enemyView)
                 {
                     KillEnemyGA killEnemyGA = new(enemyView);
                     ActionSystem.Instance.AddReaction(killEnemyGA);
@@ -130,6 +108,7 @@ public class DamageSystem : MonoBehaviour
         int attackDice = DiceRollUtil.D20();
         
         //决定事件
+        // MISS
         if (attackDice < 10)
         {
             BattleInfoUI.Instance.AddFailedResult(attackDice, 10, "20", ga.Caster);
@@ -139,11 +118,25 @@ public class DamageSystem : MonoBehaviour
             yield break;
         }
 
-        //添加检定结果到UI显示中
-        BattleInfoUI.Instance.AddSuccessResult(attackDice, 10, "20", ga.Caster);
+        // HIT or Critcal HIT
         int damageDice = DiceRollUtil.DfromString(ga.DiceStr);
-        BattleInfoUI.Instance.AddThrowResult(damageDice, ga.DiceStr);
 
-        ActionSystem.Instance.AddReaction(new NormalAttackGA(damageDice,ga.Targets,ga.Caster));
+        if (attackDice >= 18) 
+        {
+            BattleInfoUI.Instance.AddGaintSuccessResult(attackDice, ga.Caster);
+
+            BattleInfoUI.Instance.AddThrowResult(2 * damageDice, ga.DiceStr);
+
+            ActionSystem.Instance.AddReaction(new CriticalHitGA(attackDice * 2, ga.Targets, ga.Caster));
+        }
+        else
+        {
+            BattleInfoUI.Instance.AddSuccessResult(attackDice, 10, "20", ga.Caster);
+
+            BattleInfoUI.Instance.AddThrowResult(damageDice, ga.DiceStr);
+
+            ActionSystem.Instance.AddReaction(new NormalAttackGA(damageDice, ga.Targets, ga.Caster));
+        }
+       
     }
 }

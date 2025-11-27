@@ -13,7 +13,7 @@ public class DealDamageEffect : Effect
     public override GameAction GetGameAction(List<CombatantView> targets, CombatantView caster)
     {
         //创建GA并返回
-        DealDamageGA dealDamageGA = new(damageAmount, targets, caster);
+        DealFixedAttackGA dealDamageGA = new(damageAmount, targets, caster);
 
         return dealDamageGA;
     }

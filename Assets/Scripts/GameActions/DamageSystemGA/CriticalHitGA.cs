@@ -1,0 +1,11 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CriticalHitGA : DealAttackGA
+{
+    public CriticalHitGA(int amount, List<CombatantView> targets, CombatantView caster, string diceStr = null) : base(diceStr, targets, caster)
+    {
+        Damage = amount;
+    }
+}
