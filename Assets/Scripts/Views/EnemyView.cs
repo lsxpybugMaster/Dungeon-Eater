@@ -13,11 +13,18 @@ public class EnemyView : CombatantView
 
     [field: SerializeField] public EnemyAI EnemyAI { get; private set; }
 
-    public int AttackPower { get; set; }
+    //添加更细粒度的攻击数据
+    public int FixedAttackPower { get; set; }
+    public string LightAttackPowerStr { get; set; }
+    public string HeavyAttackPowerStr { get; set; }
+
 
     public void Setup(EnemyData enemyData)
     {
-        AttackPower = enemyData.AttackPower;
+        FixedAttackPower = enemyData.FixedAttack;
+        LightAttackPowerStr = enemyData.LightAttackStr;
+        HeavyAttackPowerStr = enemyData.HeavyAttackStr;
+             
         UpdateAttackText();
         //别忘记调用基类的初始化方法
         SetupBase(enemyData.Health, enemyData.Health, enemyData.Image);
@@ -38,12 +45,12 @@ public class EnemyView : CombatantView
 
     private void UpdateAttackText()
     {
-        attackText.text = "ATK: " + AttackPower;
+        attackText.text = "ATK: " + FixedAttackPower;
     }
 
     private void UpdateIntendText(EnemyIntend enemyIntend)
     {
-        intendText.text = enemyIntend.ToString();
+        intendText.text = enemyIntend.Skill.ToString();
     }
 
     private void ClearIntendText()

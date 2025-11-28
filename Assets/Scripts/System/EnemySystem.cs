@@ -65,9 +65,17 @@ public class EnemySystem : Singleton<EnemySystem>
     {
         EnemyView attacker = ga.Attacker;
 
-        // 在这里分发敌人攻击(轻击, 重击等共通逻辑)
-        
-        DealAttackGA dealAttackGA = new(attacker.AttackPower.ToString(),new() { HeroSystem.Instance.HeroView },ga.Caster);
+        // 在这里分发敌人攻击(轻击, 重击等共通逻辑),目前仅仅是修改
+        if (ga.SkillType == EnemySkill.FixedHit)
+        {
+            DealFixedAttackGA dealFixedAttackGA = new(attacker.FixedAttackPower, new() { HeroSystem.Instance.HeroView }, ga.Caster);
+            ActionSystem.Instance.AddReaction(dealFixedAttackGA);
+            yield break;
+        }
+
+        string diceStr = ga.SkillType == EnemySkill.LightHit ? attacker.LightAttackPowerStr : attacker.HeavyAttackPowerStr;
+
+        DealAttackGA dealAttackGA = new(diceStr, new() { HeroSystem.Instance.HeroView }, ga.Caster);
         ActionSystem.Instance.AddReaction(dealAttackGA);
 
         yield return null;

@@ -121,7 +121,7 @@ public class DamageSystem : MonoBehaviour
         // HIT or Critcal HIT
         int damageDice = DiceRollUtil.DfromString(ga.DiceStr);
 
-        if (attackDice >= 18) 
+        if (attackDice >= 12) 
         {
             BattleInfoUI.Instance.AddGaintSuccessResult(attackDice, ga.Caster);
 

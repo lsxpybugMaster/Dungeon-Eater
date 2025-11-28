@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 21300000, guid: c55bcef3840eeb242bb3c4fb2bc14755, type: 3}
   <Health>k__BackingField: 11
-  <AttackPower>k__BackingField: 5
+  <FixedAttack>k__BackingField: 5
+  <LightAttackStr>k__BackingField: 1d8
+  <HeavyAttackStr>k__BackingField: 1d20
   <ConditionedIntendTable>k__BackingField:
   - rid: 5386319798658924564
   - rid: 5386319980480430085
@@ -49,11 +51,13 @@ MonoBehaviour:
     - rid: 5386319798658924569
       type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
       data:
+        skill: 2
         statusEffectType: 0
         stackCount: 5
     - rid: 5386319798658924570
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
-      data: 
+      data:
+        skill: 1
     - rid: 5386319980480430080
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
@@ -65,6 +69,7 @@ MonoBehaviour:
     - rid: 5386319980480430081
       type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
       data:
+        skill: 4
         cardData: {fileID: 11400000, guid: 82282b7cd3517274cbdb53f43717089a, type: 2}
         pileType: 1
     - rid: 5386319980480430085
@@ -82,4 +87,5 @@ MonoBehaviour:
     - rid: 5386319980480430090
       type: {class: HealIntend, ns: , asm: Assembly-CSharp}
       data:
+        skill: 3
         healAmount: 10

@@ -10,7 +10,11 @@ public class EnemyData : ScriptableObject
     // 基本数据
     [field: SerializeField] public Sprite Image { get; private set; }
     [field: SerializeField] public int Health { get; private set; }
-    [field: SerializeField] public int AttackPower { get; private set; }
+
+    //更细粒度的攻击数值
+    [field: SerializeField] public int FixedAttack { get; private set; }
+    [field: SerializeField] public string LightAttackStr { get; private set; }
+    [field: SerializeField] public string HeavyAttackStr { get; private set; }
 
     // AI逻辑数据
     [field: SerializeReference, SR]
