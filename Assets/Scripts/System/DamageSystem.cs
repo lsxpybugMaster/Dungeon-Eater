@@ -44,7 +44,7 @@ public class DamageSystem : MonoBehaviour
     //处理攻击掷骰(为处理伤害事件的预先反应)
     private void DealBeforeFixedAttack(DealFixedAttackGA ga)
     {
-        BattleInfoUI.Instance.AddFixedResult(ga.FixedDamage,ga.Caster);
+        BattleInfoUI.Instance.AddFixedResult(ga.FixedDamage, ga.Caster);
     }
 
 
@@ -63,13 +63,14 @@ public class DamageSystem : MonoBehaviour
 
     public IEnumerator CriticalHitPerformer(CriticalHitGA ga)
     {
-        yield return AttackAnim(ga.Caster, new Vector2(2, 0), Config.Instance.attackTime);
+        yield return AttackAnim(ga.Caster, new Vector2(3, 0), Config.Instance.attackTime);
         yield return DealDamage(ga.Targets, ga.Damage);
     }
 
     //处理固定伤害的事件
     private IEnumerator FixedAttackPerformer(DealFixedAttackGA ga)
     {
+        yield return AttackAnim(ga.Caster, new Vector2(0.5f, 0), Config.Instance.attackTime);
         yield return DealDamage(ga.Targets, ga.FixedDamage);
     }
 

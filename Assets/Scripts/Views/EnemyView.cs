@@ -27,7 +27,7 @@ public class EnemyView : CombatantView
              
         UpdateAttackText();
         //别忘记调用基类的初始化方法
-        SetupBase(enemyData.Health, enemyData.Health, enemyData.Image);
+        base.Setup(enemyData.Health, enemyData.Health, enemyData.Image);
        
         //对EnemyAI进行依赖注入
         EnemyAI.BindEnemy(this, enemyData.ConditionedIntendTable, enemyData.RandomIntendTable);

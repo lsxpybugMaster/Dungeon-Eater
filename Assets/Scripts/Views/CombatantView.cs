@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -16,7 +15,7 @@ public class CombatantView : MonoBehaviour
 
     [SerializeField] private StatusEffectsUI statusEffectsUI;
 
-    public int MaxHealth {  get; private set; }
+    public int MaxHealth { get; private set; }
     public int CurrentHealth { get; private set; }
 
     //记录状态的堆叠数量
@@ -25,21 +24,61 @@ public class CombatantView : MonoBehaviour
     //IDEA: 数据的改变事件,一般是由UI响应的
     public event Action<int, int> OnHealthChanged;
 
+    //OPTIMIZE: model
+    public Combatant Combatant { get; set; }
 
-    protected void SetupBase(int health, int maxhealth, Sprite image)
+    /*
+        View初始化逻辑
+     */
+    protected virtual void Setup(int health, int maxhealth, Sprite image, Combatant combatant = null)
     {
+        //OPTIMIZE: 绞杀者模式下的新逻辑
+        Combatant = combatant;
+
+        BindEvents();
+
         MaxHealth = maxhealth;
         CurrentHealth = health;
         spriteRenderer.sprite = image;
         UpdateHealthText();
     }
 
+    //从外部传入数据已初始化的Model : 使用MVC组装器(丐版)
+    protected virtual void SetUp(Combatant combatant)
+    {
+        Combatant = combatant;
+    }
+
+    private void BindEvents()
+    {
+        Combatant.OnHealthChanged += UpdateHealthText;
+        Combatant.OnEffectChanged += UpdateEffect;
+        Combatant.OnDamaged += Shake;
+    }
+
+    private void UnBindEvents()
+    {
+        Combatant.OnHealthChanged -= UpdateHealthText;
+        Combatant.OnEffectChanged -= UpdateEffect;
+        Combatant.OnDamaged -= Shake;
+    }
+
+    private void OnDestroy()
+    {
+        UnBindEvents();
+    }
+
+
     protected virtual void UpdateHealthText()
     {
-        healthText.text = "HP: " + CurrentHealth;
-        //IDEA: 引发事件
-        OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+        healthText.text = $"HP: {CurrentHealth}";
     }
+
+    private void UpdateHealthText(int CurrentHealth, int MaxHealth)
+    {
+
+    }
+
 
     /// <summary>
     /// 供damageSystem调用
@@ -134,5 +173,15 @@ public class CombatantView : MonoBehaviour
     {
         //结算护甲效果
         ClearStatusEffect(StatusEffectType.AMROR);
+    }
+
+    public void UpdateEffect(StatusEffectType type, int stacks)
+    {
+        statusEffectsUI.UpdateStatusEffectUI(type, stacks);
+    }
+
+    public void Shake()
+    {
+        transform.DOShakePosition(0.2f, 0.5f);
     }
 }

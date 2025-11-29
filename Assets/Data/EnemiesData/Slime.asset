@@ -34,7 +34,7 @@ MonoBehaviour:
         Condition:
           rid: -2
         Intend:
-          rid: 5386319798658924569
+          rid: 5386320117043036160
         P: 0
     - rid: 5386319798658924564
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
@@ -48,12 +48,6 @@ MonoBehaviour:
       type: {class: HPCondition, ns: , asm: Assembly-CSharp}
       data:
         threshold: 0.5
-    - rid: 5386319798658924569
-      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
-      data:
-        skill: 2
-        statusEffectType: 0
-        stackCount: 5
     - rid: 5386319798658924570
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
@@ -89,3 +83,7 @@ MonoBehaviour:
       data:
         skill: 3
         healAmount: 10
+    - rid: 5386320117043036160
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 2

@@ -11,13 +11,14 @@ public class HeroView : CombatantView
     // 可持久化部分使用heroState,其余正常
     public void Setup(HeroState heroState)
     {
-        SetupBase(heroState.CurrentHealth, heroState.MaxHealth, heroState.HeroSprite);
+        base.Setup(heroState.CurrentHealth, heroState.MaxHealth, heroState.HeroSprite);
+    }
 
-        // 注册UI响应
-        OnHealthChanged += (cur, max) =>
-        {
-            GameManager.Instance.PersistUIController.TopUI.UpdateHeroHp(cur, max);
-        };
+    protected override void UpdateHealthText()
+    {
+        base.UpdateHealthText();
+
+        GameManager.Instance.PersistUIController.TopUI.UpdateHeroHp(CurrentHealth, MaxHealth);
     }
 
     public void SaveData()
