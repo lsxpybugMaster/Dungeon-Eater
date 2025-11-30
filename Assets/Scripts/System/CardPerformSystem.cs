@@ -1,9 +1,9 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-//统一管理卡牌Performer
+//缁熶竴绠＄悊鍗＄墝Performer
 public class CardPerformSystem : MonoBehaviour
 {
     private void OnEnable()
@@ -18,17 +18,17 @@ public class CardPerformSystem : MonoBehaviour
 
     private IEnumerator HealGAPerformer(HealGA healGA)
     {
-        //直接调用打包好的动画工具
+        //鐩存帴璋冪敤鎵撳寘濂界殑鍔ㄧ敾宸ュ叿
         yield return MotionUtil.Dash(
             healGA.Caster.transform,
             new Vector2(0, 0.8f),
             Config.Instance.attackTime
         );
 
-        //执行生命回复逻辑
+        //鎵ц鐢熷懡鍥炲閫昏緫
         foreach (var view in healGA.Targets)
         {
-            view.Heal(healGA.Amount);
+            view.M.Heal(healGA.Amount);
         }
     }
 }

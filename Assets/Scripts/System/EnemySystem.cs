@@ -63,7 +63,7 @@ public class EnemySystem : Singleton<EnemySystem>
 
     private IEnumerator AttackHeroPerformer(AttackHeroGA ga)
     {
-        EnemyView attacker = ga.Attacker;
+        EnemyCombatant attacker = (EnemyCombatant)ga.Attacker.M;
 
         // 在这里分发敌人攻击(轻击, 重击等共通逻辑),目前仅仅是修改
         if (ga.SkillType == EnemySkill.FixedHit)

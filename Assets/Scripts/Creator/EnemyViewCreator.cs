@@ -9,8 +9,10 @@ public class EnemyViewCreator : Singleton<EnemyViewCreator>
 
     public EnemyView CreateEnemyView(EnemyData enemyData, Vector3 position, Quaternion rotation)
     {
+        //现在需要同时创建 M, V
         EnemyView enemyView = Instantiate(enemyViewPrefab, position, rotation);
-        enemyView.Setup(enemyData);
+        EnemyCombatant enemyCombatant = new(enemyData);
+        enemyView.Setup(enemyData, enemyCombatant);
         return enemyView;
     }
 

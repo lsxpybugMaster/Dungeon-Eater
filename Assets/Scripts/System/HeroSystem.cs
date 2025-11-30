@@ -23,8 +23,8 @@ public class HeroSystem : Singleton<HeroSystem>
 
     public void Setup(HeroState heroState)
     {
-        Combatant combatant = new(heroState.CurrentHealth, heroState.MaxHealth);
-        HeroView.Setup(heroState);
+        HeroCombatant combatant = new(heroState);
+        HeroView.Setup(heroState, combatant);
     }
 
 

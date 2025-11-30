@@ -58,14 +58,8 @@ MonoBehaviour:
         Condition:
           rid: -2
         Intend:
-          rid: 5386319980480430081
+          rid: 5386320139801591808
         P: 0
-    - rid: 5386319980480430081
-      type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
-      data:
-        skill: 4
-        cardData: {fileID: 11400000, guid: 82282b7cd3517274cbdb53f43717089a, type: 2}
-        pileType: 1
     - rid: 5386319980480430085
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
@@ -81,9 +75,15 @@ MonoBehaviour:
     - rid: 5386319980480430090
       type: {class: HealIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 3
+        skill: 4
         healAmount: 10
     - rid: 5386320117043036160
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 2
+    - rid: 5386320139801591808
+      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 3
+        statusEffectType: 0
+        stackCount: 5

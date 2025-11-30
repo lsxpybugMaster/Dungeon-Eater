@@ -20,8 +20,8 @@ public class BurnSystem : MonoBehaviour
     {
         CombatantView target = applyBurnGA.Target;
         Instantiate(burnVFX, target.transform.position, Quaternion.identity);
-        target.Damage(applyBurnGA.BurnDamage);
-        target.RemoveStatusEffect(StatusEffectType.BURN, 1);
+        target.M.Damage(applyBurnGA.BurnDamage);
+        target.M.RemoveStatusEffect(StatusEffectType.BURN, 1);
         
         yield return new WaitForSeconds(1f);
     }

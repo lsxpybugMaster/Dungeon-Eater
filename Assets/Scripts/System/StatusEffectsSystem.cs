@@ -40,7 +40,7 @@ public class StatusEffectsSystem : MonoBehaviour
                 Config.Instance.attackTime
             );
 
-            target.AddStatusEffect(addStatusEffectGA.StatusEffectType, addStatusEffectGA.StackCount); 
+            target.M.AddStatusEffect(addStatusEffectGA.StatusEffectType, addStatusEffectGA.StackCount); 
             // yield return null;
         }
     }

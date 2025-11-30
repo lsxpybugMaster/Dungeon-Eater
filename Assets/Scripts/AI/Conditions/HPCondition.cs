@@ -13,6 +13,6 @@ public class HPCondition : IntendCondition
 
     public override bool Evaluate(EnemyView enemy)
     {
-        return enemy.CurrentHealth / (float)enemy.MaxHealth < threshold;
+        return enemy.M.CurrentHealth / (float)enemy.M.MaxHealth < threshold;
     }
 }

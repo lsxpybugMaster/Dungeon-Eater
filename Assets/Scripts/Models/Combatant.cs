@@ -3,11 +3,12 @@ using System.Collections.Generic;
 
 /*
  战斗个体 Model ：存储数据和数据变化
+ 注意子类初始化数据时初始化生命
  */
 public class Combatant
 {
-    public int MaxHealth { get; private set; }
-    public int CurrentHealth { get; private set; }
+    public int MaxHealth { get; protected set; }
+    public int CurrentHealth { get; protected set; }
 
     //记录状态的堆叠数量
     private Dictionary<StatusEffectType, int> statusEffects = new();
@@ -16,13 +17,6 @@ public class Combatant
     public event Action<int, int> OnHealthChanged;
     public event Action<StatusEffectType, int> OnEffectChanged;
     public event Action OnDamaged;
-
-    public Combatant(int hp, int maxHp)
-    {
-        CurrentHealth = hp;
-        MaxHealth = maxHp;
-    }
-
 
     public void Damage(int damageAmount)
     {

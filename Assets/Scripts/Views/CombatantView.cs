@@ -1,6 +1,4 @@
 ﻿using DG.Tweening;
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -15,53 +13,40 @@ public class CombatantView : MonoBehaviour
 
     [SerializeField] private StatusEffectsUI statusEffectsUI;
 
-    public int MaxHealth { get; private set; }
-    public int CurrentHealth { get; private set; }
+    private Combatant Combatant { get; set; }
 
-    //记录状态的堆叠数量
-    private Dictionary<StatusEffectType, int> statusEffects = new();
-
-    //IDEA: 数据的改变事件,一般是由UI响应的
-    public event Action<int, int> OnHealthChanged;
-
-    //OPTIMIZE: model
-    public Combatant Combatant { get; set; }
+    //FIXME: 实际使用时需要强制转换,不太方便,不使用则需要每个子类声明一次,也不方便
+    public Combatant M => Combatant;
 
     /*
         View初始化逻辑
      */
-    protected virtual void Setup(int health, int maxhealth, Sprite image, Combatant combatant = null)
+    protected virtual void Setup(Sprite image, Combatant combatant)
     {
-        //OPTIMIZE: 绞杀者模式下的新逻辑
         Combatant = combatant;
 
         BindEvents();
 
-        MaxHealth = maxhealth;
-        CurrentHealth = health;
         spriteRenderer.sprite = image;
-        UpdateHealthText();
+
+        UpdateHealthText(M.CurrentHealth, M.MaxHealth);
     }
 
-    //从外部传入数据已初始化的Model : 使用MVC组装器(丐版)
-    protected virtual void SetUp(Combatant combatant)
-    {
-        Combatant = combatant;
-    }
 
-    private void BindEvents()
+    protected virtual void BindEvents()
     {
         Combatant.OnHealthChanged += UpdateHealthText;
         Combatant.OnEffectChanged += UpdateEffect;
         Combatant.OnDamaged += Shake;
     }
 
-    private void UnBindEvents()
+    protected virtual void UnBindEvents()
     {
         Combatant.OnHealthChanged -= UpdateHealthText;
         Combatant.OnEffectChanged -= UpdateEffect;
         Combatant.OnDamaged -= Shake;
     }
+
 
     private void OnDestroy()
     {
@@ -69,110 +54,14 @@ public class CombatantView : MonoBehaviour
     }
 
 
-    protected virtual void UpdateHealthText()
+    //protected virtual void UpdateHealthText()
+    //{
+    //    healthText.text = $"HP: {CurrentHealth}";
+    //}
+
+    public virtual void UpdateHealthText(int CurrentHealth, int MaxHealth)
     {
         healthText.text = $"HP: {CurrentHealth}";
-    }
-
-    private void UpdateHealthText(int CurrentHealth, int MaxHealth)
-    {
-
-    }
-
-
-    /// <summary>
-    /// 供damageSystem调用
-    /// </summary>
-    /// <param name="damageAmount"></param>
-    public void Damage(int damageAmount)
-    {
-        //依据护甲计算实际伤害
-        int remainingDamage = damageAmount;
-        int currentArmor = GetStatusEffectStacks(StatusEffectType.AMROR);
-        if (currentArmor > 0)
-        {
-            if (currentArmor >= damageAmount)
-            {
-                RemoveStatusEffect(StatusEffectType.AMROR, remainingDamage);
-                remainingDamage = 0;
-            }
-            else if (currentArmor < damageAmount)
-            {
-                RemoveStatusEffect(StatusEffectType.AMROR, currentArmor);
-                remainingDamage -= currentArmor;
-            }
-        }
-        if (remainingDamage > 0)
-        {
-            CurrentHealth -= damageAmount;
-            if (CurrentHealth < 0)
-            {
-                CurrentHealth = 0;
-            }
-        }
-
-        transform.DOShakePosition(0.2f, 0.5f);
-        UpdateHealthText();
-    }
-
-    //回复生命,不能过量回复
-    public void Heal(int curePoint)
-    {
-        //防止过量回复
-        CurrentHealth = Math.Min(CurrentHealth + curePoint, MaxHealth);
-        UpdateHealthText();
-    }
-
-    public void AddStatusEffect(StatusEffectType type, int stackCount)
-    {
-        if (statusEffects.ContainsKey(type))
-        {
-            statusEffects[type] += stackCount;
-        }
-        else
-        {
-            statusEffects.Add(type, stackCount);
-        }
-        statusEffectsUI.UpdateStatusEffectUI(type, GetStatusEffectStacks(type));
-    }
-
-
-    public void RemoveStatusEffect(StatusEffectType type, int stackCount)
-    {
-        if (statusEffects.ContainsKey(type))
-        {
-            statusEffects[type] -= stackCount;
-            if (statusEffects[type] <= 0)
-            {
-                statusEffects.Remove(type);
-            }
-        }
-        statusEffectsUI.UpdateStatusEffectUI(type, GetStatusEffectStacks(type));
-    }
-    
-
-    //直接清空Effect
-    public void ClearStatusEffect(StatusEffectType type)
-    {
-        if (statusEffects.ContainsKey(type))
-        {
-            statusEffects[type] = 0;
-        }
-        statusEffectsUI.UpdateStatusEffectUI(type, GetStatusEffectStacks(type));
-    }
-
-
-    public int GetStatusEffectStacks(StatusEffectType type)
-    {
-        if (statusEffects.ContainsKey(type)) return statusEffects[type];
-        else return 0;
-    }
-
-    //每轮结束/开始时自动结算一些Buff
-    public void UpdateEffectStacks()
-    {
-        //结算护甲效果
-        ClearStatusEffect(StatusEffectType.AMROR);
     }
 
     public void UpdateEffect(StatusEffectType type, int stacks)

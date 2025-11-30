@@ -49,7 +49,7 @@ public class TurnSystem : Singleton<TurnSystem>
         foreach (var enemy in EnemySystem.Instance.Enemies)
         {
             //-------------------------结算当前状态-----------------------------
-            int burnStacks = enemy.GetStatusEffectStacks(StatusEffectType.BURN);
+            int burnStacks = enemy.M.GetStatusEffectStacks(StatusEffectType.BURN);
             if (burnStacks > 0)
             {
                 ApplyBurnGA applyBurnGA = new(burnStacks, enemy);
@@ -69,7 +69,7 @@ public class TurnSystem : Singleton<TurnSystem>
     {
         var heroView = HeroSystem.Instance.HeroView;
 
-        int burnStacks = heroView.GetStatusEffectStacks(StatusEffectType.BURN);
+        int burnStacks = heroView.M.GetStatusEffectStacks(StatusEffectType.BURN);
         if (burnStacks > 0)
         {
             ApplyBurnGA applyBurnGA = new(burnStacks, heroView);
@@ -104,7 +104,7 @@ public class TurnSystem : Singleton<TurnSystem>
     private IEnumerator UpdateEffectPerformer(UpdateEffectGA updateEffectGA)
     {
         Debug.Log($"{updateEffectGA.CombatantView.name}");
-        updateEffectGA.CombatantView.UpdateEffectStacks();   
+        updateEffectGA.CombatantView.M.UpdateEffectStacks();   
         yield return null;
     }
 }

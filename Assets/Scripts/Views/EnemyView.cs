@@ -13,21 +13,10 @@ public class EnemyView : CombatantView
 
     [field: SerializeField] public EnemyAI EnemyAI { get; private set; }
 
-    //添加更细粒度的攻击数据
-    public int FixedAttackPower { get; set; }
-    public string LightAttackPowerStr { get; set; }
-    public string HeavyAttackPowerStr { get; set; }
-
-
-    public void Setup(EnemyData enemyData)
+    public void Setup(EnemyData enemyData, EnemyCombatant enemyCombatant)
     {
-        FixedAttackPower = enemyData.FixedAttack;
-        LightAttackPowerStr = enemyData.LightAttackStr;
-        HeavyAttackPowerStr = enemyData.HeavyAttackStr;
-             
-        UpdateAttackText();
         //别忘记调用基类的初始化方法
-        base.Setup(enemyData.Health, enemyData.Health, enemyData.Image);
+        base.Setup(enemyData.Image, enemyCombatant);
        
         //对EnemyAI进行依赖注入
         EnemyAI.BindEnemy(this, enemyData.ConditionedIntendTable, enemyData.RandomIntendTable);
@@ -35,6 +24,8 @@ public class EnemyView : CombatantView
         //基于事件的IoC
         EnemyAI.OnEnemyAIUpdated += UpdateIntendText;
         EnemyAI.OnEnemyAIDone += ClearIntendText;
+
+        UpdateAttackText();
     }
 
     //TODO: 是否需要OnDisable也加入此逻辑？(如果使用对象池)
@@ -45,7 +36,7 @@ public class EnemyView : CombatantView
 
     private void UpdateAttackText()
     {
-        attackText.text = "ATK: " + FixedAttackPower;
+        attackText.text = "ATK: " + ((EnemyCombatant)M).FixedAttackPower;
     }
 
     private void UpdateIntendText(EnemyIntend enemyIntend)

@@ -78,12 +78,12 @@ public class DamageSystem : MonoBehaviour
     {
         foreach (var target in targets)
         {
-            target.Damage(damage);
+            target.M.Damage(damage);
 
             Instantiate(damageVFX, target.transform.position, Quaternion.identity);
             yield return new WaitForSeconds(0.15f);
 
-            if (target.CurrentHealth <= 0)
+            if (target.M.CurrentHealth <= 0)
             {
                 //enemyView即Enemy类
                 if (target is EnemyView enemyView)

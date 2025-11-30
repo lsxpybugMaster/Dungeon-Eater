@@ -9,14 +9,14 @@ public class HeroView : CombatantView
     /// </summary>
     /// <param name="heroState"></param>
     // 可持久化部分使用heroState,其余正常
-    public void Setup(HeroState heroState)
+    public void Setup(HeroState heroState, HeroCombatant heroCombatant)
     {
-        base.Setup(heroState.CurrentHealth, heroState.MaxHealth, heroState.HeroSprite);
+        base.Setup(heroState.HeroSprite, heroCombatant);
     }
 
-    protected override void UpdateHealthText()
+    public override void UpdateHealthText(int CurrentHealth, int MaxHealth)
     {
-        base.UpdateHealthText();
+        base.UpdateHealthText(CurrentHealth, MaxHealth);
 
         GameManager.Instance.PersistUIController.TopUI.UpdateHeroHp(CurrentHealth, MaxHealth);
     }
@@ -24,15 +24,7 @@ public class HeroView : CombatantView
     public void SaveData()
     {
         //保存数据
-        GameManager.Instance.HeroState.Save(CurrentHealth, MaxHealth);
+        GameManager.Instance.HeroState.Save(M.CurrentHealth, M.MaxHealth);
     }
 
-    ////英雄除了更新CombatantView的UI,还需更新全局UI
-    //protected override void UpdateHealthText()
-    //{
-    //    base.UpdateHealthText();
-    //    //TODO: 以后调整这种不优雅的更新UI方式
-    //    //GameManager.Instance.PersistUIController.TopUI.UpdateHeroHp(CurrentHealth, MaxHealth);
-    //    //GameManager.Instance.GlobalUI.UpdateHeroHp(CurrentHealth, MaxHealth);
-    //}
 }
