@@ -7,8 +7,11 @@ using System.Collections.Generic;
  */
 public class Combatant
 {
+    //参照CombatantData
     public int MaxHealth { get; protected set; }
     public int CurrentHealth { get; protected set; }
+    public int Proficiency { get; protected set; }
+    public int Flexbility { get; protected set; }
 
     //记录状态的堆叠数量
     private Dictionary<StatusEffectType, int> statusEffects = new();

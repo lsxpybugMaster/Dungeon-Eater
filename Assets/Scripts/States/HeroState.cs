@@ -1,7 +1,4 @@
-﻿using ActionSystemTest;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -17,6 +14,9 @@ public class HeroState : BaseState<HeroData>
     //------------------------动态数据---------------------------
     public int MaxHealth { get; private set; }
     public int CurrentHealth { get; private set; }
+    public int Proficiency { get; private set; }
+    public int Flexbility { get; private set; }
+
 
     /// <summary>
     /// 玩家局外卡组信息在此
@@ -40,6 +40,8 @@ public class HeroState : BaseState<HeroData>
 
         MaxHealth = BaseData.Health;
         CurrentHealth = BaseData.Health;
+        Proficiency = BaseData.Proficiency;
+        Flexbility = BaseData.Flexbility;
 
         //别忘记初始化!
         Deck = new List<Card>();

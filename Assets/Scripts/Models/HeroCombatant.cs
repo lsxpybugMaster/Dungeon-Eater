@@ -8,6 +8,11 @@ public class HeroCombatant : Combatant
     public HeroCombatant(HeroState heroState)
     {
         CurrentHealth = heroState.CurrentHealth;
+        
         MaxHealth = heroState.MaxHealth;
+
+        Proficiency = heroState.Proficiency;
+    
+        Flexbility = heroState.Flexbility;
     }
 }

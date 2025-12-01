@@ -55,19 +55,37 @@ public class BattleInfoUI : Singleton<BattleInfoUI>
     /// </summary>
     public void AddSuccessResult(int ans, int dc, string originCommand, CombatantView caster)
     {
-        AddLine($"[{caster.gameObject.name}] <color=green>Success!: {ans}({originCommand}) > {dc}</color>");       
+        AddLine($"[{caster.gameObject.name}] <color=green>Success! {ans}({originCommand}) > {dc}</color>");       
     }
 
+    public void AddSuccessResult(int ans, int add, int sub, int dc, string originCommand, CombatantView caster)
+    {
+        AddLine($"[{caster.gameObject.name}] <color=green>Success! {ans}({originCommand}) + {add} - {sub} > {dc} </color>");
+    }
 
-    public void AddGaintSuccessResult(int ans, CombatantView caster)
+    public void AddGiantSuccessResult(int ans, CombatantView caster)
     {
         AddLine($"[{caster.gameObject.name}] <color=orange>Gaint Success! ({ans}) </color>");
     }
 
+
+    public void AddGiantFailedResult(int ans, CombatantView caster)
+    {
+        AddLine($"[{caster.gameObject.name}] <color=red>Gaint Failed! {ans} </color>");
+    }
+
+
     public void AddFailedResult(int ans, int dc, string originCommand, CombatantView caster)
     {
-        AddLine($"[{caster.gameObject.name}] <color=red>Failed!: {ans}({originCommand}) < {dc} </color>");
+        AddLine($"[{caster.gameObject.name}] <color=red>Failed! {ans}({originCommand}) < {dc} </color>");
     }
+
+    public void AddFailedResult(int ans, int add, int sub ,int dc, string originCommand, CombatantView caster)
+    {
+        AddLine($"[{caster.gameObject.name}] <color=red>Failed! {ans}({originCommand}) + {add} - {sub} < {dc} </color>");
+    }
+
+
 
     public void AddFixedResult(int ans, CombatantView caster)
     {

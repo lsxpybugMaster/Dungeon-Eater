@@ -12,9 +12,17 @@ public class EnemyCombatant : Combatant
     public EnemyCombatant(EnemyData enemyData)
     {
         CurrentHealth = enemyData.Health;
+
         MaxHealth = enemyData.Health;
+
         FixedAttackPower = enemyData.FixedAttack;
+
         LightAttackPowerStr = enemyData.LightAttackStr;
+
         HeavyAttackPowerStr = enemyData.HeavyAttackStr;
+
+        Proficiency = enemyData.Proficiency;
+
+        Flexbility = enemyData.Flexbility;
     }
 }

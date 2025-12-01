@@ -1,8 +1,5 @@
-﻿using ActionSystemTest;
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -104,40 +101,59 @@ public class DamageSystem : MonoBehaviour
     /// </summary>
     private IEnumerator DealAttackPerformer(DealAttackGA ga)
     {
-        //攻击掷骰判定
-        //TODO: 从攻击者和受击者中提取攻击掷骰修正值
-        int attackDice = DiceRollUtil.D20();
-        
-        //决定事件
-        // MISS
-        if (attackDice < 10)
-        {
-            BattleInfoUI.Instance.AddFailedResult(attackDice, 10, "20", ga.Caster);
-
-            ActionSystem.Instance.AddReaction(new MissGA(ga.Targets, ga.Caster));
-
-            yield break;
-        }
-
         // HIT or Critcal HIT
         int damageDice = DiceRollUtil.DfromString(ga.DiceStr);
 
-        if (attackDice >= 12) 
+        switch (CheckUtil.AttackRoll(ga.Caster, ga.Targets[0]))
         {
-            BattleInfoUI.Instance.AddGaintSuccessResult(attackDice, ga.Caster);
+            case Result.GiantSuccess:
+                BattleInfoUI.Instance.AddThrowResult(2 * damageDice, ga.DiceStr);
+                ActionSystem.Instance.AddReaction(new CriticalHitGA(damageDice * 2, ga.Targets, ga.Caster));
+                break;
 
-            BattleInfoUI.Instance.AddThrowResult(2 * damageDice, ga.DiceStr);
+            case Result.Success:
+                BattleInfoUI.Instance.AddThrowResult(damageDice, ga.DiceStr);
+                ActionSystem.Instance.AddReaction(new NormalAttackGA(damageDice, ga.Targets, ga.Caster));
+                break;
 
-            ActionSystem.Instance.AddReaction(new CriticalHitGA(attackDice * 2, ga.Targets, ga.Caster));
+            case Result.Failure:
+                ActionSystem.Instance.AddReaction(new MissGA(ga.Targets, ga.Caster));
+                break;
         }
-        else
-        {
-            BattleInfoUI.Instance.AddSuccessResult(attackDice, 10, "20", ga.Caster);
 
-            BattleInfoUI.Instance.AddThrowResult(damageDice, ga.DiceStr);
+        yield return null;
+        ////攻击掷骰判定
+        ////TODO: 从攻击者和受击者中提取攻击掷骰修正值
+        //int attackDice = DiceRollUtil.D20();
+        
+        ////决定事件
+        //// MISS
+        //if (attackDice < 10)
+        //{
+        //    BattleInfoUI.Instance.AddFailedResult(attackDice, 10, "20", ga.Caster);
 
-            ActionSystem.Instance.AddReaction(new NormalAttackGA(damageDice, ga.Targets, ga.Caster));
-        }
+        //    ActionSystem.Instance.AddReaction(new MissGA(ga.Targets, ga.Caster));
+
+        //    yield break;
+        //}
+
        
+
+        //if (attackDice >= 12) 
+        //{
+        //    BattleInfoUI.Instance.AddGaintSuccessResult(attackDice, ga.Caster);
+
+        //    BattleInfoUI.Instance.AddThrowResult(2 * damageDice, ga.DiceStr);
+
+        //    ActionSystem.Instance.AddReaction(new CriticalHitGA(damageDice * 2, ga.Targets, ga.Caster));
+        //}
+        //else
+        //{
+        //    BattleInfoUI.Instance.AddSuccessResult(attackDice, 10, "20", ga.Caster);
+
+        //    BattleInfoUI.Instance.AddThrowResult(damageDice, ga.DiceStr);
+
+        //    ActionSystem.Instance.AddReaction(new NormalAttackGA(damageDice, ga.Targets, ga.Caster));
+        //}      
     }
 }

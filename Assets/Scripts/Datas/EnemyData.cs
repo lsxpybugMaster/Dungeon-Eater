@@ -5,11 +5,9 @@ using UnityEngine;
 
 //参考CardData的设计
 [CreateAssetMenu(menuName = "Data/Enemy")]
-public class EnemyData : ScriptableObject
+public class EnemyData : CombatantData
 {
-    // 基本数据
-    [field: SerializeField] public Sprite Image { get; private set; }
-    [field: SerializeField] public int Health { get; private set; }
+    // 基本数据 => 已存储至 CombatantData
 
     //更细粒度的攻击数值
     [field: SerializeField] public int FixedAttack { get; private set; }
