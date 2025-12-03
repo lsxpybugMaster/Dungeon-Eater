@@ -97,11 +97,12 @@ public class DamageSystem : MonoBehaviour
     }
 
     /// <summary>
+    //NOTE: 使用了事件分发
     /// 处理全套攻击逻辑(攻击判定 + 数值判定)
     /// </summary>
     private IEnumerator DealAttackPerformer(DealAttackGA ga)
     {
-        // HIT or Critcal HIT
+        //这里由于需要判定重击双倍伤害,所以没有直接使用封装好的工具类
         int damageDice = DiceRollUtil.DfromString(ga.DiceStr);
 
         switch (CheckUtil.AttackRoll(ga.Caster, ga.Targets[0]))
@@ -122,38 +123,5 @@ public class DamageSystem : MonoBehaviour
         }
 
         yield return null;
-        ////攻击掷骰判定
-        ////TODO: 从攻击者和受击者中提取攻击掷骰修正值
-        //int attackDice = DiceRollUtil.D20();
-        
-        ////决定事件
-        //// MISS
-        //if (attackDice < 10)
-        //{
-        //    BattleInfoUI.Instance.AddFailedResult(attackDice, 10, "20", ga.Caster);
-
-        //    ActionSystem.Instance.AddReaction(new MissGA(ga.Targets, ga.Caster));
-
-        //    yield break;
-        //}
-
-       
-
-        //if (attackDice >= 12) 
-        //{
-        //    BattleInfoUI.Instance.AddGaintSuccessResult(attackDice, ga.Caster);
-
-        //    BattleInfoUI.Instance.AddThrowResult(2 * damageDice, ga.DiceStr);
-
-        //    ActionSystem.Instance.AddReaction(new CriticalHitGA(damageDice * 2, ga.Targets, ga.Caster));
-        //}
-        //else
-        //{
-        //    BattleInfoUI.Instance.AddSuccessResult(attackDice, 10, "20", ga.Caster);
-
-        //    BattleInfoUI.Instance.AddThrowResult(damageDice, ga.DiceStr);
-
-        //    ActionSystem.Instance.AddReaction(new NormalAttackGA(damageDice, ga.Targets, ga.Caster));
-        //}      
     }
 }

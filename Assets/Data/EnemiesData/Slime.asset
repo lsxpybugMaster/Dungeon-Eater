@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 21300000, guid: c55bcef3840eeb242bb3c4fb2bc14755, type: 3}
   <Health>k__BackingField: 11
-  <Proficiency>k__BackingField: 1
+  <Proficiency>k__BackingField: 2
   <Flexbility>k__BackingField: 1
   <FixedAttack>k__BackingField: 5
   <LightAttackStr>k__BackingField: 1d8

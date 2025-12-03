@@ -19,7 +19,10 @@ public enum Result
 //    public int sub;
 //}
 
-//处理检定
+/*
+    处理检定及掷骰
+    包含检定和信息通知(UI显示)
+*/
 public static class CheckUtil
 {
     /// <summary>
@@ -59,6 +62,15 @@ public static class CheckUtil
             BattleInfoUI.Instance.AddSuccessResult(attackDice, add, sub, 10, "20", caster);
             return Result.Success;
         }
+    }
 
+    //提供一个数值,同时处理其UI显示
+    public static int Throw(string diceStr, string addtionInfo)
+    {
+        int result = DiceRollUtil.DfromString(diceStr);
+
+        BattleInfoUI.Instance.AddThrowResult(result, diceStr, addtionInfo);
+
+        return result;
     }
 }

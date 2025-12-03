@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
   m_Name: Armor Up
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: Add 5 Armor
+  <Id>k__BackingField: 59670ec7-5a90-4b5a-a3f1-b40a2526620d
+  <Description>k__BackingField: Add 1d6 Armor
   <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 21300000, guid: 0a2c0895084dff442982047574702fad, type: 3}
   <ManualTargetEffect>k__BackingField:
@@ -21,17 +22,17 @@ MonoBehaviour:
   - <TargetMode>k__BackingField:
       rid: 8501353642540138497
     <Effect>k__BackingField:
-      rid: 8501353642540138498
+      rid: 2509721132496322562
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 2509721132496322562
+      type: {class: AddRandomStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 0
+        stackCountDice: 1d6
     - rid: 8501353642540138497
       type: {class: HeroTM, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 8501353642540138498
-      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
-      data:
-        statusEffectType: 0
-        stackCount: 5

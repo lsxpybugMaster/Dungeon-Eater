@@ -44,9 +44,9 @@ public class BattleInfoUI : Singleton<BattleInfoUI>
     /// <summary>
     /// 数值掷骰
     /// </summary>
-    public void AddThrowResult(int ans, string originCommand)
+    public void AddThrowResult(int ans, string originCommand, string addtionInfo = "")
     {
-        AddLine($"Throws: {ans} ({originCommand})");
+        AddLine($"{addtionInfo} Throws: <b><color=black>{ans} ({originCommand})</color></b>");
     }
 
 
@@ -60,7 +60,7 @@ public class BattleInfoUI : Singleton<BattleInfoUI>
 
     public void AddSuccessResult(int ans, int add, int sub, int dc, string originCommand, CombatantView caster)
     {
-        AddLine($"[{caster.gameObject.name}] <color=green>Success! {ans}({originCommand}) + {add} - {sub} > {dc} </color>");
+        AddLine($"[{caster.gameObject.name}] <color=green>Success! {ans}({originCommand}) + {add} - {sub} = {ans + add - sub} > {dc} </color>");
     }
 
     public void AddGiantSuccessResult(int ans, CombatantView caster)
@@ -82,7 +82,7 @@ public class BattleInfoUI : Singleton<BattleInfoUI>
 
     public void AddFailedResult(int ans, int add, int sub ,int dc, string originCommand, CombatantView caster)
     {
-        AddLine($"[{caster.gameObject.name}] <color=red>Failed! {ans}({originCommand}) + {add} - {sub} < {dc} </color>");
+        AddLine($"[{caster.gameObject.name}] <color=red>Failed! {ans}({originCommand}) + {add} - {sub} = {ans + add - sub} < {dc} </color>");
     }
 
 
