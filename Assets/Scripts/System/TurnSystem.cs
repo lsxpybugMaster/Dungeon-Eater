@@ -103,7 +103,6 @@ public class TurnSystem : Singleton<TurnSystem>
     //与事件有关的GA Performer(直接执行)
     private IEnumerator UpdateEffectPerformer(UpdateEffectGA updateEffectGA)
     {
-        Debug.Log($"{updateEffectGA.CombatantView.name}");
         updateEffectGA.CombatantView.M.UpdateEffectStacks();   
         yield return null;
     }

@@ -8,7 +8,7 @@ using UnityEngine;
 /// 负责管理所有 CardData 的查找、缓存与随机获取。
 /// 对外提供只读接口，禁止外部直接修改或访问底层列表。
 /// </summary>
-[CreateAssetMenu(menuName = "Database/CardDatabase")]
+[CreateAssetMenu(menuName = "DataBase/CardDatabase")]
 public class CardDatabase : ScriptableObject
 {
     // 外部配置卡牌总数据
