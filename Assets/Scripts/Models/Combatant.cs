@@ -108,6 +108,9 @@ public class Combatant
     public void UpdateEffectStacks()
     {
         //结算护甲效果
-        ClearStatusEffect(StatusEffectType.AMROR);
+        // ClearStatusEffect(StatusEffectType.AMROR);
+        StatusEffectDataBase.UpdateFunc(StatusEffectType.AMROR)(this);
+
+        OnEffectChanged?.Invoke(StatusEffectType.AMROR, GetStatusEffectStacks(StatusEffectType.AMROR));
     }
 }

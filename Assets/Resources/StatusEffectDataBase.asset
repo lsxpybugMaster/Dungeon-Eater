@@ -14,4 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allEffects:
   - Type: 1
-  - Type: 1
+    clearPerRound: 0
+    decayPerRound: 1
+  - Type: 0
+    clearPerRound: 1
+    decayPerRound: 1
+  - Type: 2
+    clearPerRound: 0
+    decayPerRound: 1

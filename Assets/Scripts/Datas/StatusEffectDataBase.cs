@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 // DataBase配置<Type,Class> => Class 存储相关函数以及数值
@@ -12,4 +12,56 @@ using UnityEngine;
 public class StatusEffectDataBase : ScriptableObject
 {
     [SerializeField] private List<StatusEffect> allEffects = new();
+
+    private Dictionary<StatusEffectType, StatusEffect> typeLookup;
+
+
+    // --------------------- 初始化 ---------------------
+    public void Init()
+    {
+        if (typeLookup != null) return; // 避免重复初始化
+
+        typeLookup = new();
+
+        foreach (var effect in allEffects)
+        {
+            if (effect == null) continue;
+
+            if (typeLookup.ContainsKey(effect.Type))
+                Debug.LogWarning($"[StatusEffectDataBase] Duplicate EffectType detected: {effect.Type}");
+            else
+                typeLookup.Add(effect.Type, effect);
+        }
+
+        Debug.Log($"[StatusEffectDataBase] Initialized with {typeLookup.Count} effects.");
+    }
+
+    // --------------------- 单例访问 ---------------------
+    private static StatusEffectDataBase _instance;
+    public static StatusEffectDataBase I
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = Resources.Load<StatusEffectDataBase>("StatusEffectDataBase");
+                if (_instance == null)
+                    Debug.LogError("StatusEffectDataBase.asset not found in Resources folder!");
+                else
+                    _instance.Init();
+            }
+            return _instance;
+        }
+    }
+
+    // --------------------- 查询接口 ---------------------
+
+    /// <summary> 通过卡牌ID查找模板 </summary>
+    public static Action<Combatant> UpdateFunc(StatusEffectType effectType)
+    {
+        return I.typeLookup.TryGetValue(effectType, out var e)
+            ? e.OnTurnEnd
+            : (Combatant c) => { Debug.LogError("未找到匹配函数"); };
+    }
+
 }
