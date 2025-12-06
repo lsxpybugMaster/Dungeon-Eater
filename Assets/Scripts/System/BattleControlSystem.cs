@@ -73,7 +73,7 @@ public class BattleControlSystem : MonoBehaviour
         // 初始化天赋
         // PerkSystem.Instance.AddPerk(new Perk(perkData));
 
-        ManaSystem.Instance.Setup();
+        ManaSystem.Instance.Setup(heroState.MaxMana);
 
         OtherSetupLogic();
     }

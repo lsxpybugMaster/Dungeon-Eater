@@ -6,22 +6,25 @@ public class ManaSystem : Singleton<ManaSystem>
 {
     [SerializeField] private ManaUI manaUI;
 
-    private const int MAX_MANA = 3;
-    
-    private int currentMana = MAX_MANA;
+    private int maxMana = 3;
+
+    private int currentMana;
 
     /// <summary>
     /// 初始化能量
     /// </summary>
-    public void Setup()
+    public void Setup(int maxMana)
     {
-        manaUI.UpdateManaText(MAX_MANA);
+        this.maxMana = maxMana;
+        currentMana = maxMana;
+        manaUI.UpdateManaText(currentMana);
     }
 
     void OnEnable()
     {
         ActionSystem.AttachPerformer<SpendManaGA>(SpendManaPerformer);
         ActionSystem.AttachPerformer<RefillManaGA>(RefillManaPerformer);
+        ActionSystem.AttachPerformer<AddManaGA>(AddManaPerformer);
         ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
 
@@ -29,6 +32,7 @@ public class ManaSystem : Singleton<ManaSystem>
     {
         ActionSystem.DetachPerformer<SpendManaGA>();  
         ActionSystem.DetachPerformer<RefillManaGA>();
+        ActionSystem.DetachPerformer<AddManaGA>();
         ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
 
@@ -50,10 +54,21 @@ public class ManaSystem : Singleton<ManaSystem>
 
     private IEnumerator RefillManaPerformer(RefillManaGA refillManaGA)
     {
-        currentMana = MAX_MANA;
+        currentMana = maxMana;
         manaUI.UpdateManaText(currentMana);
         yield return null;
     }
+
+    private IEnumerator AddManaPerformer(AddManaGA addManaGA)
+    {
+        if (addManaGA.Refill)
+            currentMana = maxMana;
+        else
+            currentMana += addManaGA.Amount;
+        manaUI.UpdateManaText(currentMana);
+        yield return null;
+    }
+
 
     //注意这是个反应而非Performer!!!
     private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)

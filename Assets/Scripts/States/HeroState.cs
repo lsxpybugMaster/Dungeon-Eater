@@ -16,6 +16,7 @@ public class HeroState : BaseState<HeroData>
     public int CurrentHealth { get; private set; }
     public int Proficiency { get; private set; }
     public int Flexbility { get; private set; }
+    public int MaxMana { get; private set; }    
 
 
     /// <summary>
@@ -42,6 +43,7 @@ public class HeroState : BaseState<HeroData>
         CurrentHealth = BaseData.Health;
         Proficiency = BaseData.Proficiency;
         Flexbility = BaseData.Flexbility;
+        MaxMana = BaseData.MaxMana;
 
         //别忘记初始化!
         Deck = new List<Card>();

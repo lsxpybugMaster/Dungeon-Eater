@@ -11,7 +11,9 @@ public class Combatant
     public int MaxHealth { get; protected set; }
     public int CurrentHealth { get; protected set; }
     public int Proficiency { get; protected set; }
+    public int ProficiencyBuff => GetStatusEffectStacks(StatusEffectType.PROFICIENCY);
     public int Flexbility { get; protected set; }
+    public int FlexbilityBuff => GetStatusEffectStacks(StatusEffectType.FLEXBILITY);
 
     //记录状态的堆叠数量
     private Dictionary<StatusEffectType, int> statusEffects = new();
@@ -73,7 +75,6 @@ public class Combatant
         OnEffectChanged?.Invoke(type, GetStatusEffectStacks(type));
     }
 
-
     public void RemoveStatusEffect(StatusEffectType type, int stackCount)
     {
         if (statusEffects.ContainsKey(type))
@@ -107,10 +108,14 @@ public class Combatant
     //每轮结束/开始时自动结算一些Buff
     public void UpdateEffectStacks()
     {
-        //结算护甲效果
-        // ClearStatusEffect(StatusEffectType.AMROR);
-        StatusEffectDataBase.UpdateFunc(StatusEffectType.AMROR)(this);
-
-        OnEffectChanged?.Invoke(StatusEffectType.AMROR, GetStatusEffectStacks(StatusEffectType.AMROR));
+        //NOTE: 在 foreach 遍历字典时，不允许对字典进行任何修改操作
+        //所以需要额外存储key列表
+        List<StatusEffectType> keysSnapshot = new(statusEffects.Keys);
+        
+        foreach (var type in keysSnapshot)
+        {
+            StatusEffectDataBase.GetEffect(type).UpdateOnTurnEnd(this);
+        }
     }
+    
 }

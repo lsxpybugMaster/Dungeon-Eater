@@ -16,6 +16,7 @@ MonoBehaviour:
   <Health>k__BackingField: 50
   <Proficiency>k__BackingField: 3
   <Flexbility>k__BackingField: 3
+  <MaxMana>k__BackingField: 4
   <Deck>k__BackingField:
   - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
   - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
@@ -23,3 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c2ddd1391867c6742a7dffd0e27f312c, type: 2}
   - {fileID: 11400000, guid: c2ddd1391867c6742a7dffd0e27f312c, type: 2}
   - {fileID: 11400000, guid: 11b16000ff00e5a4faa56826d9c5ead3, type: 2}
+  - {fileID: 11400000, guid: 1bbc448dbe729834082e6ed5daf46a26, type: 2}
+  - {fileID: 11400000, guid: a5f04efada4ea734aa2c4347c58a8163, type: 2}
+  - {fileID: 11400000, guid: e8d6237b8ad0f0f4daf8e0e2dab962c0, type: 2}
+  - {fileID: 11400000, guid: 5e9811ce229f058459c3d470dfdbbd70, type: 2}

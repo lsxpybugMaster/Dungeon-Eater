@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class StatusEffectsUI : MonoBehaviour
 {
     [SerializeField] private StatusEffectUI statusEffectUIPrefab;
-
-    [SerializeField] private Sprite armorSprite, burnSprite;
 
     //UI对象字典
     private Dictionary<StatusEffectType, StatusEffectUI> statusEffectUIs = new();
@@ -41,11 +37,12 @@ public class StatusEffectsUI : MonoBehaviour
     //根据状态类型返回对应sprite
     private Sprite GetSpriteByType(StatusEffectType statusEffectType)
     {
-        return statusEffectType switch
-        {
-            StatusEffectType.AMROR => armorSprite,
-            StatusEffectType.BURN => burnSprite,
-            _ => null,
-        };
+        //return statusEffectType switch
+        //{
+        //    StatusEffectType.AMROR => armorSprite,
+        //    StatusEffectType.BURN => burnSprite,
+        //    _ => null,
+        //};
+        return StatusEffectDataBase.GetEffect(statusEffectType).sprite;
     }
 }

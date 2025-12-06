@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ×¢ÒâGameActionÒªÔÚÆä¶ÔÓ¦ËùÊôµÄSystemÖĞ×¢²á
+/// æ³¨æ„GameActionè¦åœ¨å…¶å¯¹åº”æ‰€å±çš„Systemä¸­æ³¨å†Œ
 /// </summary>
 public class PlayCardGA : GameAction
 {
@@ -17,7 +17,7 @@ public class PlayCardGA : GameAction
     }
 
     /// <summary>
-    /// ¸Ã¹¹ÔìÆ÷ÓÃÓÚÉùÃ÷´øÊÖ¶¯Ä¿±êµÄ¿¨ÅÆ¼¼ÄÜ
+    /// è¯¥æ„é€ å™¨ç”¨äºå£°æ˜å¸¦æ‰‹åŠ¨ç›®æ ‡çš„å¡ç‰ŒæŠ€èƒ½
     /// </summary>
     /// <param name="card"></param>
     /// <param name="target"></param>

@@ -57,11 +57,11 @@ public class StatusEffectDataBase : ScriptableObject
     // --------------------- 查询接口 ---------------------
 
     /// <summary> 通过卡牌ID查找模板 </summary>
-    public static Action<Combatant> UpdateFunc(StatusEffectType effectType)
+    public static StatusEffect GetEffect(StatusEffectType effectType)
     {
         return I.typeLookup.TryGetValue(effectType, out var e)
-            ? e.OnTurnEnd
-            : (Combatant c) => { Debug.LogError("未找到匹配函数"); };
+            ? e
+            : null;
     }
 
 }

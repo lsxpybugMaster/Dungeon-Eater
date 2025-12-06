@@ -48,8 +48,8 @@ public static class CheckUtil
             return Result.Failure; //大失败不会对玩家造成额外影响
         }
 
-        int add = caster.M.Proficiency;
-        int sub = target.M.Flexbility;
+        int add = caster.M.Proficiency + caster.M.ProficiencyBuff;
+        int sub = target.M.Flexbility  + target.M.FlexbilityBuff;
         int finalAmount = attackDice + add - sub;
         
         if (attackDice == 1 || finalAmount < 10)

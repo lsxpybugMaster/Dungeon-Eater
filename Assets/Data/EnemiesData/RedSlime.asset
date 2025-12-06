@@ -28,6 +28,12 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 2509721198799355904
+      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 3
+        statusEffectType: 0
+        stackCount: 10
     - rid: 5386319821270941696
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
@@ -46,10 +52,5 @@ MonoBehaviour:
         Condition:
           rid: -2
         Intend:
-          rid: 5386319980480430089
+          rid: 2509721198799355904
         P: 0
-    - rid: 5386319980480430089
-      type: {class: HealIntend, ns: , asm: Assembly-CSharp}
-      data:
-        skill: 4
-        healAmount: 10
