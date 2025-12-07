@@ -13,7 +13,7 @@ public class CombatantView : MonoBehaviour
 
     [SerializeField] private StatusEffectsUI statusEffectsUI;
 
-    private Combatant Combatant { get; set; }
+    public Combatant Combatant { get; set; }
 
     //FIXME: 实际使用时需要强制转换,不太方便,不使用则需要每个子类声明一次,也不方便
     public Combatant M => Combatant;
@@ -24,6 +24,8 @@ public class CombatantView : MonoBehaviour
     protected virtual void Setup(Sprite image, Combatant combatant)
     {
         Combatant = combatant;
+        //TODO: 临时绑定
+        Combatant.view = this;
 
         BindEvents();
 
@@ -32,9 +34,13 @@ public class CombatantView : MonoBehaviour
         UpdateHealthText(M.CurrentHealth, M.MaxHealth);
     }
 
+    protected virtual CombatantView ReturnThis()
+    {
+        return this;
+    }
 
     protected virtual void BindEvents()
-    {
+    { 
         Combatant.OnHealthChanged += UpdateHealthText;
         Combatant.OnEffectChanged += UpdateEffect;
         Combatant.OnDamaged += Shake;
@@ -42,6 +48,7 @@ public class CombatantView : MonoBehaviour
 
     protected virtual void UnBindEvents()
     {
+
         Combatant.OnHealthChanged -= UpdateHealthText;
         Combatant.OnEffectChanged -= UpdateEffect;
         Combatant.OnDamaged -= Shake;

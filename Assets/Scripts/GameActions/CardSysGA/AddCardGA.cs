@@ -6,15 +6,15 @@ public class AddCardGA : GameAction, IHaveCaster //区分玩家(或者敌人)添
 {
     public CombatantView Caster { get; private set; }
 
-    public PileType whichPileToAdd { get; private set; }
+    public PileType WhichPileToAdd { get; private set; }
 
-    public Card whichCard { get; private set; }
+    public Card WhichCard { get; private set; }
 
     public AddCardGA(PileType pileType, CombatantView caster, CardData cardData)
     {
         Caster = caster;
-        whichPileToAdd = pileType;
+        WhichPileToAdd = pileType;
         //根据外部传入的数据进行初始化Card
-        whichCard = new Card(cardData);
+        WhichCard = new Card(cardData);
     }
 }

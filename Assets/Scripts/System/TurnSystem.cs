@@ -69,12 +69,13 @@ public class TurnSystem : Singleton<TurnSystem>
     {
         var heroView = HeroSystem.Instance.HeroView;
 
-        int burnStacks = heroView.M.GetStatusEffectStacks(StatusEffectType.BURN);
-        if (burnStacks > 0)
-        {
-            ApplyBurnGA applyBurnGA = new(burnStacks, heroView);
-            ActionSystem.Instance.AddReaction(applyBurnGA);
-        }
+        //结算燃烧事件
+        //int burnStacks = heroView.M.GetStatusEffectStacks(StatusEffectType.BURN);
+        //if (burnStacks > 0)
+        //{
+        //    ApplyBurnGA applyBurnGA = new(burnStacks, heroView);
+        //    ActionSystem.Instance.AddReaction(applyBurnGA);
+        //}
 
 
         //------------------------敌人AI意图计算及获取事件------------------------------

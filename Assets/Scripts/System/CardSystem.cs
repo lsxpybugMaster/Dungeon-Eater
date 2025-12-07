@@ -11,6 +11,12 @@ public enum PileType
     HandPile,
 }
 
+/*
+ //TODO: 优化该模块:
+    提取PileSystem维护牌堆: 避免手动调用  
+        OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
+        DoWhenDeckChanged();
+ */
 public class CardSystem : Singleton<CardSystem>
 {
     [SerializeField] private HandView handView;
@@ -71,7 +77,6 @@ public class CardSystem : Singleton<CardSystem>
     /// </summary>
     public void AddCardToPile(Card card, PileType pileType)
     {
-
         switch (pileType)
         {
             case PileType.DrawPile:
@@ -125,8 +130,8 @@ public class CardSystem : Singleton<CardSystem>
 
     private IEnumerator AddCardPerformer(AddCardGA addCardGA)
     {
-        var card   = addCardGA.whichCard;
-        var pile   = addCardGA.whichPileToAdd;
+        var card   = addCardGA.WhichCard;
+        var pile   = addCardGA.WhichPileToAdd;
         var caster = addCardGA.Caster;
 
         int drct = caster is HeroView ? 1 : -1; 
@@ -172,10 +177,8 @@ public class CardSystem : Singleton<CardSystem>
         }
 
         //实际逻辑上的添加
-        AddCardToPile(addCardGA.whichCard, addCardGA.whichPileToAdd);
+        AddCardToPile(addCardGA.WhichCard, addCardGA.WhichPileToAdd);
     }
-
-    //Performers
 
 
     /// <summary>
@@ -234,7 +237,16 @@ public class CardSystem : Singleton<CardSystem>
         hand.Remove(playCardGA.Card);
         //删除卡牌后卡牌位置更新,同时返回删除的卡片
         CardView cardView = handView.RemoveCard(playCardGA.Card);
-        yield return DiscardCard(cardView);
+
+        //TODO: 提取出这部分逻辑
+        if (playCardGA.Card.HasTag(CardTag.Exhaust))
+        {
+            yield return ExhaustCard(cardView);
+        }
+        else
+        {
+            yield return DiscardCard(cardView);
+        }
 
         //减少对应的法力值
         SpendManaGA spendManaGA = new(playCardGA.Card.Mana);
@@ -263,7 +275,18 @@ public class CardSystem : Singleton<CardSystem>
 
     //注意上面的Performers不主动执行,而是作为reaction
 
+    //在打出卡牌时删除卡牌,请与删除所选牌堆中卡牌区分
+    private IEnumerator ExhaustCard(CardView cardView)
+    {
+        Tween tween = cardView.transform.DOScale(Vector3.zero, Config.Instance.moveTime);
+        yield return tween.WaitForCompletion();
 
+        Destroy(cardView.gameObject);
+
+        OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
+        //TopUI也要同步
+        DoWhenDeckChanged();
+    }
 
     private IEnumerator DrawCard()
     {
@@ -306,3 +329,4 @@ public class CardSystem : Singleton<CardSystem>
         OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
     }
 }
+

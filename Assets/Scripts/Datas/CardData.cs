@@ -23,6 +23,7 @@ public class CardData : ScriptableObject
     //有许多自动决定目标对象的Effect
     [field: SerializeField] public List<AutoTargetEffect> OtherEffects { get; private set; }
 
+    [field: SerializeField] public List<CardTag> CardTags { get; private set; }
 
 #if UNITY_EDITOR
     // Unity 的编辑器回调方法

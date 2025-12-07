@@ -16,12 +16,37 @@ MonoBehaviour:
   - Type: 1
     sprite: {fileID: 21300000, guid: 348399bcbcd65574ba80aa8e02017ef6, type: 3}
     decayPerRound: 1
+    effectOnStart:
+      rid: 2509721224727756800
+    effectOnEnd:
+      rid: -2
   - Type: 0
     sprite: {fileID: 21300000, guid: 0a2c0895084dff442982047574702fad, type: 3}
     decayPerRound: 9999
+    effectOnStart:
+      rid: -2
+    effectOnEnd:
+      rid: -2
   - Type: 2
     sprite: {fileID: 21300000, guid: 182d4995aa60fe1408e7d76d63bf6a21, type: 3}
     decayPerRound: 1
+    effectOnStart:
+      rid: -2
+    effectOnEnd:
+      rid: -2
   - Type: 3
     sprite: {fileID: 21300000, guid: 128b1274a4e58fc4e8985aafb91a3e14, type: 3}
     decayPerRound: 1
+    effectOnStart:
+      rid: -2
+    effectOnEnd:
+      rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2509721224727756800
+      type: {class: ApplyBurnEffect, ns: , asm: Assembly-CSharp}
+      data:
+        burnDamage: 3

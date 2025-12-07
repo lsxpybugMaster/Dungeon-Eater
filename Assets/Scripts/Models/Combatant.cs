@@ -18,10 +18,14 @@ public class Combatant
     //记录状态的堆叠数量
     private Dictionary<StatusEffectType, int> statusEffects = new();
 
+    //IMPORTANT: Combantant使用事件与CombantantView交流
     //Change Event
     public event Action<int, int> OnHealthChanged;
     public event Action<StatusEffectType, int> OnEffectChanged;
     public event Action OnDamaged;
+ 
+    //TODO: 删除该临时逻辑
+    public CombatantView view { get; set; }
 
     public void Damage(int damageAmount)
     {
@@ -106,6 +110,17 @@ public class Combatant
 
 
     //每轮结束/开始时自动结算一些Buff
+    public void DoEffects()
+    {
+        List<StatusEffectType> keysSnapshot = new(statusEffects.Keys);
+
+        foreach (var type in keysSnapshot)
+        {
+            StatusEffectDataBase.GetEffect(type).DoOnTurnStart(this);
+        }
+    }
+
+
     public void UpdateEffectStacks()
     {
         //NOTE: 在 foreach 遍历字典时，不允许对字典进行任何修改操作
@@ -118,4 +133,5 @@ public class Combatant
         }
     }
     
+   
 }

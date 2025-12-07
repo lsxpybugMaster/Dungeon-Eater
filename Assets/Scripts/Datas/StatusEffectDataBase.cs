@@ -7,6 +7,7 @@ using UnityEngine;
 /// 全局状态配置库：
 /// 负责管理所有 CardData 的查找、缓存与随机获取。
 /// 对外提供只读接口，禁止外部直接修改或访问底层列表。
+//TODO: 优化 DataBase, 使用公共基类描述
 /// </summary>
 [CreateAssetMenu(menuName = "DataBase/StatusEffectDatabase")]
 public class StatusEffectDataBase : ScriptableObject
