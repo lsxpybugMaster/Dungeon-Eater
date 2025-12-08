@@ -9,6 +9,7 @@ public enum StatusEffectType
     BURN,
     PROFICIENCY, //临时熟练度
     FLEXBILITY, //临时敏捷度
+    DIZZY,  //眩晕
 }
 
 /*
@@ -21,7 +22,8 @@ public class StatusEffect
 {
     public StatusEffectType Type;
     public Sprite sprite;
-    public int decayPerRound; //每回合的衰减
+    public int decay; //衰减(每回合/每次执行)
+    public int decayPerEffect;
 
     //支持外部数据配置
     [field: SerializeReference, SR] public Effect effectOnStart;
@@ -31,24 +33,26 @@ public class StatusEffect
     /// 该状态在回合开始时造成的影响(燃烧,眩晕)
     /// </summary>
     /// <param name="c"></param>
-    public virtual void DoOnTurnStart(Combatant c)
+    public virtual void OnTurnStart(Combatant c)
     {
         if (effectOnStart == null)
         {
             return;
         }
 
-        GameAction ga = effectOnStart.GetGameAction(new() {c.view} , c.view);
-        // 直接Perform
-        ActionSystem.Instance.Perform(ga);
+        GameAction ga = effectOnStart.GetGameAction(new() {c.__view__} , c.__view__);
+        // 该函数会在其他Performer中执行,所以需要加Reaction而非Performer
+        ActionSystem.Instance.AddReaction(ga);
+
+        c.RemoveStatusEffect(Type, decayPerEffect);
     }
 
     /// <summary>
     /// 该状态在回合结束时造成的影响(回复生命,结算状态)
     /// </summary>
     /// <param name="c"></param>
-    public virtual void UpdateOnTurnEnd(Combatant c) 
+    public virtual void OnTurnEnd(Combatant c) 
     {
-        c.RemoveStatusEffect(Type, decayPerRound);
+        c.RemoveStatusEffect(Type, decay);
     }
 }

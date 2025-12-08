@@ -24,11 +24,12 @@ public class CombatantView : MonoBehaviour
     protected virtual void Setup(Sprite image, Combatant combatant)
     {
         Combatant = combatant;
-        //TODO: 临时绑定
-        Combatant.view = this;
+        
+        //TODO: 临时绑定,目前已经破坏了MVC!! 
+        Combatant.__view__ = this;
 
         BindEvents();
-
+        
         spriteRenderer.sprite = image;
 
         UpdateHealthText(M.CurrentHealth, M.MaxHealth);

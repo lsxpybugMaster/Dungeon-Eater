@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 /*
  战斗个体 Model ：存储数据和数据变化
@@ -24,8 +25,8 @@ public class Combatant
     public event Action<StatusEffectType, int> OnEffectChanged;
     public event Action OnDamaged;
  
-    //TODO: 删除该临时逻辑
-    public CombatantView view { get; set; }
+    //TODO: 注意其破坏了MVC架构! 使用特殊的名字,代表要谨慎使用该变量!!
+    public CombatantView __view__ { get; set; }
 
     public void Damage(int damageAmount)
     {
@@ -110,18 +111,19 @@ public class Combatant
 
 
     //每轮结束/开始时自动结算一些Buff
-    public void DoEffects()
+    public void EffectsOnTurnStart()
     {
         List<StatusEffectType> keysSnapshot = new(statusEffects.Keys);
 
         foreach (var type in keysSnapshot)
         {
-            StatusEffectDataBase.GetEffect(type).DoOnTurnStart(this);
+            Debug.Log(type);
+            StatusEffectDataBase.GetEffect(type).OnTurnStart(this);
         }
     }
 
 
-    public void UpdateEffectStacks()
+    public void EffectsOnTurnEnd()
     {
         //NOTE: 在 foreach 遍历字典时，不允许对字典进行任何修改操作
         //所以需要额外存储key列表
@@ -129,7 +131,7 @@ public class Combatant
         
         foreach (var type in keysSnapshot)
         {
-            StatusEffectDataBase.GetEffect(type).UpdateOnTurnEnd(this);
+            StatusEffectDataBase.GetEffect(type).OnTurnEnd(this);
         }
     }
     

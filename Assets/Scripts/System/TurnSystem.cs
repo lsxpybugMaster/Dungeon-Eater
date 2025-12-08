@@ -48,13 +48,14 @@ public class TurnSystem : Singleton<TurnSystem>
         //到了敌人的回合,遍历每个敌人并执行逻辑
         foreach (var enemy in EnemySystem.Instance.Enemies)
         {
-            //-------------------------结算当前状态-----------------------------
-            int burnStacks = enemy.M.GetStatusEffectStacks(StatusEffectType.BURN);
-            if (burnStacks > 0)
-            {
-                ApplyBurnGA applyBurnGA = new(burnStacks, enemy);
-                ActionSystem.Instance.AddReaction(applyBurnGA);
-            }
+            //-------------------------结算敌人当前状态-----------------------------
+            //int burnStacks = enemy.M.GetStatusEffectStacks(StatusEffectType.BURN);
+            //if (burnStacks > 0)
+            //{
+            //    ApplyBurnGA applyBurnGA = new(burnStacks, enemy);
+            //    ActionSystem.Instance.AddReaction(applyBurnGA);
+            //}
+            enemy.M.EffectsOnTurnStart();
 
             //AttackHeroGA attackHeroGA = new(enemy);
             //ActionSystem.Instance.AddReaction(attackHeroGA);
@@ -69,6 +70,7 @@ public class TurnSystem : Singleton<TurnSystem>
     {
         var heroView = HeroSystem.Instance.HeroView;
 
+        //玩家结算
         //结算燃烧事件
         //int burnStacks = heroView.M.GetStatusEffectStacks(StatusEffectType.BURN);
         //if (burnStacks > 0)
@@ -104,7 +106,12 @@ public class TurnSystem : Singleton<TurnSystem>
     //与事件有关的GA Performer(直接执行)
     private IEnumerator UpdateEffectPerformer(UpdateEffectGA updateEffectGA)
     {
-        updateEffectGA.CombatantView.M.UpdateEffectStacks();   
+        updateEffectGA.CombatantView.M.EffectsOnTurnEnd();   
         yield return null;
     }
+
+    //private IEnumerator PerformEffectPerformer()
+    //{
+
+    //}
 }

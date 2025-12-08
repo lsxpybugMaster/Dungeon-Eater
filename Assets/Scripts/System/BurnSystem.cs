@@ -21,7 +21,9 @@ public class BurnSystem : MonoBehaviour
         CombatantView target = applyBurnGA.Target;
         Instantiate(burnVFX, target.transform.position, Quaternion.identity);
         target.M.Damage(applyBurnGA.BurnDamage);
-        target.M.RemoveStatusEffect(StatusEffectType.BURN, 1);
+        
+        //OPTIMIZE: 考虑到敌人不一定真的是因为状态受到燃烧伤害,把这部分逻辑交给外部处理
+        //target.M.RemoveStatusEffect(StatusEffectType.BURN, 1);
         
         yield return new WaitForSeconds(1f);
     }
