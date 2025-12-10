@@ -2218,7 +2218,7 @@ GameObject:
   - component: {fileID: 1158634236}
   - component: {fileID: 1158634237}
   m_Layer: 0
-  m_Name: BurnSystem
+  m_Name: EffectPerformSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3271,7 +3271,8 @@ MonoBehaviour:
   freezeTime: 0.4
   moveTime: 0.15
   scaleTime: 0.15
-  attackTime: 0.15
+  effectTime: 0.15
+  attackTime: 0.4
   logicBetweentime: 0.5
 --- !u!1 &1671130620
 GameObject:

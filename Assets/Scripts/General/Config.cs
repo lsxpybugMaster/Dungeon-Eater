@@ -21,6 +21,10 @@ public class Config : PersistentSingleton<Config>
     //卡牌缩放/膨胀所需的时间
     public float scaleTime;
 
+    [Header("效果系统相关参数")]
+    //显示VFX的时间
+    public float effectTime;
+
     [Header("战斗动画相关参数")]
     public float attackTime;
 

@@ -248,9 +248,11 @@ public class CardSystem : Singleton<CardSystem>
             yield return DiscardCard(cardView);
         }
 
+
         //减少对应的法力值
         SpendManaGA spendManaGA = new(playCardGA.Card.Mana);
         ActionSystem.Instance.AddReaction(spendManaGA);
+
 
         //解析该卡牌的手动指示目标Effect
         if (playCardGA.Card.ManualTargetEffect != null)

@@ -15,6 +15,11 @@ public enum StatusEffectType
 /*
  * 通用的状态,包含一些共通的更新逻辑
  * 每一个类映射对应的函数
+ * 
+ * Buff 结算条件:
+ *      自动结算(标志型效果) 如护盾,临时精通值
+ *      激活时结算(主动)  如燃烧
+ *      触发时结算(被动)  如反击
  */
 
 [System.Serializable]
@@ -22,12 +27,13 @@ public class StatusEffect
 {
     public StatusEffectType Type;
     public Sprite sprite;
-    public int decay; //衰减(每回合/每次执行)
-    public int decayPerEffect;
+    
+    public int decayPerRound; //衰减(每回合)
+    public int decayPerEffect; //衰减(每次执行)
 
     //支持外部数据配置
-    [field: SerializeReference, SR] public Effect effectOnStart;
-    [field: SerializeReference, SR] public Effect effectOnEnd;
+    //[field: SerializeReference, SR] public Effect effectOnStart;
+    [field: SerializeReference, SR] public Effect effect;
 
     /// <summary>
     /// 该状态在回合开始时造成的影响(燃烧,眩晕)
@@ -35,16 +41,15 @@ public class StatusEffect
     /// <param name="c"></param>
     public virtual void OnTurnStart(Combatant c)
     {
-        if (effectOnStart == null)
-        {
-            return;
-        }
-
-        GameAction ga = effectOnStart.GetGameAction(new() {c.__view__} , c.__view__);
-        // 该函数会在其他Performer中执行,所以需要加Reaction而非Performer
-        ActionSystem.Instance.AddReaction(ga);
-
-        c.RemoveStatusEffect(Type, decayPerEffect);
+        //只要执行该函数,说明状态不为0,所以要更新状态
+        //状态结算的效果
+        //if (effectOnStart != null)
+        //{
+        //    Debug.Log("==OnTurnStart");
+        //    GameAction ga = effectOnStart.GetGameAction(new() { c.__view__ }, c.__view__);
+        //    // 该函数会在其他Performer中执行,所以需要加Reaction而非Performer
+        //    ActionSystem.Instance.AddReaction(ga);
+        //}       
     }
 
     /// <summary>
@@ -53,6 +58,16 @@ public class StatusEffect
     /// <param name="c"></param>
     public virtual void OnTurnEnd(Combatant c) 
     {
-        c.RemoveStatusEffect(Type, decay);
+        //只要执行该函数,说明状态不为0,所以要更新状态
+        //c.RemoveStatusEffect(Type, decayPerRound);
+
+        if (effect != null)
+        {
+            GameAction ga = effect.GetGameAction(new() { c.__view__ }, c.__view__);
+            // 该函数会在其他Performer中执行,所以需要加Reaction而非Performer
+            ActionSystem.Instance.AddReaction(ga);
+        }
+
+
     }
 }

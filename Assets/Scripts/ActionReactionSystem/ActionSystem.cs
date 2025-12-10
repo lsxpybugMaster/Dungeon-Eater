@@ -40,11 +40,13 @@ public class ActionSystem : Singleton<ActionSystem>
     private void OnEnable()
     {
         AttachPerformer<PerformAllGA>(PerformAllPerformer);
+        AttachPerformer<EmptyGA>(PerformEmptyGAPerformer);
     }
 
     private void OnDisable()
     {
         DetachPerformer<PerformAllGA>();
+        DetachPerformer<EmptyGA>();
     }
 
     //注意可能导致的Perform冲突问题
@@ -60,6 +62,12 @@ public class ActionSystem : Singleton<ActionSystem>
                 yield return null;
         }
     }
+
+    private IEnumerator PerformEmptyGAPerformer(EmptyGA ga)
+    {
+        yield return null;
+    }
+
     #endregion
 
 

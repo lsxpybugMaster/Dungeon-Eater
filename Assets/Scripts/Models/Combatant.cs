@@ -93,6 +93,12 @@ public class Combatant
         OnEffectChanged?.Invoke(type, GetStatusEffectStacks(type));
     }
 
+    //快速获取一些状态,用于判断
+    public bool HasStatus(StatusEffectType type)
+    {
+        return GetStatusEffectStacks(type) > 0;
+    }
+
 
     public int GetStatusEffectStacks(StatusEffectType type)
     {
@@ -117,7 +123,6 @@ public class Combatant
 
         foreach (var type in keysSnapshot)
         {
-            Debug.Log(type);
             StatusEffectDataBase.GetEffect(type).OnTurnStart(this);
         }
     }

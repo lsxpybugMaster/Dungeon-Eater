@@ -74,6 +74,14 @@ public class EnemyAI : MonoBehaviour
         return enemyNextIntend;
     }
 
+    //响应外部变化,改变意图: 如被某些状态打断意图
+    public void ChangeEnemyIntend(EnemyIntend newIntend)
+    {
+        Debug.Log($"更改状态为{newIntend.ToString()}");
+        enemyNextIntend = newIntend;
+        OnEnemyAIUpdated?.Invoke(enemyNextIntend);
+    }
+
 
     /// <summary>
     /// 获取计算好的敌人行为,直接执行

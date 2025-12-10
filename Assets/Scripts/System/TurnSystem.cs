@@ -29,17 +29,17 @@ public class TurnSystem : Singleton<TurnSystem>
     //-------------------------------敌人回合前(作为反应)---------------------------------
     private void EnemyTurnPreAction(EnemyTurnGA enemyTurnGA)
     {
-        //-----------------------------清空敌人状态------------------------------------
+        DiscardAllCardsGA discardAllCardsGA = new();
+
+        ActionSystem.Instance.AddReaction(discardAllCardsGA);
+
+
+        //-------------------------执行并更新敌人状态------------------------------------
         foreach (var enemy in EnemySystem.Instance.Enemies)
         {
             UpdateEffectGA updateEffectGA = new(enemy);
             ActionSystem.Instance.AddReaction(updateEffectGA);
-        }
-
-
-        DiscardAllCardsGA discardAllCardsGA = new();
-
-        ActionSystem.Instance.AddReaction(discardAllCardsGA);
+        }        
     }
 
     //--------------------------------敌人回合----------------------------------
@@ -55,7 +55,17 @@ public class TurnSystem : Singleton<TurnSystem>
             //    ApplyBurnGA applyBurnGA = new(burnStacks, enemy);
             //    ActionSystem.Instance.AddReaction(applyBurnGA);
             //}
-            enemy.M.EffectsOnTurnStart();
+
+            //自动结算敌人状态
+            //IMPORTANT: 在Performer中AddReaction可能出现顺序问题,尽量在PreAction中解决
+            //enemy.M.EffectsOnTurnStart();
+            
+            //if (enemy.M.HasStatus(StatusEffectType.DIZZY))
+            //{
+            //    ApplyDizzyGA applyDizzyGA = new(enemy);
+            //    ActionSystem.Instance.AddReaction(applyDizzyGA);
+            //    //enemy.EnemyAI.ChangeEnemyIntend(new NoIntend());
+            //}
 
             //AttackHeroGA attackHeroGA = new(enemy);
             //ActionSystem.Instance.AddReaction(attackHeroGA);

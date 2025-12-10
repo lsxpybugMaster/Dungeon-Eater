@@ -45,6 +45,7 @@ public class EnemySystem : Singleton<EnemySystem>
     //执行敌人的行动
     public void DoEnemyIntend(EnemyView enemyView)
     {
+        Debug.Log("===DoEnemyIntend");
         GameAction enemyAction = enemyView.EnemyAI.GetEnemyAction();
         ActionSystem.Instance.AddReaction(enemyAction);
     }

@@ -23,3 +23,9 @@ public class PerformAllGA : GameAction
 
     public List<GameAction> GetSequence() => sequence;
 }
+
+//用于占位的GA
+public class EmptyGA : GameAction
+{
+    
+}

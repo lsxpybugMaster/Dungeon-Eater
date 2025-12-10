@@ -15,3 +15,5 @@ public abstract class GameAction
     //执行动作后反应
     public List<GameAction> PostReactions { get; private set;} = new();
 }
+
+
