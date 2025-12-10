@@ -40,7 +40,7 @@ public class Perk
             }
             if (data.UseAutoTarget)
             {
-                targets.AddRange(effect.TargetMode.GetTargets());
+                targets.AddRange(effect.TargetMode.GetTargets(null));
             }
             //动作的执行者为敌人
             GameAction perkEffectAction = effect.Effect.GetGameAction(targets, HeroSystem.Instance.HeroView);

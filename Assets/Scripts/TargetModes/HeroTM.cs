@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class HeroTM : TargetMode
 {
-    public override List<CombatantView> GetTargets()
+    public override List<CombatantView> GetTargets(CombatantView manualTarget)
     {
         List<CombatantView> targets = new()
         {

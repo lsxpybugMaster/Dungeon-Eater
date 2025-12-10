@@ -265,7 +265,7 @@ public class CardSystem : Singleton<CardSystem>
         //解析该卡牌的其余Effect并"执行"(因为不会立刻执行)
         foreach (var effectWrapper in playCardGA.Card.OtherEffects)
         {
-            List<CombatantView> targets = effectWrapper.TargetMode.GetTargets();
+            List<CombatantView> targets = effectWrapper.TargetMode.GetTargets(playCardGA.ManualTarget);
 
             PerformEffectGA performEffectGA = new(effectWrapper.Effect, targets);
             //注意现在是在Performer中,若想执行其他Action必须使用AddReaction 
