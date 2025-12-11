@@ -238,16 +238,8 @@ public class CardSystem : Singleton<CardSystem>
         //删除卡牌后卡牌位置更新,同时返回删除的卡片
         CardView cardView = handView.RemoveCard(playCardGA.Card);
 
-        //TODO: 提取出这部分逻辑
-        if (playCardGA.Card.HasTag(CardTag.Exhaust))
-        {
-            yield return ExhaustCard(cardView);
-        }
-        else
-        {
-            yield return DiscardCard(cardView);
-        }
-
+        //处理卡牌Tag
+        yield return DealWithCardTag(cardView);
 
         //减少对应的法力值
         SpendManaGA spendManaGA = new(playCardGA.Card.Mana);
@@ -271,6 +263,19 @@ public class CardSystem : Singleton<CardSystem>
             //注意现在是在Performer中,若想执行其他Action必须使用AddReaction 
 
             ActionSystem.Instance.AddReaction(performEffectGA);
+        }
+    }
+
+    //处理卡牌的特殊属性(消耗,复制等)
+    private IEnumerator DealWithCardTag(CardView cardView)
+    {
+        if (cardView.Card.HasTag(CardTag.Exhaust))
+        {
+            yield return ExhaustCard(cardView);
+        }
+        else
+        {
+            yield return DiscardCard(cardView);
         }
     }
 
