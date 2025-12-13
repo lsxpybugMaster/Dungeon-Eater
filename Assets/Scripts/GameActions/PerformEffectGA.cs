@@ -12,10 +12,15 @@ public class PerformEffectGA : GameAction
 
     public List<CombatantView> Targets { get; set; }
 
-    public PerformEffectGA(Effect effect, List<CombatantView> targets)
+    //上下文,记录该Effect效果
+    public EffectContext Context { get; set; }
+
+    public PerformEffectGA(Effect effect, List<CombatantView> targets, EffectContext context)
     {
         Effect = effect;
         //防御性拷贝
         Targets = targets?.ToList();
+
+        Context = context;
     }
 }

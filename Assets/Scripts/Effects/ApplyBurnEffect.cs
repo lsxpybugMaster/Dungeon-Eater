@@ -9,7 +9,7 @@ using UnityEngine;
 public class ApplyBurnEffect : Effect
 {
     [SerializeField] public int burnDamage;
-    public override GameAction GetGameAction(List<CombatantView> targets, CombatantView caster)
+    public override GameAction GetGameAction(List<CombatantView> targets, CombatantView caster, EffectContext context)
     {
         ApplyBurnGA ga = new(burnDamage, targets[0]);
         return ga;

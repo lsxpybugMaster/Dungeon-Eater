@@ -12,7 +12,7 @@ public class AddRandomStatusEffectEffect : Effect
 
     [SerializeField] private string stackCountDice;
 
-    public override GameAction GetGameAction(List<CombatantView> targets, CombatantView caster)
+    public override GameAction GetGameAction(List<CombatantView> targets, CombatantView caster, EffectContext context)
     {
         return new AddRandomStatusEffectGA(statusEffectType, stackCountDice, targets);
     }

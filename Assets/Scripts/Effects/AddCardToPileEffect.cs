@@ -6,7 +6,7 @@ public class AddCardToPileEffect : Effect
     [SerializeField] private CardData cardData;
     [SerializeField] private PileType pileType;
 
-    public override GameAction GetGameAction(List<CombatantView> targets, CombatantView caster)
+    public override GameAction GetGameAction(List<CombatantView> targets, CombatantView caster, EffectContext context)
     {
         AddCardGA addCardGA = new(pileType, caster, cardData);
         return addCardGA;

@@ -79,6 +79,6 @@ public class CombatantView : MonoBehaviour
 
     public void Shake()
     {
-        transform.DOShakePosition(0.2f, 0.5f);
+        transform.DOShakePosition(Config.Instance.effectTime, 0.5f);
     }
 }

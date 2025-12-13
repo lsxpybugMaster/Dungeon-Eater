@@ -42,6 +42,11 @@ public class StatusEffectsSystem : MonoBehaviour
     {
         foreach (var target in ga.Targets)
         {
+            if (target == null)
+            {
+                Debug.Log("敌人已经没了!");
+            }
+
             //TODO: 如何将这些耦合的动画剔除？
             //直接调用打包好的动画工具
             yield return MotionUtil.Dash(

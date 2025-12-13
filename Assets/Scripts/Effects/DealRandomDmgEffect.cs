@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 与DealDamageEffect类似,处理骰子字符串，并解析对应伤害
 /// </summary>
-public class DealRandomDmgEffect : Effect
+public class DealRandomDmgEffect : Effect, INeedContext
 {
     /// <summary>
     /// 骰子判定字符串
@@ -16,9 +16,9 @@ public class DealRandomDmgEffect : Effect
     /// </summary>
     /// <param name="targets"></param>
     /// <returns></returns>
-    public override GameAction GetGameAction(List<CombatantView> targets, CombatantView caster)
+    public override GameAction GetGameAction(List<CombatantView> targets, CombatantView caster, EffectContext context)
     {
-        DealAttackGA dealAttackGA = new(diceString, targets, caster);
+        DealAttackGA dealAttackGA = new(diceString, targets, caster, context);
         return dealAttackGA;            
     }
 }

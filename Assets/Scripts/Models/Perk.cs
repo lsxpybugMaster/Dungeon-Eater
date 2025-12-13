@@ -43,7 +43,7 @@ public class Perk
                 targets.AddRange(effect.TargetMode.GetTargets(null));
             }
             //动作的执行者为敌人
-            GameAction perkEffectAction = effect.Effect.GetGameAction(targets, HeroSystem.Instance.HeroView);
+            GameAction perkEffectAction = effect.Effect.GetGameAction(targets, HeroSystem.Instance.HeroView, null);
 
             ActionSystem.Instance.AddReaction(perkEffectAction);
         }

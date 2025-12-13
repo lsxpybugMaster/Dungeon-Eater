@@ -33,7 +33,7 @@ MonoBehaviour:
     - rid: 2509721291522834436
       type: {class: DealRandomDmgEffect, ns: , asm: Assembly-CSharp}
       data:
-        diceString: 1d4
+        diceString: 1d8
     - rid: 2509721291522834438
       type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
       data:

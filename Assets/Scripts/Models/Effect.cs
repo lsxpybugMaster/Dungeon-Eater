@@ -15,5 +15,25 @@ public abstract class Effect
     /// 将效果转换为GameAction, 同时指明发起者Caster
     /// </summary>
     /// <returns></returns>
-    public abstract GameAction GetGameAction(List<CombatantView> targets, CombatantView caster);
+    public abstract GameAction GetGameAction(List<CombatantView> targets, CombatantView caster, EffectContext context);
+}
+
+/// <summary>
+/// 决定Effect效果,用于与同一张卡牌后续效果
+/// </summary>
+public class EffectContext
+{
+    public bool MainEffectSuccess { get; private set; } = true; //一定默认为true!
+
+    public void SetMainEffectSuccess(Result res)
+    {
+        if (res == Result.Success || res == Result.GiantSuccess) 
+        {
+            MainEffectSuccess = true;
+        }
+        else if (res == Result.GiantFail || res == Result.Failure)
+        {
+            MainEffectSuccess = false;
+        }
+    }
 }

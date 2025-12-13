@@ -226,7 +226,7 @@ public class CardSystem : Singleton<CardSystem>
     }
 
 
-    //IMPORTANT: 所有卡牌的功能在这里执行
+    //NOTE: 所有卡牌的功能在这里执行
     /// <summary>
     /// 卡牌功能执行函数
     /// </summary>
@@ -234,6 +234,8 @@ public class CardSystem : Singleton<CardSystem>
     /// <returns></returns>
     private IEnumerator PlayCardPerformer(PlayCardGA playCardGA)
     {
+        //IMPORTANT: AddReaction 不会立即执行,所以在 AddReaction 间的判断应与 AddReaction 的执行结果无关!!
+
         hand.Remove(playCardGA.Card);
         //删除卡牌后卡牌位置更新,同时返回删除的卡片
         CardView cardView = handView.RemoveCard(playCardGA.Card);
@@ -246,10 +248,12 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.Instance.AddReaction(spendManaGA);
 
 
+        //当前的临时卡牌上下文
+        EffectContext context = new();
         //解析该卡牌的手动指示目标Effect
         if (playCardGA.Card.ManualTargetEffect != null)
         {
-            PerformEffectGA performEffectGA = new(playCardGA.Card.ManualTargetEffect, new() { playCardGA.ManualTarget });
+            PerformEffectGA performEffectGA = new(playCardGA.Card.ManualTargetEffect, new() { playCardGA.ManualTarget }, context);
             ActionSystem.Instance.AddReaction(performEffectGA);
         }
         //注意手动指示目标Effect和其余Effect不冲突,因此这里无需if-else
@@ -259,7 +263,8 @@ public class CardSystem : Singleton<CardSystem>
         {
             List<CombatantView> targets = effectWrapper.TargetMode.GetTargets(playCardGA.ManualTarget);
 
-            PerformEffectGA performEffectGA = new(effectWrapper.Effect, targets);
+            //IMPORTANT: 其中 context 会先被 ManualTargetEffect.GA 修改,实现 effect间通信
+            PerformEffectGA performEffectGA = new(effectWrapper.Effect, targets, context);
             //注意现在是在Performer中,若想执行其他Action必须使用AddReaction 
 
             ActionSystem.Instance.AddReaction(performEffectGA);

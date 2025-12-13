@@ -78,7 +78,8 @@ public class DamageSystem : MonoBehaviour
             target.M.Damage(damage);
 
             Instantiate(damageVFX, target.transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(0.15f);
+            //时间一定要用黑板变量统一控制
+            yield return new WaitForSeconds(Config.Instance.effectTime);
 
             if (target.M.CurrentHealth <= 0)
             {
@@ -105,7 +106,9 @@ public class DamageSystem : MonoBehaviour
         //这里由于需要判定重击双倍伤害,所以没有直接使用封装好的工具类
         int damageDice = DiceRollUtil.DfromString(ga.DiceStr);
 
-        switch (CheckUtil.AttackRoll(ga.Caster, ga.Targets[0]))
+        Result res;
+
+        switch (res = CheckUtil.AttackRoll(ga.Caster, ga.Targets[0]))
         {
             case Result.GiantSuccess:
                 BattleInfoUI.Instance.AddThrowResult(2 * damageDice, ga.DiceStr);
@@ -122,6 +125,8 @@ public class DamageSystem : MonoBehaviour
                 break;
         }
 
+        ga.Context?.SetMainEffectSuccess(res);
+        
         yield return null;
     }
 }

@@ -76,7 +76,7 @@ public class EnemySystem : Singleton<EnemySystem>
 
         string diceStr = ga.SkillType == EnemySkill.LightHit ? attacker.LightAttackPowerStr : attacker.HeavyAttackPowerStr;
 
-        DealAttackGA dealAttackGA = new(diceStr, new() { HeroSystem.Instance.HeroView }, ga.Caster);
+        DealAttackGA dealAttackGA = new(diceStr, new() { HeroSystem.Instance.HeroView }, ga.Caster, null);
         ActionSystem.Instance.AddReaction(dealAttackGA);
 
         yield return null;

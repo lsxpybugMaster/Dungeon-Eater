@@ -63,7 +63,7 @@ public class StatusEffect
 
         if (effect != null)
         {
-            GameAction ga = effect.GetGameAction(new() { c.__view__ }, c.__view__);
+            GameAction ga = effect.GetGameAction(new() { c.__view__ }, c.__view__ , null);
             // 该函数会在其他Performer中执行,所以需要加Reaction而非Performer
             ActionSystem.Instance.AddReaction(ga);
         }
