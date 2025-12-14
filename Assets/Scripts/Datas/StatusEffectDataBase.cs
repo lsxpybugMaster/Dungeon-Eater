@@ -10,32 +10,28 @@ using UnityEngine;
 //TODO: 优化 DataBase, 使用公共基类描述
 /// </summary>
 [CreateAssetMenu(menuName = "DataBase/StatusEffectDatabase")]
-public class StatusEffectDataBase : ScriptableObject
+public class StatusEffectDataBase : DataBase<StatusEffectType, StatusEffect>
 {
-    [SerializeField] private List<StatusEffect> allEffects = new();
-
-    private Dictionary<StatusEffectType, StatusEffect> typeLookup;
-
 
     // --------------------- 初始化 ---------------------
-    public void Init()
-    {
-        if (typeLookup != null) return; // 避免重复初始化
+    //public void Init()
+    //{
+    //    if (typeLookup != null) return; // 避免重复初始化
 
-        typeLookup = new();
+    //    typeLookup = new();
 
-        foreach (var effect in allEffects)
-        {
-            if (effect == null) continue;
+    //    foreach (var effect in allEffects)
+    //    {
+    //        if (effect == null) continue;
 
-            if (typeLookup.ContainsKey(effect.Type))
-                Debug.LogWarning($"[StatusEffectDataBase] Duplicate EffectType detected: {effect.Type}");
-            else
-                typeLookup.Add(effect.Type, effect);
-        }
+    //        if (typeLookup.ContainsKey(effect.Type))
+    //            Debug.LogWarning($"[StatusEffectDataBase] Duplicate EffectType detected: {effect.Type}");
+    //        else
+    //            typeLookup.Add(effect.Type, effect);
+    //    }
 
-        Debug.Log($"[StatusEffectDataBase] Initialized with {typeLookup.Count} effects.");
-    }
+    //    Debug.Log($"[StatusEffectDataBase] Initialized with {typeLookup.Count} effects.");
+    //}
 
     // --------------------- 单例访问 ---------------------
     private static StatusEffectDataBase _instance;
@@ -60,7 +56,7 @@ public class StatusEffectDataBase : ScriptableObject
     /// <summary> 通过卡牌ID查找模板 </summary>
     public static StatusEffect GetEffect(StatusEffectType effectType)
     {
-        return I.typeLookup.TryGetValue(effectType, out var e)
+        return I.idLookup.TryGetValue(effectType, out var e)
             ? e
             : null;
     }

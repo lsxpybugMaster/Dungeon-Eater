@@ -9,36 +9,37 @@ using UnityEngine;
 /// 对外提供只读接口，禁止外部直接修改或访问底层列表。
 /// </summary>
 [CreateAssetMenu(menuName = "DataBase/CardDatabase")]
-public class CardDatabase : ScriptableObject
+public class CardDatabase : DataBase<string,CardData> 
 {
-    // 外部配置卡牌总数据
-    [SerializeField] private List<CardData> allCards = new();
+    //// 外部配置卡牌总数据
+    //[SerializeField] private List<CardData> allCards = new();
 
-    // 索引卡牌
-    private Dictionary<string, CardData> idLookup;
+    //// 索引卡牌
+    //private Dictionary<string, CardData> idLookup;
 
     // --------------------- 初始化 ---------------------
-    public void Init()
-    {
-        if (idLookup != null) return; // 避免重复初始化
+    //public void Init()
+    //{
+    //    if (idLookup != null) return; // 避免重复初始化
 
-        idLookup = new Dictionary<string, CardData>();
-        //不考虑大小写的查找
+    //    idLookup = new Dictionary<string, CardData>();
+    //    //不考虑大小写的查找
 
-        foreach (var card in allCards)
-        {
-            if (card == null) continue;
+    //    foreach (var card in allCards)
+    //    {
+    //        if (card == null) continue;
 
-            if (idLookup.ContainsKey(card.Id))
-                Debug.LogWarning($"[CardDatabase] Duplicate Card ID detected: {card.Id}");
-            else
-                idLookup.Add(card.Id, card);   
-        }
+    //        if (idLookup.ContainsKey(card.Id))
+    //            Debug.LogWarning($"[CardDatabase] Duplicate Card ID detected: {card.Id}");
+    //        else
+    //            idLookup.Add(card.Id, card);   
+    //    }
 
-        Debug.Log($"[CardDatabase] Initialized with {allCards.Count} cards.");
-    }
+    //    Debug.Log($"[CardDatabase] Initialized with {allCards.Count} cards.");
+    //}
 
     // --------------------- 单例访问 ---------------------
+    // 这块逻辑提取成基类需要泛型,Resources.Load使用泛型会有问题
     private static CardDatabase _instance;
     public static CardDatabase Instance
     {
@@ -74,7 +75,7 @@ public class CardDatabase : ScriptableObject
     public static CardData GetRandomCard(Func<CardData, bool> filter = null)
     {
         //确定随机的范围
-        var pool = filter == null ? Instance.allCards : Instance.allCards.Where(filter).ToList();
+        var pool = filter == null ? Instance.datas : Instance.datas.Where(filter).ToList();
         if (pool.Count == 0) return null;
 
         int index = UnityEngine.Random.Range(0, pool.Count);
@@ -83,5 +84,5 @@ public class CardDatabase : ScriptableObject
 
 
     /// <summary> 获取所有卡牌（只读） </summary>
-    public static IReadOnlyList<CardData> AllCards => Instance.allCards;
+    public static IReadOnlyList<CardData> AllCards => Instance.datas;
 }

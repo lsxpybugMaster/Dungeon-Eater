@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Data/Card")]
-public class CardData : ScriptableObject
+public class CardData : ScriptableObject, IHaveKey<string>
 {
     /*
         区分属性与字段
@@ -13,6 +13,8 @@ public class CardData : ScriptableObject
      */
 
     [field: SerializeField] public string Id { get; private set; } //唯一标识符
+    public string GetKey() => Id; //其作为数据库索引
+
     [field: SerializeField] public string Description { get; private set; }
     [field: SerializeField] public int Mana { get; private set; }
     [field: SerializeField] public Sprite Image { get; private set; }

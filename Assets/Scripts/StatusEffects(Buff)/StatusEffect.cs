@@ -23,9 +23,11 @@ public enum StatusEffectType
  */
 
 [System.Serializable]
-public class StatusEffect
+public class StatusEffect : IHaveKey<StatusEffectType>
 {
     public StatusEffectType Type;
+    public StatusEffectType GetKey() => Type;
+
     public Sprite sprite;
 
     //支持外部数据配置
