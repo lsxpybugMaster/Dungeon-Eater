@@ -27,12 +27,8 @@ public class StatusEffect
 {
     public StatusEffectType Type;
     public Sprite sprite;
-    
-    public int decayPerRound; //衰减(每回合)
-    public int decayPerEffect; //衰减(每次执行)
 
     //支持外部数据配置
-    //[field: SerializeReference, SR] public Effect effectOnStart;
     [field: SerializeReference, SR] public Effect effect;
 
     /// <summary>
@@ -40,16 +36,7 @@ public class StatusEffect
     /// </summary>
     /// <param name="c"></param>
     public virtual void OnTurnStart(Combatant c)
-    {
-        //只要执行该函数,说明状态不为0,所以要更新状态
-        //状态结算的效果
-        //if (effectOnStart != null)
-        //{
-        //    Debug.Log("==OnTurnStart");
-        //    GameAction ga = effectOnStart.GetGameAction(new() { c.__view__ }, c.__view__);
-        //    // 该函数会在其他Performer中执行,所以需要加Reaction而非Performer
-        //    ActionSystem.Instance.AddReaction(ga);
-        //}       
+    {  
     }
 
     /// <summary>
@@ -58,16 +45,11 @@ public class StatusEffect
     /// <param name="c"></param>
     public virtual void OnTurnEnd(Combatant c) 
     {
-        //只要执行该函数,说明状态不为0,所以要更新状态
-        //c.RemoveStatusEffect(Type, decayPerRound);
-
         if (effect != null)
         {
             GameAction ga = effect.GetGameAction(new() { c.__view__ }, c.__view__ , null);
             // 该函数会在其他Performer中执行,所以需要加Reaction而非Performer
             ActionSystem.Instance.AddReaction(ga);
         }
-
-
     }
 }

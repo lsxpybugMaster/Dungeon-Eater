@@ -11,14 +11,27 @@ public class EffectPerformSystem : MonoBehaviour
 
     private void OnEnable()
     {
+        ActionSystem.AttachPerformer<DecayEffectGA>(DecayEffectPerformer);
+
         ActionSystem.AttachPerformer<ApplyBurnGA>(ApplyBurnPerformer);
         ActionSystem.AttachPerformer<ApplyDizzyGA>(ApplyDizzyPerformer);
     }
 
     private void OnDisable()
     {
+        ActionSystem.DetachPerformer<DecayEffectGA>();
+
         ActionSystem.DetachPerformer<ApplyBurnGA>();
         ActionSystem.DetachPerformer<ApplyDizzyGA>();
+    }
+
+    private IEnumerator DecayEffectPerformer(DecayEffectGA decayEffectGA)
+    {
+        CombatantView target = decayEffectGA.Target;
+        var type = decayEffectGA.Type;
+        int decay = decayEffectGA.Decay;
+        target.M.RemoveStatusEffect(type, decay);
+        yield return null;
     }
 
     private IEnumerator ApplyBurnPerformer(ApplyBurnGA applyBurnGA)
