@@ -16,4 +16,42 @@ public static class ListExtensions
         list.Remove(t);
         return t;
     }
+
+
+    // 从列表中选择n个数据（允许重复）并返回
+    public static List<T> GetRandomN<T>(this List<T> list, int count, bool allowDuplicates = true)
+    {
+        List<T> result = new List<T>();
+
+        // 如果列表为空或请求数量小于等于0，返回空列表
+        if (list.Count == 0 || count <= 0)
+            return result;
+
+        // 如果允许重复
+        if (allowDuplicates)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                int r = Random.Range(0, list.Count);
+                result.Add(list[r]);
+            }
+        }
+        else // 不允许重复
+        {
+            // 如果请求数量超过列表元素数量，限制为列表元素数量
+            int drawCount = Mathf.Min(count, list.Count);
+
+            // 创建一个临时列表副本以避免修改原始列表
+            List<T> tempList = new List<T>(list);
+
+            for (int i = 0; i < drawCount; i++)
+            {
+                int r = Random.Range(0, tempList.Count);
+                result.Add(tempList[r]);
+                tempList.RemoveAt(r);
+            }
+        }
+
+        return result;
+    }
 }

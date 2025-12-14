@@ -19,7 +19,8 @@ MonoBehaviour:
   <FixedAttack>k__BackingField: 5
   <LightAttackStr>k__BackingField: 1d8
   <HeavyAttackStr>k__BackingField: 1d20
-  <ConditionedIntendTable>k__BackingField: []
+  <ConditionedIntendTable>k__BackingField:
+  - rid: 2509721378210971652
   <RandomIntendTable>k__BackingField:
   - rid: 5386319821270941696
   - rid: 5386319980480430088
@@ -34,6 +35,24 @@ MonoBehaviour:
         skill: 3
         statusEffectType: 0
         stackCount: 10
+    - rid: 2509721378210971652
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: 2509721378210971653
+        Intend:
+          rid: 2509721378210971654
+        P: 0
+    - rid: 2509721378210971653
+      type: {class: HPCondition, ns: , asm: Assembly-CSharp}
+      data:
+        threshold: 0.4
+    - rid: 2509721378210971654
+      type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 5
+        cardData: {fileID: 11400000, guid: 82282b7cd3517274cbdb53f43717089a, type: 2}
+        pileType: 0
     - rid: 5386319821270941696
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
