@@ -5,8 +5,15 @@ using UnityEngine;
 
 //参考CardData的设计
 [CreateAssetMenu(menuName = "Data/Enemy")]
-public class EnemyData : CombatantData
+public class EnemyData : CombatantData, IHaveKey<string>
 {
+    // 与生成有关的配置数据,动态数据会分析这些信息,决定是否包含这些内容。
+    [field: SerializeField] public string ID { get; private set; }
+    [field: SerializeField] public int Diffculty { get; private set; }
+    [field: SerializeField] public List<int> AppearLevels { get; private set; }
+
+    public string GetKey() => ID;
+
     // 基本数据 => 已存储至 CombatantData
 
     //更细粒度的攻击数值

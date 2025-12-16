@@ -12,49 +12,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699d0857e5115e343af7e1a59939df97, type: 3}
   m_Name: StatusEffectDataBase
   m_EditorClassIdentifier: 
-  allEffects:
+  datas:
+  - Type: 0
+    sprite: {fileID: 21300000, guid: d286a86fd9593d7488fcd81041ffc296, type: 3}
+    effect:
+      rid: 2509721379855400965
   - Type: 1
     sprite: {fileID: 21300000, guid: 348399bcbcd65574ba80aa8e02017ef6, type: 3}
     effect:
-      rid: 2509721291522834432
-  - Type: 0
-    sprite: {fileID: 21300000, guid: 0a2c0895084dff442982047574702fad, type: 3}
-    effect:
-      rid: 2509721378210971648
+      rid: 2509721379855400966
   - Type: 2
     sprite: {fileID: 21300000, guid: 182d4995aa60fe1408e7d76d63bf6a21, type: 3}
     effect:
-      rid: 2509721378210971649
+      rid: 2509721379855400967
   - Type: 3
     sprite: {fileID: 21300000, guid: 128b1274a4e58fc4e8985aafb91a3e14, type: 3}
     effect:
-      rid: 2509721378210971651
+      rid: 2509721379855400968
   - Type: 4
     sprite: {fileID: 21300108, guid: 09e4c6a7d75923945afe43953ef58ad2, type: 3}
     effect:
-      rid: 2509721291522834433
+      rid: 2509721379855400969
   references:
     version: 2
     RefIds:
-    - rid: 2509721291522834432
-      type: {class: ApplyBurnEffect, ns: , asm: Assembly-CSharp}
-      data:
-        burnDamage: 2
-    - rid: 2509721291522834433
-      type: {class: ApplyDizzyEffect, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 2509721378210971648
+    - rid: 2509721379855400965
       type: {class: DecayStatusEffect, ns: , asm: Assembly-CSharp}
       data:
         decay: 9999
         type: 0
-    - rid: 2509721378210971649
+    - rid: 2509721379855400966
+      type: {class: ApplyBurnEffect, ns: , asm: Assembly-CSharp}
+      data:
+        burnDamage: 4
+    - rid: 2509721379855400967
       type: {class: DecayStatusEffect, ns: , asm: Assembly-CSharp}
       data:
         decay: 1
         type: 2
-    - rid: 2509721378210971651
+    - rid: 2509721379855400968
       type: {class: DecayStatusEffect, ns: , asm: Assembly-CSharp}
       data:
         decay: 1
         type: 3
+    - rid: 2509721379855400969
+      type: {class: ApplyDizzyEffect, ns: , asm: Assembly-CSharp}
+      data: 

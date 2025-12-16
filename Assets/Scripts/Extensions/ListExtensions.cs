@@ -17,6 +17,12 @@ public static class ListExtensions
         return t;
     }
 
+    public static T GetRamdom<T>(this List<T> list)
+    {
+        if (list.Count == 0) return default;
+        int r = Random.Range(0, list.Count);
+        return list[r];
+    }
 
     // 从列表中选择n个数据（允许重复）并返回
     public static List<T> GetRandomN<T>(this List<T> list, int count, bool allowDuplicates = true)

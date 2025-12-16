@@ -12,15 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
   m_Name: E1
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: 0}
-  <Health>k__BackingField: 0
-  <Proficiency>k__BackingField: 0
-  <Flexbility>k__BackingField: 0
-  <FixedAttack>k__BackingField: 0
-  <LightAttackStr>k__BackingField: 
-  <HeavyAttackStr>k__BackingField: 
+  <Image>k__BackingField: {fileID: 131729264, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Health>k__BackingField: 35
+  <Proficiency>k__BackingField: 1
+  <Flexbility>k__BackingField: 1
+  <FixedAttack>k__BackingField: 12
+  <LightAttackStr>k__BackingField: 1d8
+  <HeavyAttackStr>k__BackingField: 3d6
   <ConditionedIntendTable>k__BackingField: []
-  <RandomIntendTable>k__BackingField: []
+  <RandomIntendTable>k__BackingField:
+  - rid: 2509721379855400960
+  - rid: 2509721379855400962
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2509721379855400960
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 2509721379855400961
+        P: 0
+    - rid: 2509721379855400961
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 0
+    - rid: 2509721379855400962
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 2509721379855400963
+        P: 0
+    - rid: 2509721379855400963
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 1

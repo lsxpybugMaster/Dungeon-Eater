@@ -36,10 +36,10 @@ public class EnemySystem : Singleton<EnemySystem>
 
     public void Setup(List<EnemyData> enemyDatas)
     {
-        List<EnemyData> enemies = enemyDatas.GetRandomN(Random.Range(2,4));
+        //List<EnemyData> enemies = enemyDatas.GetRandomN(Random.Range(2,4));
 
-        // foreach (var enemyData in enemyDatas)
-        foreach (var enemyData in enemies)
+        foreach (var enemyData in enemyDatas)
+        //foreach (var enemyData in enemies)
         {
             enemyBoardView.AddEnemy(enemyData);
         }

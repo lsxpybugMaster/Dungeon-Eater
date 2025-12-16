@@ -1,28 +1,28 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class DataBase<TKey, TValue> : ScriptableObject where TValue : class, IHaveKey<TKey>
 {
-    // Íâ²¿ÅäÖÃ¿¨ÅÆ×ÜÊı¾İ
+    // å¤–éƒ¨é…ç½®å¡ç‰Œæ€»æ•°æ®
     [SerializeField] protected List<TValue> datas = new();
 
-    // Ë÷Òı¿¨ÅÆ
+    // ç´¢å¼•å¡ç‰Œ
     protected Dictionary<TKey, TValue> idLookup;
 
-    // --------------------- ³õÊ¼»¯ ---------------------
-    protected void Init()
+    // --------------------- åˆå§‹åŒ– ---------------------
+    protected virtual void Init()
     {
-        if (idLookup != null) return; // ±ÜÃâÖØ¸´³õÊ¼»¯
+        if (idLookup != null) return; // é¿å…é‡å¤åˆå§‹åŒ–
 
         idLookup = new Dictionary<TKey, TValue>();
-        //²»¿¼ÂÇ´óĞ¡Ğ´µÄ²éÕÒ
+        //ä¸è€ƒè™‘å¤§å°å†™çš„æŸ¥æ‰¾
 
         foreach (var d in datas)
         {
             if (d == null) continue;
 
-            TKey key = d.GetKey(); //ÀûÓÃ½Ó¿Ú + ·ºĞÍÔ¼Êø
+            TKey key = d.GetKey(); //åˆ©ç”¨æ¥å£ + æ³›å‹çº¦æŸ
 
             if (idLookup.ContainsKey(key))
                 Debug.LogWarning($"[{GetType().Name}] Duplicate ID detected: {key}");
@@ -32,4 +32,5 @@ public abstract class DataBase<TKey, TValue> : ScriptableObject where TValue : c
 
         Debug.Log($"[{GetType().Name}] Initialized with {datas.Count} data.");
     }
+
 }

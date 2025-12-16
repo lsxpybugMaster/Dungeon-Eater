@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
   m_Name: ArrowRain
   m_EditorClassIdentifier: 
+  <Id>k__BackingField: 62b06a56-6b4a-4d9e-86a1-6881561aec11
   <Description>k__BackingField: Deal 10 damage to all Enemies
   <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 21300000, guid: f5539375b633be2478867d3889959881, type: 3}
@@ -21,16 +22,17 @@ MonoBehaviour:
   - <TargetMode>k__BackingField:
       rid: 723492467705118724
     <Effect>k__BackingField:
-      rid: 723492467705118721
+      rid: 2509721379855400964
+  <CardTags>k__BackingField: 
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 723492467705118721
-      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
-      data:
-        damageAmount: 10
     - rid: 723492467705118724
       type: {class: AllEnemiesTM, ns: , asm: Assembly-CSharp}
       data: 
+    - rid: 2509721379855400964
+      type: {class: DealRandomDmgEffect, ns: , asm: Assembly-CSharp}
+      data:
+        diceString: 10d10

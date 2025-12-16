@@ -64,7 +64,9 @@ public class BattleControlSystem : MonoBehaviour
         HeroSystem.Instance.Setup(heroState);
 
         //初始化敌人信息
-        EnemySystem.Instance.Setup(enemyDatas);
+        //OPTIMIZE: 数据库读取
+        EnemySystem.Instance.Setup(EnemyGroupDatabase.GetRandomGroupByLevel(1).Enemies);
+        //EnemySystem.Instance.Setup(enemyDatas);
 
         //现在要传入持久化数据了
         CardSystem.Instance.Setup(heroState.Deck);

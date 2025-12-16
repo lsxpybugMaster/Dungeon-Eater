@@ -1884,12 +1884,12 @@ Transform:
   m_Children:
   - {fileID: 1950506442}
   - {fileID: 1207237733}
+  - {fileID: 1546738022}
   - {fileID: 1184827847}
   - {fileID: 1671130621}
   - {fileID: 1224010739}
   - {fileID: 1277458684}
   - {fileID: 681689741}
-  - {fileID: 1546738022}
   - {fileID: 1307189774}
   - {fileID: 959670466}
   - {fileID: 1461735290}
@@ -3170,6 +3170,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8e4628ec52e667649b203d1b30df6866, type: 2}
   - {fileID: 11400000, guid: 8e4628ec52e667649b203d1b30df6866, type: 2}
   - {fileID: 11400000, guid: 10bc7e35f49c74449a00e3e0dc766504, type: 2}
+  - {fileID: 11400000, guid: b1ad47719dc920b4191fd66ddb5f9c00, type: 2}
   perkData: {fileID: 11400000, guid: 2ad045eb17163a349894181fbed1d3ad, type: 2}
 --- !u!1 &1567808580
 GameObject:
