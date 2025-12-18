@@ -34,6 +34,7 @@ public class GameManager : PersistentSingleton<GameManager>
     //STEP: 保存持久化数据 【注意】纯C#类需要实例化再用
     public HeroState HeroState { get; private set; }
     public MapState MapState { get; private set; }
+    public EnemyPool EnemyPool { get; private set; }
 
     //STEP:保存功能模块(纯C#类)
     public PlayerDeckController PlayerDeckController { get; private set; }
@@ -65,6 +66,7 @@ public class GameManager : PersistentSingleton<GameManager>
         //数据部分由State类自己获取
         HeroState = new HeroState();
         MapState = new MapState();
+
         
         //初始化全局UI对象
         InitPersistUI(); 
@@ -74,6 +76,8 @@ public class GameManager : PersistentSingleton<GameManager>
 
         //通知其他注册了该事件的脚本进行初始化,以此确保该脚本的执行在它们前面
         OnGameManagerInitialized?.Invoke();
+
+        EnterNewLevel(1);
     }
 
 
@@ -132,5 +136,12 @@ public class GameManager : PersistentSingleton<GameManager>
 
         //大模式切换,通知其他
         PersistUIController.ResetUp();
+    }
+
+    //进入新的大关卡
+    public void EnterNewLevel(int level)
+    {
+        //LevelManager
+        EnemyPool = new(level);
     }
 }

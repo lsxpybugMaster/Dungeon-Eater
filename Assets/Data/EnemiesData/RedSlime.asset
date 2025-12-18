@@ -16,6 +16,9 @@ MonoBehaviour:
   <Health>k__BackingField: 15
   <Proficiency>k__BackingField: 2
   <Flexbility>k__BackingField: 1
+  ID: 2123
+  <Diffculty>k__BackingField: 1
+  <AppearLevels>k__BackingField: 01000000
   <FixedAttack>k__BackingField: 5
   <LightAttackStr>k__BackingField: 1d8
   <HeavyAttackStr>k__BackingField: 1d20

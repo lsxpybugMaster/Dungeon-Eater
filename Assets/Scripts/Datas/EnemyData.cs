@@ -8,7 +8,8 @@ using UnityEngine;
 public class EnemyData : CombatantData, IHaveKey<string>
 {
     // 与生成有关的配置数据,动态数据会分析这些信息,决定是否包含这些内容。
-    [field: SerializeField] public string ID { get; private set; }
+    [Header("生成配置")]
+    public string ID;
     [field: SerializeField] public int Diffculty { get; private set; }
     [field: SerializeField] public List<int> AppearLevels { get; private set; }
 

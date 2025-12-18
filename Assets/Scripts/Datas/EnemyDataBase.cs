@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //仅存储敌人信息,复杂的索引动态地分析,不再存储
-//[CreateAssetMenu(menuName = "DataBase/CardDatabase")]
+[CreateAssetMenu(menuName = "DataBase/EnemyDatabase")]
 public class EnemyDataBase : DataBase<string, EnemyData>
 {
     // --------------------- 单例访问 ---------------------

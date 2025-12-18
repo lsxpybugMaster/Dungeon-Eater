@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,9 +6,9 @@ using UnityEngine;
 public abstract class TargetMode
 {
     /// <summary>
-    /// ³éÏó·½·¨,·µ»ØÖµÎªËùÓĞ´¥·¢¶¯×÷µÄÄ¿±ê
+    /// æŠ½è±¡æ–¹æ³•,è¿”å›å€¼ä¸ºæ‰€æœ‰è§¦å‘åŠ¨ä½œçš„ç›®æ ‡
     /// </summary>
-    /// <param name="manualTarget">Èç¹ûÎŞĞè¸Ãº¯Êı,´«Èë¿Õ²Î</param>
+    /// <param name="manualTarget">å¦‚æœæ— éœ€è¯¥å‡½æ•°,ä¼ å…¥ç©ºå‚</param>
     /// <returns></returns>
     public abstract List<CombatantView> GetTargets(CombatantView manualTarget);
 }
