@@ -13,7 +13,7 @@ public class EnemyGroup
 
 [CreateAssetMenu(menuName = "Data/EnemyGroupData")]
 //存储一些搭配好的固定敌人
-public class EnemyGroupData : ScriptableObject, IHaveKey<int>
+public class EnemyGroupsData : ScriptableObject, IHaveKey<int>
 {
     //属于哪一层关卡
     [SerializeField] int level;

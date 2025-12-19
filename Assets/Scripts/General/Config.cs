@@ -7,6 +7,9 @@ using UnityEngine;
 /// </summary>
 public class Config : PersistentSingleton<Config>
 {
+    [Header("战斗数值相关系统")]
+    public int difficultScore;
+
     [Header("卡牌系统相关参数")]
     //卡牌大小
     [Range(0, 2f)] public float cardSize; 

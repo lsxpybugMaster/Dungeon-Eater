@@ -1,6 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 //静态工具类,无需挂载脚本,直接使用
 public static class ListExtensions 
@@ -11,16 +12,29 @@ public static class ListExtensions
     {
         //default 关键字返回T类型的默认值
         if (list.Count == 0) return default;
-        int r = Random.Range(0, list.Count);
+        int r = UnityEngine.Random.Range(0, list.Count);
         T t = list[r];
         list.Remove(t);
         return t;
     }
 
-    public static T GetRamdom<T>(this List<T> list)
+    public static T GetRandom<T>(this List<T> list)
     {
         if (list.Count == 0) return default;
-        int r = Random.Range(0, list.Count);
+        int r = UnityEngine.Random.Range(0, list.Count);
+        return list[r];
+    }
+
+    // 使用 System.Random（可控随机）
+    public static T GetRandom<T>(this List<T> list, System.Random rng)
+    {
+        if (list == null || list.Count == 0)
+            return default;
+
+        if (rng == null)
+            throw new ArgumentNullException(nameof(rng));
+
+        int r = rng.Next(0, list.Count); 
         return list[r];
     }
 
@@ -38,7 +52,7 @@ public static class ListExtensions
         {
             for (int i = 0; i < count; i++)
             {
-                int r = Random.Range(0, list.Count);
+                int r = UnityEngine.Random.Range(0, list.Count);
                 result.Add(list[r]);
             }
         }
@@ -52,7 +66,7 @@ public static class ListExtensions
 
             for (int i = 0; i < drawCount; i++)
             {
-                int r = Random.Range(0, tempList.Count);
+                int r = UnityEngine.Random.Range(0, tempList.Count);
                 result.Add(tempList[r]);
                 tempList.RemoveAt(r);
             }

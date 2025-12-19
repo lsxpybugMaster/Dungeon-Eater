@@ -1,6 +1,7 @@
 ﻿using SerializeReferenceEditor;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 //参考CardData的设计
@@ -34,4 +35,20 @@ public class EnemyData : CombatantData, IHaveKey<string>
         条件行为: 按顺序判断，依次执行直到第一个事件执行成功
         随机行为: 如果条件行为没有选出事件,则在随机行为中按概率抽取行为(概率和为1)
      */
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        // 获取 asset 路径
+        string path = AssetDatabase.GetAssetPath(this);
+        if (string.IsNullOrEmpty(path)) return;
+
+        // 文件名（不含扩展名）
+        string fileName = System.IO.Path.GetFileNameWithoutExtension(path);
+
+        ID = fileName;
+
+        // 告诉数据已经修改,写回磁盘
+        EditorUtility.SetDirty(this);
+    }
+#endif
 }
