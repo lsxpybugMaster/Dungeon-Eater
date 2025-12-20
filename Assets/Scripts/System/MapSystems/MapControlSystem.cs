@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameManager;
 
 /// <summary>
 /// 负责初始化地图,以及存储一些地图配置信息(在编辑器中编辑的)
@@ -49,21 +50,41 @@ public class MapControlSystem : Singleton<MapControlSystem>
     void Start()
     {
         //防止初次进入Map场景时该脚本早于GameManager初始化,导致重复执行setup函数
-        if (!hasSetup)
-            SetupMap();
+        //if (!hasSetup)
+        //    SetupMap();
+
+        StartCoroutine(WaitAndSetup());
     }
+
+
+    private IEnumerator WaitAndSetup()
+    {
+        // 等 GameManager 实例存在
+        while (GameManager.Instance == null)
+            yield return null;
+
+        // 等 GameManager 完成初始化
+        while (GameManager.Instance.Phase != GameManagerPhase.Ready)
+            yield return null;
+
+        // 防止重复初始化
+        // if (hasSetup) yield break;
+
+        SetupMap();
+    }
+
 
 
     private void OnEnable()
     {
         //确保该系统晚于GameManager创建,防止获取不到持久数据
-        GameManager.OnGameManagerInitialized += SetupMap;
+        //GameManager.OnGameManagerInitialized += SetupMap;
     }
 
 
     private void OnDisable()
     {
-        GameManager.OnGameManagerInitialized -= SetupMap;
+        //GameManager.OnGameManagerInitialized -= SetupMap;
     }
 
 

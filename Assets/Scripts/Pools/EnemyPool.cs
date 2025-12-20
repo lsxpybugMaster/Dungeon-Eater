@@ -5,6 +5,7 @@ using UnityEngine;
 /*
     动态存储当前关卡下的敌人
     解析EnemyDataBase并使用字典封装
+    EnemiesGroup => EnemyGroup => enemies (List<EnemyData>)
  */
 public class EnemyPool
 {
@@ -49,8 +50,18 @@ public class EnemyPool
         return EnemiesDifficulty[diff].GetRandom();
     }
 
-    public int GetEnemyLenByDifficulty(int diff)
+    public EnemyData GetEnemyByDifficulty(int diff, System.Random rng)
     {
-        return EnemiesDifficulty[diff].Count;
+        return EnemiesDifficulty[diff].GetRandom(rng);
+    }
+
+    public List<EnemyData> GetEnemyListByDiffculty(int diff)
+    {
+        return EnemiesGroup.GetRandom().Enemies;
+    }
+
+    public List<EnemyData> GetEnemyListByDiffculty(int diff, System.Random rng)
+    {
+        return EnemiesGroup.GetRandom(rng).Enemies;
     }
 }

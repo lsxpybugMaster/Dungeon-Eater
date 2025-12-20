@@ -1175,6 +1175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1413040179464688424}
   - component: {fileID: 6958478280189695525}
+  - component: {fileID: 7754546062802205028}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1182,6 +1183,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7754546062802205028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7754546062802205027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95cc706a0d48e6340bfe57698ff3d004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficultScore: 3
+  cardSize: 0.7
+  cardShowSize: 0.8
+  freezeTime: 0.4
+  moveTime: 0.15
+  scaleTime: 0.15
+  effectTime: 0.4
+  attackTime: 0.15
+  logicBetweentime: 0.5
 --- !u!114 &8302273042198741385
 MonoBehaviour:
   m_ObjectHideFlags: 0

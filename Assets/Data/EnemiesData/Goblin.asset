@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
+  m_Name: Goblin
+  m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: -1085446695, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Health>k__BackingField: 11
+  <Proficiency>k__BackingField: 2
+  <Flexbility>k__BackingField: 1
+  ID: Goblin
+  <Diffculty>k__BackingField: 1
+  <AppearLevels>k__BackingField: 01000000
+  <FixedAttack>k__BackingField: 5
+  <LightAttackStr>k__BackingField: 1d8
+  <HeavyAttackStr>k__BackingField: 1d20
+  <ConditionedIntendTable>k__BackingField:
+  - rid: 5386319798658924564
+  - rid: 5386319980480430085
+  <RandomIntendTable>k__BackingField:
+  - rid: 5386319798658924563
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 5386319798658924563
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 5386320117043036160
+        P: 0
+    - rid: 5386319798658924564
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: 5386319798658924565
+        Intend:
+          rid: 5386319798658924570
+        P: 0.75
+    - rid: 5386319798658924565
+      type: {class: HPCondition, ns: , asm: Assembly-CSharp}
+      data:
+        threshold: 0.5
+    - rid: 5386319798658924570
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 1
+    - rid: 5386319980480430085
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: 5386319980480430086
+        Intend:
+          rid: 5386319980480430090
+        P: 0.9
+    - rid: 5386319980480430086
+      type: {class: HPCondition, ns: , asm: Assembly-CSharp}
+      data:
+        threshold: 0.5
+    - rid: 5386319980480430090
+      type: {class: HealIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 4
+        healAmount: 10
+    - rid: 5386320117043036160
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 0

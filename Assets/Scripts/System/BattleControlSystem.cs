@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameManager;
 
 /// <summary>
 /// 初始化系统(如开局发牌）
@@ -18,21 +19,24 @@ public class BattleControlSystem : MonoBehaviour
 
     [SerializeField] private PerkData perkData;
 
+    private EnemyGroupGenerator enemyGroupGenerator;
+
     private void OnEnable()
     {
-        GameManager.OnGameManagerInitialized += SetupBattle;
+        // GameManager.OnGameManagerInitialized += SetupBattle;
+        
         //监听事件,一旦所有敌人被杀死,则执行胜利结算的相关工作
         ActionSystem.SubscribeReaction<KillAllEnemyGA>(BattleWin, ReactionTiming.POST);
     }
 
     private void OnDisable()
     {
-        GameManager.OnGameManagerInitialized -= SetupBattle;
+        //GameManager.OnGameManagerInitialized -= SetupBattle;
 
         ActionSystem.UnsubscribeReaction<KillAllEnemyGA>(BattleWin, ReactionTiming.POST);
     }
 
-    private bool hasSetup = false;
+    // private bool hasSetup = false;
 
     void Start()
     {
@@ -44,9 +48,29 @@ public class BattleControlSystem : MonoBehaviour
          */
 
         //防止初次进入Battle场景时该脚本早于GameManager初始化
-        if (!hasSetup) 
-            SetupBattle();
+        //if (!hasSetup) 
+        //    SetupBattle();
+
+        //IMPORTANT: 目前的解决方案: 使用协程停等 + GameManager提供当前状态
+        StartCoroutine(WaitAndSetup());
     }
+
+    private IEnumerator WaitAndSetup()
+    {
+        // 等 GameManager 实例存在
+        while (GameManager.Instance == null)
+            yield return null;
+
+        // 等 GameManager 完成初始化
+        while (GameManager.Instance.Phase != GameManagerPhase.Ready)
+            yield return null;
+
+        // 防止重复初始化
+        // if (hasSetup) yield break;
+
+        SetupBattle();
+    }
+
 
     //IMPORTANT: 整个战斗场景的初始化入口:
     /* 持久化数据初始化
@@ -54,7 +78,7 @@ public class BattleControlSystem : MonoBehaviour
      */
     private void SetupBattle()
     {
-        hasSetup = true; 
+        // hasSetup = true; 
 
         HeroState heroState = GameManager.Instance.HeroState;
         if (heroState == null)
@@ -64,8 +88,11 @@ public class BattleControlSystem : MonoBehaviour
         HeroSystem.Instance.Setup(heroState);
 
         //初始化敌人信息
-        //OPTIMIZE: 数据库读取
-        EnemySystem.Instance.Setup(EnemyGroupDatabase.GetRandomGroupByLevel(1).Enemies);
+        //使用专门的Generator
+        enemyGroupGenerator = new();
+
+        //EnemyGroupDatabase.GetRandomGroupByLevel(1).Enemies
+        EnemySystem.Instance.Setup(enemyGroupGenerator.GetEnemyGroup(Config.Instance.difficultScore));
         //EnemySystem.Instance.Setup(enemyDatas);
 
         //现在要传入持久化数据了

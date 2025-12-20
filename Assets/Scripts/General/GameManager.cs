@@ -22,6 +22,16 @@ public enum GameState
 /// </summary>
 public class GameManager : PersistentSingleton<GameManager>
 {
+    //生命周期状态,防止空指针
+    public enum GameManagerPhase
+    {
+        None,
+        Initializing,
+        Ready
+    }
+    public GameManagerPhase Phase { get; private set; } = GameManagerPhase.None;
+
+
     // 外部数据引用
     [SerializeField] private PersistUIController persistUIControllerPrefab;
 
@@ -48,7 +58,7 @@ public class GameManager : PersistentSingleton<GameManager>
     public PersistUIController PersistUIController { get; private set; }
 
     // 初始化事件,GameManager初始化完毕后立刻通知其他脚本执行
-    public static event Action OnGameManagerInitialized;
+    // public static event Action OnGameManagerInitialized;
 
     protected override void Awake()
     {
@@ -59,6 +69,8 @@ public class GameManager : PersistentSingleton<GameManager>
     //防止对象还未创建
     private void Start()
     {
+        Phase = GameManagerPhase.Initializing;
+
         //TODO: 优化这部分表达
         SEED = SEED == 0 ? UnityEngine.Random.Range(0, int.MaxValue) : SEED;
         RogueController = new RNGSystem(SEED);
@@ -75,9 +87,12 @@ public class GameManager : PersistentSingleton<GameManager>
         PlayerDeckController = new PlayerDeckController(HeroState);
 
         //通知其他注册了该事件的脚本进行初始化,以此确保该脚本的执行在它们前面
-        OnGameManagerInitialized?.Invoke();
+        //改为使用协程直接停等
+        //OnGameManagerInitialized?.Invoke();
 
         EnterNewLevel(1);
+
+        Phase = GameManagerPhase.Ready;
     }
 
 
