@@ -32,14 +32,19 @@ public class MapUI : MonoBehaviour
         currentButtonClickAction?.Invoke();
     }
 
+    //NOTE: 入口函数
     private void OnRoomChanged(RoomChangedEvent e)
     {
-        BindClickAction(e.gridType.ToString(), ChangeRoomUtil.GridActions[e.gridType]);
+        MapGrid g = e.grid;
+
+        Debug.Log($"INFO: {g.gridIndex}");
+
+        GridType gridType = g.gridType;
+        BindClickAction(gridType.ToString(), ChangeRoomUtil.GridActions[gridType]);
     }
 
     public void BindClickAction(string settings, Action onClick)
     {
-        Debug.Log("settings");
         modeInfoTMP.text = settings;
         currentButtonClickAction = onClick;
     }

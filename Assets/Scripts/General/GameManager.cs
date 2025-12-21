@@ -122,6 +122,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     //管理模式切换(不一定导致场景切换)
 
+    //进入战斗的入口
     public void ToBattleMode()
     {
         ChangeGameState(GameState.Battle);

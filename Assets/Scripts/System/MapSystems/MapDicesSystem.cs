@@ -91,8 +91,9 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
         int id = mapDiceView.MapDice.Index;
         MapGrid mapGrid = GameManager.Instance.MapState.Map[id];
 
+        //NOTE: 在这里开始进入房间的准备逻辑
         //依据房间类型,通过事件总线全局激活RoomChangedEvent
-        EventBus.Publish(new RoomChangedEvent(mapGrid.gridType));
+        EventBus.Publish(new RoomChangedEvent(mapGrid));
     }
 
 

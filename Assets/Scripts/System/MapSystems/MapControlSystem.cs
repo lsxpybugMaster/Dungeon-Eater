@@ -1,26 +1,24 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static GameManager;
 
 /// <summary>
-/// ¸ºÔğ³õÊ¼»¯µØÍ¼,ÒÔ¼°´æ´¢Ò»Ğ©µØÍ¼ÅäÖÃĞÅÏ¢(ÔÚ±à¼­Æ÷ÖĞ±à¼­µÄ)
-//DISCUSS: ÓĞ±ØÒªÍ¬Ê±¸ºÔğÄ£Ê½ÇĞ»»ÏµÍ³Âğ?
+/// è´Ÿè´£åˆå§‹åŒ–åœ°å›¾,ä»¥åŠå­˜å‚¨ä¸€äº›åœ°å›¾é…ç½®ä¿¡æ¯(åœ¨ç¼–è¾‘å™¨ä¸­ç¼–è¾‘çš„)
+//DISCUSS: æœ‰å¿…è¦åŒæ—¶è´Ÿè´£æ¨¡å¼åˆ‡æ¢ç³»ç»Ÿå—?
 /// </summary>
-//IMPORTANT: Õû¸öMapµÄµ×²ã
-public class MapControlSystem : Singleton<MapControlSystem>
+//IMPORTANT: æ•´ä¸ªMapçš„åº•å±‚
+public class MapControlSystem : Singleton<MapControlSystem>, IRequireGameManager
 {
-    private bool hasSetup = false;
-
     private MapState mapState;
     private MapDicesSystem dicesSystem;
 
-    [Header("¹ÜÀíµÄ×ÓÄ£¿é")]
+    [Header("ç®¡ç†çš„å­æ¨¡å—")]
     [SerializeField] private MapViewCreator mapViewcreator;
     [SerializeField] private MapUI mapUI;
     // [SerializeField] private ChangeRoomSystem changeRoomSystem;
 
-    [Header("µØÍ¼µÄÏà¹Ø±à¼­Æ÷ÅäÖÃÊı¾İ")]
+    [Header("åœ°å›¾çš„ç›¸å…³ç¼–è¾‘å™¨é…ç½®æ•°æ®")]
     [SerializeField] private float gridInterval;
     [SerializeField] private float gridSize;
     [SerializeField] private float mapDiceMoveSpeed;
@@ -29,13 +27,13 @@ public class MapControlSystem : Singleton<MapControlSystem>
     public MapViewCreator MapViewCreator => mapViewcreator;
     
 
-    //·â×°ĞèÒª±©Â¶µÄ×Ö¶ÎÎªÊôĞÔ
+    //å°è£…éœ€è¦æš´éœ²çš„å­—æ®µä¸ºå±æ€§
     public float GridInterval => gridInterval;
     public float GridSize => gridSize;
     public float MapDiceMoveSpeed => mapDiceMoveSpeed;
 
     /// <summary>
-    /// Êµ¼ÊÉú³É/ÔÚ¸ñ×ÓÖĞÒÆ¶¯µÄ¾àÀë
+    /// å®é™…ç”Ÿæˆ/åœ¨æ ¼å­ä¸­ç§»åŠ¨çš„è·ç¦»
     /// </summary>
     public float Step => step;
 
@@ -44,40 +42,22 @@ public class MapControlSystem : Singleton<MapControlSystem>
         base.Awake();
         step = gridSize + gridInterval;
         if (mapDiceMoveSpeed <= 0)
-            Debug.LogError("·Ç·¨µÄ»òÎ´³õÊ¼»¯mapDiceMoveSpeed");
+            Debug.LogError("éæ³•çš„æˆ–æœªåˆå§‹åŒ–mapDiceMoveSpeed");
     }
 
-    void Start()
+    IEnumerator Start()
     {
-        //·ÀÖ¹³õ´Î½øÈëMap³¡¾°Ê±¸Ã½Å±¾ÔçÓÚGameManager³õÊ¼»¯,µ¼ÖÂÖØ¸´Ö´ĞĞsetupº¯Êı
+        //é˜²æ­¢åˆæ¬¡è¿›å…¥Mapåœºæ™¯æ—¶è¯¥è„šæœ¬æ—©äºGameManageråˆå§‹åŒ–,å¯¼è‡´é‡å¤æ‰§è¡Œsetupå‡½æ•°
         //if (!hasSetup)
         //    SetupMap();
 
-        StartCoroutine(WaitAndSetup());
+        yield return this.WaitGameManagerReady(SetupMap);
     }
-
-
-    private IEnumerator WaitAndSetup()
-    {
-        // µÈ GameManager ÊµÀı´æÔÚ
-        while (GameManager.Instance == null)
-            yield return null;
-
-        // µÈ GameManager Íê³É³õÊ¼»¯
-        while (GameManager.Instance.Phase != GameManagerPhase.Ready)
-            yield return null;
-
-        // ·ÀÖ¹ÖØ¸´³õÊ¼»¯
-        // if (hasSetup) yield break;
-
-        SetupMap();
-    }
-
 
 
     private void OnEnable()
     {
-        //È·±£¸ÃÏµÍ³ÍíÓÚGameManager´´½¨,·ÀÖ¹»ñÈ¡²»µ½³Ö¾ÃÊı¾İ
+        //ç¡®ä¿è¯¥ç³»ç»Ÿæ™šäºGameManageråˆ›å»º,é˜²æ­¢è·å–ä¸åˆ°æŒä¹…æ•°æ®
         //GameManager.OnGameManagerInitialized += SetupMap;
     }
 
@@ -88,25 +68,13 @@ public class MapControlSystem : Singleton<MapControlSystem>
     }
 
 
-    //BUG:ÆäÖ´ĞĞÁ½´Î,µ¼ÖÂµÚÒ»´ÎÖ´ĞĞÊ±Ë³Ğò³ö´í
     private void SetupMap()
     {
-
         mapState = GameManager.Instance.MapState;
         dicesSystem = MapDicesSystem.Instance;
-        //Ã¿´ÎÖØĞÂ½øÈë¶¼ĞèÒªÉú³ÉµØÍ¼,Í¬Ê±³õÊ¼»¯÷»×ÓÎ»ÖÃ
-     
-        //NOTE: ·ÀÖ¹³öÏÖÉÏÃæµÄÎÊÌâ
-        if (mapState == null)
-        {
-            Debug.LogWarning("mapState == null,  SetupMapÔçÓÚGameManager.mapState³õÊ¼»¯");
-            return;
-        } 
-            
+        //æ¯æ¬¡é‡æ–°è¿›å…¥éƒ½éœ€è¦ç”Ÿæˆåœ°å›¾,åŒæ—¶åˆå§‹åŒ–éª°å­ä½ç½®
         mapViewcreator.CreateMapWithDice(mapState.Map, mapState.MapDiceList);
-     
         dicesSystem.SetUp(mapState.MapDiceList);
-        hasSetup = true;
     }
 
 

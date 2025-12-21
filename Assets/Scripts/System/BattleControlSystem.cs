@@ -8,7 +8,7 @@ using static GameManager;
 /// 现在还管理整个关卡
 /// </summary>
 // 原MatchSetupSystem
-public class BattleControlSystem : MonoBehaviour
+public class BattleControlSystem : MonoBehaviour, IRequireGameManager
 {
     /// <summary>
     /// 包含英雄的初始卡组等信息
@@ -38,7 +38,8 @@ public class BattleControlSystem : MonoBehaviour
 
     // private bool hasSetup = false;
 
-    void Start()
+    //OPTIMIZE: 使用Trait来复用功能
+    IEnumerator Start()
     {
         /*
             问题:
@@ -52,24 +53,26 @@ public class BattleControlSystem : MonoBehaviour
         //    SetupBattle();
 
         //IMPORTANT: 目前的解决方案: 使用协程停等 + GameManager提供当前状态
-        StartCoroutine(WaitAndSetup());
+        //StartCoroutine(WaitAndSetup());
+
+        yield return this.WaitGameManagerReady(SetupBattle);
     }
 
-    private IEnumerator WaitAndSetup()
-    {
-        // 等 GameManager 实例存在
-        while (GameManager.Instance == null)
-            yield return null;
+    //private IEnumerator WaitAndSetup()
+    //{
+    //    // 等 GameManager 实例存在
+    //    while (GameManager.Instance == null)
+    //        yield return null;
 
-        // 等 GameManager 完成初始化
-        while (GameManager.Instance.Phase != GameManagerPhase.Ready)
-            yield return null;
+    //    // 等 GameManager 完成初始化
+    //    while (GameManager.Instance.Phase != GameManagerPhase.Ready)
+    //        yield return null;
 
-        // 防止重复初始化
-        // if (hasSetup) yield break;
+    //    // 防止重复初始化
+    //    // if (hasSetup) yield break;
 
-        SetupBattle();
-    }
+    //    SetupBattle();
+    //}
 
 
     //IMPORTANT: 整个战斗场景的初始化入口:

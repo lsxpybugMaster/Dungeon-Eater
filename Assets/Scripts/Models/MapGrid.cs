@@ -19,4 +19,7 @@ public class MapGrid
     public int gridIndex;
     public GridType gridType;
     public char nextDirection; //指向下一个方向
+
+    //如果需要,存取敌人
+    public List<EnemyData> roomEnemies;
 }
