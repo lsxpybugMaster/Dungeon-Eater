@@ -17,7 +17,7 @@ public class ChangeRoomSystem : Singleton<ChangeRoomSystem>
         };
     }
 
-    public void Enter(GridType type)
+    public void EnterRoom(GridType type)
     {
         if (actions.TryGetValue(type, out var act))
             act.Invoke();
