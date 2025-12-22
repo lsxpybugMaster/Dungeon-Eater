@@ -77,7 +77,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
         //数据部分由State类自己获取
         HeroState = new HeroState();
-        MapState = new MapState();
+        MapState = new MapState(); 
 
         
         //初始化全局UI对象

@@ -30,7 +30,7 @@ public abstract class DataBase<TKey, TValue> : ScriptableObject where TValue : c
                 idLookup.Add(key, d);
         }
 
-        Debug.Log($"[{GetType().Name}] Initialized with {datas.Count} data.");
+        // Debug.Log($"[{GetType().Name}] Initialized with {datas.Count} data.");
     }
 
 }

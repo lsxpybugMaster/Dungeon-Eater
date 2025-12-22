@@ -40,7 +40,9 @@ public class MapUI : MonoBehaviour
         Debug.Log($"INFO: {g.gridIndex}");
 
         GridType gridType = g.gridType;
-        BindClickAction(gridType.ToString(), ChangeRoomUtil.GridActions[gridType]);
+        // BindClickAction(gridType.ToString(), ChangeRoomUtil.GridActions[gridType]);
+
+        BindClickAction(gridType.ToString(), () => ChangeRoomSystem.Instance.Enter(gridType)) ;
     }
 
     public void BindClickAction(string settings, Action onClick)
