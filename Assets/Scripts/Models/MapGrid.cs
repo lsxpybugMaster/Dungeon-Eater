@@ -10,7 +10,9 @@ public enum GridType
     Enemy,
     Shop,
     Event,
-    Start,
+    Rest,
+    Box,
+    Elite,
     Boss
 }
 

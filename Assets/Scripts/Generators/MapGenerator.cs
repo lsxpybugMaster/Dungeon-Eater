@@ -37,6 +37,8 @@ public class MapGenerator
 
         int shopGrids = levelConfig.shopGrids;
 
+        int restGrids = levelConfig.roomCounts.restRoomNumbers;
+
         List<MapGrid> grids = new(totalGrids);
         //后面生成时判重
         HashSet<int> used = new();
@@ -66,6 +68,20 @@ public class MapGenerator
             while (used.Contains(idx));
             used.Add(idx);
             grids[idx].gridType = GridType.Shop;
+        }
+
+        for (int i = 0; i < restGrids; i++)
+        {
+            int idx;
+            //防止重复
+            do
+            {
+                //使用Map随机流生成随机数
+                idx = rng.Next(0, totalGrids);
+            }
+            while (used.Contains(idx));
+            used.Add(idx);
+            grids[idx].gridType = GridType.Rest;
         }
 
         return grids;

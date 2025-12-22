@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Open–Closed Principle（对扩展开放，对修改关闭）
 //存取与房间切换相关的功能
 public class ChangeRoomSystem : Singleton<ChangeRoomSystem>
 {
@@ -25,4 +26,8 @@ public class ChangeRoomSystem : Singleton<ChangeRoomSystem>
 
     private void EnterBattle() => GameManager.Instance.ToBattleMode();
     private void EnterShop() => GameManager.Instance.ToShopMode();
+    private void EnterRest()
+    {
+
+    }
 }

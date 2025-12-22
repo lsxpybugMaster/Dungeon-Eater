@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -14,6 +14,8 @@ public class MapGridView : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         if (type == GridType.Enemy)
             sr.color = Color.red;
+        else if (type == GridType.Rest)
+            sr.color = Color.green;
         else
             sr.color = Color.yellow;
     }

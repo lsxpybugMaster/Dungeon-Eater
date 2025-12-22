@@ -4,6 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+//打包好的房间计数
+[System.Serializable]
+public class RoomCounts
+{
+    //EnenyRoom由总长度反推出
+    public int shopRoomNumbers;
+    public int eventRoomNumbers;
+    public int restRoomNumbers;
+    public int eliteRoomNumbers;
+}
+
 
 /// <summary>
 /// 将MapData分为几个关卡,每个关卡是一个level
@@ -23,6 +34,9 @@ public class LevelData
     public string levelSetCode;
     //NOTE: 该字符串在编辑器中便被解析成为可分析的字符串
     public string levelInfostr;
+
+    [Header("不同种类房间个数")]
+    public RoomCounts roomCounts;
 
     public int shopGrids;
     [Header("控制行动的骰子个数")]

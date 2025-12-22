@@ -40,6 +40,8 @@ public class GameManager : PersistentSingleton<GameManager>
 
     //TODO: 将这些临时属性统一管理成state
     public int SEED;
+    //TODO: 大关卡间切换
+    public int level = 1;
 
     //STEP: 保存持久化数据 【注意】纯C#类需要实例化再用
     public HeroState HeroState { get; private set; }
@@ -77,6 +79,9 @@ public class GameManager : PersistentSingleton<GameManager>
 
         //数据部分由State类自己获取
         HeroState = new HeroState();
+
+        //
+        EnemyPool = new(level);
         MapState = new MapState(); 
 
         
@@ -90,7 +95,7 @@ public class GameManager : PersistentSingleton<GameManager>
         //改为使用协程直接停等
         //OnGameManagerInitialized?.Invoke();
 
-        EnterNewLevel(1);
+        //EnterNewLevel(1);
 
         Phase = GameManagerPhase.Ready;
     }
