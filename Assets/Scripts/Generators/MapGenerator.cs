@@ -14,11 +14,16 @@ public class MapGenerator
     //从RNGSystem中获取随机数生成器
     private System.Random rng;
 
+    //同时准备一个敌人生成器,将敌人提前保存在房间中(为了确定性生成)
+    private EnemyGroupGenerator enemyGroupGenerator;
+
     public MapGenerator(MapData mapData)
     {
         baseData = mapData;
         //以后使用"Map"索引随机流;
         rng = GameManager.Instance.RogueController.GetStream("Map");
+
+        enemyGroupGenerator = new();
     }
 
     /// <summary>
@@ -82,6 +87,15 @@ public class MapGenerator
             while (used.Contains(idx));
             used.Add(idx);
             grids[idx].gridType = GridType.Rest;
+        }
+
+        //仅供测试
+        for (int i = 0; i < totalGrids; i++)
+        {
+            if (grids[i].gridType == GridType.Enemy)
+            {
+                grids[i].roomEnemies = enemyGroupGenerator.GetEnemyGroup(Config.Instance.difficultScore);
+            }
         }
 
         return grids;

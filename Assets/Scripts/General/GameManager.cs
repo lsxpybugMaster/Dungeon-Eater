@@ -13,6 +13,7 @@ public enum GameState
     Battle,         //战斗
     BattleVictory,  //胜利结算 ==> 禁用玩家战斗
     Shopping,       //进入商店界面 ==> 禁用地图交互
+    Resting,
 }
 
 // GameManager 负责生命周期管理（初始化、场景切换、销毁）。
@@ -126,7 +127,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
 
     //管理模式切换(不一定导致场景切换)
-
+    //TODO: 提取成模式切换模块
     //进入战斗的入口
     public void ToBattleMode()
     {
@@ -135,6 +136,11 @@ public class GameManager : PersistentSingleton<GameManager>
 
         //大模式切换,通知其他
         PersistUIController.ResetUp();
+    }
+
+    public void ToRestMode()
+    {
+        ChangeGameState(GameState.Resting);
     }
 
     public void ToShopMode()

@@ -15,6 +15,8 @@ public class EnemyPool
     // 存储敌人小组
     public List<EnemyGroup> EnemiesGroup { get; private set; } 
 
+    // 存储敌人缓存,用于下一次生成的敌人,可以直接读写
+    public List<EnemyData> EnemiesBuffer { get; set; }
 
     // 后续添加 => 生成权重
     //public Dictionary<int, float> EnemiesChosenWeight;
@@ -23,6 +25,7 @@ public class EnemyPool
     public EnemyPool(int level)
     {
         EnemiesDifficulty = new();
+        EnemiesBuffer = new();
         // 动态解析一次EnemyDataBase
         foreach (EnemyData enemyData in EnemyDataBase.AllEnemies)
         {
@@ -44,6 +47,18 @@ public class EnemyPool
             
         DebugUtil.Yellow($"关卡{level}敌人数据准备完成： {EnemiesDifficulty[1].Count }个");
         DebugUtil.Yellow($"关卡{level}敌人组合数据准备完成： {EnemiesGroup.Count}个");
+    }
+
+    public List<EnemyData> GetEnemiesBuffer()
+    {
+        Debug.Log("GetEnemiesBuffer");
+        return EnemiesBuffer;
+    }
+
+    public void SetEnemiesBuffer(List<EnemyData> enemiesBuffer)
+    {
+        Debug.Log("SetEnemiesBuffer");
+        EnemiesBuffer = enemiesBuffer;
     }
 
     public EnemyData GetEnemyByDifficulty(int diff)

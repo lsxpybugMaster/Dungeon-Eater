@@ -15,19 +15,23 @@ public class ChangeRoomSystem : Singleton<ChangeRoomSystem>
         {
             { GridType.Enemy, EnterBattle },
             { GridType.Shop,  EnterShop },
+            { GridType.Rest,  EnterRest },
         };
     }
 
-    public void EnterRoom(GridType type)
+    public void EnterRoom(MapGrid grid)
     {
-        if (actions.TryGetValue(type, out var act))
+        //TODO: 重构
+        if (grid.gridType == GridType.Enemy)
+        {
+            GameManager.Instance.EnemyPool.SetEnemiesBuffer(grid.roomEnemies);
+        }
+
+        if (actions.TryGetValue(grid.gridType, out var act))
             act.Invoke();
     }
 
     private void EnterBattle() => GameManager.Instance.ToBattleMode();
     private void EnterShop() => GameManager.Instance.ToShopMode();
-    private void EnterRest()
-    {
-
-    }
+    private void EnterRest() => GameManager.Instance.ToRestMode();
 }

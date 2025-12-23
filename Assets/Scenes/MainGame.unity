@@ -448,6 +448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1799819893}
+  - component: {fileID: 1799819894}
   m_Layer: 0
   m_Name: ChangeRoomSystem
   m_TagString: Untagged
@@ -470,6 +471,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2054398821}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1799819894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799819892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62354e3b352f972449fd46d979efa24a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1814279323
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,8 +812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e757ff0a8d3174f40885a125d2ddf3c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swtichModeBtn: {fileID: 7536282309370147912}
-  modeInfoTMP: {fileID: 5825405337413416976}
+  changeRoomButton: {fileID: 8629099640162357274}
 --- !u!4 &1413040179464688424
 Transform:
   m_ObjectHideFlags: 0
@@ -879,6 +891,7 @@ GameObject:
   - component: {fileID: 5085496184090461362}
   - component: {fileID: 648577020301140244}
   - component: {fileID: 7536282309370147912}
+  - component: {fileID: 8629099640162357274}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -994,7 +1007,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Buttons
+  m_text: Exploring...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1121,6 +1134,7 @@ MonoBehaviour:
   persistUIControllerPrefab: {fileID: 3847000970675050835, guid: e08e480831709f94c845e3020b818361, type: 3}
   <GameState>k__BackingField: 0
   SEED: 42
+  level: 1
 --- !u!114 &7536282309370147912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1241,6 +1255,18 @@ RectTransform:
   m_AnchoredPosition: {x: -324, y: 175}
   m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8629099640162357274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4224937657052773270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84d414f7824ff314fb1ba2abb235340c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9048769627753523271
 GameObject:
   m_ObjectHideFlags: 0

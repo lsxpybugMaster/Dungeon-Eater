@@ -92,10 +92,20 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
 
         //初始化敌人信息
         //使用专门的Generator
-        enemyGroupGenerator = new();
 
+        List<EnemyData> enemyDatas;
+        if (GameManager.Instance.EnemyPool.EnemiesBuffer.Count == 0)
+        {
+            enemyGroupGenerator = new();
+            enemyDatas = enemyGroupGenerator.GetEnemyGroup(Config.Instance.difficultScore);
+        }   
+        else
+        {
+            enemyDatas = GameManager.Instance.EnemyPool.GetEnemiesBuffer();
+        }
+                  
         //EnemyGroupDatabase.GetRandomGroupByLevel(1).Enemies
-        EnemySystem.Instance.Setup(enemyGroupGenerator.GetEnemyGroup(Config.Instance.difficultScore));
+        EnemySystem.Instance.Setup(enemyDatas);
         //EnemySystem.Instance.Setup(enemyDatas);
 
         //现在要传入持久化数据了

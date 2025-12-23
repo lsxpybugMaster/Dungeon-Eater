@@ -16,12 +16,12 @@ public class ChangeRoomButton : MonoBehaviour
     }
 
     //在玩家棋子落定后,决定按钮的流向
-    public void Setup(string text, GridType gridType)
+    public void Setup(string text, MapGrid mapGrid)
     {
         textInfoTMP.text = text;
         btn.onClick.AddListener(() =>
         {
-            ChangeRoomSystem.Instance.EnterRoom(gridType);
+            ChangeRoomSystem.Instance.EnterRoom(mapGrid);
         });
     }
 

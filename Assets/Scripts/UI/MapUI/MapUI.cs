@@ -22,6 +22,6 @@ public class MapUI : MonoBehaviour
     private void UpdateRoomButton(RoomChangedEvent e)
     {
         var g = e.grid;
-        changeRoomButton.Setup($"[{g.gridIndex}] {g.gridType}", g.gridType);
+        changeRoomButton.Setup($"[{g.gridIndex}] {g.gridType}", g);
     }
 }
