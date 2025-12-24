@@ -12,12 +12,15 @@ public class MapGridView : MonoBehaviour
     public void Setup(GridType type)
     {
         sr = GetComponent<SpriteRenderer>();
-        if (type == GridType.Enemy)
-            sr.color = Color.red;
-        else if (type == GridType.Rest)
-            sr.color = Color.green;
-        else
-            sr.color = Color.yellow;
+
+        sr.color = RoomDataBase.GetRoomData(type).RoomColor;
+
+        //if (type == GridType.Enemy)
+        //    sr.color = Color.red;
+        //else if (type == GridType.Rest)
+        //    sr.color = Color.green;
+        //else
+        //    sr.color = Color.yellow;
     }
 
     public void SetIndex(int index)
