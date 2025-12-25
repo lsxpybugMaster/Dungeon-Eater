@@ -63,6 +63,9 @@ public class GameManager : PersistentSingleton<GameManager>
     // 初始化事件,GameManager初始化完毕后立刻通知其他脚本执行
     // public static event Action OnGameManagerInitialized;
 
+    // 重要事件,在游戏状态改变时进行通信
+    public static event Action<GameState> OnGameStateChanged;
+
     protected override void Awake()
     {
         //先继承跨场景单例的Awake
@@ -123,6 +126,9 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         Debug.Log("Change game state to" +  gameState.ToString());
         GameState = gameState;
+
+        //调用事件激活相关的监听者
+        OnGameStateChanged?.Invoke(gameState);
     }
 
 

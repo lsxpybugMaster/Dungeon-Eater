@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ShopRoomData
   m_EditorClassIdentifier: 
   <RoomType>k__BackingField: 1
-  <RoomColor>k__BackingField: {r: 0.93710685, g: 0.76284707, b: 0.43319082, a: 0}
+  <RoomColor>k__BackingField: {r: 0.93710685, g: 0.76284707, b: 0.43319082, a: 1}

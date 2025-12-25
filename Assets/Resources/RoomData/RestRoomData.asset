@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RestRoomData
   m_EditorClassIdentifier: 
   <RoomType>k__BackingField: 3
-  <RoomColor>k__BackingField: {r: 0.5786954, g: 0.8805031, b: 0.65212244, a: 0}
+  <RoomColor>k__BackingField: {r: 0.5786954, g: 0.8805031, b: 0.65212244, a: 1}
