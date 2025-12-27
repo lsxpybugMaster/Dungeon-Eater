@@ -57,13 +57,13 @@ public class CardView : MonoBehaviour
     //将交互判断鉴权提出
     bool CanHover()
     {
-        return Interactions.Instance.PlayerCanHover() 
+        return BattleInteractions.Instance.PlayerCanHover() 
             && GameManager.Instance.GameState != GameState.BattleVictory;
     }
 
     bool CanInterAct()
     {
-        return Interactions.Instance.PlayerCanInteract()
+        return BattleInteractions.Instance.PlayerCanInteract()
             && GameManager.Instance.GameState != GameState.BattleVictory;
     }
 
@@ -104,7 +104,7 @@ public class CardView : MonoBehaviour
         }
         else
         {
-            Interactions.Instance.PlayerIsDragging = true;
+            BattleInteractions.Instance.PlayerIsDragging = true;
 
             //显示手牌
             wrapper.SetActive(true);
@@ -168,7 +168,7 @@ public class CardView : MonoBehaviour
                 transform.position = dragStartPosition;
                 transform.rotation = dragStartRotation;
             }
-            Interactions.Instance.PlayerIsDragging = false;
+            BattleInteractions.Instance.PlayerIsDragging = false;
         }
     }
 

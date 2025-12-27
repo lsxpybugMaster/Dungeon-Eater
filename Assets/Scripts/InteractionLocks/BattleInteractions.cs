@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //用于管理鼠标交互,防止Hover与Up,Down冲突
-public class Interactions : Singleton<Interactions>
+public class BattleInteractions : Singleton<BattleInteractions>
 {
     public bool PlayerIsDragging { get; set; } = false;
 

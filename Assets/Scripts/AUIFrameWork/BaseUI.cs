@@ -1,4 +1,4 @@
-using UnityEngine;
+锘縰sing UnityEngine;
 using System;
 
 public enum UILayer
@@ -9,54 +9,13 @@ public enum UILayer
     Overlay
 }
 
-public abstract class GlobalUI : BaseUI
-{
-    public override UILayer Layer => UILayer.Global;
-}
-
-
-public abstract class AnimatedUI : BaseUI
-{
-    UIMoveAnimator animator;
-
-    protected virtual void Awake()
-    {
-        animator = GetComponent<UIMoveAnimator>();
-    }
-
-    protected override void PlayEnterAnimation()
-    {
-        animator?.PlayEnter();
-    }
-
-    protected override void PlayExitAnimation(Action onComplete)
-    {
-        if (animator != null)
-            animator.PlayExit(onComplete);
-        else
-            onComplete?.Invoke();
-    }
-}
-
-
-public abstract class PageUI : AnimatedUI
-{
-    public override UILayer Layer => UILayer.Page;
-}
-
-public abstract class PopupUI : AnimatedUI
-{
-    public override UILayer Layer => UILayer.Popup;
-}
-
-
 public abstract class BaseUI : MonoBehaviour
 {
     public bool IsVisible { get; private set; }
     public abstract UILayer Layer { get; }
 
     /// <summary>
-    /// 注入依赖（子类实现）
+    /// 娉ㄥ叆渚濊禆锛堝瓙绫诲疄鐜帮級
     /// </summary>
     protected virtual void Inject() { }
 

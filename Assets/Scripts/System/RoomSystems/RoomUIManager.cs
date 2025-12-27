@@ -1,17 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+
+public static class RoomUIEvents
+{
+    public static Action OnRoomExit;
+}
 
 public class RoomUIManager : MonoBehaviour
 {
+
     private void OnEnable()
     {
         GameManager.OnGameStateChanged += HandleGameStateChanged;
+        RoomUIEvents.OnRoomExit += HandleRoomUIExit;
     }
 
     private void OnDisable()
     {
         GameManager.OnGameStateChanged -= HandleGameStateChanged;
+        RoomUIEvents.OnRoomExit -= HandleRoomUIExit;
     }
 
     private void HandleGameStateChanged(GameState state)
@@ -31,22 +38,15 @@ public class RoomUIManager : MonoBehaviour
                 UIManager.Instance.Hide<ShopUI>();
                 break;
         }
-        //HideAll();
-
-        //switch (state)
-        //{
-        //    case GameState.Resting:
-        //        restUI.Show();
-        //        break;
-        //    case GameState.Shopping:
-        //        shopUI.Show();
-        //        break;
-        //}
     }
 
-    //private void HideAll()
-    //{
-    //    restUI.Hide();
-    //    shopUI.Hide();
-    //}
+    private void HandleRoomUIExit()
+    {
+        MapDicesSystem.Instance.ResetRollDiceTimes();
+
+        MapInteractions.OnMapUIEnabled();
+
+        GameManager.Instance.ChangeGameState(GameState.Exploring);
+    }
+
 }

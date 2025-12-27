@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopUI : BaseUI
+public class ShopUI : RoomUI
 {
-    public override UILayer Layer => throw new System.NotImplementedException();
 }

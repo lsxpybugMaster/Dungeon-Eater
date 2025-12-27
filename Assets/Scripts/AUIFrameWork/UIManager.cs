@@ -1,12 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-
-public interface IGameStateService
-{
-    GameState CurrentState { get; }
-}
-
 
 public class UIManager : Singleton<UIManager>
 {

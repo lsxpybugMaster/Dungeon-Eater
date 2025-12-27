@@ -50,6 +50,11 @@ public class MapDicesSystem : Singleton<MapDicesSystem>
         }
     }
 
+    public void ResetRollDiceTimes()
+    {
+        rollDiceTimesLeft = 1;
+    }
+
     /*
         IoC 流程：
         Dice被点击事件 => HandleDiceClicked => Dice移动 => Dice移动完成 => HandleClickMoveFinished
