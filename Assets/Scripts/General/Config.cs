@@ -7,6 +7,17 @@ using UnityEngine;
 /// </summary>
 public class Config : PersistentSingleton<Config>
 {
+    [Header("全局信息")]
+    [SerializeField] private int seed; //随机数种子
+    public int Seed 
+    {
+        get
+        {
+            Debug.Log($"seed = {seed}");
+            return seed == 0 ? UnityEngine.Random.Range(0, int.MaxValue) : seed;
+        }
+    }
+
     [Header("战斗数值相关系统")]
     public int difficultScore;
 

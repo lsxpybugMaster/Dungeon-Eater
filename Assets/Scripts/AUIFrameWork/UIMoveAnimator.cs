@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using DG.Tweening;
 using System;
 
@@ -19,13 +19,17 @@ public class UIMoveAnimator : MonoBehaviour
 
     public void PlayEnter()
     {
-        rect.DOAnchorPos(target.anchoredPosition, duration).SetEase(ease);
+        rect.DOAnchorPos(target.anchoredPosition, duration)
+            .SetEase(ease)
+            .SetLink(gameObject, LinkBehaviour.KillOnDestroy)
+            ;
     }
 
     public void PlayExit(Action onComplete)
     {
         rect.DOAnchorPos(origin, duration)
             .SetEase(ease)
+            .SetLink(gameObject, LinkBehaviour.KillOnDestroy)
             .OnComplete(() => onComplete?.Invoke());
     }
 }

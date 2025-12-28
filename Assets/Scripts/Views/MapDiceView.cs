@@ -75,7 +75,20 @@ public class MapDiceView : MonoBehaviour
     private void OnMouseDown()
     {
         //STEP: 通过IoC将逻辑上传,由上面的系统管理逻辑
-        OnDiceClicked.Invoke(this);
+        if (MapInteractions.Instance.PlayerCanInteract())
+            OnDiceClicked.Invoke(this);
+    }
+
+    //注意要求有碰撞体才能运行
+    private void OnMouseEnter()
+    {
+        if (MapInteractions.Instance.PlayerCanInteract())
+            isMoveHovering = true;
+    }
+
+    private void OnMouseExit()
+    {
+        isMoveHovering = false;
     }
 
     /// <summary>
@@ -111,14 +124,5 @@ public class MapDiceView : MonoBehaviour
         seq.Play();
     }
 
-    //注意要求有碰撞体才能运行
-    private void OnMouseEnter()
-    {
-        isMoveHovering = true;
-    }
 
-    private void OnMouseExit() 
-    { 
-        isMoveHovering = false;
-    }
 }

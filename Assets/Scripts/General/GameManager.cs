@@ -32,22 +32,18 @@ public class GameManager : PersistentSingleton<GameManager>
     }
     public GameManagerPhase Phase { get; private set; } = GameManagerPhase.None;
 
+    [field: SerializeField] public GameState GameState { get; private set; }
+
 
     // 外部数据引用
     [SerializeField] private PersistUIController persistUIControllerPrefab;
-
-    //STEP: 属性
-    [field: SerializeField] public GameState GameState { get; private set; } // private set; }
-
-    //TODO: 将这些临时属性统一管理成state
-    public int SEED;
-    //TODO: 大关卡间切换
-    public int level = 1;
 
     //STEP: 保存持久化数据 【注意】纯C#类需要实例化再用
     public HeroState HeroState { get; private set; }
     public MapState MapState { get; private set; }
     public EnemyPool EnemyPool { get; private set; }
+
+    public LevelProgress LevelProgress { get; private set; }
 
     //STEP:保存功能模块(纯C#类)
     public PlayerDeckController PlayerDeckController { get; private set; }
@@ -76,16 +72,13 @@ public class GameManager : PersistentSingleton<GameManager>
     private void Start()
     {
         Phase = GameManagerPhase.Initializing;
-
-        //TODO: 优化这部分表达
-        SEED = SEED == 0 ? UnityEngine.Random.Range(0, int.MaxValue) : SEED;
-        RogueController = new RNGSystem(SEED);
+        RogueController = new RNGSystem(Config.Instance.Seed);
+        LevelProgress = new LevelProgress();
 
         //数据部分由State类自己获取
         HeroState = new HeroState();
-
-        //
-        EnemyPool = new(level);
+        
+        EnemyPool = new(LevelProgress.Level);
         MapState = new MapState(); 
 
         
