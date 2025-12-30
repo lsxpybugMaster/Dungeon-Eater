@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+//TODO: 重构逻辑
 //IDEA: 将其也作为跨场景UI(因为调用其show函数的按钮在GlobalUI上)
 public class DeckUI : MonoBehaviour, IUIMove<IReadOnlyList<Card>>, IAmPersistUI
 {
@@ -15,7 +16,7 @@ public class DeckUI : MonoBehaviour, IUIMove<IReadOnlyList<Card>>, IAmPersistUI
 
     public void Setup()
     {
-
+        
     }
 
     private void Awake()

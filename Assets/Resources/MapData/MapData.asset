@@ -27,7 +27,7 @@ MonoBehaviour:
         roomCounts:
           shopRoomNumbers: 0
           eventRoomNumbers: 0
-          restRoomNumbers: 7
+          restRoomNumbers: 13
           eliteRoomNumbers: 0
         shopGrids: 7
         mapDices: 2
