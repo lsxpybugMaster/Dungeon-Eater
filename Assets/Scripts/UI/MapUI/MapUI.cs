@@ -12,22 +12,24 @@ public class MapUI : MonoBehaviour
         //现在由事件总线管理
         EventBus.Subscribe<RoomChangedEvent>(UpdateRoomButton);
 
-        MapInteractions.OnMapUIEnabled += EnableButton;
-        MapInteractions.OnMapUIDisabled += DisableButton;
+        MapInteractions.OnButtonEnabled += EnableButton;
+        MapInteractions.OnButtonDisabled += DisableButton;
     }
 
     private void OnDisable()
     {
         EventBus.UnSubscribe<RoomChangedEvent>(UpdateRoomButton);
 
-        MapInteractions.OnMapUIEnabled -= EnableButton;
-        MapInteractions.OnMapUIDisabled -= DisableButton;
+        MapInteractions.OnButtonEnabled -= EnableButton;
+        MapInteractions.OnButtonDisabled -= DisableButton;
     }
 
     //调用链: MapDiceSystem => RoomChangedEvent => UpdateRoomButton => ChangeRoomSystem.EnterRoom
     private void UpdateRoomButton(RoomChangedEvent e)
     {
         var g = e.grid;
+        //重新显示按钮
+        MapInteractions.OnButtonEnabled();
         changeRoomButton.Setup($"[{g.gridIndex}] {g.gridType}", g);
     }
 

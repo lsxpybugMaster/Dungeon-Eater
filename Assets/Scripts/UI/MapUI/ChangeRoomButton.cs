@@ -36,7 +36,8 @@ public class ChangeRoomButton : MonoBehaviour
         {
             ChangeRoomSystem.Instance.EnterRoom(mapGrid);
 
-            MapInteractions.OnMapUIDisabled();
+            //禁用按钮
+            MapInteractions.OnButtonDisabled();
         });
     }
 

@@ -44,7 +44,7 @@ public class RoomUIManager : MonoBehaviour
     {
         MapDicesSystem.Instance.ResetRollDiceTimes();
 
-        MapInteractions.OnMapUIEnabled();
+        MapInteractions.OnButtonDisabled();
 
         GameManager.Instance.ChangeGameState(GameState.Exploring);
     }

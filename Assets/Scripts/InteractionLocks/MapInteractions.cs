@@ -3,8 +3,8 @@
 
 public class MapInteractions : Singleton<MapInteractions>
 {
-    public static Action OnMapUIDisabled;
-    public static Action OnMapUIEnabled;
+    public static Action OnButtonEnabled;
+    public static Action OnButtonDisabled;
 
     public bool PlayerCanInteract()
     {
