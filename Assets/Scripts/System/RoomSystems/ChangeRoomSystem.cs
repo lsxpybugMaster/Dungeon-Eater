@@ -30,6 +30,8 @@ public class ChangeRoomSystem : Singleton<ChangeRoomSystem>
         //if (actions.TryGetValue(grid.gridType, out var act))
         //    act.Invoke();
 
+        Debug.Log("EnterRoom");
+
         //OPTIMIZE: 基于RoomDataBase的数据驱动
         RoomDataBase.GetRoomData(grid.gridType).Enter(grid);
     }
