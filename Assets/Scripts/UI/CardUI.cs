@@ -1,22 +1,62 @@
-using TMPro;
+ï»¿using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
-//ÔÚUIÖĞÒÔ¿¨ÅÆĞÎÊ½Õ¹Ê¾¿¨ÅÆÊı¾İ
-//TODO: ÕâÀïÓëCardViewÀàËÆ,ÊÇ·ñ¿É¸´ÓÃ£¿
+//åœ¨UIä¸­ä»¥å¡ç‰Œå½¢å¼å±•ç¤ºå¡ç‰Œæ•°æ®
+//TODO: è¿™é‡Œä¸CardViewç±»ä¼¼,æ˜¯å¦å¯å¤ç”¨ï¼Ÿ
 public class CardUI : MonoBehaviour
 {
-    //ĞèÒªUIÕ¹Ê¾µÄÊôĞÔ
+    //æ§åˆ¶æŠ•å°„çš„ç»„ä»¶
+    [SerializeField] private UIRayCastArea uIRayCastArea;
+
+    //éœ€è¦UIå±•ç¤ºçš„å±æ€§
     [SerializeField] private TMP_Text title;
     [SerializeField] private TMP_Text description;
     [SerializeField] private TMP_Text mana;
     [SerializeField] private Image image;
+    [SerializeField] private Color hoverColor;
+
+    private Color originColor;
+    private Image cardViewImage;
+
+    private void Awake()
+    {
+        uIRayCastArea.OnHoverEnter += HandleHoverEnter;
+        uIRayCastArea.OnHoverExit += HandleHoverExit;
+        uIRayCastArea.OnClick += HandleClick;
+    }
 
     public void Setup(Card card)
     {
+        originColor = image.color;
+        cardViewImage = GetComponent<Image>();
         title.text = card.Title;
         description.text = card.Description;
         mana.text = card.Mana.ToString();        
         image.sprite = card.Image;
     }
+
+    public void HandleHoverEnter()
+    {
+        cardViewImage.color = hoverColor;
+        image.color = hoverColor;
+        Debug.Log("HandleHoverEnter");
+    }
+
+    public void HandleClick()
+    {
+        
+        Debug.Log("HandleClick");
+    }
+
+    public void HandleHoverExit()
+    {
+        cardViewImage.color = originColor;
+        image.color = originColor;
+
+        Debug.Log("HandleHoverExit");
+    }
+
 }
