@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21cfbf1e17c4b3b4593d2fb59eb85205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uIRayCastArea: {fileID: 5317265068646946669}
+  uiRayCastArea: {fileID: 5317265068646946669}
   title: {fileID: 2652603094314532612}
   description: {fileID: 1880880137639572411}
   mana: {fileID: 3238127128649277919}

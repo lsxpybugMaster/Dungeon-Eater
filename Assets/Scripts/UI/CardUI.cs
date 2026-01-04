@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ using UnityEngine.Windows;
 public class CardUI : MonoBehaviour
 {
     //控制投射的组件
-    [SerializeField] private UIRayCastArea uIRayCastArea;
+    [SerializeField] private UIRayCastArea uiRayCastArea;
 
     //需要UI展示的属性
     [SerializeField] private TMP_Text title;
@@ -20,12 +21,20 @@ public class CardUI : MonoBehaviour
 
     private Color originColor;
     private Image cardViewImage;
+    //TODO: 卡牌键
+    private Card cardData;
+
+    //TODO: 重构通信方式
+    public Action<Card> OnCardChoosen { get; set; }
 
     private void Awake()
     {
-        uIRayCastArea.OnHoverEnter += HandleHoverEnter;
-        uIRayCastArea.OnHoverExit += HandleHoverExit;
-        uIRayCastArea.OnClick += HandleClick;
+        if (uiRayCastArea != null)
+        {
+            uiRayCastArea.OnHoverEnter += HandleHoverEnter;
+            uiRayCastArea.OnHoverExit += HandleHoverExit;
+            uiRayCastArea.OnClick += HandleClick;
+        }
     }
 
     public void Setup(Card card)
@@ -36,6 +45,8 @@ public class CardUI : MonoBehaviour
         description.text = card.Description;
         mana.text = card.Mana.ToString();        
         image.sprite = card.Image;
+
+        cardData = card;
     }
 
     public void HandleHoverEnter()
@@ -47,7 +58,7 @@ public class CardUI : MonoBehaviour
 
     public void HandleClick()
     {
-        
+        OnCardChoosen(cardData);
         Debug.Log("HandleClick");
     }
 
