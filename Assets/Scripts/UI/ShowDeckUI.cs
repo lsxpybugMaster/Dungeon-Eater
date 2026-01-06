@@ -8,15 +8,7 @@ public class ShowDeckUI : MonoBehaviour
     [SerializeField] private GameObject cardUIPrefab;
     [SerializeField] private GameObject cardUIRoot; //UI放置位置
 
-    //TODO: 现在暂时由其管理选中卡牌展示功能
-    public CardUI choosenCardUI;
-
-
-    public void ShowChoosenCard(Card card)
-    {
-        choosenCardUI.Setup(card);
-        Debug.Log($"Show Choosen {card}");
-    }
+    [SerializeField] private DeleteCardUI deleteCardUI;
 
     //显示当前所有卡牌
     public void Show(IReadOnlyList<Card> cardPile)
@@ -36,11 +28,11 @@ public class ShowDeckUI : MonoBehaviour
 
     private void InstantiateCardUIPrefab(Card card)
     {
-        GameObject mygo = Instantiate(cardUIPrefab);
+        CardUI cardUIInst = Instantiate(cardUIPrefab).GetComponent<CardUI>();
         //挂载到指定父节点下管理
-        mygo.transform.SetParent(cardUIRoot.transform);
-        mygo.GetComponent<CardUI>().Setup(card);
-
-        mygo.GetComponent<CardUI>().OnCardChoosen = ShowChoosenCard;
+        cardUIInst.transform.SetParent(cardUIRoot.transform);
+        cardUIInst.Setup(card);
+        //绑定其至显示UI
+        deleteCardUI.RegistCardUI(cardUIInst);
     }
 }

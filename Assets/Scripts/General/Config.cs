@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Config : PersistentSingleton<Config>
 {
+    //TODO: 这你能忍住不改成SO？
     [Header("全局信息")]
     [SerializeField] private int seed; //随机数种子
     public int Seed 
@@ -41,6 +42,9 @@ public class Config : PersistentSingleton<Config>
 
     [Header("战斗动画相关参数")]
     public float attackTime;
+
+    [Header("UI动画相关参数")]
+    public float showCardTime;
 
     [Header("逻辑显示相关参数")]
     public float logicBetweentime; //如击败全部敌人后显示胜利的时间间隔

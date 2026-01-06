@@ -3,7 +3,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.Windows;
 
 //在UI中以卡牌形式展示卡牌数据
 //TODO: 这里与CardView类似,是否可复用？
@@ -21,11 +20,11 @@ public class CardUI : MonoBehaviour
 
     private Color originColor;
     private Image cardViewImage;
-    //TODO: 卡牌键
-    private Card cardData;
+    //必须保留原来Card的引用,以保证删除
+    public Card cardData { get; set; }
 
-    //TODO: 重构通信方式
-    public Action<Card> OnCardChoosen { get; set; }
+    //外部调用监听此事件(小心内存泄漏)
+    public event Action<Card> OnCardSelected;
 
     private void Awake()
     {
@@ -53,21 +52,17 @@ public class CardUI : MonoBehaviour
     {
         cardViewImage.color = hoverColor;
         image.color = hoverColor;
-        Debug.Log("HandleHoverEnter");
     }
 
     public void HandleClick()
     {
-        OnCardChoosen(cardData);
-        Debug.Log("HandleClick");
+        OnCardSelected?.Invoke(cardData);
     }
 
     public void HandleHoverExit()
     {
         cardViewImage.color = originColor;
         image.color = originColor;
-
-        Debug.Log("HandleHoverExit");
     }
 
 }
