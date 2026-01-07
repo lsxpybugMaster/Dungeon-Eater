@@ -28,6 +28,16 @@ public class PlayerDeckController
         DoWhenUpdateCard(); 
     }
 
+    /*
+        升级卡牌: 删除卡牌后用新一级的卡牌替换
+     */
+    public void UpdateCardFromDeck(Card oriCard, CardData updatedCardData)
+    {
+        heroState.RemoveCardFromDeck(oriCard);
+        //卡牌总数没变,不必更新UI
+        heroState.AddCardToDeck(updatedCardData);
+    }
+
 
     //IDEA: 考虑到可能对手牌进行更改,我们传入需要删除的卡牌实例进行删除
     public void RemoveCardFromDeck(Card card)

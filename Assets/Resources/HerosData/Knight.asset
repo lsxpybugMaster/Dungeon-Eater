@@ -19,10 +19,10 @@ MonoBehaviour:
   <MaxMana>k__BackingField: 4
   <Deck>k__BackingField:
   - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
-  - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
-  - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
-  - {fileID: 11400000, guid: c2ddd1391867c6742a7dffd0e27f312c, type: 2}
-  - {fileID: 11400000, guid: c2ddd1391867c6742a7dffd0e27f312c, type: 2}
+  - {fileID: 11400000, guid: 6777f8e8b5c9d1645a84fad8945c45ed, type: 2}
+  - {fileID: 11400000, guid: afd1747a59c9f00428516a5a0ce17a0e, type: 2}
+  - {fileID: 11400000, guid: 6777f8e8b5c9d1645a84fad8945c45ed, type: 2}
+  - {fileID: 11400000, guid: afd1747a59c9f00428516a5a0ce17a0e, type: 2}
   - {fileID: 11400000, guid: dcecd90d611553b418d7d5848a859b8d, type: 2}
   - {fileID: 11400000, guid: dcecd90d611553b418d7d5848a859b8d, type: 2}
   - {fileID: 11400000, guid: c90a51fe405c7fc44862dbe047ecab8f, type: 2}
