@@ -22,6 +22,11 @@ public class DeleteCardUI : MonoBehaviour
         deleteCardbtn.onClick.AddListener(Delete);
     }
 
+    private void OnEnable()
+    {
+        deleteCardbtn.interactable = false;
+    }
+
     //建立卡牌UI点击与调用的联系
     public void RegistCardUI(CardUI cardUI)
     {
@@ -30,34 +35,46 @@ public class DeleteCardUI : MonoBehaviour
 
     public void ShowChoosenCard(Card card)
     {
+        deleteCardbtn.interactable = true;
         choosenCardUI.Setup(card);
-
         ShowCardEffect();
     }
 
     private void Delete()
     {
+        deleteCardbtn.interactable = false;
         DeleteChoosenCard(choosenCardUI.cardData);
+        DeleteCardEffect();
     }
 
     public void DeleteChoosenCard(Card card)
     {
         GameManager.Instance.PlayerDeckController.RemoveCardFromDeck(card);
         // 使用事件通知上层
-        // OnCardUIDeleted?.Invoke();
+        OnCardUIDeleted?.Invoke();
     }
 
     private void ShowCardEffect()
     {
+        CardScaleEffect(Vector3.zero, Vector3.one);
+    }
+
+    private void DeleteCardEffect()
+    {
+        CardScaleEffect(Vector3.one, Vector3.zero);
+    }
+
+    private void CardScaleEffect(Vector3 fromScale, Vector3 toScale)
+    {
         Transform t = choosenCardUI.transform;
-        t.localScale = Vector3.zero;
+        t.localScale = fromScale;
 
         //防止多次点击叠加 Tween
         showTween?.Kill();
 
         //播放 Scale 动画
         showTween = t
-            .DOScale(Vector3.one, Config.Instance.showCardTime)
+            .DOScale(toScale, Config.Instance.showCardTime)
             .SetEase(Ease.OutCubic);
     }
 }

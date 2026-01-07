@@ -10,9 +10,24 @@ public class ShowDeckUI : MonoBehaviour
 
     [SerializeField] private DeleteCardUI deleteCardUI;
 
-    //显示当前所有卡牌
-    public void Show(IReadOnlyList<Card> cardPile)
+    private void OnEnable()
     {
+        Debug.Log("Regist");
+        deleteCardUI.OnCardUIDeleted += Show;
+    }
+
+    private void OnDisable()
+    {
+        Debug.Log("UnRegist");
+        deleteCardUI.OnCardUIDeleted -= Show;
+    }
+
+    //显示当前所有卡牌
+    public void Show()
+    {
+        //既然已经使用了单例,就不再传入依赖了,不如直接获取
+        var cardPile = GameManager.Instance.HeroState.Deck;
+
         //删除已有的预制体
         for (int i = cardUIRoot.transform.childCount - 1; i >= 0; i--)
         {

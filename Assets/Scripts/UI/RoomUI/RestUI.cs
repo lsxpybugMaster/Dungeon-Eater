@@ -8,6 +8,6 @@ public class RestUI : RoomUI
 
     private void Start()
     {
-        showDeckUI.Show(GameManager.Instance.HeroState.Deck);
+        showDeckUI.Show();
     }
 }

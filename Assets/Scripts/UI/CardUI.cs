@@ -25,6 +25,11 @@ public class CardUI : MonoBehaviour
 
     //外部调用监听此事件(小心内存泄漏)
     public event Action<Card> OnCardSelected;
+    private void OnDestroy()
+    {
+        OnCardSelected = null;
+    }
+
 
     private void Awake()
     {

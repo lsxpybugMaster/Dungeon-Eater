@@ -27,6 +27,10 @@ public class CardData : ScriptableObject, IHaveKey<string>
 
     [field: SerializeField] public List<CardTag> CardTags { get; private set; }
 
+    //存储卡牌升级后的效果
+    [field: SerializeField] public List<CardData> UpdateCardInfo { get; private set; }
+
+
 #if UNITY_EDITOR
     // Unity 的编辑器回调方法
     private void OnValidate()
