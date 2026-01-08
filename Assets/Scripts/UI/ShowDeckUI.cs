@@ -9,6 +9,7 @@ public class ShowDeckUI : MonoBehaviour
     [SerializeField] private GameObject cardUIRoot; //UI放置位置
 
     [SerializeField] private DeleteCardUI deleteCardUI;
+    [SerializeField] private UpdateCardUI updateCardUI;
 
     private void OnEnable()
     {
@@ -49,5 +50,6 @@ public class ShowDeckUI : MonoBehaviour
         cardUIInst.Setup(card);
         //绑定其至显示UI
         deleteCardUI.RegistCardUI(cardUIInst);
+        updateCardUI.RegistCardUI(cardUIInst);
     }
 }

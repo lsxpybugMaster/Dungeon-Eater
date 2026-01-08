@@ -35,6 +35,17 @@ public class DeleteCardUI : MonoBehaviour
 
     public void ShowChoosenCard(Card card)
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            //C# 事件注册/回调与Unity无关, 所以需要对象自己控制
+            Debug.Log($" {this.name} 脚本已被禁用,事件执行终止");
+            return;
+        }
+        else
+        {
+            Debug.Log("OMG !!");
+        }
+
         deleteCardbtn.interactable = true;
         choosenCardUI.Setup(card);
         ShowCardEffect();

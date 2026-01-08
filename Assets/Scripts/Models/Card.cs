@@ -17,6 +17,7 @@ public class Card
     public Sprite Image => data.Image;
     public Effect ManualTargetEffect => data.ManualTargetEffect;
     public List<AutoTargetEffect> OtherEffects => data.OtherEffects;
+    public List<CardData> updateChoices => data.UpdateCardInfo;
 
     public HashSet<CardTag> CardTags;
 
