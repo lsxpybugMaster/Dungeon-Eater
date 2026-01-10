@@ -15,12 +15,14 @@ public class ShowDeckUI : MonoBehaviour
     {
         Debug.Log("Regist");
         deleteCardUI.OnCardUIDeleted += Show;
+        updateCardUI.OnCardUIUpdated += Show;
     }
 
     private void OnDisable()
     {
         Debug.Log("UnRegist");
         deleteCardUI.OnCardUIDeleted -= Show;
+        updateCardUI.OnCardUIUpdated -= Show;
     }
 
     //显示当前所有卡牌

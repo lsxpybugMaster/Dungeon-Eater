@@ -31,11 +31,11 @@ public class PlayerDeckController
     /*
         升级卡牌: 删除卡牌后用新一级的卡牌替换
      */
-    public void UpdateCardFromDeck(Card oriCard, CardData updatedCardData)
+    public void UpdateCardFromDeck(Card oriCard, Card updatedCard)
     {
         heroState.RemoveCardFromDeck(oriCard);
         //卡牌总数没变,不必更新UI
-        heroState.AddCardToDeck(updatedCardData);
+        heroState.AddCardToDeck(updatedCard.data);
     }
 
 

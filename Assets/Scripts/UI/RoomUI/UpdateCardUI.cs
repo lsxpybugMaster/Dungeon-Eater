@@ -1,18 +1,20 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpdateCardUI : MonoBehaviour
 {
-    public CardUI choosenCardUI;
+    [SerializeField] CardUI choosenCardUI;
     //2 ~ 3 个卡牌升级选项
-    public List<CardUI> updateCardUIList;
-
+    [SerializeField] List<CardUI> updateCardUIList;
+    [SerializeField] List<Button> buttonList;
     
     private Tween showTween;
     private Vector3 originCardScale;
 
-    //public event Action OnCardUIDeleted;
+    public event Action OnCardUIUpdated;
 
     //[SerializeField] private Button deleteCardbtn;
 
@@ -20,6 +22,13 @@ public class UpdateCardUI : MonoBehaviour
     {
         originCardScale = choosenCardUI.transform.localScale;
         //deleteCardbtn.onClick.AddListener(Delete);
+        
+        //初始化按钮对应返回的值,注意闭包问题
+        for (int i = 0; i < updateCardUIList.Count; i++)
+        {
+            int locali = i;
+            buttonList[i].onClick.AddListener(() => { UpdateCard(locali); });
+        }
     }
 
     private void OnEnable()
@@ -27,9 +36,10 @@ public class UpdateCardUI : MonoBehaviour
         //开始时隐藏
         choosenCardUI.transform.localScale = Vector3.zero;
 
-        foreach (var updateCardUI in updateCardUIList)
+        for(int i = 0 ; i < updateCardUIList.Count; i++)
         {
-            updateCardUI.gameObject.SetActive(false);
+            updateCardUIList[i].gameObject.SetActive(false);
+            buttonList[i].gameObject.SetActive(false);
         }
         //deleteCardbtn.interactable = false;
     }
@@ -51,55 +61,83 @@ public class UpdateCardUI : MonoBehaviour
         int i = 0;
         for (; i < n; i++)
         {
-            //展示的升级选项是虚拟的卡牌,因此直接构造
-            updateCardUIList[i].gameObject.SetActive(true);
-            updateCardUIList[i].Setup(new Card(updateChoiceDatas[i]));
+            var updateCardUI = updateCardUIList[i];
+            //展示的升级选项是虚拟的卡牌,因此直接构造       
+            buttonList[i].gameObject.SetActive(true);
+            updateCardUI.gameObject.SetActive(true);
+            updateCardUI.Setup(new Card(updateChoiceDatas[i]));
+
+            ShowCardEffect(updateCardUI.transform);
         }
         //剩余空白位置隐藏
         for (; i < m; i++)
         {
             updateCardUIList[i].gameObject.SetActive(false);
+            buttonList[i].gameObject.SetActive(false);
         }
 
-        ShowCardEffect();
+        ShowCardEffect(choosenCardUI.transform);
     }
 
-    //private void Delete()
-    //{
-    //    deleteCardbtn.interactable = false;
-    //    DeleteChoosenCard(choosenCardUI.cardData);
-    //    DeleteCardEffect();
-    //}
 
-    //public void DeleteChoosenCard(Card card)
-    //{
-    //    GameManager.Instance.PlayerDeckController.RemoveCardFromDeck(card);
-    //    // 使用事件通知上层
-    //    OnCardUIDeleted?.Invoke();
-    //}
-
-    private void ShowCardEffect()
+    /// <summary>
+    /// 由按钮传入索引,在依据索引执行对应功能
+    /// </summary>
+    /// <param name="i"></param>
+    public void UpdateCard(int i)
     {
-        Debug.Log($"ori_scale {originCardScale}");
-        CardScaleEffect(Vector3.zero, originCardScale);
+        Card origin = choosenCardUI.cardData;
+        Card target = updateCardUIList[i].cardData;
+
+        GameManager.Instance.PlayerDeckController.UpdateCardFromDeck(origin, target);
+
+        //及时处理信息
+        HideAllButtons(); //防止又一次升级
+
+        //从视觉上隐藏UI
+        HideAllCards();
+
+        OnCardUIUpdated?.Invoke();
     }
 
-    private void DeleteCardEffect()
+    private void ShowCardEffect(Transform t)
     {
-        CardScaleEffect(originCardScale, Vector3.zero);
+        CardScaleEffect(t, Vector3.zero, originCardScale);
     }
 
-    private void CardScaleEffect(Vector3 fromScale, Vector3 toScale)
+    private void HideCardUIEffect(Transform t)
     {
-        Transform t = choosenCardUI.transform;
+        CardScaleEffect(t, originCardScale, Vector3.zero);
+    }
+
+    private void CardScaleEffect(Transform t, Vector3 fromScale, Vector3 toScale)
+    {  
         t.localScale = fromScale;
 
         //防止多次点击叠加 Tween
-        showTween?.Kill();
+        //showTween?.Kill();
 
         //播放 Scale 动画
-        showTween = t
-            .DOScale(toScale, Config.Instance.showCardTime)
-            .SetEase(Ease.OutCubic);
+        //showTween = t
+        t.DOScale(toScale, Config.Instance.showCardTime)
+         .SetEase(Ease.OutCubic);
+    }
+
+    private void HideAllButtons()
+    {
+        foreach (var btn in buttonList)
+        {
+            btn.gameObject.SetActive(false);
+        }
+    }
+
+    private void HideAllCards()
+    {
+        HideCardUIEffect(choosenCardUI.transform);
+        foreach (var ui in updateCardUIList)
+        {
+            //被隐藏了无所谓
+            HideCardUIEffect(ui.transform);
+        }
     }
 }

@@ -6,7 +6,7 @@ public class TestSystem : MonoBehaviour
 {
     private void Start()
     {
-
+        
     }
 
     private void Update()
@@ -14,6 +14,10 @@ public class TestSystem : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.P))
         {
             AddCard();
+        }
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            UIManager.Instance.Show<RestUI>();
         }
     }
 
