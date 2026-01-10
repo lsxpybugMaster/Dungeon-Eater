@@ -145,6 +145,9 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
     private void BattleWin(KillAllEnemyGA killAllEnemyGA)
     {
         UISystem.Instance.ShowWinUI();
+
+        RewardSystem.Instance.GetReward();
+
         // 显示完UI更换游戏模式，以禁用输入 
         GameManager.Instance.ChangeGameState(GameState.BattleVictory);
     }

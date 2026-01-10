@@ -1901,6 +1901,7 @@ Transform:
   - {fileID: 1158634236}
   - {fileID: 1528931447}
   - {fileID: 1417773349}
+  - {fileID: 1811258657}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1099982786
@@ -3268,6 +3269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cc706a0d48e6340bfe57698ff3d004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seed: 0
   difficultScore: 3
   cardSize: 0.7
   cardShowSize: 0.8
@@ -3276,6 +3278,7 @@ MonoBehaviour:
   scaleTime: 0.15
   effectTime: 0.4
   attackTime: 0.15
+  showCardTime: 0
   logicBetweentime: 0.5
 --- !u!1 &1671130620
 GameObject:
@@ -3669,6 +3672,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765113298}
   m_CullTransparentMesh: 1
+--- !u!1 &1811258656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1811258657}
+  - component: {fileID: 1811258658}
+  m_Layer: 0
+  m_Name: RewardSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1811258657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811258656}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1045284375}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1811258658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811258656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c14425a2fb624f46a68abc82d4f9ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1837271248
 GameObject:
   m_ObjectHideFlags: 0
@@ -3787,9 +3834,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3857e0ea5d0dbf548aaa08e59099b540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  persistUIControllerPrefab: {fileID: 0}
   <GameState>k__BackingField: 0
-  SEED: 0
+  persistUIControllerPrefab: {fileID: 0}
 --- !u!4 &1840230839
 Transform:
   m_ObjectHideFlags: 0
@@ -4379,7 +4425,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -339, y: -657}
+  m_AnchoredPosition: {x: -815, y: -689}
   m_SizeDelta: {x: 250, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1997018608
@@ -4513,8 +4559,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 750}
+  m_AnchoredPosition: {x: -17.5, y: 0}
+  m_SizeDelta: {x: 1385, y: 750}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2030401838
 MonoBehaviour:

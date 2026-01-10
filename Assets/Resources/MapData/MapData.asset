@@ -25,12 +25,12 @@ MonoBehaviour:
         levelSetCode: r3u2r5d3l3dl5u2
         levelInfostr: RRRUURRRRRDDDLLLDLLLLLUU
         roomCounts:
-          shopRoomNumbers: 0
+          shopRoomNumbers: 3
           eventRoomNumbers: 0
-          restRoomNumbers: 13
+          restRoomNumbers: 3
           eliteRoomNumbers: 0
-        shopGrids: 7
-        mapDices: 2
+        shopGrids: 3
+        mapDices: 3
     - rid: 8501354094988886019
       type: {class: LevelData, ns: , asm: Assembly-CSharp}
       data:
