@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
   m_Name: FireStorm
   m_EditorClassIdentifier: 
+  <Id>k__BackingField: FireStorm
   <Description>k__BackingField: Add 3 Burn Effect
   <Mana>k__BackingField: 2
   <Image>k__BackingField: {fileID: 21300000, guid: 244a920166e9a41468580b0f277dc575, type: 3}
@@ -22,6 +23,8 @@ MonoBehaviour:
       rid: 8501353665225031680
     <Effect>k__BackingField:
       rid: 8501353665225031681
+  <CardTags>k__BackingField: 
+  <UpdateCardInfo>k__BackingField: []
   references:
     version: 2
     RefIds:

@@ -9,14 +9,13 @@ public class RewardSystem : Singleton<RewardSystem>
 
     public void GetReward()
     {
+        List<CardData> rewardDatas = new List<CardData>();
         for (int i = 0; i < 3; i++)
         {
             CardData d = CardDatabase.GetRandomCard();
-            if (d == null)
-            {
-                Debug.Log("not FOUND CARD");
-            }
-            DebugUtil.Cyan($"Reward Card: {d.name}");
+            rewardDatas.Add(d);
         }
+
+        EventBus.Publish(new RewardCardEvent(rewardDatas));
     }
 }

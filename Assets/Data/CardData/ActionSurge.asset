@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
   m_Name: ActionSurge
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 9049fc58-8868-4a2e-97ae-1e0c7719fc05
+  <Id>k__BackingField: ActionSurge
   <Description>k__BackingField: Add Mana to max Mana; [Once Per Battle]
   <Mana>k__BackingField: 0
   <Image>k__BackingField: {fileID: 21300000, guid: 6957d0e9e59addf438d0f5d67d81eab4, type: 3}
@@ -28,6 +28,7 @@ MonoBehaviour:
     <Effect>k__BackingField:
       rid: 2509721198799355910
   <CardTags>k__BackingField: 00000000
+  <UpdateCardInfo>k__BackingField: []
   references:
     version: 2
     RefIds:

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
   m_Name: AddCardToHand
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 9049fc58-8868-4a2e-97ae-1e0c7719fc05
+  <Id>k__BackingField: AddCardToHand
   <Description>k__BackingField: Add a debug card to your DrawPile
   <Mana>k__BackingField: 0
   <Image>k__BackingField: {fileID: 21300000, guid: 348399bcbcd65574ba80aa8e02017ef6, type: 3}
@@ -23,6 +23,8 @@ MonoBehaviour:
       rid: 5386319892022034432
     <Effect>k__BackingField:
       rid: 5386319892022034433
+  <CardTags>k__BackingField: 
+  <UpdateCardInfo>k__BackingField: []
   references:
     version: 2
     RefIds:

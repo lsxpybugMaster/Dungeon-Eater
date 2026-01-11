@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
   m_Name: DrawCards
   m_EditorClassIdentifier: 
+  <Id>k__BackingField: DrawCards
   <Description>k__BackingField: Draw 2 Cards
   <Mana>k__BackingField: 0
   <Image>k__BackingField: {fileID: 21300000, guid: 128b1274a4e58fc4e8985aafb91a3e14, type: 3}
@@ -22,6 +23,8 @@ MonoBehaviour:
       rid: 723492467705118722
     <Effect>k__BackingField:
       rid: 723492467705118723
+  <CardTags>k__BackingField: 
+  <UpdateCardInfo>k__BackingField: []
   references:
     version: 2
     RefIds:

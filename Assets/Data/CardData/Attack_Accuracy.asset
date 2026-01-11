@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
   m_Name: Attack_Accuracy
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 3f1ab0a5-8c9d-442f-9bb9-89418310290f
+  <Id>k__BackingField: Attack_Accuracy
   <Description>k__BackingField: Deal 6 damage
   <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 21300000, guid: 182d4995aa60fe1408e7d76d63bf6a21, type: 3}

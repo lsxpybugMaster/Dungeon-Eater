@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
   m_Name: PommelStrike
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 9049fc58-8868-4a2e-97ae-1e0c7719fc05
+  <Id>k__BackingField: PommelStrike
   <Description>k__BackingField: deal 1d4 damage, if meet will give dizzy effect
   <Mana>k__BackingField: 2
   <Image>k__BackingField: {fileID: 21300108, guid: 09e4c6a7d75923945afe43953ef58ad2, type: 3}
@@ -24,6 +24,7 @@ MonoBehaviour:
     <Effect>k__BackingField:
       rid: 2509721291522834438
   <CardTags>k__BackingField: 
+  <UpdateCardInfo>k__BackingField: []
   references:
     version: 2
     RefIds:

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
   m_Name: AddFlexibility
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: 9049fc58-8868-4a2e-97ae-1e0c7719fc05
+  <Id>k__BackingField: AddFlexibility
   <Description>k__BackingField: Add 1 temp flexibility
   <Mana>k__BackingField: 0
   <Image>k__BackingField: {fileID: 21300000, guid: 32700198561e47044863cf80370fe63a, type: 3}
@@ -23,6 +23,8 @@ MonoBehaviour:
       rid: 2509721198799355907
     <Effect>k__BackingField:
       rid: 2509721198799355906
+  <CardTags>k__BackingField: 
+  <UpdateCardInfo>k__BackingField: []
   references:
     version: 2
     RefIds:

@@ -1,6 +1,7 @@
 ﻿using SerializeReferenceEditor;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Data/Card")]
@@ -35,9 +36,14 @@ public class CardData : ScriptableObject, IHaveKey<string>
     // Unity 的编辑器回调方法
     private void OnValidate()
     {
-        // 如果还没有ID，则自动生成（防止重复）
-        if (string.IsNullOrEmpty(Id))
-            Id = System.Guid.NewGuid().ToString();
+        // 使用文件名作为ID
+        string assetPath = AssetDatabase.GetAssetPath(this);
+        if (!string.IsNullOrEmpty(assetPath))
+        {
+            // 直接使用文件名（不含扩展名）作为ID
+            Id = System.IO.Path.GetFileNameWithoutExtension(assetPath);
+            EditorUtility.SetDirty(this);
+        }  
     }
 #endif
 }
