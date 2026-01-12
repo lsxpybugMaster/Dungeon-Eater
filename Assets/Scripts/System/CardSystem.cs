@@ -116,6 +116,10 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.AttachPerformer<DiscardAllCardsGA>(DiscardAllCardsPerformer);
         ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);
         ActionSystem.AttachPerformer<AddCardGA>(AddCardPerformer);
+
+        //TODO: 通过事件建立CardSystem与PlayerDeckController的联系
+        //这可能需要CardSystem也晚于GameManager建立(当然如果菜单界面开始运行就没问题)
+        //GameManager.Instance.PlayerDeckController.OnAddCardToDeck += (CardData d) => { };
     }
 
 

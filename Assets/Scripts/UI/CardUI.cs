@@ -24,10 +24,16 @@ public class CardUI : MonoBehaviour
     public Card cardData { get; set; }
 
     //外部调用监听此事件(小心内存泄漏)
+    //NOTE: 现在其会额外传入一个标识符
     public event Action<Card> OnCardSelected;
+
+    private int idx = 0;
+    public event Action<Card, int> OnCardSelectedInGroup;
+
     private void OnDestroy()
     {
         OnCardSelected = null;
+        OnCardSelectedInGroup = null;
     }
 
 
@@ -39,6 +45,21 @@ public class CardUI : MonoBehaviour
             uiRayCastArea.OnHoverExit += HandleHoverExit;
             uiRayCastArea.OnClick += HandleClick;
         }
+    }
+
+    //取消该卡牌的交互功能
+    public void DisableCasting()
+    {
+        uiRayCastArea.OnHoverEnter -= HandleHoverEnter;
+        uiRayCastArea.OnHoverExit -= HandleHoverExit;
+        uiRayCastArea.OnClick -= HandleClick;
+    }
+
+    //将作为一组CardUI中的一个,比正常的SetUp复杂些
+    public void SetupForGroup(Card card, int idx)
+    {
+        Setup(card);
+        this.idx = idx; 
     }
 
     public void Setup(Card card)
@@ -53,21 +74,23 @@ public class CardUI : MonoBehaviour
         cardData = card;
     }
 
-    public void HandleHoverEnter()
+    private void HandleHoverEnter()
     {
         cardViewImage.color = hoverColor;
         image.color = hoverColor;
     }
 
-    public void HandleClick()
+    private void HandleClick()
     {
         OnCardSelected?.Invoke(cardData);
+        OnCardSelectedInGroup?.Invoke(cardData, idx);
     }
 
-    public void HandleHoverExit()
+    private void HandleHoverExit()
     {
         cardViewImage.color = originColor;
         image.color = originColor;
     }
 
+    
 }

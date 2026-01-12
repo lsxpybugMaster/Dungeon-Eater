@@ -11,8 +11,11 @@ public class PlayerDeckController
     //由GameManager负责初始化
     private HeroState heroState;
 
-
     public int DeckSize => heroState.DeckSize;
+
+    // 提供事件,使得外部系统(CardSystem)与全局卡牌产生联系
+    public event Action<CardData> OnAddCardToDeck;
+
 
     public PlayerDeckController(HeroState heroState)
     {
@@ -25,7 +28,10 @@ public class PlayerDeckController
     public void AddCardToDeck(CardData cardData)
     {
         heroState.AddCardToDeck(cardData);
-        DoWhenUpdateCard(); 
+        DoWhenUpdateCard();
+
+        //TODO: 小心这里可能会导致卡牌数量结果的覆盖
+        OnAddCardToDeck?.Invoke(cardData);
     }
 
     /*
