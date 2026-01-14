@@ -3218,6 +3218,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardViewPrefab: {fileID: 7887162032003757299, guid: 63de2a990e9942744b994958d9168465, type: 3}
+--- !u!1 &1615120181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1615120182}
+  m_Layer: 5
+  m_Name: Tar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1615120182
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615120181}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6631922457125870239}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1616976886
 GameObject:
   m_ObjectHideFlags: 0
@@ -3269,7 +3304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cc706a0d48e6340bfe57698ff3d004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 0
+  so: {fileID: 11400000, guid: 159188c19a67c4d439c5c3dc7312157c, type: 2}
   difficultScore: 3
   cardSize: 0.7
   cardShowSize: 0.8
@@ -3278,7 +3313,7 @@ MonoBehaviour:
   scaleTime: 0.15
   effectTime: 0.4
   attackTime: 0.15
-  showCardTime: 0
+  showCardTime: 0.2
   logicBetweentime: 0.5
 --- !u!1 &1671130620
 GameObject:
@@ -4560,7 +4595,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1550, y: 750}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2030401838
@@ -5803,6 +5838,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2031568787588710201}
+  - {fileID: 1615120182}
   m_Father: {fileID: 2030401837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5825,6 +5861,7 @@ MonoBehaviour:
   layoutGroup: {fileID: 2031568787588710201}
   cardUIPrefab: {fileID: 2963480741209160962, guid: 48f3f04f2192d2c4a9e6d32054374e8f, type: 3}
   additionalSpaceSize: 300
+  targetRectForAni: {fileID: 1615120182}
 --- !u!23 &6751657784509984773
 MeshRenderer:
   m_ObjectHideFlags: 0
