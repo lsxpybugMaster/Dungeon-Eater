@@ -1,9 +1,7 @@
-﻿using ActionSystemTest;
-using System.Collections;
+﻿using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using static UnityEngine.UI.Image;
+
 
 //展示一些 n 选 1 的卡牌选项
 public class ShowChoosenCardUI : MonoBehaviour
@@ -12,6 +10,10 @@ public class ShowChoosenCardUI : MonoBehaviour
     private float layoutGroupWidth; //如果牌数过多,会增加宽度
     [SerializeField] private CardUI cardUIPrefab;
     [SerializeField] private float additionalSpaceSize;
+    [SerializeField] private RectTransform targetRectForAni;
+
+
+    private Vector3 originCardScale;
 
     //存储当前的奖励卡牌信息
     //注意C# 中需要初始化
@@ -20,6 +22,7 @@ public class ShowChoosenCardUI : MonoBehaviour
     private void Awake()
     {
         layoutGroupWidth = layoutGroup.sizeDelta.x;
+        originCardScale = cardUIPrefab.transform.localScale;
     }
 
     private void OnEnable()
@@ -60,20 +63,67 @@ public class ShowChoosenCardUI : MonoBehaviour
         }
     }
 
-    private void DisableAllRewardCards()
-    {
-        foreach (var cardUI in rewardCardUIList)
-        {
-           cardUI.DisableCasting();
-        }
-    }
 
     //选择一张卡牌,然后隐藏其他卡牌
     private void ChooseCard(Card card, int id)
     {
         GameManager.Instance.PlayerDeckController.AddCardToDeck(card.data);
-        Debug.Log($"id号为 [{id}] 的被选中");
 
-        DisableAllRewardCards();
+        //简单效果
+        for (int i = 0; i < rewardCardUIList.Count; i++)
+        {
+            var cardUI = rewardCardUIList[i];
+            cardUI.DisableCasting();
+            if (i == id)
+            {
+                var rect = cardUI.GetComponent<RectTransform>();
+                AnimUtil.DetachFromLayoutGroup(rect, GetComponent<RectTransform>());
+                CardSelectedEffect(rect);
+            }
+            else
+                CardScaleEffect(cardUI.transform, originCardScale, Vector3.zero);
+        }
+
+        //DisableAllRewardCards();
     }
+
+    private void CardScaleEffect(Transform t, Vector3 fromScale, Vector3 toScale)
+    {
+        t.localScale = fromScale;
+
+        //防止多次点击叠加 Tween
+        //showTween?.Kill();
+
+        //播放 Scale 动画
+        //showTween = t
+        t.DOScale(toScale, Config.Instance.showCardTime)
+         .SetEase(Ease.OutCubic);
+    }
+
+    private void CardSelectedEffect(RectTransform rect)
+    {
+
+        // 防止重复点击叠加 Tween
+        rect.DOKill();
+
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(
+            rect.DOScale(originCardScale * 1.2f, 0.5f)
+                .SetEase(Ease.OutBack)
+        );
+
+        seq.Append(
+            rect.DOAnchorPos(Vector2.zero, 0.5f)
+                .SetEase(Ease.OutCubic)
+        );
+
+        //seq.Append(
+        //    rect.DOScale(Vector3.zero, 0.5f)
+        //        .SetEase(Ease.InBack)
+        //);
+
+        seq.Play();
+    }
+
 }

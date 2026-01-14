@@ -10,7 +10,7 @@ public class RewardSystem : Singleton<RewardSystem>
     public void GetReward()
     {
         List<CardData> rewardDatas = new List<CardData>();
-        int n = Random.Range(1, 6);
+        int n = Random.Range(3, 6);
         for (int i = 0; i < n; i++)
         {
             CardData d = CardDatabase.GetRandomCard();

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 事先封装一些dotween动画,用于在Performer中演示
+/// 事先封装一些dotween动画,用于在Performer中演示 (非UI)
 /// </summary>
 public static class MotionUtil 
 {

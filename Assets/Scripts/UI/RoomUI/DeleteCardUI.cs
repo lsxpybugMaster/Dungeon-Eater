@@ -41,10 +41,6 @@ public class DeleteCardUI : MonoBehaviour
             Debug.Log($" {this.name} 脚本已被禁用,事件执行终止");
             return;
         }
-        else
-        {
-            Debug.Log("OMG !!");
-        }
 
         deleteCardbtn.interactable = true;
         choosenCardUI.Setup(card);

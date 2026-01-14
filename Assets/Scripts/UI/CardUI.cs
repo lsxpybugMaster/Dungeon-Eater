@@ -1,7 +1,6 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 //在UI中以卡牌形式展示卡牌数据
@@ -24,9 +23,9 @@ public class CardUI : MonoBehaviour
     public Card cardData { get; set; }
 
     //外部调用监听此事件(小心内存泄漏)
-    //NOTE: 现在其会额外传入一个标识符
     public event Action<Card> OnCardSelected;
 
+    //扩展事件,用于有一系列CardUI对象的情况
     private int idx = 0;
     public event Action<Card, int> OnCardSelectedInGroup;
 
