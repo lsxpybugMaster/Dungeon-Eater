@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -6,27 +7,54 @@ using UnityEngine;
 /// </summary>
 public class ShowCardUIBase : MonoBehaviour
 {
-    //目前只是复用跟动画相关的代码
+    //复用事件注册
+    public event Action OnCardUIClicked;
+
+
+    //复用跟动画相关的代码
 
     //存储最初大小,用于Scale动画
     protected Vector3 originCardScale;
 
     [SerializeField] protected CardUI cardUIPrefab;
 
+
     protected void Awake()
     {
         originCardScale = cardUIPrefab.transform.localScale;
     }
+
+
+    //建立卡牌UI点击与调用的联系
+    public void RegistCardUI(CardUI cardUI)
+    {
+        cardUI.OnCardSelected += ShowChoosenCard;
+    }
+
+    protected void InvokeOnCardUIClicked()
+    {
+        OnCardUIClicked?.Invoke();
+    }
+
+
+
+    public virtual void ShowChoosenCard(Card card)
+    {
+
+    }
+
 
     protected void ShowCardUIEffect(Transform t)
     {
         CardScaleEffect(t, Vector3.zero, originCardScale);
     }
 
+
     protected void HideCardUIEffect(Transform t)
     {
         CardScaleEffect(t, originCardScale, Vector3.zero);
     }
+
 
     protected void CardScaleEffect(Transform t, Vector3 fromScale, Vector3 toScale)
     {
@@ -40,6 +68,7 @@ public class ShowCardUIBase : MonoBehaviour
         t.DOScale(toScale, Config.Instance.showCardTime)
          .SetEase(Ease.OutCubic);
     }
+
 
     protected void CardSelectedEffect(RectTransform rect)
     {

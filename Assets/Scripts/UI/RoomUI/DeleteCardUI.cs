@@ -13,7 +13,7 @@ public class DeleteCardUI : ShowCardUIBase
 
     //private Tween showTween;
 
-    public event Action OnCardUIDeleted;
+    //public event Action OnCardUIDeleted;
 
     [SerializeField] private Button deleteCardbtn;
 
@@ -31,20 +31,13 @@ public class DeleteCardUI : ShowCardUIBase
     }
 
     //建立卡牌UI点击与调用的联系
-    public void RegistCardUI(CardUI cardUI)
-    {
-        cardUI.OnCardSelected += ShowChoosenCard;
-    }
+    //public void RegistCardUI(CardUI cardUI)
+    //{
+    //    cardUI.OnCardSelected += ShowChoosenCard;
+    //}
 
-    public void ShowChoosenCard(Card card)
+    public override void ShowChoosenCard(Card card)
     {
-        if (!gameObject.activeInHierarchy)
-        {
-            //C# 事件注册/回调与Unity无关, 所以需要对象自己控制
-            Debug.Log($" {this.name} 脚本已被禁用,事件执行终止");
-            return;
-        }
-
         deleteCardbtn.interactable = true;
         choosenCardUI.Setup(card);
         ShowCardUIEffect(choosenCardUI.transform);
@@ -62,7 +55,8 @@ public class DeleteCardUI : ShowCardUIBase
     {
         GameManager.Instance.PlayerDeckController.RemoveCardFromDeck(card);
         // 使用事件通知上层
-        OnCardUIDeleted?.Invoke();
+        //OnCardUIDeleted?.Invoke();
+        InvokeOnCardUIClicked(); //基类调用事件
     }
 
     //private void ShowCardEffect()

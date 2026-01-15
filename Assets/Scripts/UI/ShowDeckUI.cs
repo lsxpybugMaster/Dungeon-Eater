@@ -8,20 +8,23 @@ public class ShowDeckUI : MonoBehaviour
     [SerializeField] private GameObject cardUIPrefab;
     [SerializeField] private GameObject cardUIRoot; //UI放置位置
 
-    [SerializeField] private DeleteCardUI deleteCardUI;
-    [SerializeField] private UpdateCardUI updateCardUI;
+    //[SerializeField] private DeleteCardUI deleteCardUI;
+    //[SerializeField] private UpdateCardUI updateCardUI;
+    [SerializeField] private ShowCardUIBase showCardUI;
 
     private void OnEnable()
     {
         //这里的注册太死了,修改思路
-        deleteCardUI.OnCardUIDeleted += Show;
-        updateCardUI.OnCardUIUpdated += Show;
+        //deleteCardUI.OnCardUIDeleted += Show;
+        //updateCardUI.OnCardUIUpdated += Show;
+        showCardUI.OnCardUIClicked += Show;
     }
 
     private void OnDisable()
     {
-        deleteCardUI.OnCardUIDeleted -= Show;
-        updateCardUI.OnCardUIUpdated -= Show;
+        //deleteCardUI.OnCardUIDeleted -= Show;
+        //updateCardUI.OnCardUIUpdated -= Show;
+        showCardUI.OnCardUIClicked -= Show;
     }
 
     //显示当前所有卡牌
@@ -50,7 +53,8 @@ public class ShowDeckUI : MonoBehaviour
         cardUIInst.transform.SetParent(cardUIRoot.transform);
         cardUIInst.Setup(card);
         //绑定其至显示UI
-        deleteCardUI.RegistCardUI(cardUIInst);
-        updateCardUI.RegistCardUI(cardUIInst);
+        //deleteCardUI.RegistCardUI(cardUIInst);
+        //updateCardUI.RegistCardUI(cardUIInst);
+        showCardUI.RegistCardUI(cardUIInst);
     }
 }

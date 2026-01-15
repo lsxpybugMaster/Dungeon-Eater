@@ -15,9 +15,9 @@ public class UpdateCardUI : ShowCardUIBase
     // private Tween showTween;
     // private Vector3 originCardScale;
 
-    public event Action OnCardUIUpdated;
+    // public event Action OnCardUIUpdated;
 
-    //[SerializeField] private Button deleteCardbtn;
+    // [SerializeField] private Button deleteCardbtn;
 
     private new void Awake()
     {
@@ -49,20 +49,13 @@ public class UpdateCardUI : ShowCardUIBase
     }
 
     //建立卡牌UI点击与调用的联系
-    public void RegistCardUI(CardUI cardUI)
-    {
-        cardUI.OnCardSelected += ShowChoosenCard;
-    }
+    //public void RegistCardUI(CardUI cardUI)
+    //{
+    //    cardUI.OnCardSelected += ShowChoosenCard;
+    //}
 
-    public void ShowChoosenCard(Card card)
+    public override void ShowChoosenCard(Card card)
     {
-        if (!gameObject.activeInHierarchy)
-        {
-            //C# 事件注册/回调与Unity无关, 所以需要对象自己控制
-            Debug.Log($" {this.name} 脚本已被禁用,事件执行终止");
-            return;
-        }
-
         //deleteCardbtn.interactable = true;
         choosenCardUI.Setup(card);
         //
@@ -108,7 +101,8 @@ public class UpdateCardUI : ShowCardUIBase
         //从视觉上隐藏UI
         HideAllCards();
 
-        OnCardUIUpdated?.Invoke();
+        //OnCardUIUpdated?.Invoke();
+        InvokeOnCardUIClicked();
     }
 
     //private void ShowCardEffect(Transform t)
