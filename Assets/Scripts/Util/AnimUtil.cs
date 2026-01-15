@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,5 +24,13 @@ public static class AnimUtil
         rect.pivot = new Vector2(0.5f, 0.5f);
        
         rect.position = worldPosition;
+    }
+
+    public static void CardScaleAnim(Transform t, Vector3 fromScale, Vector3 toScale, float time)
+    {
+        t.localScale = fromScale;
+
+        t.DOScale(toScale, time)
+         .SetEase(Ease.OutCubic);
     }
 }

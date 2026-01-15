@@ -4,25 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpdateCardUI : MonoBehaviour
+public class UpdateCardUI : ShowCardUIBase
 {
-    [SerializeField] CardUI choosenCardUI;
+    //[SerializeField] CardUI choosenCardUI;
+    private CardUI choosenCardUI;
     //2 ~ 3 个卡牌升级选项
     [SerializeField] List<CardUI> updateCardUIList;
     [SerializeField] List<Button> buttonList;
     
-    private Tween showTween;
-    private Vector3 originCardScale;
+    // private Tween showTween;
+    // private Vector3 originCardScale;
 
     public event Action OnCardUIUpdated;
 
     //[SerializeField] private Button deleteCardbtn;
 
-    private void Awake()
+    private new void Awake()
     {
-        originCardScale = choosenCardUI.transform.localScale;
+        base.Awake();
+
+        choosenCardUI = cardUIPrefab; //重新命名
+        //originCardScale = choosenCardUI.transform.localScale;
         //deleteCardbtn.onClick.AddListener(Delete);
-        
+
         //初始化按钮对应返回的值,注意闭包问题
         for (int i = 0; i < updateCardUIList.Count; i++)
         {
@@ -52,6 +56,13 @@ public class UpdateCardUI : MonoBehaviour
 
     public void ShowChoosenCard(Card card)
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            //C# 事件注册/回调与Unity无关, 所以需要对象自己控制
+            Debug.Log($" {this.name} 脚本已被禁用,事件执行终止");
+            return;
+        }
+
         //deleteCardbtn.interactable = true;
         choosenCardUI.Setup(card);
         //
@@ -67,7 +78,7 @@ public class UpdateCardUI : MonoBehaviour
             updateCardUI.gameObject.SetActive(true);
             updateCardUI.Setup(new Card(updateChoiceDatas[i]));
 
-            ShowCardEffect(updateCardUI.transform);
+            ShowCardUIEffect(updateCardUI.transform);
         }
         //剩余空白位置隐藏
         for (; i < m; i++)
@@ -76,7 +87,7 @@ public class UpdateCardUI : MonoBehaviour
             buttonList[i].gameObject.SetActive(false);
         }
 
-        ShowCardEffect(choosenCardUI.transform);
+        ShowCardUIEffect(choosenCardUI.transform);
     }
 
 
@@ -100,28 +111,15 @@ public class UpdateCardUI : MonoBehaviour
         OnCardUIUpdated?.Invoke();
     }
 
-    private void ShowCardEffect(Transform t)
-    {
-        CardScaleEffect(t, Vector3.zero, originCardScale);
-    }
+    //private void ShowCardEffect(Transform t)
+    //{
+    //    AnimUtil.CardScaleAnim(t, Vector3.zero, originCardScale, Config.Instance.showCardTime);
+    //}
 
-    private void HideCardUIEffect(Transform t)
-    {
-        CardScaleEffect(t, originCardScale, Vector3.zero);
-    }
-
-    private void CardScaleEffect(Transform t, Vector3 fromScale, Vector3 toScale)
-    {  
-        t.localScale = fromScale;
-
-        //防止多次点击叠加 Tween
-        //showTween?.Kill();
-
-        //播放 Scale 动画
-        //showTween = t
-        t.DOScale(toScale, Config.Instance.showCardTime)
-         .SetEase(Ease.OutCubic);
-    }
+    //private void HideCardUIEffect(Transform t)
+    //{
+    //    AnimUtil.CardScaleAnim(t, originCardScale, Vector3.zero, Config.Instance.showCardTime);
+    //}
 
     private void HideAllButtons()
     {

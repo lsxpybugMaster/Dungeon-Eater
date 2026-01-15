@@ -7,18 +7,21 @@ using UnityEngine.UI;
 
 //删卡UI,提供相关卡牌的显示,管理按钮,以及调用具体接口
 //同时管理对卡牌的删除
-public class DeleteCardUI : MonoBehaviour
+public class DeleteCardUI : ShowCardUIBase
 {
-    public CardUI choosenCardUI;
+    private CardUI choosenCardUI;
 
-    private Tween showTween;
+    //private Tween showTween;
 
     public event Action OnCardUIDeleted;
 
     [SerializeField] private Button deleteCardbtn;
 
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
+        choosenCardUI = cardUIPrefab;
+        choosenCardUI.transform.localScale = Vector3.zero; //隐藏选中卡牌
         deleteCardbtn.onClick.AddListener(Delete);
     }
 
@@ -44,14 +47,15 @@ public class DeleteCardUI : MonoBehaviour
 
         deleteCardbtn.interactable = true;
         choosenCardUI.Setup(card);
-        ShowCardEffect();
+        ShowCardUIEffect(choosenCardUI.transform);
     }
 
     private void Delete()
     {
         deleteCardbtn.interactable = false;
         DeleteChoosenCard(choosenCardUI.cardData);
-        DeleteCardEffect();
+        HideCardUIEffect(choosenCardUI.transform);
+        // DeleteCardEffect();
     }
 
     public void DeleteChoosenCard(Card card)
@@ -61,27 +65,27 @@ public class DeleteCardUI : MonoBehaviour
         OnCardUIDeleted?.Invoke();
     }
 
-    private void ShowCardEffect()
-    {
-        CardScaleEffect(Vector3.zero, Vector3.one);
-    }
+    //private void ShowCardEffect()
+    //{
+    //    CardScaleEffect(Vector3.zero, Vector3.one);
+    //}
 
-    private void DeleteCardEffect()
-    {
-        CardScaleEffect(Vector3.one, Vector3.zero);
-    }
+    //private void DeleteCardEffect()
+    //{
+    //    CardScaleEffect(Vector3.one, Vector3.zero);
+    //}
 
-    private void CardScaleEffect(Vector3 fromScale, Vector3 toScale)
-    {
-        Transform t = choosenCardUI.transform;
-        t.localScale = fromScale;
+    //private void CardScaleEffect(Vector3 fromScale, Vector3 toScale)
+    //{
+    //    Transform t = choosenCardUI.transform;
+    //    t.localScale = fromScale;
 
-        //防止多次点击叠加 Tween
-        showTween?.Kill();
+    //    //防止多次点击叠加 Tween
+    //    showTween?.Kill();
 
-        //播放 Scale 动画
-        showTween = t
-            .DOScale(toScale, Config.Instance.showCardTime)
-            .SetEase(Ease.OutCubic);
-    }
+    //    //播放 Scale 动画
+    //    showTween = t
+    //        .DOScale(toScale, Config.Instance.showCardTime)
+    //        .SetEase(Ease.OutCubic);
+    //}
 }

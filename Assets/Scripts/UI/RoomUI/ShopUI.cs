@@ -4,4 +4,10 @@ using UnityEngine;
 
 public class ShopUI : RoomUI
 {
+    [SerializeField] private ShowDeckUI showDeckUI;
+
+    private void Start()
+    {
+        showDeckUI.Show();
+    }
 }

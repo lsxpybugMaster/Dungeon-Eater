@@ -13,14 +13,13 @@ public class ShowDeckUI : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("Regist");
+        //这里的注册太死了,修改思路
         deleteCardUI.OnCardUIDeleted += Show;
         updateCardUI.OnCardUIUpdated += Show;
     }
 
     private void OnDisable()
     {
-        Debug.Log("UnRegist");
         deleteCardUI.OnCardUIDeleted -= Show;
         updateCardUI.OnCardUIUpdated -= Show;
     }

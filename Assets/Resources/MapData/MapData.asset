@@ -27,9 +27,9 @@ MonoBehaviour:
         roomCounts:
           shopRoomNumbers: 3
           eventRoomNumbers: 0
-          restRoomNumbers: 3
-          eliteRoomNumbers: 0
-        shopGrids: 3
+          restRoomNumbers: 8
+          eliteRoomNumbers: 8
+        shopGrids: 8
         mapDices: 3
     - rid: 8501354094988886019
       type: {class: LevelData, ns: , asm: Assembly-CSharp}
