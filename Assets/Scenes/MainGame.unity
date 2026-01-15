@@ -6679,7 +6679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cc706a0d48e6340bfe57698ff3d004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 42
+  so: {fileID: 11400000, guid: 159188c19a67c4d439c5c3dc7312157c, type: 2}
   difficultScore: 3
   cardSize: 0.7
   cardShowSize: 0.8

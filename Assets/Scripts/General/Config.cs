@@ -34,79 +34,33 @@ public class Config : PersistentSingleton<Config>
     private int seed; //随机数种子
     public int Seed { get { return seed; } }    
 
-    [Header("战斗数值相关系统")]
-    public int difficultScore;
+    //战斗数值相关系统
+    [HideInInspector] public int difficultScore;
 
-    [Header("卡牌系统相关参数")]
+    //卡牌系统相关参数
     //卡牌大小
-    [Range(0, 2f)] public float cardSize;
+    [HideInInspector] public float cardSize;
     //卡牌作为动画展示时的大小
-    [Range(0, 2f)] public float cardShowSize;
+    [HideInInspector] public float cardShowSize;
 
-    [Header("卡牌动画相关参数")]
+    //卡牌动画相关参数
     //展示卡牌对象的时间
-    public float freezeTime;
+    [HideInInspector] public float freezeTime;
     //移动卡牌对象动画的时间
-    public float moveTime;
+    [HideInInspector] public float moveTime;
     //卡牌缩放/膨胀所需的时间
-    public float scaleTime;
+    [HideInInspector] public float scaleTime;
 
-    [Header("效果系统相关参数")]
+    //效果系统相关参数
     //显示VFX的时间
-    public float effectTime;
+    [HideInInspector] public float effectTime;
 
-    [Header("战斗动画相关参数")]
-    public float attackTime;
+    //战斗动画相关参数
+    [HideInInspector] public float attackTime;
 
-    [Header("UI动画相关参数")]
-    public float showCardTime;
+    //UI动画相关参数
+    [HideInInspector] public float showCardTime;
 
-    [Header("逻辑显示相关参数")]
-    public float logicBetweentime; //如击败全部敌人后显示胜利的时间间隔
-
-
-
-
-
-    //[Header("全局信息")]
-    //[SerializeField] private int seed; //随机数种子
-    //public int Seed 
-    //{
-    //    get
-    //    {
-    //        Debug.Log($"seed = {seed}");
-    //        return seed == 0 ? UnityEngine.Random.Range(0, int.MaxValue) : seed;
-    //    }
-    //}
-
-    //[Header("战斗数值相关系统")]
-    //public int difficultScore;
-
-    //[Header("卡牌系统相关参数")]
-    ////卡牌大小
-    //[Range(0, 2f)] public float cardSize; 
-    ////卡牌作为动画展示时的大小
-    //[Range(0, 2f)] public float cardShowSize;
-
-    //[Header("卡牌动画相关参数")]
-    ////展示卡牌对象的时间
-    //public float freezeTime;
-    ////移动卡牌对象动画的时间
-    //public float moveTime;
-    ////卡牌缩放/膨胀所需的时间
-    //public float scaleTime;
-
-    //[Header("效果系统相关参数")]
-    ////显示VFX的时间
-    //public float effectTime;
-
-    //[Header("战斗动画相关参数")]
-    //public float attackTime;
-
-    //[Header("UI动画相关参数")]
-    //public float showCardTime;
-
-    //[Header("逻辑显示相关参数")]
-    //public float logicBetweentime; //如击败全部敌人后显示胜利的时间间隔
-
+    //逻辑显示相关参数
+    [HideInInspector] public float logicBetweentime; //如击败全部敌人后显示胜利的时间间隔
 }
