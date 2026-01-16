@@ -16,6 +16,7 @@ public class MapControlSystem : Singleton<MapControlSystem>, IRequireGameManager
     [Header("管理的子模块")]
     [SerializeField] private MapViewCreator mapViewcreator;
     [SerializeField] private MapUI mapUI;
+    [SerializeField] private LevelProgressUI levelProgressUI;
     // [SerializeField] private ChangeRoomSystem changeRoomSystem;
 
     [Header("地图的相关编辑器配置数据")]
@@ -75,7 +76,12 @@ public class MapControlSystem : Singleton<MapControlSystem>, IRequireGameManager
         //每次重新进入都需要生成地图,同时初始化骰子位置
         mapViewcreator.CreateMapWithDice(mapState.Map, mapState.MapDiceList);
         dicesSystem.SetUp(mapState.MapDiceList);
+
+        SetupOtherLogic();
     }
 
-
+    private void SetupOtherLogic()
+    {
+        levelProgressUI.gameObject.SetActive(true);
+    }
 }
