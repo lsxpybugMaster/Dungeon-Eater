@@ -29,13 +29,13 @@ public class MapState : BaseState<MapData>
     public List<MapDice> MapDiceList { get; set; } //当前地图对应的骰子,可以被Map编辑
  
     //------------------------持久化数据---------------------------
-    //NOTE: 全局仅执行一次
-    public MapState()
+    //NOTE: 
+    public MapState(int level)
     {
         //自己去获取数据文件,不再由GameManager管理
         LoadDataFromResources("MapData/MapData");
 
-        currentLevel = 0;
+        currentLevel = level;
         currentStep = 0;
         initNewLevel(currentLevel);
 

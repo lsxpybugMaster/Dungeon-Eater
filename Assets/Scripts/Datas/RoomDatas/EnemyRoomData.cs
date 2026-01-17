@@ -10,6 +10,6 @@ public class EnemyRoomData : RoomData
     {
         GameManager.Instance.EnemyPool.SetEnemiesBuffer(grid.roomEnemies);
 
-        GameManager.Instance.ToBattleMode();
+        GameManager.Instance.SceneModeManager.ToBattleMode();
     }
 }

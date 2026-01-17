@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: MapData
   m_EditorClassIdentifier: 
   <levels>k__BackingField:
-  - rid: 8501354094988886018
   - rid: 8501354094988886019
   - rid: 8501354094988886020
+  - rid: 8501354094988886018
   references:
     version: 2
     RefIds:
@@ -34,24 +34,24 @@ MonoBehaviour:
     - rid: 8501354094988886019
       type: {class: LevelData, ns: , asm: Assembly-CSharp}
       data:
-        levelSetCode: R4D3L4U3
-        levelInfostr: RRRRDDDLLLLUUU
+        levelSetCode: U2R6D5L6U3
+        levelInfostr: UURRRRRRDDDDDLLLLLLUUU
         roomCounts:
-          shopRoomNumbers: 0
+          shopRoomNumbers: 3
           eventRoomNumbers: 0
-          restRoomNumbers: 0
+          restRoomNumbers: 6
           eliteRoomNumbers: 0
-        shopGrids: 0
-        mapDices: 0
+        shopGrids: 6
+        mapDices: 4
     - rid: 8501354094988886020
       type: {class: LevelData, ns: , asm: Assembly-CSharp}
       data:
-        levelSetCode: r3u2r5d3l3dl5u2
-        levelInfostr: RRRUURRRRRDDDLLLDLLLLLUU
+        levelSetCode: R4U2R3D2R2D2L9U2
+        levelInfostr: RRRRUURRRDDRRDDLLLLLLLLLUU
         roomCounts:
           shopRoomNumbers: 0
           eventRoomNumbers: 0
-          restRoomNumbers: 0
+          restRoomNumbers: 4
           eliteRoomNumbers: 0
-        shopGrids: 0
-        mapDices: 0
+        shopGrids: 5
+        mapDices: 8

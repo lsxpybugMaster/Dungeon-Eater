@@ -7,6 +7,6 @@ public class ShopRoomData : RoomData
 {
     public override void Enter(MapGrid grid)
     {
-        GameManager.Instance.ToShopMode();
+        GameManager.Instance.SceneModeManager.ToShopMode();
     }
 }

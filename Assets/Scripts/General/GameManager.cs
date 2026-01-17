@@ -43,6 +43,7 @@ public class GameManager : PersistentSingleton<GameManager>
     public MapState MapState { get; private set; }
     public EnemyPool EnemyPool { get; private set; }
 
+    public SceneModeManager SceneModeManager { get; private set; }
     public LevelProgress LevelProgress { get; private set; }
 
     //STEP:保存功能模块(纯C#类)
@@ -68,20 +69,18 @@ public class GameManager : PersistentSingleton<GameManager>
         base.Awake();
     }
 
-    //防止对象还未创建
+    //防止对象还未创建,整个游戏只会做一次初始化
     private void Start()
     {
         Phase = GameManagerPhase.Initializing;
+        SceneModeManager = new SceneModeManager(this);
         RogueController = new RNGSystem(Config.Instance.Seed);
         LevelProgress = new LevelProgress();
-
         //数据部分由State类自己获取
         HeroState = new HeroState();
-        
-        EnemyPool = new(LevelProgress.Level);
-        MapState = new MapState(); 
 
-        
+        EnterNewLevel(LevelProgress.Level);
+   
         //初始化全局UI对象
         InitPersistUI(); 
 
@@ -95,6 +94,15 @@ public class GameManager : PersistentSingleton<GameManager>
         //EnterNewLevel(1);
 
         Phase = GameManagerPhase.Ready;
+    }
+
+    //进入新的大关卡
+    public void EnterNewLevel(int level)
+    {
+        //每次进入新的关卡,需要重设敌人池和地图
+        //IMPORTANT: 注意传入是从0开始的,配置也要从0开始
+        EnemyPool = new(level);
+        MapState = new MapState(level);
     }
 
 
@@ -124,7 +132,7 @@ public class GameManager : PersistentSingleton<GameManager>
         OnGameStateChanged?.Invoke(gameState);
     }
 
-
+    /*
     //管理模式切换(不一定导致场景切换)
     //TODO: 提取成模式切换模块
     //进入战斗的入口
@@ -147,14 +155,11 @@ public class GameManager : PersistentSingleton<GameManager>
         ChangeGameState(GameState.Shopping);
     }
 
+    //从战斗场景返回地图场景时,判断是否需要更新大关卡
     public void ToMapMode()
     {
-        // 相同场景间切换
-        if (GameState == GameState.Shopping)
-        {
-            ChangeGameState(GameState.Exploring);
-            return;
-        }
+        JudgeLevelChange();
+
         HeroSystem.Instance?.SaveData();
         //在这里切换游戏模式:
         ChangeGameState(GameState.Exploring);
@@ -163,11 +168,18 @@ public class GameManager : PersistentSingleton<GameManager>
         //大模式切换,通知其他
         PersistUIController.ResetUp();
     }
+    */
 
-    //进入新的大关卡
-    public void EnterNewLevel(int level)
+    /// <summary>
+    /// 检测是否需要更新大关卡
+    /// </summary>
+    public void JudgeLevelChange()
     {
-        //LevelManager
-        EnemyPool = new(level);
+        if (LevelProgress.Round >= 3)
+        {
+            Debug.Log("Change LEVEL");
+            LevelProgress.IncreaseLevel();
+            EnterNewLevel(LevelProgress.Level);
+        }
     }
 }

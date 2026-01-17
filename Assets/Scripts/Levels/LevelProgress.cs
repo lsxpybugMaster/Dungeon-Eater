@@ -3,8 +3,9 @@
 //记录当前的关卡流程信息
 public class LevelProgress : IModelForUI<LevelProgress>
 {
-    //当前关卡, 从 1 开始
+    //当前关卡, 从 0 开始
     public int Level { get; private set; }
+  
 
     //当前轮次, 即该关卡走了多少房间
     public int Round { get; private set; }
@@ -14,7 +15,7 @@ public class LevelProgress : IModelForUI<LevelProgress>
 
     public LevelProgress()
     {
-        Level = 1;
+        Level = 0;
         Round = 0;
     }
 
@@ -23,7 +24,9 @@ public class LevelProgress : IModelForUI<LevelProgress>
     public void IncreaseLevel()
     {
         Level++;
-        OnModelChanged.Invoke(this);
+        Round = 0;
+        // 此时可能UI还为准备
+        // OnModelChanged.Invoke(this);
     }
 
     public void IncreaseRound()

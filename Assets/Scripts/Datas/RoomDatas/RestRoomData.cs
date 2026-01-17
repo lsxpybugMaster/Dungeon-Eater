@@ -7,6 +7,6 @@ public class RestRoomData : RoomData
 {
     public override void Enter(MapGrid grid)
     {
-        GameManager.Instance.ToRestMode();
+        GameManager.Instance.SceneModeManager.ToRestMode();
     }
 }

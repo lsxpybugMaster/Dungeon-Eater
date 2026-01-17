@@ -16,11 +16,11 @@ public class EnemyGroup
 public class EnemyGroupsData : ScriptableObject, IHaveKey<int>
 {
     //属于哪一层关卡
-    [SerializeField] int level;
+    [SerializeField] int levelId;
     //代表其中搭配好的固定敌人(二维列表,为了便于配置提出了一层作为EnemyGroup)
     [field: SerializeField] public List<EnemyGroup> Groups { get; set; }
 
-    public int GetKey() => level;
+    public int GetKey() => levelId;
 
 
 #if UNITY_EDITOR

@@ -18,7 +18,7 @@ MonoBehaviour:
   <Flexbility>k__BackingField: 1
   ID: Goblin
   <Diffculty>k__BackingField: 1
-  <AppearLevels>k__BackingField: 01000000
+  <AppearLevels>k__BackingField: 0000000001000000
   <FixedAttack>k__BackingField: 5
   <LightAttackStr>k__BackingField: 1d8
   <HeavyAttackStr>k__BackingField: 1d20

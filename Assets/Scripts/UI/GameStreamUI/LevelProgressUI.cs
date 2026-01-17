@@ -13,7 +13,7 @@ public class LevelProgressUI : TextUI<LevelProgress>
 
     protected override void UpdateTxt(LevelProgress model)
     {
-        txt.text = $"Level: {model.Level} : Round {model.Round}";
+        txt.text = $"Level: {model.Level + 1} : Round {model.Round}";
     }
 
     ////存储UI文本

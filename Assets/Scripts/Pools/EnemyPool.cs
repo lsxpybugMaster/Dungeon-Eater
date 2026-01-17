@@ -63,21 +63,37 @@ public class EnemyPool
 
     public EnemyData GetEnemyByDifficulty(int diff)
     {
+        if (EnemiesDifficulty.Count == 0)
+        {
+            Debug.LogWarning($"难度系数 {diff} 下未检索到敌人");
+        }
         return EnemiesDifficulty[diff].GetRandom();
     }
 
     public EnemyData GetEnemyByDifficulty(int diff, System.Random rng)
     {
+        if (EnemiesDifficulty.Count == 0)
+        {
+            Debug.LogWarning($"难度系数 {diff} 下未检索到敌人");
+        }
         return EnemiesDifficulty[diff].GetRandom(rng);
     }
 
     public List<EnemyData> GetEnemyListByDiffculty(int diff)
     {
+        if (EnemiesGroup.Count == 0)
+        {
+            Debug.LogWarning($"难度系数 {diff} 下未检索到敌人组");
+        }
         return EnemiesGroup.GetRandom().Enemies;
     }
 
     public List<EnemyData> GetEnemyListByDiffculty(int diff, System.Random rng)
     {
+        if (EnemiesGroup.Count == 0)
+        {
+            Debug.LogWarning($"难度系数 {diff} 下未检索到敌人组");
+        }
         return EnemiesGroup.GetRandom(rng).Enemies;
     }
 }

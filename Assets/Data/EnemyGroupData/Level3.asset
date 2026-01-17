@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 986c99dc1284ac54da57c6d122e8eabb, type: 3}
-  m_Name: Level1
+  m_Name: Level3
   m_EditorClassIdentifier: 
-  levelId: 0
+  levelId: 2
   <Groups>k__BackingField:
   - <Enemies>k__BackingField:
     - {fileID: 11400000, guid: b1ad47719dc920b4191fd66ddb5f9c00, type: 2}
     - {fileID: 11400000, guid: b1ad47719dc920b4191fd66ddb5f9c00, type: 2}
+    - {fileID: 11400000, guid: b1ad47719dc920b4191fd66ddb5f9c00, type: 2}
   - <Enemies>k__BackingField:
-    - {fileID: 11400000, guid: 10bc7e35f49c74449a00e3e0dc766504, type: 2}
-    - {fileID: 11400000, guid: 8e4628ec52e667649b203d1b30df6866, type: 2}
-    - {fileID: 11400000, guid: 8e4628ec52e667649b203d1b30df6866, type: 2}
+    - {fileID: 11400000, guid: 3f6d1e9d93e76d8499613500c5222f62, type: 2}
+    - {fileID: 11400000, guid: 3f6d1e9d93e76d8499613500c5222f62, type: 2}
+    - {fileID: 11400000, guid: 3f6d1e9d93e76d8499613500c5222f62, type: 2}
