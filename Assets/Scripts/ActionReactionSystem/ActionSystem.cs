@@ -86,6 +86,12 @@ public class ActionSystem : Singleton<ActionSystem>
     /// <param name="OnPerformFinished">可选的回调，当整个动作及其所有反应完全执行完毕后触发</param>
     public void Perform(GameAction action, Action OnPerformFinished = null)
     {
+        if (GameManager.Instance.GameState == GameState.Fail)
+        {
+            DebugUtil.Orange("[Perform终止] GameManager.Instance.GameState == GameState.Fail");
+            return;
+        }
+
         // 检查系统是否正在执行其他动作，防止动作重叠执行
         if (IsPerforming) return;
 
@@ -126,6 +132,9 @@ public class ActionSystem : Singleton<ActionSystem>
     /// <returns></returns>
     private IEnumerator Flow(GameAction action, Action OnFlowFinished = null)
     {
+        if (GameManager.Instance.GameState == GameState.Fail)
+            yield break;
+
         // ========== PHASE 1: PRE-ACTION (执行前阶段) ==========
         // 1. 准备：将当前要处理的反应列表指向动作的 PreReactions
         reactions = action.PreReactions;

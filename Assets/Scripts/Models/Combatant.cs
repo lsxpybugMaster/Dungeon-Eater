@@ -46,17 +46,25 @@ public class Combatant
                 remainingDamage -= currentArmor;
             }
         }
-        if (remainingDamage > 0)
-        {
-            CurrentHealth -= damageAmount;
-            if (CurrentHealth < 0)
-            {
-                CurrentHealth = 0;
-            }
-        }
+
+        //真正处理生命的损失
+        DecreaseHealth(remainingDamage);
 
         OnDamaged?.Invoke();
         OnHealthChanged?.Invoke(CurrentHealth, MaxHealth);
+    }
+
+    private void DecreaseHealth(int amount)
+    {
+        if (amount < 0)
+            return;
+
+        CurrentHealth -= amount;
+        if (CurrentHealth < 0)
+        {
+            CurrentHealth = 0;
+        }
+
     }
 
     //回复生命,不能过量回复

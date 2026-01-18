@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Knight
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 21300000, guid: 128b1274a4e58fc4e8985aafb91a3e14, type: 3}
-  <Health>k__BackingField: 50
+  <Health>k__BackingField: 3
   <Proficiency>k__BackingField: 16
-  <Flexbility>k__BackingField: 3
+  <Flexbility>k__BackingField: -5
   <MaxMana>k__BackingField: 4
   <Deck>k__BackingField:
   - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}

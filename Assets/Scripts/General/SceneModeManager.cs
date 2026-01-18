@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 //从GameManger中提取的模块,用于管理模式切换和Scene切换
@@ -23,6 +24,16 @@ public class SceneModeManager
 
         //大模式切换,通知其他
         gm.PersistUIController.ResetUp();
+    }
+
+    public void Win()
+    {
+        gm.ChangeGameState(GameState.Win);
+    }
+
+    public void Fail() 
+    {
+        gm.ChangeGameState(GameState.Fail);
     }
 
     public void ToRestMode()

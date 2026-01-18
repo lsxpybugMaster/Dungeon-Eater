@@ -14,6 +14,8 @@ public enum GameState
     BattleVictory,  //胜利结算 ==> 禁用玩家战斗
     Shopping,       //进入商店界面 ==> 禁用地图交互
     Resting,
+    Fail, //失败,注意此时要限制许多逻辑!!
+    Win,
 }
 
 // GameManager 负责生命周期管理（初始化、场景切换、销毁）。

@@ -70,6 +70,9 @@ public class TurnSystem : Singleton<TurnSystem>
             //AttackHeroGA attackHeroGA = new(enemy);
             //ActionSystem.Instance.AddReaction(attackHeroGA);
             //-------------------------执行AI系统-----------------------------
+            
+            //BUG: 不能在协程内部进行玩家是否死亡的判断,这没有用
+
             EnemySystem.Instance.DoEnemyIntend(enemy); //底层是AddReaction实现
         }
         yield return null;

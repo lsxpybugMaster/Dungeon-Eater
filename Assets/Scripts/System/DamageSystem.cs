@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 /// <summary>
 /// 战斗数值相关系统
@@ -75,24 +76,36 @@ public class DamageSystem : MonoBehaviour
     {
         foreach (var target in targets)
         {
+            //STEP: 造成伤害
             target.M.Damage(damage);
 
+            //STEP: 播放特效
             Instantiate(damageVFX, target.transform.position, Quaternion.identity);
             //时间一定要用黑板变量统一控制
             yield return new WaitForSeconds(Config.Instance.effectTime);
 
-            if (target.M.CurrentHealth <= 0)
+            //STEP: 判断该伤害是否"致命"
+            CheckTargetHealthState(target);
+        }
+    }
+
+    private void CheckTargetHealthState(CombatantView target)
+    {
+        if (target.M.CurrentHealth <= 0)
+        {
+            //enemyView即Enemy类
+            if (target is EnemyView enemyView)
             {
-                //enemyView即Enemy类
-                if (target is EnemyView enemyView)
-                {
-                    KillEnemyGA killEnemyGA = new(enemyView);
-                    ActionSystem.Instance.AddReaction(killEnemyGA);
-                }
-                else
-                {
-                    //Game Over
-                }
+                KillEnemyGA killEnemyGA = new(enemyView);
+                ActionSystem.Instance.AddReaction(killEnemyGA);
+            }
+            else if (target is HeroView heroView)
+            {
+                Debug.Log("玩家寄了");
+
+                PlayerFailGA playerFailGA = new(heroView);
+                ActionSystem.Instance.AddReaction(playerFailGA);
+                //Game Over
             }
         }
     }
