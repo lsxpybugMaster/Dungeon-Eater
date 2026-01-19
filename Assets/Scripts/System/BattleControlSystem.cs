@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static GameManager;
 
 /// <summary>
 /// 初始化系统(如开局发牌）
@@ -82,6 +81,9 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
     private void SetupBattle()
     {
         // hasSetup = true; 
+
+        //IMPORTANT: 初始化ActionSystem的约束
+        ActionSystem.Instance.ExecutionGate = new BattleFailedGate(); //保证玩家死亡时停止AS系统
 
         HeroState heroState = GameManager.Instance.HeroState;
         if (heroState == null)

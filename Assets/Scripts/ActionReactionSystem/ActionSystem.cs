@@ -8,6 +8,9 @@ using UnityEngine;
 /// </summary>
 public class ActionSystem : Singleton<ActionSystem>
 {
+    //用于外部注入相关中断条件, 注意要在外部脚本初始化!
+    public IActionExecutionGate ExecutionGate { get; set; }
+
     //反应队列,确保反应有序执行(只是一个临时指针)
     private List<GameAction> reactions = null;
     public bool IsPerforming { get; private set; } = false;
@@ -86,11 +89,15 @@ public class ActionSystem : Singleton<ActionSystem>
     /// <param name="OnPerformFinished">可选的回调，当整个动作及其所有反应完全执行完毕后触发</param>
     public void Perform(GameAction action, Action OnPerformFinished = null)
     {
-        if (GameManager.Instance.GameState == GameState.Fail)
-        {
-            DebugUtil.Orange("[Perform终止] GameManager.Instance.GameState == GameState.Fail");
+        //之前的示例
+        //if (GameManager.Instance.GameState == GameState.Fail)
+        //{
+        //    DebugUtil.Orange("[Perform终止] GameManager.Instance.GameState == GameState.Fail");
+        //    return;
+        //}
+
+        if (ExecutionGate != null && !ExecutionGate.CanStart(action))
             return;
-        }
 
         // 检查系统是否正在执行其他动作，防止动作重叠执行
         if (IsPerforming) return;
@@ -132,7 +139,11 @@ public class ActionSystem : Singleton<ActionSystem>
     /// <returns></returns>
     private IEnumerator Flow(GameAction action, Action OnFlowFinished = null)
     {
-        if (GameManager.Instance.GameState == GameState.Fail)
+        //示例中断
+        //if (GameManager.Instance.GameState == GameState.Fail)
+        //    yield break;
+
+        if (ExecutionGate != null && !ExecutionGate.CanContinue(action))
             yield break;
 
         // ========== PHASE 1: PRE-ACTION (执行前阶段) ==========
