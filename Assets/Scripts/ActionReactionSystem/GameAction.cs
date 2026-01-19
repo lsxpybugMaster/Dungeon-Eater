@@ -1,18 +1,18 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class GameAction
 {
-    //ÔÚActionSystemµÄFlowÖĞ°´Ë³Ğò½âÎö²¢Ö´ĞĞ
+    //åœ¨ActionSystemçš„Flowä¸­æŒ‰é¡ºåºè§£æå¹¶æ‰§è¡Œ
 
-    //Ö´ĞĞ¶¯×÷Ö®Ç°·´Ó¦
+    //æ‰§è¡ŒåŠ¨ä½œä¹‹å‰ååº”
     public List<GameAction> PreReactions { get; private set; } = new();
 
-    //Ö´ĞĞ¶¯×÷Ê±·´Ó¦
+    //æ‰§è¡ŒåŠ¨ä½œæ—¶ååº”
     public List<GameAction> PerformReactions { get; private set; } = new();
 
-    //Ö´ĞĞ¶¯×÷ºó·´Ó¦
+    //æ‰§è¡ŒåŠ¨ä½œåååº”
     public List<GameAction> PostReactions { get; private set;} = new();
 }
 

@@ -62,11 +62,6 @@ public class UISystem : Singleton<UISystem>
         victoryUI.gameObject.SetActive(false);
     }
 
-    public void ShowUI(GameObject ui)
-    {
-        ui.SetActive(true);
-    }
-
     public void ShowWinUI()
     {
         ShowCanvasGroup();
@@ -74,6 +69,6 @@ public class UISystem : Singleton<UISystem>
 
     public void ShowFailUI()
     {
-        ShowUI(failUI);
+        failUI.gameObject.SetActive(true);
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127a4f46ad6138c44aa6b6e1e65c3a55, type: 3}
   m_Name: Knight
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: 21300000, guid: 128b1274a4e58fc4e8985aafb91a3e14, type: 3}
+  <Image>k__BackingField: {fileID: 1351559378, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <Health>k__BackingField: 3
   <Proficiency>k__BackingField: 16
   <Flexbility>k__BackingField: -5
