@@ -184,4 +184,13 @@ public class GameManager : PersistentSingleton<GameManager>
             EnterNewLevel(LevelProgress.Level);
         }
     }
+
+    //自我摧毁,一般在游戏结束时调用
+    public void DestroySelf()
+    {
+        Debug.Log("Destroy GameManager");
+
+        Destroy(PersistUIController.gameObject);
+        Destroy(gameObject);
+    }
 }
