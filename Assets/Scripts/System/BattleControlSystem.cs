@@ -96,6 +96,7 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
         //使用专门的Generator
 
         List<EnemyData> enemyDatas;
+        //这种情况只有直接从该场景开始时才会出现
         if (GameManager.Instance.EnemyPool.EnemiesBuffer.Count == 0)
         {
             enemyGroupGenerator = new();
@@ -105,7 +106,7 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
         {
             enemyDatas = GameManager.Instance.EnemyPool.GetEnemiesBuffer();
         }
-                  
+             
         //EnemyGroupDatabase.GetRandomGroupByLevel(1).Enemies
         EnemySystem.Instance.Setup(enemyDatas);
         //EnemySystem.Instance.Setup(enemyDatas);

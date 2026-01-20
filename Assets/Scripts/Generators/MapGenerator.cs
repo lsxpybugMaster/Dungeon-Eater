@@ -38,11 +38,11 @@ public class MapGenerator
 
         string mapInfo = levelConfig.levelInfostr;
 
+        //分析各个房间格子数量
         int totalGrids = mapInfo.Length;
-
-        int shopGrids = levelConfig.shopGrids;
-
+        int shopGrids = levelConfig.roomCounts.shopRoomNumbers;
         int restGrids = levelConfig.roomCounts.restRoomNumbers;
+        int bossGrids = levelConfig.roomCounts.bossRoomNumbers;
 
         List<MapGrid> grids = new(totalGrids);
         //后面生成时判重
@@ -54,7 +54,7 @@ public class MapGenerator
             grids.Add(new MapGrid
             {
                 gridIndex = i,
-                gridType = GridType.Enemy,
+                gridType = i % 2 == 0 ? GridType.Enemy : GridType.Boss,
                 nextDirection = mapInfo[i],
             });
         }
@@ -96,8 +96,13 @@ public class MapGenerator
             {
                 grids[i].roomEnemies = enemyGroupGenerator.GetEnemyGroup(Config.Instance.difficultScore);
             }
+            else if (grids[i].gridType == GridType.Boss)
+            {
+                //非Enemy级别敌人无需组装
+                grids[i].roomEnemies = enemyGroupGenerator.GetBossGroup();
+            }
         }
 
-        return grids;
+        return grids;       
     }
 }

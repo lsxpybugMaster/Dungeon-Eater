@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b51bb1693df6fb848bd5655c5ec55b98, type: 3}
-  m_Name: EnemyRoomData
+  m_Script: {fileID: 11500000, guid: 0f45e0853bd3d5d4cb71a5f49330e6e6, type: 3}
+  m_Name: BossRoomData
   m_EditorClassIdentifier: 
-  <RoomType>k__BackingField: 0
-  <RoomColor>k__BackingField: {r: 0.91823894, g: 0.4648945, b: 0.4648945, a: 1}
-  battleType: 1
+  <RoomType>k__BackingField: 6
+  <RoomColor>k__BackingField: {r: 0.30817598, g: 0.30817598, b: 0.30817598, a: 1}
+  battleType: 3

@@ -15,10 +15,12 @@ public class SceneModeManager
     }
 
     //管理模式切换(不一定导致场景切换)
-    //TODO: 提取成模式切换模块
-    //进入战斗的入口
-    public void ToBattleMode()
+    //进入战斗的入口, 注意注入上下文
+    public void ToBattleMode(BattleType battleType)
     {
+        //NOTE: 一定优先注入上下文
+        GameManager.Instance.BattleContext.Init(battleType);
+
         gm.ChangeGameState(GameState.Battle);
         SceneManager.LoadScene((int)Scene.BATTLE);
 
@@ -49,6 +51,9 @@ public class SceneModeManager
     //从战斗场景返回地图场景时,判断是否需要更新大关卡
     public void ToMapMode()
     {
+        //解除上下文
+        GameManager.Instance.BattleContext.Invalidate();
+
         //汇报给上层,其判断是否更新大关卡
         gm.JudgeLevelChange();
 

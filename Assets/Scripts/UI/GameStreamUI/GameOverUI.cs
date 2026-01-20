@@ -7,8 +7,8 @@ public class GameOverUI : TextBtnUI
 {
     protected override void BindBtnInbtnList(List<Button> btnList)
     {
-        BindBtn(0, () => { 
-            GameManager.Instance.DestroySelf();
+        BindBtn(0, () => {
+            GameManager.Instance?.GlobalClearLogic();
             SceneManager.LoadScene("TitleScene");
         });
 

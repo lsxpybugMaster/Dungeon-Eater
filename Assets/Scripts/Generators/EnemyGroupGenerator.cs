@@ -10,16 +10,18 @@ using UnityEngine;
 public class EnemyGroupGenerator 
 {
     private System.Random rng;
+    private System.Random bossRng;
     private EnemyPool enemyPool;
     
     public EnemyGroupGenerator()
     {
         rng = GameManager.Instance.RogueController.GetStream("Enemy");
+        bossRng = GameManager.Instance.RogueController.GetStream("Boss");
         enemyPool = GameManager.Instance.EnemyPool;
     }
 
     /// <summary>
-    /// 依据关卡和随机数生成器生成敌人
+    /// 依据关卡和随机数生成器生成普通敌人
     /// </summary>
     /// <param name="level"></param>
     /// <param name="difficulty"></param>
@@ -30,13 +32,18 @@ public class EnemyGroupGenerator
         int fixflag = rng.Next(0, 2);
         if (fixflag == 1)
         {
-            return enemyPool.GetEnemyListByDiffculty(difficulty, rng);
+            return enemyPool.GetRandomEnemyGroup(BattleType.Normal , rng);
         }
         //否则根据难度分数挑选敌人
         else
         {
             return CalculateEnemyGroup(difficulty, rng);
         }
+    }
+
+    public List<EnemyData> GetBossGroup()
+    {
+        return enemyPool.GetRandomEnemyGroup(BattleType.Boss, bossRng);
     }
 
     private List<EnemyData> CalculateEnemyGroup(int diff, System.Random rng)

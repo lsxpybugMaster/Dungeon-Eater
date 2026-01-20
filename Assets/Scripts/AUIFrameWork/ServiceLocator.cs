@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public static class ServiceLocator
 {
+    //如果使用了,注意管理销毁过程
     private static readonly Dictionary<Type, object> services = new();
 
     public static void Register<T>(T service)

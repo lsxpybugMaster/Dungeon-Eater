@@ -32,7 +32,7 @@ public static class ListExtensions
             return default;
 
         if (rng == null)
-            throw new ArgumentNullException(nameof(rng));
+            return GetRandom(list);
 
         int r = rng.Next(0, list.Count); 
         return list[r];

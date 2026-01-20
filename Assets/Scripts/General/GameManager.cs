@@ -34,13 +34,15 @@ public class GameManager : PersistentSingleton<GameManager>
     }
     public GameManagerPhase Phase { get; private set; } = GameManagerPhase.None;
 
+    //=========================相关全局上下文================================
     [field: SerializeField] public GameState GameState { get; private set; }
+    public BattleContext BattleContext { get; set; } 
 
 
     // 外部数据引用
     [SerializeField] private PersistUIController persistUIControllerPrefab;
 
-    //STEP: 保存持久化数据 【注意】纯C#类需要实例化再用
+    //==============保存持久化数据 【注意】纯C#类需要实例化再用================
     public HeroState HeroState { get; private set; }
     public MapState MapState { get; private set; }
     public EnemyPool EnemyPool { get; private set; }
@@ -48,20 +50,22 @@ public class GameManager : PersistentSingleton<GameManager>
     public SceneModeManager SceneModeManager { get; private set; }
     public LevelProgress LevelProgress { get; private set; }
 
-    //STEP:保存功能模块(纯C#类)
+    //=========================保存功能模块(纯C#类)=========================
     public PlayerDeckController PlayerDeckController { get; private set; }
     /// <summary>
     /// 全局随机数生成器,支持配发随机流
     /// </summary>
-    public RNGSystem RogueController { get; private set; } 
+    public RNGSystem RogueController { get; private set; }
 
-    //STEP: 保存跨场景Mono实例
+    //=========================保存跨场景Mono实例=========================
     public TopUI GlobalUI { get; private set; }
     public PersistUIController PersistUIController { get; private set; }
 
+
+    //==============================相关事件==============================
+
     // 初始化事件,GameManager初始化完毕后立刻通知其他脚本执行
     // public static event Action OnGameManagerInitialized;
-
     // 重要事件,在游戏状态改变时进行通信
     public static event Action<GameState> OnGameStateChanged;
 
@@ -75,6 +79,8 @@ public class GameManager : PersistentSingleton<GameManager>
     private void Start()
     {
         Phase = GameManagerPhase.Initializing;
+        BattleContext = new BattleContext();
+
         SceneModeManager = new SceneModeManager(this);
         RogueController = new RNGSystem(Config.Instance.Seed);
         LevelProgress = new LevelProgress();
@@ -185,12 +191,16 @@ public class GameManager : PersistentSingleton<GameManager>
         }
     }
 
-    //自我摧毁,一般在游戏结束时调用
-    public void DestroySelf()
+    public void GlobalClearLogic()
     {
-        Debug.Log("Destroy GameManager");
+        DestroyAllPersistElements();
+    }    
 
+    //自我摧毁,一般在游戏结束时调用
+    private void DestroyAllPersistElements()
+    {
         Destroy(PersistUIController.gameObject);
+        //确保最后执行
         Destroy(gameObject);
     }
 }

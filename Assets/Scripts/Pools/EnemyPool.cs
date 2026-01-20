@@ -10,10 +10,11 @@ using UnityEngine;
 public class EnemyPool
 {
     // 存储难度分 => 敌人
-    public Dictionary<int, List<EnemyData>> EnemiesDifficulty {  get; private set; }
+    public Dictionary<int, List<EnemyData>> EnemiesDifficulty { get; private set; }
 
     // 存储敌人小组
-    public List<EnemyGroup> EnemiesGroup { get; private set; } 
+    public List<EnemyGroup> EnemiesGroup { get; private set; }
+    public List<EnemyGroup> BossGroup { get; private set; }
 
     // 存储敌人缓存,用于下一次生成的敌人,可以直接读写
     public List<EnemyData> EnemiesBuffer { get; set; }
@@ -44,20 +45,20 @@ public class EnemyPool
 
         // 动态解析一次EnemyGroup
         EnemiesGroup = new(EnemyGroupDatabase.GetGroupsByLevel(level).Groups);
-            
-        DebugUtil.Yellow($"关卡{level}敌人数据准备完成： {EnemiesDifficulty[1].Count }个");
+        BossGroup = new(BossGroupDataBase.GetBossGroupsByLevel(level).Groups);
+
+        DebugUtil.Yellow($"关卡{level}敌人数据准备完成： {EnemiesDifficulty[1].Count}个");
+        DebugUtil.Yellow($"关卡{level}BOSS数据准备完成： {BossGroup.Count}个");
         DebugUtil.Yellow($"关卡{level}敌人组合数据准备完成： {EnemiesGroup.Count}个");
     }
 
     public List<EnemyData> GetEnemiesBuffer()
     {
-        Debug.Log("GetEnemiesBuffer");
         return EnemiesBuffer;
     }
 
     public void SetEnemiesBuffer(List<EnemyData> enemiesBuffer)
     {
-        Debug.Log("SetEnemiesBuffer");
         EnemiesBuffer = enemiesBuffer;
     }
 
@@ -79,21 +80,28 @@ public class EnemyPool
         return EnemiesDifficulty[diff].GetRandom(rng);
     }
 
-    public List<EnemyData> GetEnemyListByDiffculty(int diff)
+    /// <summary>
+    /// 获取XXXGroup的随机一行敌人,rng为空时GetRandom会自动识别并随机
+    /// </summary>
+    /// <param name="type"></param>
+    /// <param name="rng"></param>
+    /// <returns></returns>
+    public List<EnemyData> GetRandomEnemyGroup(BattleType type, System.Random rng = null)
     {
-        if (EnemiesGroup.Count == 0)
+        List<EnemyGroup> tarGroup = type switch
         {
-            Debug.LogWarning($"难度系数 {diff} 下未检索到敌人组");
-        }
-        return EnemiesGroup.GetRandom().Enemies;
-    }
+            BattleType.Normal => EnemiesGroup,
+            BattleType.Elite => default,
+            BattleType.Boss => BossGroup,
+            _ => null
+        };
 
-    public List<EnemyData> GetEnemyListByDiffculty(int diff, System.Random rng)
-    {
-        if (EnemiesGroup.Count == 0)
+        if (tarGroup == null || tarGroup.Count == 0)
         {
-            Debug.LogWarning($"难度系数 {diff} 下未检索到敌人组");
+            Debug.LogError($"[{type}] 下的 tarGroup 不合法");
+            return null;
         }
-        return EnemiesGroup.GetRandom(rng).Enemies;
+
+        return tarGroup.GetRandom(rng).Enemies;
     }
 }

@@ -23,6 +23,7 @@ public class RoomUIManager : MonoBehaviour
 
     private void HandleGameStateChanged(GameState state)
     {
+        Debug.Log("HandleGameStateChanged");
         switch (state)
         {
             case GameState.Resting:
