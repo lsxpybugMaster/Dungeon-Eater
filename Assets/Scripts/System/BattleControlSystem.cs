@@ -94,7 +94,6 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
 
         //初始化敌人信息
         //使用专门的Generator
-
         List<EnemyData> enemyDatas;
         //这种情况只有直接从该场景开始时才会出现
         if (GameManager.Instance.EnemyPool.EnemiesBuffer.Count == 0)
@@ -147,11 +146,24 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
     /// </summary>
     private void BattleWin(KillAllEnemyGA killAllEnemyGA)
     {
-        UISystem.Instance.ShowWinUI();
-
-        RewardSystem.Instance.GetReward();
+        if (GameManager.Instance.LevelProgress.IsFinalLevel())
+        {
+            UISystem.Instance.ShowWinUI(finalWin : true);
+        }
+        else
+        {
+            UISystem.Instance.ShowWinUI();
+            RewardSystem.Instance.GetReward();
+        }
 
         // 显示完UI更换游戏模式，以禁用输入 
         GameManager.Instance.ChangeGameState(GameState.BattleVictory);
+    }
+
+
+    //封装调用,使得战斗上下文的获取接口更清晰
+    public static BattleType GetBattleMode()
+    {
+        return GameManager.Instance.BattleContext.Type;
     }
 }

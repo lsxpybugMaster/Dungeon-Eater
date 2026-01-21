@@ -60,4 +60,9 @@ public static class EventBus
             (act as Action<T>)?.Invoke(evt);
         }
     }
+
+    public static void ClearAll()
+    {
+        eventTable.Clear();
+    }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+//目前在VictoryUI下
 //展示一些 n 选 1 的卡牌选项
 public class ShowChoosenCardUI : ShowCardUIBase
 {

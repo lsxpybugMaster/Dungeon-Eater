@@ -37,13 +37,18 @@ public class MapState : BaseState<MapData>
 
         currentLevel = level;
         currentStep = 0;
-        initNewLevel(currentLevel);
+        InitNewLevel(currentLevel);
 
         GenerateMap();
         GenerateDiceState();
     }
 
-    public void initNewLevel(int curLevel)
+    public int GetMaxLevels()
+    {
+        return BaseData.levels.Length;
+    }
+
+    public void InitNewLevel(int curLevel)
     {
         mapDices = BaseData.levels[curLevel].mapDices;
     }

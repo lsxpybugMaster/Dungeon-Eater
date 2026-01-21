@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public enum Scene
 {
-    MAP, BATTLE,
+    MAP, BATTLE, TITLE
 }
 
 public enum GameState
@@ -111,6 +111,8 @@ public class GameManager : PersistentSingleton<GameManager>
         //IMPORTANT: 注意传入是从0开始的,配置也要从0开始
         EnemyPool = new(level);
         MapState = new MapState(level);
+
+        LevelProgress.MaxLevel = MapState.GetMaxLevels();
     }
 
 
@@ -181,11 +183,10 @@ public class GameManager : PersistentSingleton<GameManager>
     /// <summary>
     /// 检测是否需要更新大关卡
     /// </summary>
-    public void JudgeLevelChange()
+    public void JudgeLevelChange(bool ifChange)
     {
-        if (LevelProgress.Round >= 3)
+        if (ifChange)
         {
-            Debug.Log("Change LEVEL");
             LevelProgress.IncreaseLevel();
             EnterNewLevel(LevelProgress.Level);
         }
@@ -200,6 +201,10 @@ public class GameManager : PersistentSingleton<GameManager>
     private void DestroyAllPersistElements()
     {
         Destroy(PersistUIController.gameObject);
+
+        //ActionSystem会在场景切换时自动清空字典,所以不用管
+        EventBus.ClearAll();
+
         //确保最后执行
         Destroy(gameObject);
     }

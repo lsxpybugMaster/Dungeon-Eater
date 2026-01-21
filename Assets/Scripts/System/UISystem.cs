@@ -15,6 +15,7 @@ public class UISystem : Singleton<UISystem>
     [SerializeField] private CardPileUI cardPileCountUI;
 
     [SerializeField] private GameObject failUI;
+    [SerializeField] private GameObject successUI;
 
     //判断UI能否交互的验证函数
     public bool CanInteract() => GameManager.Instance.GameState != GameState.BattleVictory;
@@ -62,10 +63,14 @@ public class UISystem : Singleton<UISystem>
         victoryUI.gameObject.SetActive(false);
     }
 
-    public void ShowWinUI()
+    public void ShowWinUI(bool finalWin = false)
     {
-        ShowCanvasGroup();
+        if (finalWin)            
+            successUI.gameObject.SetActive(true);
+        else
+            ShowCanvasGroup();
     }
+
 
     public void ShowFailUI()
     {

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// 注意目前游戏胜利的界面也是使用该逻辑
+/// </summary>
 public class GameOverUI : TextBtnUI
 {
     protected override void BindBtnInbtnList(List<Button> btnList)

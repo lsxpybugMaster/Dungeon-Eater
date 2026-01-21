@@ -3,6 +3,8 @@
 //记录当前的关卡流程信息
 public class LevelProgress : IModelForUI<LevelProgress>
 {
+    public int MaxLevel { get; set; }
+
     //当前关卡, 从 0 开始
     public int Level { get; private set; }
   
@@ -20,6 +22,13 @@ public class LevelProgress : IModelForUI<LevelProgress>
     }
 
     public event Action<LevelProgress> OnModelChanged;
+
+    //判断是否最后一大关也通关,由此判断胜利条件
+    public bool IsFinalLevel()
+    {
+        //因为level从0开始
+        return Level == MaxLevel - 1;
+    }
 
     public void IncreaseLevel()
     {

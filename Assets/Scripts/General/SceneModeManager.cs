@@ -51,11 +51,11 @@ public class SceneModeManager
     //从战斗场景返回地图场景时,判断是否需要更新大关卡
     public void ToMapMode()
     {
-        //解除上下文
-        GameManager.Instance.BattleContext.Invalidate();
+        //读取上下文
+        BattleType lastBattleType = GameManager.Instance.BattleContext.Type;
 
         //汇报给上层,其判断是否更新大关卡
-        gm.JudgeLevelChange();
+        gm.JudgeLevelChange(lastBattleType == BattleType.Boss);
 
         HeroSystem.Instance?.SaveData();
         //在这里切换游戏模式:
@@ -64,6 +64,9 @@ public class SceneModeManager
 
         //大模式切换,通知其他
         gm.PersistUIController.ResetUp();
+
+        //解除上下文
+        GameManager.Instance.BattleContext.Invalidate();
     }
 
 
