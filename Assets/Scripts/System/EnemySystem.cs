@@ -58,7 +58,8 @@ public class EnemySystem : Singleton<EnemySystem>
         //显示敌人意图(同时计算出敌人意图)
         foreach (var enemy in Enemies)
         {
-            EnemyIntend intend = enemy.EnemyAI.GetPrepareEnemyIntend();
+            enemy.EnemyAI.GetPrepareEnemyIntend();
+            //EnemyIntend intend = enemy.EnemyAI.GetPrepareEnemyIntend();
         }
         yield return null;
     }   

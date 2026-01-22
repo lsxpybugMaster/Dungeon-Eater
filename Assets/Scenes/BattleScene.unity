@@ -4834,7 +4834,7 @@ MonoBehaviour:
   backToMapBtn: {fileID: 1997018609}
   cardPileCountUI: {fileID: 1674791157}
   failUI: {fileID: 340824651}
-  successUI: {fileID: 0}
+  successUI: {fileID: 1012601784}
 --- !u!1 &1546738021
 GameObject:
   m_ObjectHideFlags: 0

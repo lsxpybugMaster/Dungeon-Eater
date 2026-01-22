@@ -42,18 +42,18 @@ public class ActionSystem : Singleton<ActionSystem>
     //初始化AS系统时,注册一个扩展GA,其支持跳过Flow的isPerforming锁,将多个GA依序打包执行
     private void OnEnable()
     {
-        AttachPerformer<PerformAllGA>(PerformAllPerformer);
-        AttachPerformer<EmptyGA>(PerformEmptyGAPerformer);
+        AttachPerformer<SeqenceGameAction>(PerformAllPerformer);
+        AttachPerformer<EmptyGameAction>(PerformEmptyGAPerformer);
     }
 
     private void OnDisable()
     {
-        DetachPerformer<PerformAllGA>();
-        DetachPerformer<EmptyGA>();
+        DetachPerformer<SeqenceGameAction>();
+        DetachPerformer<EmptyGameAction>();
     }
 
     //注意可能导致的Perform冲突问题
-    private IEnumerator PerformAllPerformer(PerformAllGA seqGA)
+    private IEnumerator PerformAllPerformer(SeqenceGameAction seqGA)
     {
         foreach (var ga in seqGA.GetSequence())
         {
@@ -66,7 +66,7 @@ public class ActionSystem : Singleton<ActionSystem>
         }
     }
 
-    private IEnumerator PerformEmptyGAPerformer(EmptyGA ga)
+    private IEnumerator PerformEmptyGAPerformer(EmptyGameAction ga)
     {
         yield return null;
     }

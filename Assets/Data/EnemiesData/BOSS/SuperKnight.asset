@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
-  m_Name: Super
+  m_Name: SuperKnight
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 654643611, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <Health>k__BackingField: 35
   <Proficiency>k__BackingField: 1
   <Flexbility>k__BackingField: 1
-  ID: Super
+  ID: SuperKnight
   <Diffculty>k__BackingField: 1
-  <AppearLevels>k__BackingField: 000000000100000002000000
-  <FixedAttack>k__BackingField: 12
-  <LightAttackStr>k__BackingField: 1d8
-  <HeavyAttackStr>k__BackingField: 3d6
+  <AppearLevels>k__BackingField: 00000000
+  <FixedAttack>k__BackingField: 10
+  <LightAttackStr>k__BackingField: 6 + 1d8
+  <HeavyAttackStr>k__BackingField: 0
   <ConditionedIntendTable>k__BackingField: []
   <RandomIntendTable>k__BackingField:
   - rid: 2509721379855400960
-  - rid: 2509721379855400962
+  - rid: 4226095495479033857
   references:
     version: 2
     RefIds:
@@ -43,15 +43,15 @@ MonoBehaviour:
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 0
-    - rid: 2509721379855400962
+    - rid: 4226095495479033857
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
         Condition:
           rid: -2
         Intend:
-          rid: 2509721379855400963
+          rid: 4226095495479033858
         P: 0
-    - rid: 2509721379855400963
+    - rid: 4226095495479033858
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 1
+        skill: 2

@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//注意敌人意图显示目前就是这些名字
 public enum EnemySkill
 {
     LightHit,
     HeavyHit,
     FixedHit, //必中的,伤害固定的攻击
+    AddState,
     Defence,
     Heal,
     AddCard, 

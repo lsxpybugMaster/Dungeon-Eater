@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ¸øÍæ¼ÒÅÆ×éÀïÈûµãºÃ¶«Î÷
+/// ç»™ç©å®¶ç‰Œç»„é‡Œå¡ç‚¹å¥½ä¸œè¥¿
 /// </summary>
 public class AddCardIntend : EnemyIntend
 {

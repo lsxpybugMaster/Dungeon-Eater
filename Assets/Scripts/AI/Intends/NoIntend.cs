@@ -9,6 +9,6 @@ public class NoIntend : EnemyIntend
 {
     public override GameAction GetGameAction(EnemyView enemy)
     {
-        return new EmptyGA();
+        return new EmptyGameAction();
     }
 }

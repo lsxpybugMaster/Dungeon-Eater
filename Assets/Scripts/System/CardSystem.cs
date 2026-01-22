@@ -140,12 +140,13 @@ public class CardSystem : Singleton<CardSystem>
 
         int drct = caster is HeroView ? 1 : -1; 
 
+        //NOTE: 现在添加卡牌不再播放动画了(后续有其他动画)
         //前摇动画
-        yield return MotionUtil.Dash(
-            caster.transform,
-            new Vector2(drct * 1f, 0),
-            Config.Instance.attackTime
-        );
+        //yield return MotionUtil.Dash(
+        //    caster.transform,
+        //    new Vector2(drct * 1f, 0),
+        //    Config.Instance.attackTime
+        //);
 
 
         //创建一个展示卡牌(仅动画效果)

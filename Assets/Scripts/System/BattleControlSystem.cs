@@ -133,7 +133,7 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
             所以不能按顺序声明两个Perform
         */
 
-        var performAllGA = new PerformAllGA(
+        var performAllGA = new SeqenceGameAction(
             new DrawCardsGA(5),
             new DecideEnemyIntendGA()
         );
