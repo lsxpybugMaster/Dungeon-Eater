@@ -16,6 +16,8 @@ public class EnemyAI : MonoBehaviour
     public event Action<EnemyIntend> OnEnemyAIUpdated;
     public event Action OnEnemyAIDone;
 
+    public AIContext aiContext { get; private set;}
+
     private EnemyIntend enemyNextIntend;
 
     private List<EnemyIntendNode> CondIntendTable { get; set; }
@@ -26,6 +28,7 @@ public class EnemyAI : MonoBehaviour
     public void BindEnemy(EnemyView enemy, List<EnemyIntendNode> ConditionedIntendTable, List<EnemyIntendNode> RandomIntendTable)
     {
         this.enemy = enemy;
+        aiContext = new();
         //TODO: 目前无法修改IntendTable(否则会修改SO数据)
         CondIntendTable = ConditionedIntendTable;
         RandIntendTable = RandomIntendTable;
@@ -43,6 +46,8 @@ public class EnemyAI : MonoBehaviour
             Debug.LogError("EnemyAI没有绑定enemy!");
         }
 
+        Debug.Log($"=========Turn ==> {aiContext.Get(AI.Turn)}");
+
         // 使用外部配置的IntendTable的可配置"简单行为树"
 
         //------------------- 条件行为判断阶段 ----------------------
@@ -58,6 +63,10 @@ public class EnemyAI : MonoBehaviour
 
         //--------------------- 行为判断阶段 ----------------------
         int idx = UnityEngine.Random.Range(0, RandIntendTable.Count);
+
+        //---------------------更新ai环境上下文----------------------
+        aiContext.Inc(AI.Turn);
+
         return RandIntendTable[idx].Intend;
     }
 
