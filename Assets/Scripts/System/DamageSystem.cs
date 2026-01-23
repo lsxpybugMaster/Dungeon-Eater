@@ -17,8 +17,11 @@ public class DamageSystem : MonoBehaviour
         ActionSystem.AttachPerformer<MissGA>(MissGAPerformer);
         ActionSystem.AttachPerformer<CriticalHitGA>(CriticalHitPerformer);
 
-        ActionSystem.AttachPerformer<DealFixedAttackGA>(FixedAttackPerformer);
+        ActionSystem.AttachPerformer<DealFixedAttackGA>(DealFixedAttackPerformer);
+        
+        //通过注册反应来提前修改伤害相关GameAction
         ActionSystem.SubscribeReaction<DealFixedAttackGA>(DealBeforeFixedAttack, ReactionTiming.PRE);
+        ActionSystem.SubscribeReaction<DealAttackGA>(DealBeforeAttack, ReactionTiming.PRE);
     }
 
     void OnDisable()
@@ -36,13 +39,6 @@ public class DamageSystem : MonoBehaviour
     {
         int drct = caster is HeroView ? 1 : -1;
         yield return MotionUtil.Dash(caster.transform, drct * direction, attackTime);
-    }
-
-
-    //处理攻击掷骰(为处理伤害事件的预先反应)
-    private void DealBeforeFixedAttack(DealFixedAttackGA ga)
-    {
-        BattleInfoUI.Instance.AddFixedResult(ga.FixedDamage, ga.Caster);
     }
 
 
@@ -65,8 +61,15 @@ public class DamageSystem : MonoBehaviour
         yield return DealDamage(ga.Targets, ga.Damage);
     }
 
+
+    //处理攻击掷骰(为处理伤害事件的预先反应)
+    private void DealBeforeFixedAttack(DealFixedAttackGA ga)
+    {
+        BattleInfoUI.Instance.AddFixedResult(ga.FixedDamage, ga.Caster);
+    }
+
     //处理固定伤害的事件
-    private IEnumerator FixedAttackPerformer(DealFixedAttackGA ga)
+    private IEnumerator DealFixedAttackPerformer(DealFixedAttackGA ga)
     {
         yield return AttackAnim(ga.Caster, new Vector2(0.5f, 0), Config.Instance.attackTime);
         yield return DealDamage(ga.Targets, ga.FixedDamage);
@@ -109,6 +112,22 @@ public class DamageSystem : MonoBehaviour
             }
         }
     }
+
+    private void DealBeforeAttack(DealAttackGA dealAttackGA)
+    {
+        CombatantView caster = dealAttackGA.Caster;
+        if (caster.M.GetStatusEffectStacks(StatusEffectType.BLESS) > 0)
+        {
+            dealAttackGA.DiceStr_Buff = "+1d4";
+            Debug.Log("敌人在有祝福术的情况下发动攻击");
+        }
+        else
+        {
+            dealAttackGA.DiceStr_Buff = "";
+            Debug.Log("敌人在不含任何状态的情况下发动攻击");
+        }
+    }
+
 
     /// <summary>
     //NOTE: 使用了事件分发

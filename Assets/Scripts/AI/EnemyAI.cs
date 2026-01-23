@@ -46,8 +46,6 @@ public class EnemyAI : MonoBehaviour
             Debug.LogError("EnemyAI没有绑定enemy!");
         }
 
-        Debug.Log($"=========Turn ==> {aiContext.Get(AI.Turn)}");
-
         // 使用外部配置的IntendTable的可配置"简单行为树"
 
         //------------------- 条件行为判断阶段 ----------------------

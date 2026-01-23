@@ -21,11 +21,13 @@ MonoBehaviour:
   <AppearLevels>k__BackingField: 00000000
   <FixedAttack>k__BackingField: 10
   <LightAttackStr>k__BackingField: 6 + 1d8
-  <HeavyAttackStr>k__BackingField: 0
-  <ConditionedIntendTable>k__BackingField: []
+  <HeavyAttackStr>k__BackingField: 8d8
+  <ConditionedIntendTable>k__BackingField:
+  - rid: 4226095495479033870
   <RandomIntendTable>k__BackingField:
   - rid: 2509721379855400960
-  - rid: 4226095495479033857
+  - rid: 4226095495479033864
+  - rid: 4226095495479033876
   references:
     version: 2
     RefIds:
@@ -43,15 +45,60 @@ MonoBehaviour:
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 0
-    - rid: 4226095495479033857
+    - rid: 4226095495479033864
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
         Condition:
           rid: -2
         Intend:
-          rid: 4226095495479033858
+          rid: 4226095495479033865
         P: 0
-    - rid: 4226095495479033858
+    - rid: 4226095495479033865
+      type: {class: SequenceEnemyIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 3
+        enemyIntendSeq:
+        - rid: 4226095495479033869
+        - rid: 4226095495479033868
+    - rid: 4226095495479033868
+      type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 5
+        cardData: {fileID: 11400000, guid: e8bd44f67b9c0934eb269fad6d48dfcf, type: 2}
+        pileType: 0
+    - rid: 4226095495479033869
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 2
+        skill: 0
+    - rid: 4226095495479033870
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: 4226095495479033871
+        Intend:
+          rid: 4226095495479033875
+        P: 1
+    - rid: 4226095495479033871
+      type: {class: AICondition, ns: , asm: Assembly-CSharp}
+      data:
+        cond: 0
+        relation: 3
+        x: 3
+    - rid: 4226095495479033875
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 1
+    - rid: 4226095495479033876
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 4226095495479033877
+        P: 0
+    - rid: 4226095495479033877
+      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 4
+        statusEffectType: 0
+        stackCount: 10

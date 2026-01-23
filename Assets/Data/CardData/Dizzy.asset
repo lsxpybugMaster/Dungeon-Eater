@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
   m_Name: Dizzy
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: Debug
-  <Description>k__BackingField: Debugging....
+  <Id>k__BackingField: Dizzy
+  <Description>k__BackingField: Dizzy, Play this card to Exhaust
   <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 21300000, guid: c55bcef3840eeb242bb3c4fb2bc14755, type: 3}
   <ManualTargetEffect>k__BackingField:

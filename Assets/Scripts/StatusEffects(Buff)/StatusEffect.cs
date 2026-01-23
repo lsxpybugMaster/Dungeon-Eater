@@ -10,6 +10,7 @@ public enum StatusEffectType
     PROFICIENCY, //临时熟练度
     FLEXBILITY, //临时敏捷度
     DIZZY,  //眩晕
+    BLESS, //专注: 祝福术
 }
 
 /*
