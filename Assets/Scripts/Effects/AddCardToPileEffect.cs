@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AddCardToPileEffect : Effect
 {
-    [SerializeField] private CardData cardData;
+    [SerializeField] private List<CardData> cardData;
     [SerializeField] private PileType pileType;
 
     public override GameAction GetGameAction(List<CombatantView> targets, CombatantView caster, EffectContext context)

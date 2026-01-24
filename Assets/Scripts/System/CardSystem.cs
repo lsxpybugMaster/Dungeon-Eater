@@ -134,57 +134,67 @@ public class CardSystem : Singleton<CardSystem>
 
     private IEnumerator AddCardPerformer(AddCardGA addCardGA)
     {
-        var card   = addCardGA.WhichCard;
+        var cardList  = addCardGA.AddCardList;
         var pile   = addCardGA.WhichPileToAdd;
         var caster = addCardGA.Caster;
 
-        int drct = caster is HeroView ? 1 : -1; 
+        int n = cardList.Count;
+        List<CardView> cardViewList = new(n);
 
-        //NOTE: 现在添加卡牌不再播放动画了(后续有其他动画)
-        //前摇动画
-        //yield return MotionUtil.Dash(
-        //    caster.transform,
-        //    new Vector2(drct * 1f, 0),
-        //    Config.Instance.attackTime
-        //);
-
-
-        //创建一个展示卡牌(仅动画效果)
-        CardView cardView = CardViewCreator.Instance.CreateCardView(card, 
-            showNewCardPoint.position, 
-            showNewCardPoint.rotation, 
-            showMode: true
+        Vector3[] positions = CalculateCenteredLinePositions(
+            showNewCardPoint.position,
+            n,
+            spacing: 2f,
+            right: showNewCardPoint.right   
         );
+
+        //现在支持加n张卡牌了
+        //首先创建卡牌
+        for (int i = 0; i < n; i++)
+        {
+            var card = cardList[i];
+
+            //创建一个展示卡牌(仅动画效果)
+            CardView cardView = CardViewCreator.Instance.CreateCardView(card,
+                positions[i],
+                //showNewCardPoint.position + new Vector3(2f,0,0) * i,
+                showNewCardPoint.rotation,
+                showMode: true
+            );
+
+            cardViewList.Add(cardView);
+        }
 
         //展示卡牌的时间
         yield return new WaitForSeconds(Config.Instance.freezeTime);
+        //统一处理动画
+        yield return DoCardAnimSeqence(cardViewList, pile);
 
-        // 根据添加的位置(抽牌堆,弃牌堆,手牌堆) 确定效果类型
-        if (pile == PileType.HandPile)
+        //统一最终逻辑处理
+        for (int i = 0; i < n; i++)
         {
-            //继续减小卡牌大小(原来是显示级大小)
-            cardView.transform.DOScale(Vector3.one * Config.Instance.cardSize , Config.Instance.moveTime);
-            // 将卡牌添加到手牌
-            yield return handView.AddCard(cardView);
+            // 根据添加的位置(抽牌堆,弃牌堆,手牌堆) 确定效果类型
+            if (pile == PileType.HandPile)
+            {
+                cardViewList[i].transform.DOScale(
+                       Vector3.one * Config.Instance.cardSize,
+                       Config.Instance.moveTime
+                );
 
-            cardView.EnableCardInteraction();
+                // 将卡牌添加到手牌
+                yield return handView.AddCard(cardViewList[i]);
+                cardViewList[i].EnableCardInteraction();
+            }
+            else
+            {    
+                Destroy(cardViewList[i].gameObject);
+            }
+
+            //实际逻辑上的添加
+            AddCardToPile(cardList[i], addCardGA.WhichPileToAdd);
         }
-        else
-        {
-            //效果:卡牌变小并向对应的位置移动
-            Vector3 pos = pile == PileType.DrawPile ? drawPilePoint.position : discardPilePoint.position;
-            cardView.transform.DOScale(Vector3.zero, Config.Instance.moveTime);
-            Tween tween = cardView.transform.DOMove(pos, Config.Instance.moveTime);
-
-            yield return tween.WaitForCompletion();
-
-            Destroy(cardView.gameObject);
-        }
-
-        //实际逻辑上的添加
-        AddCardToPile(addCardGA.WhichCard, addCardGA.WhichPileToAdd);
+        
     }
-
 
     /// <summary>
     /// 抽牌
@@ -344,6 +354,57 @@ public class CardSystem : Singleton<CardSystem>
         Destroy(cardView.gameObject);
 
         OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
+    }
+
+    //TODO: 辅助函数,移出该脚本
+    private IEnumerator DoCardAnimSeqence(List<CardView> cardViews, PileType pile)
+    {
+        
+        foreach (CardView view in cardViews)
+        {
+            Sequence seq = DOTween.Sequence();
+            if (pile == PileType.HandPile)
+            {
+                //加入手牌的需要单独处理
+                continue;
+            }
+
+            Vector3 pos = pile == PileType.DrawPile ? drawPilePoint.position : discardPilePoint.position;
+            seq.Join(
+                view.transform.DOMove(pos, Config.Instance.moveTime)
+            );
+            seq.Join(
+                view.transform.DOScale(
+                    Vector3.zero,
+                    Config.Instance.moveTime
+                )
+            );
+            yield return seq.WaitForCompletion();
+        }
+    }
+
+    //保证卡牌生成时居中
+    public static Vector3[] CalculateCenteredLinePositions(
+        Vector3 center,
+        int count,
+        float spacing,
+        Vector3 right
+    )
+    {
+        Vector3[] positions = new Vector3[count];
+
+        if (count == 0)
+            return positions;
+
+        float totalWidth = (count - 1) * spacing;
+        float startOffset = -totalWidth / 2f;
+
+        for (int i = 0; i < count; i++)
+        {
+            positions[i] = center + right * (startOffset + i * spacing);
+        }
+
+        return positions;
     }
 }
 

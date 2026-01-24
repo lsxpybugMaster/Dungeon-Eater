@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class AddCardIntend : EnemyIntend
 {
-    [SerializeField] private CardData cardData;
+    [SerializeField] private List<CardData> cardData;
     [SerializeField] private PileType pileType;
 
     public override GameAction GetGameAction(EnemyView enemy)
