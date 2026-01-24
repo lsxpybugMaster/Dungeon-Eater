@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 
 public enum Relation
@@ -8,23 +8,25 @@ public enum Relation
     greater, 
     greater_equal,
     equal,
+    if_mod, //å›åˆæ•°æ¨¡è¯¥å€¼ä¸º0æ—¶æ‰§è¡Œ
 }
 
-//¾ö¶¨µĞÈËÒâÍ¼µÄÌõ¼ş
-[Serializable] //Ê¹µÃÄÜ¹»±»±à¼­Æ÷½âÎö(ÔÚ²å¼ş×÷ÓÃÏÂ)
+//å†³å®šæ•Œäººæ„å›¾çš„æ¡ä»¶
+[Serializable] //ä½¿å¾—èƒ½å¤Ÿè¢«ç¼–è¾‘å™¨è§£æ(åœ¨æ’ä»¶ä½œç”¨ä¸‹)
 public abstract class IntendCondition
 {
-    //staticµÄ×Öµä´æ´¢¸¨ÖúÀà
+    //staticçš„å­—å…¸å­˜å‚¨è¾…åŠ©ç±»
     protected static readonly Dictionary<Relation, Func<int, int, bool>> Compare = new()
     {
         { Relation.less,         (a, b) => a < b },
         { Relation.equal,        (a, b) => a == b },
         { Relation.greater,      (a, b) => a > b },
         { Relation.less_equal,   (a, b) => a <= b},
-        { Relation.greater_equal,(a, b) => a >= b }
+        { Relation.greater_equal,(a, b) => a >= b },
+        { Relation.if_mod,       (a, b) => a % b == 0}
     };
 
 
-    //¸ù¾İµĞÈËµÄÏà¹ØĞÅÏ¢,½øĞĞÅĞ¶¨
+    //æ ¹æ®æ•Œäººçš„ç›¸å…³ä¿¡æ¯,è¿›è¡Œåˆ¤å®š
     public abstract bool Evaluate(EnemyView enemy);
 }

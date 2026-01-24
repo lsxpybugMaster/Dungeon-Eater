@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
-  m_Name: SuperKnight
+  m_Name: PalatinCoco
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 654643611, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <Health>k__BackingField: 35
   <Proficiency>k__BackingField: 1
   <Flexbility>k__BackingField: 1
-  ID: SuperKnight
+  ID: PalatinCoco
   <Diffculty>k__BackingField: 1
   <AppearLevels>k__BackingField: 00000000
   <FixedAttack>k__BackingField: 10
@@ -28,6 +28,7 @@ MonoBehaviour:
   - rid: 2509721379855400960
   - rid: 4226095495479033864
   - rid: 4226095495479033876
+  - rid: 4226095541533016064
   references:
     version: 2
     RefIds:
@@ -76,18 +77,14 @@ MonoBehaviour:
         Condition:
           rid: 4226095495479033871
         Intend:
-          rid: 4226095495479033875
+          rid: 4226095541533016066
         P: 1
     - rid: 4226095495479033871
       type: {class: AICondition, ns: , asm: Assembly-CSharp}
       data:
         cond: 0
-        relation: 3
-        x: 3
-    - rid: 4226095495479033875
-      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
-      data:
-        skill: 1
+        relation: 4
+        x: 1
     - rid: 4226095495479033876
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
@@ -102,3 +99,23 @@ MonoBehaviour:
         skill: 4
         statusEffectType: 0
         stackCount: 10
+    - rid: 4226095541533016064
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 4226095541533016065
+        P: 0
+    - rid: 4226095541533016065
+      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 3
+        statusEffectType: 5
+        stackCount: 2
+    - rid: 4226095541533016066
+      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 3
+        statusEffectType: 2
+        stackCount: 4

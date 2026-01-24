@@ -16,6 +16,3 @@ MonoBehaviour:
   <Groups>k__BackingField:
   - <Enemies>k__BackingField:
     - {fileID: 11400000, guid: 96c30d36d8d403b42a24fe0941e61beb, type: 2}
-  - <Enemies>k__BackingField:
-    - {fileID: 11400000, guid: 929f021164f68ee4dbb4ae29b66a6034, type: 2}
-    - {fileID: 11400000, guid: 929f021164f68ee4dbb4ae29b66a6034, type: 2}

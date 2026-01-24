@@ -16,16 +16,16 @@ MonoBehaviour:
   <Health>k__BackingField: 35
   <Proficiency>k__BackingField: 1
   <Flexbility>k__BackingField: 1
-  ID: Super 1
+  ID: BigStrong
   <Diffculty>k__BackingField: 1
   <AppearLevels>k__BackingField: 000000000100000002000000
   <FixedAttack>k__BackingField: 12
-  <LightAttackStr>k__BackingField: 1d8
+  <LightAttackStr>k__BackingField: 8d4
   <HeavyAttackStr>k__BackingField: 3d6
   <ConditionedIntendTable>k__BackingField: []
   <RandomIntendTable>k__BackingField:
   - rid: 2509721379855400960
-  - rid: 2509721379855400962
+  - rid: 4226095520488620034
   references:
     version: 2
     RefIds:
@@ -43,15 +43,17 @@ MonoBehaviour:
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 0
-    - rid: 2509721379855400962
+    - rid: 4226095520488620034
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
         Condition:
           rid: -2
         Intend:
-          rid: 2509721379855400963
+          rid: 4226095520488620035
         P: 0
-    - rid: 2509721379855400963
-      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+    - rid: 4226095520488620035
+      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 1
+        skill: 3
+        statusEffectType: 5
+        stackCount: 2

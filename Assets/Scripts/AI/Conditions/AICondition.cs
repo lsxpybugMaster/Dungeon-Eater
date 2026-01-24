@@ -19,7 +19,8 @@ public class AICondition : IntendCondition
     public override bool Evaluate(EnemyView enemy)
     {
         AIContext aIContext = enemy.EnemyAI.aiContext;
-        int currentValue = aIContext.Get(cond); 
+        int currentValue = aIContext.Get(cond);
+        Debug.Log($"{currentValue} , {x}");
         return Compare[relation](currentValue, x);
     }
 }

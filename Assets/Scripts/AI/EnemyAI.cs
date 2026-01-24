@@ -52,9 +52,10 @@ public class EnemyAI : MonoBehaviour
         // 获取GA时传入了enemy信息,则行为树可以使用enemy数据
         foreach (var IntendNode in CondIntendTable)
         {
-            // 判断条件
-            if ((IntendNode.Condition == null || IntendNode.Condition.Evaluate(enemy)) && UnityEngine.Random.value < IntendNode.P)
+            // 判断条件: 满足条件 + 依据概率判断是否选该intend
+            if (IntendNode.Condition.Evaluate(enemy) && UnityEngine.Random.value < IntendNode.P)
             {
+                aiContext.Inc(AI.Turn); //注意别忘记更新上下文!
                 return IntendNode.Intend;
             }
         }
@@ -64,7 +65,6 @@ public class EnemyAI : MonoBehaviour
 
         //---------------------更新ai环境上下文----------------------
         aiContext.Inc(AI.Turn);
-
         return RandIntendTable[idx].Intend;
     }
 

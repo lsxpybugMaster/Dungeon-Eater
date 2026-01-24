@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,13 +8,16 @@ using UnityEngine;
 /// </summary>
 public class TurnSystem : Singleton<TurnSystem>
 {
+    public int Turn { get; set; } = 1;//当前战斗的回合数计数
+    public event Action<int> OnTurnChanged; //UI注册事件并跟随更新
+
     private void OnEnable()
     {
         ActionSystem.AttachPerformer<UpdateEffectGA>(UpdateEffectPerformer);
 
         ActionSystem.AttachPerformer<EnemyTurnGA>(EnemyTurnPerformer);
         ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPreAction, ReactionTiming.PRE);
-        ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);  
+        ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
     }
 
     private void OnDisable()
@@ -23,8 +27,9 @@ public class TurnSystem : Singleton<TurnSystem>
         ActionSystem.DetachPerformer<EnemyTurnGA>();
         ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPreAction, ReactionTiming.PRE);
         ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
-    }
 
+        OnTurnChanged = null;
+    }
 
     //-------------------------------敌人回合前(作为反应)---------------------------------
     private void EnemyTurnPreAction(EnemyTurnGA enemyTurnGA)
@@ -82,6 +87,10 @@ public class TurnSystem : Singleton<TurnSystem>
     private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
     {
         var heroView = HeroSystem.Instance.HeroView;
+
+        //在这里更新回合数
+        Turn++;
+        OnTurnChanged.Invoke(Turn);
 
         //玩家结算
         //结算燃烧事件

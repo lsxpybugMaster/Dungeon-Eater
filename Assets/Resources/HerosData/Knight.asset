@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 1351559378, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <Health>k__BackingField: 1000
-  <Proficiency>k__BackingField: 16
-  <Flexbility>k__BackingField: -5
+  <Proficiency>k__BackingField: 15
+  <Flexbility>k__BackingField: 0
   <MaxMana>k__BackingField: 4
   <Deck>k__BackingField:
   - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
