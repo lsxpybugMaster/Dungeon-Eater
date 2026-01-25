@@ -23,6 +23,7 @@ MonoBehaviour:
       rid: 5386319892022034432
     <Effect>k__BackingField:
       rid: 5386319892022034433
+  <DiscardEffects>k__BackingField: []
   <CardTags>k__BackingField: 
   <UpdateCardInfo>k__BackingField: []
   references:
@@ -36,5 +37,9 @@ MonoBehaviour:
     - rid: 5386319892022034433
       type: {class: AddCardToPileEffect, ns: , asm: Assembly-CSharp}
       data:
-        cardData: {fileID: 11400000, guid: 5e9811ce229f058459c3d470dfdbbd70, type: 2}
+        cardData:
+        - {fileID: 11400000, guid: 82282b7cd3517274cbdb53f43717089a, type: 2}
+        - {fileID: 11400000, guid: 82282b7cd3517274cbdb53f43717089a, type: 2}
+        - {fileID: 11400000, guid: 82282b7cd3517274cbdb53f43717089a, type: 2}
+        - {fileID: 11400000, guid: 82282b7cd3517274cbdb53f43717089a, type: 2}
         pileType: 2

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AddCard
   m_EditorClassIdentifier: 
   <Id>k__BackingField: AddCard
-  <Description>k__BackingField: Add a debug card to your DrawPile
+  <Description>k__BackingField: Add some cards to your DrawPile
   <Mana>k__BackingField: 0
   <Image>k__BackingField: {fileID: 21300000, guid: 2ee2502f33a8197489312b63b391026e, type: 3}
   <ManualTargetEffect>k__BackingField:
@@ -23,6 +23,7 @@ MonoBehaviour:
       rid: 5386319892022034432
     <Effect>k__BackingField:
       rid: 5386319892022034433
+  <DiscardEffects>k__BackingField: []
   <CardTags>k__BackingField: 
   <UpdateCardInfo>k__BackingField: []
   references:
@@ -36,5 +37,9 @@ MonoBehaviour:
     - rid: 5386319892022034433
       type: {class: AddCardToPileEffect, ns: , asm: Assembly-CSharp}
       data:
-        cardData: {fileID: 11400000, guid: e8bd44f67b9c0934eb269fad6d48dfcf, type: 2}
+        cardData:
+        - {fileID: 11400000, guid: e8bd44f67b9c0934eb269fad6d48dfcf, type: 2}
+        - {fileID: 11400000, guid: f5ca2dd1e05408c4bb1a666f3d604087, type: 2}
+        - {fileID: 11400000, guid: 82282b7cd3517274cbdb53f43717089a, type: 2}
+        - {fileID: 11400000, guid: 12c0d5dd4727c164aaed6ebe5fa79da6, type: 2}
         pileType: 0

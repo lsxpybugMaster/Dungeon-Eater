@@ -4,6 +4,7 @@ using UnityEngine;
 public enum CardTag
 {
     Exhaust, //消耗：使用后立刻从战斗牌库删除
+    Status, //状态卡牌
 }
 
 public class Card
@@ -17,6 +18,9 @@ public class Card
     public Sprite Image => data.Image;
     public Effect ManualTargetEffect => data.ManualTargetEffect;
     public List<AutoTargetEffect> OtherEffects => data.OtherEffects;
+    //燃烧,中毒等卡牌的效果
+    public List<AutoTargetEffect> CardStatusEffects => data.DiscardEffects;
+
     public List<CardData> updateChoices => data.UpdateCardInfo;
 
     public HashSet<CardTag> CardTags;

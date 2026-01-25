@@ -10,31 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
-  m_Name: ArrowRain
+  m_Name: Poisoned
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: ArrowRain
-  <Description>k__BackingField: Deal 10 damage to all Enemies
+  <Id>k__BackingField: Poisoned
+  <Description>k__BackingField: Poisoned, when discard, get 1d6 damage,Exhausted
   <Mana>k__BackingField: 1
-  <Image>k__BackingField: {fileID: 21300000, guid: f5539375b633be2478867d3889959881, type: 3}
+  <Image>k__BackingField: {fileID: 1229898717, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <ManualTargetEffect>k__BackingField:
     rid: -2
-  <OtherEffects>k__BackingField:
+  <OtherEffects>k__BackingField: []
+  <DiscardEffects>k__BackingField:
   - <TargetMode>k__BackingField:
-      rid: 723492467705118724
+      rid: 4226095564354486279
     <Effect>k__BackingField:
-      rid: 2509721379855400964
-  <DiscardEffects>k__BackingField: []
-  <CardTags>k__BackingField: 
+      rid: 4226095564354486273
+  <CardTags>k__BackingField: 0000000001000000
   <UpdateCardInfo>k__BackingField: []
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 723492467705118724
-      type: {class: AllEnemiesTM, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 2509721379855400964
+    - rid: 4226095564354486273
       type: {class: DealRandomDmgEffect, ns: , asm: Assembly-CSharp}
       data:
-        diceString: 10d10
+        diceString: 1d6
+    - rid: 4226095564354486279
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 

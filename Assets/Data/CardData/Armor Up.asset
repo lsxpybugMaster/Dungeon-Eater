@@ -23,6 +23,7 @@ MonoBehaviour:
       rid: 8501353642540138497
     <Effect>k__BackingField:
       rid: 2509721132496322562
+  <DiscardEffects>k__BackingField: []
   <CardTags>k__BackingField: 
   <UpdateCardInfo>k__BackingField: []
   references:

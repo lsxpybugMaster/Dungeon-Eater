@@ -32,6 +32,7 @@ public class CardSystem : Singleton<CardSystem>
     [SerializeField] private Transform drawPilePoint;
     [SerializeField] private Transform discardPilePoint;
     [SerializeField] private Transform showNewCardPoint;
+    [SerializeField] private Transform heroPoint;
     
     //NOTE: 每当牌堆改变时与UI交互
     public event Action<int, int> OnPileChanged; //上面这个仅限抽牌堆弃牌堆
@@ -98,6 +99,8 @@ public class CardSystem : Singleton<CardSystem>
         GameManager.Instance.PersistUIController.TopUI.UpdateDeckSize(DeckCount);
     }
 
+
+
     /*
     //NOTE: Performer执行逻辑
        如果内部包含跨帧逻辑：
@@ -115,6 +118,7 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.AttachPerformer<DrawCardsGA>(DrawCardsPerformer);
         ActionSystem.AttachPerformer<DiscardAllCardsGA>(DiscardAllCardsPerformer);
         ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);
+        ActionSystem.AttachPerformer<PassivePlayCardGA>(PassivePlayCardPerformer);
         ActionSystem.AttachPerformer<AddCardGA>(AddCardPerformer);
 
         //TODO: 通过事件建立CardSystem与PlayerDeckController的联系
@@ -127,6 +131,7 @@ public class CardSystem : Singleton<CardSystem>
     {
         ActionSystem.DetachPerformer<DrawCardsGA>();
         ActionSystem.DetachPerformer<DiscardAllCardsGA>();
+        ActionSystem.DetachPerformer<PassivePlayCardGA>();
         ActionSystem.DetachPerformer<PlayCardGA>();
         ActionSystem.DetachPerformer<AddCardGA>();
     }
@@ -192,8 +197,7 @@ public class CardSystem : Singleton<CardSystem>
 
             //实际逻辑上的添加
             AddCardToPile(cardList[i], addCardGA.WhichPileToAdd);
-        }
-        
+        }    
     }
 
     /// <summary>
@@ -232,12 +236,80 @@ public class CardSystem : Singleton<CardSystem>
 
     private IEnumerator DiscardAllCardsPerformer(DiscardAllCardsGA discardAllCardsGA)
     {
+        List<Card> statusCards = new(); 
+
+        //弃牌
         foreach (var card in hand)
         {
+            if (card.HasTag(CardTag.Status))
+            {
+                statusCards.Add(card);
+                continue;
+            }
             CardView cardView = handView.RemoveCard(card);
             yield return DiscardCard(cardView);
         }
+
+        //特殊的在弃牌阶段的卡牌
+        foreach (var statusCard in statusCards)
+        {
+            PassivePlayCardGA ga = new(statusCard);
+            ActionSystem.Instance.AddReaction(ga);
+            //注意此时弃牌功能由PassivePlayCardGA接管,和PlayCardGA一样其管理卡片打出后的结果
+        }
+
         hand.Clear();
+    }
+
+
+    //需要在弃牌阶段被动打出的卡牌(即被动打出卡牌)
+    private IEnumerator PassivePlayCardPerformer(PassivePlayCardGA passivePlayCardGA)
+    {
+        Card card = passivePlayCardGA.Card;
+        hand.Remove(card);
+        //删除卡牌后卡牌位置更新,同时返回删除的卡片
+        CardView cardView = handView.RemoveCard(card);
+
+        //模拟卡牌打出: 将卡牌移动到中央
+        Sequence seq = DOTween.Sequence();
+        seq.Join(cardView.transform.DOMove(showNewCardPoint.position, Config.Instance.moveTime));
+        seq.Join(cardView.transform.DORotate(Vector3.zero, Config.Instance.moveTime));
+        yield return seq.WaitForCompletion();
+        //展示卡牌的时间
+        yield return new WaitForSeconds(Config.Instance.freezeTime);
+
+        //结算被动打出的卡牌对应的效果
+
+        foreach (var effectWrapper in card.CardStatusEffects)
+        {
+            //临时卡牌上下文,这里为空 (因为不涉及到和之前状态的通信)
+            EffectContext context = new();
+            //别忘记如何找到玩家的战斗体
+            //TODO: 这种被动状态结算不能使用通用的伤害事件,否则展示的结果为自己对自己攻击
+            PerformEffectGA performEffectGA = new(
+                effectWrapper.Effect,
+                effectWrapper.TargetMode.GetTargets(null),
+                context
+            );
+            //注意现在是在Performer中,若想执行其他Action必须使用AddReaction 
+            ActionSystem.Instance.AddReaction(performEffectGA);
+        }
+        //播放卡牌效果
+        Sequence overSeq = DOTween.Sequence();
+        overSeq.Join(cardView.transform.DOMove(heroPoint.position, Config.Instance.moveTime));
+        overSeq.Join(cardView.transform.DOScale(Vector3.zero, Config.Instance.moveTime));
+        yield return overSeq.WaitForCompletion();
+
+        //在这里弃牌/消耗牌,确保数据层与显示层一致
+        if (!card.HasTag(CardTag.Exhaust))
+        {
+            discardPile.Add(cardView.Card);
+        }
+        //这里必须保证三个同时更新
+        OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
+        DoWhenDeckChanged();
+        Destroy(cardView.gameObject);
+       
     }
 
 
@@ -315,6 +387,23 @@ public class CardSystem : Singleton<CardSystem>
         DoWhenDeckChanged();
     }
 
+    /// <summary>
+    /// 对传入的cardView(即游戏中卡牌)进行相关改变并最终删除
+    /// </summary>
+    /// <param name="cardView"></param>
+    /// <returns></returns>
+    private IEnumerator DiscardCard(CardView cardView)
+    {
+        //在这里弃牌,确保数据层与显示层一致
+        discardPile.Add(cardView.Card);
+        cardView.transform.DOScale(Vector3.zero, Config.Instance.moveTime);
+        Tween tween = cardView.transform.DOMove(discardPilePoint.position, Config.Instance.moveTime);
+        yield return tween.WaitForCompletion();
+        Destroy(cardView.gameObject);
+
+        OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
+    }
+
     private IEnumerator DrawCard()
     {
         //ListExtensions中的List扩展方法
@@ -337,24 +426,6 @@ public class CardSystem : Singleton<CardSystem>
         OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
     }
 
-
-
-    /// <summary>
-    /// 对传入的cardView(即游戏中卡牌)进行相关改变并最终删除
-    /// </summary>
-    /// <param name="cardView"></param>
-    /// <returns></returns>
-    private IEnumerator DiscardCard(CardView cardView)
-    {
-        //在这里弃牌,确保数据层与显示层一致
-        discardPile.Add(cardView.Card);
-        cardView.transform.DOScale(Vector3.zero, Config.Instance.moveTime);
-        Tween tween = cardView.transform.DOMove(discardPilePoint.position, Config.Instance.moveTime);
-        yield return tween.WaitForCompletion();
-        Destroy(cardView.gameObject);
-
-        OnPileChanged?.Invoke(DrawPileCount, DiscardPileCount);
-    }
 
     //TODO: 辅助函数,移出该脚本
     private IEnumerator DoCardAnimSeqence(List<CardView> cardViews, PileType pile)
@@ -384,12 +455,7 @@ public class CardSystem : Singleton<CardSystem>
     }
 
     //保证卡牌生成时居中
-    public static Vector3[] CalculateCenteredLinePositions(
-        Vector3 center,
-        int count,
-        float spacing,
-        Vector3 right
-    )
+    public static Vector3[] CalculateCenteredLinePositions(Vector3 center,int count,float spacing,Vector3 right)
     {
         Vector3[] positions = new Vector3[count];
 

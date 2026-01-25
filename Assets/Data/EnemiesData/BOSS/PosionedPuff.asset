@@ -10,22 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
-  m_Name: BigStrong
+  m_Name: PosionedPuff
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: 745437561, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Image>k__BackingField: {fileID: 1229898717, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <Health>k__BackingField: 35
   <Proficiency>k__BackingField: 1
   <Flexbility>k__BackingField: 1
-  ID: BigStrong
+  ID: PosionedPuff
   <Diffculty>k__BackingField: 1
   <AppearLevels>k__BackingField: 000000000100000002000000
-  <FixedAttack>k__BackingField: 12
+  <FixedAttack>k__BackingField: 4
   <LightAttackStr>k__BackingField: 8d4
   <HeavyAttackStr>k__BackingField: 3d6
   <ConditionedIntendTable>k__BackingField: []
   <RandomIntendTable>k__BackingField:
   - rid: 2509721379855400960
-  - rid: 4226095520488620034
   references:
     version: 2
     RefIds:
@@ -37,23 +36,24 @@ MonoBehaviour:
         Condition:
           rid: -2
         Intend:
-          rid: 2509721379855400961
+          rid: 4226095564354486275
         P: 0
-    - rid: 2509721379855400961
-      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+    - rid: 4226095564354486275
+      type: {class: SequenceEnemyIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 0
-    - rid: 4226095520488620034
-      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+        enemyIntendSeq:
+        - rid: 4226095564354486276
+        - rid: 4226095564354486277
+    - rid: 4226095564354486276
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
-        Condition:
-          rid: -2
-        Intend:
-          rid: 4226095520488620035
-        P: 0
-    - rid: 4226095520488620035
-      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+        skill: 2
+    - rid: 4226095564354486277
+      type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 3
-        statusEffectType: 5
-        stackCount: 2
+        skill: 6
+        cardData:
+        - {fileID: 11400000, guid: d229d2d14025023489529988777d8d1b, type: 2}
+        - {fileID: 11400000, guid: d229d2d14025023489529988777d8d1b, type: 2}
+        pileType: 0

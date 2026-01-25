@@ -26,6 +26,9 @@ public class CardData : ScriptableObject, IHaveKey<string>
     //有许多自动决定目标对象的Effect
     [field: SerializeField] public List<AutoTargetEffect> OtherEffects { get; private set; }
 
+    //如果该卡牌是负面效果类卡牌,是在弃牌时结算的
+    [field: SerializeField] public List<AutoTargetEffect> DiscardEffects { get; private set; }
+
     [field: SerializeField] public List<CardTag> CardTags { get; private set; }
 
     //存储卡牌升级后的效果

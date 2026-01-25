@@ -19,6 +19,7 @@ MonoBehaviour:
   <ManualTargetEffect>k__BackingField:
     rid: 2509721132496322560
   <OtherEffects>k__BackingField: []
+  <DiscardEffects>k__BackingField: []
   <CardTags>k__BackingField: 
   <UpdateCardInfo>k__BackingField:
   - {fileID: 11400000, guid: 6777f8e8b5c9d1645a84fad8945c45ed, type: 2}

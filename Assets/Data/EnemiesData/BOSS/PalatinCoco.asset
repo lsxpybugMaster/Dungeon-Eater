@@ -64,8 +64,9 @@ MonoBehaviour:
     - rid: 4226095495479033868
       type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 5
-        cardData: {fileID: 11400000, guid: e8bd44f67b9c0934eb269fad6d48dfcf, type: 2}
+        skill: 6
+        cardData:
+        - {fileID: 11400000, guid: e8bd44f67b9c0934eb269fad6d48dfcf, type: 2}
         pileType: 0
     - rid: 4226095495479033869
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
@@ -83,8 +84,8 @@ MonoBehaviour:
       type: {class: AICondition, ns: , asm: Assembly-CSharp}
       data:
         cond: 0
-        relation: 4
-        x: 1
+        relation: 6
+        x: 5
     - rid: 4226095495479033876
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:

@@ -54,7 +54,7 @@ MonoBehaviour:
       type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 5
-        cardData: {fileID: 11400000, guid: 82282b7cd3517274cbdb53f43717089a, type: 2}
+        cardData: []
         pileType: 0
     - rid: 5386319821270941696
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}

@@ -2178,6 +2178,7 @@ MonoBehaviour:
   drawPilePoint: {fileID: 194631718}
   discardPilePoint: {fileID: 270186035}
   showNewCardPoint: {fileID: 1983473295}
+  heroPoint: {fileID: 1439283245}
 --- !u!1 &688664381
 GameObject:
   m_ObjectHideFlags: 0
@@ -4589,6 +4590,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420254669}
   m_CullTransparentMesh: 1
+--- !u!1 &1439283244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1439283245}
+  m_Layer: 0
+  m_Name: HeroPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1439283245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1439283244}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.26, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1616976887}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1461735289
 GameObject:
   m_ObjectHideFlags: 0
@@ -5146,6 +5178,7 @@ Transform:
   - {fileID: 194631718}
   - {fileID: 270186035}
   - {fileID: 1983473295}
+  - {fileID: 1439283245}
   m_Father: {fileID: 159015750}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1642352306 stripped
