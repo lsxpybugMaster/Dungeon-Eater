@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
-  m_Name: FireStorm
+  m_Name: Drink
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: FireStorm
-  <Description>k__BackingField: Add 3 Burn Effect
-  <Mana>k__BackingField: 2
-  <Image>k__BackingField: {fileID: 21300000, guid: 244a920166e9a41468580b0f277dc575, type: 3}
+  <Id>k__BackingField: Drink
+  <Description>k__BackingField: Give drink effect
+  <Mana>k__BackingField: 1
+  <Image>k__BackingField: {fileID: 21300064, guid: 09e4c6a7d75923945afe43953ef58ad2, type: 3}
   <ManualTargetEffect>k__BackingField:
     rid: -2
   <OtherEffects>k__BackingField:
   - <TargetMode>k__BackingField:
-      rid: 8501353665225031680
+      rid: 4226095588439752709
     <Effect>k__BackingField:
-      rid: 8501353665225031681
+      rid: 4226095588439752710
   <DiscardEffects>k__BackingField: []
   <CardTags>k__BackingField: 
   <UpdateCardInfo>k__BackingField: []
@@ -31,11 +31,11 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 8501353665225031680
-      type: {class: AllEnemiesTM, ns: , asm: Assembly-CSharp}
+    - rid: 4226095588439752709
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 8501353665225031681
+    - rid: 4226095588439752710
       type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
       data:
-        statusEffectType: 1
-        stackCount: 3
+        statusEffectType: 6
+        stackCount: 1

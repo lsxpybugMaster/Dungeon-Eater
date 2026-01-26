@@ -19,12 +19,15 @@ MonoBehaviour:
   ID: PosionedPuff
   <Diffculty>k__BackingField: 1
   <AppearLevels>k__BackingField: 000000000100000002000000
-  <FixedAttack>k__BackingField: 4
-  <LightAttackStr>k__BackingField: 8d4
+  <FixedAttack>k__BackingField: 0
+  <LightAttackStr>k__BackingField: 4d4
   <HeavyAttackStr>k__BackingField: 3d6
   <ConditionedIntendTable>k__BackingField: []
   <RandomIntendTable>k__BackingField:
   - rid: 2509721379855400960
+  - rid: 4226095588439752717
+  - rid: 4226095588439752722
+  - rid: 4226095588439752724
   references:
     version: 2
     RefIds:
@@ -57,3 +60,58 @@ MonoBehaviour:
         - {fileID: 11400000, guid: d229d2d14025023489529988777d8d1b, type: 2}
         - {fileID: 11400000, guid: d229d2d14025023489529988777d8d1b, type: 2}
         pileType: 0
+    - rid: 4226095588439752717
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 4226095588439752718
+        P: 0
+    - rid: 4226095588439752718
+      type: {class: SequenceEnemyIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 3
+        enemyIntendSeq:
+        - rid: 4226095588439752719
+        - rid: 4226095588439752720
+    - rid: 4226095588439752719
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 2
+    - rid: 4226095588439752720
+      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 0
+        statusEffectType: 6
+        stackCount: 2
+        targetMode:
+          rid: 4226095588439752721
+    - rid: 4226095588439752721
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 4226095588439752722
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 4226095588439752723
+        P: 0
+    - rid: 4226095588439752723
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 0
+    - rid: 4226095588439752724
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 4226095588439752725
+        P: 0
+    - rid: 4226095588439752725
+      type: {class: HealIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 5
+        healAmount: 10

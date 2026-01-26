@@ -116,15 +116,15 @@ public class DamageSystem : MonoBehaviour
     private void DealBeforeAttack(DealAttackGA dealAttackGA)
     {
         CombatantView caster = dealAttackGA.Caster;
+        dealAttackGA.DiceStr_Buff = "";
+        dealAttackGA.AttackThrowStr_Buff = "";
         if (caster.M.GetStatusEffectStacks(StatusEffectType.BLESS) > 0)
+            dealAttackGA.DiceStr_Buff += "+1d4";
+
+        if (caster.M.GetStatusEffectStacks(StatusEffectType.DRUNK) > 0)
         {
-            dealAttackGA.DiceStr_Buff = "+1d4";
-            Debug.Log("敌人在有祝福术的情况下发动攻击");
-        }
-        else
-        {
-            dealAttackGA.DiceStr_Buff = "";
-            Debug.Log("敌人在不含任何状态的情况下发动攻击");
+            dealAttackGA.DiceStr_Buff += "+1d10";
+            dealAttackGA.AttackThrowStr_Buff += "-5";
         }
     }
 
@@ -138,9 +138,12 @@ public class DamageSystem : MonoBehaviour
         //这里由于需要判定重击双倍伤害,所以没有直接使用封装好的工具类
         int damageDice = DiceRollUtil.DfromString(ga.DiceStr);
 
-        Result res;
+        //计算攻击掷骰的修正值
+        int attackThrowBuff = DiceRollUtil.DfromString(ga.AttackThrowStr_Buff);
+      
 
-        switch (res = CheckUtil.AttackRoll(ga.Caster, ga.Targets[0]))
+        Result res;
+        switch (res = CheckUtil.AttackRoll(ga.Caster, ga.Targets[0], attackThrowBuff))
         {
             case Result.GiantSuccess:
                 BattleInfoUI.Instance.AddThrowResult(2 * damageDice, ga.DiceStr);

@@ -10,6 +10,9 @@ public class DealAttackGA : GameAction, IHaveCaster, INeedContext, IBuffable
     public string DiceStr_Buff { get; set; }
     public string DiceStr_Base { get; private set; }
 
+    //攻击掷骰修正值
+    public string AttackThrowStr_Buff { get; set; }
+
     //由子类计算
     public int Damage { get; set; } 
 

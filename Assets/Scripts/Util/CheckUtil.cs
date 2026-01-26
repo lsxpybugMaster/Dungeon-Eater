@@ -32,9 +32,9 @@ public static class CheckUtil
     /// <param name="flexbility">目标的敏捷值</param>
     /// <returns>返回结果</returns>
 
-    public static Result AttackRoll(CombatantView caster, CombatantView target)
+    public static Result AttackRoll(CombatantView caster, CombatantView target, int plus)
     {
-
+        
         int attackDice = DiceRollUtil.D20();
         //大成功
         if (attackDice == 20)
@@ -48,8 +48,14 @@ public static class CheckUtil
             return Result.Failure; //大失败不会对玩家造成额外影响
         }
 
+        //基本属性修正
         int add = caster.M.Proficiency + caster.M.ProficiencyBuff;
         int sub = target.M.Flexbility  + target.M.FlexbilityBuff;
+
+        //额外的修正
+        if (plus >= 0) add += plus;
+        else sub += -plus; //注意sub中存储绝对值!
+
         int finalAmount = attackDice + add - sub;
         
         if (attackDice == 1 || finalAmount < 10)

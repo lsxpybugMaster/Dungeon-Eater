@@ -11,6 +11,7 @@ public enum StatusEffectType
     FLEXBILITY, //临时敏捷度
     DIZZY,  //眩晕
     BLESS, //专注: 祝福术
+    DRUNK, //醉酒: +1d10攻击掷骰 -5精通
 }
 
 /*

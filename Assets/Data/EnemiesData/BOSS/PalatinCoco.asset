@@ -100,6 +100,8 @@ MonoBehaviour:
         skill: 4
         statusEffectType: 0
         stackCount: 10
+        targetMode:
+          rid: -2
     - rid: 4226095541533016064
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
@@ -114,9 +116,13 @@ MonoBehaviour:
         skill: 3
         statusEffectType: 5
         stackCount: 2
+        targetMode:
+          rid: -2
     - rid: 4226095541533016066
       type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 3
         statusEffectType: 2
         stackCount: 4
+        targetMode:
+          rid: -2

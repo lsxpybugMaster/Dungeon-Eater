@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 1351559378, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <Health>k__BackingField: 1000
-  <Proficiency>k__BackingField: 15
+  <Proficiency>k__BackingField: 2
   <Flexbility>k__BackingField: 0
   <MaxMana>k__BackingField: 4
   <Deck>k__BackingField:
@@ -25,6 +25,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cc67c0c693eff9a4bb8b7a1560ff8f06, type: 2}
   - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
   - {fileID: 11400000, guid: f5ca2dd1e05408c4bb1a666f3d604087, type: 2}
-  - {fileID: 11400000, guid: 841a722a23a03894ba148ba97e73f57c, type: 2}
-  - {fileID: 11400000, guid: 841a722a23a03894ba148ba97e73f57c, type: 2}
-  - {fileID: 11400000, guid: 841a722a23a03894ba148ba97e73f57c, type: 2}
+  - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
+  - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
+  - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
+  - {fileID: 11400000, guid: a04671924f78240448d451dc628baa63, type: 2}

@@ -146,7 +146,8 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
     /// </summary>
     private void BattleWin(KillAllEnemyGA killAllEnemyGA)
     {
-        if (GameManager.Instance.LevelProgress.IsFinalLevel())
+        //最终胜利条件: 最后一关的Boss敌人被击杀
+        if (GetBattleMode() == BattleType.Boss && GameManager.Instance.LevelProgress.IsFinalLevel())
         {
             UISystem.Instance.ShowWinUI(finalWin : true);
         }
