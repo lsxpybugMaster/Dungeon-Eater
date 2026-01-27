@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /*
-    Á¢¼´½áËãÈ¼ÉÕ×´Ì¬µÄĞ§¹û,¿ÉÓÃÓÚÈ¼ÉÕÏà¹Ø¿¨ÅÆ
-    ÒÔ¼°×´Ì¬½áËã
+    ç«‹å³ç»“ç®—ç‡ƒçƒ§çŠ¶æ€çš„æ•ˆæœ,å¯ç”¨äºç‡ƒçƒ§ç›¸å…³å¡ç‰Œ
+    ä»¥åŠçŠ¶æ€ç»“ç®—
  */
 public class ApplyBurnEffect : Effect
 {

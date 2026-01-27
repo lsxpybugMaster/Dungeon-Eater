@@ -12,6 +12,7 @@ public enum StatusEffectType
     DIZZY,  //眩晕
     BLESS, //专注: 祝福术
     DRUNK, //醉酒: +1d10攻击掷骰 -5精通
+    POSIONED, //中毒
 }
 
 /*

@@ -23,7 +23,7 @@ MonoBehaviour:
   - <TargetMode>k__BackingField:
       rid: 4226095564354486279
     <Effect>k__BackingField:
-      rid: 4226095564354486273
+      rid: 4226095612203892736
   <CardTags>k__BackingField: 0000000001000000
   <UpdateCardInfo>k__BackingField: []
   references:
@@ -31,10 +31,12 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 4226095564354486273
-      type: {class: DealRandomDmgEffect, ns: , asm: Assembly-CSharp}
-      data:
-        diceString: 1d6
     - rid: 4226095564354486279
       type: {class: HeroTM, ns: , asm: Assembly-CSharp}
       data: 
+    - rid: 4226095612203892736
+      type: {class: ApplyStatusCardEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damage: 10
+        cardStatusEffectType: 7
+        statusVFX: {fileID: 1524533970525000399, guid: 1133dff0b5fda2e4295d301899b1582d, type: 3}

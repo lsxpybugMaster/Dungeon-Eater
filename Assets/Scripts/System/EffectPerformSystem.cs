@@ -13,6 +13,8 @@ public class EffectPerformSystem : MonoBehaviour
     {
         ActionSystem.AttachPerformer<DecayEffectGA>(DecayEffectPerformer);
 
+        ActionSystem.AttachPerformer<ApplyCardDiscardedEffectGA>(ApplyCardStatusPerformer);
+
         ActionSystem.AttachPerformer<ApplyBurnGA>(ApplyBurnPerformer);
         ActionSystem.AttachPerformer<ApplyDizzyGA>(ApplyDizzyPerformer);
     }
@@ -20,6 +22,8 @@ public class EffectPerformSystem : MonoBehaviour
     private void OnDisable()
     {
         ActionSystem.DetachPerformer<DecayEffectGA>();
+
+        ActionSystem.DetachPerformer<ApplyCardDiscardedEffectGA>();
 
         ActionSystem.DetachPerformer<ApplyBurnGA>();
         ActionSystem.DetachPerformer<ApplyDizzyGA>();
@@ -32,6 +36,21 @@ public class EffectPerformSystem : MonoBehaviour
         int decay = decayEffectGA.Decay;
         target.M.RemoveStatusEffect(type, decay);
         yield return null;
+    }
+
+    /// <summary>
+    /// 弃牌时的卡牌状态相关效果执行(如中毒卡,诅咒卡)
+    /// </summary>
+    /// <param name="ga"></param>
+    /// <returns></returns>
+    private IEnumerator ApplyCardStatusPerformer(ApplyCardDiscardedEffectGA ga)
+    {
+        var target = HeroSystem.Instance.HeroView;
+        Instantiate(ga.VFX, target.transform.position, Quaternion.identity);
+        
+        target.M.Damage(ga.Damage);
+
+        yield return new WaitForSeconds(Config.Instance.effectTime);
     }
 
     private IEnumerator ApplyBurnPerformer(ApplyBurnGA applyBurnGA)

@@ -13,6 +13,8 @@ public abstract class Effect
     //效果对象能够执行GA
     /// <summary>
     /// 将效果转换为GameAction, 同时指明发起者Caster
+    /// Caster有可能是通过上层的AutoTargetEffect中TargetMode决定,Effect无需知晓
+    /// 底层的子系统中Effect不一定完全使用其中的参数!
     /// </summary>
     /// <returns></returns>
     public abstract GameAction GetGameAction(List<CombatantView> targets, CombatantView caster, EffectContext context);
