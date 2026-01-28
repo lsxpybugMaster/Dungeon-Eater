@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
+  m_Name: Chipman
+  m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: -1255387141, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Health>k__BackingField: 35
+  <Proficiency>k__BackingField: 1
+  <Flexbility>k__BackingField: 1
+  ID: Chipman
+  <Diffculty>k__BackingField: 1
+  <AppearLevels>k__BackingField: 000000000100000002000000
+  <FixedAttack>k__BackingField: 12
+  <LightAttackStr>k__BackingField: 1d8
+  <HeavyAttackStr>k__BackingField: 3d6
+  <ConditionedIntendTable>k__BackingField: []
+  <RandomIntendTable>k__BackingField:
+  - rid: 2509721379855400960
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2509721379855400960
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 2509721379855400961
+        P: 0
+    - rid: 2509721379855400961
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 0

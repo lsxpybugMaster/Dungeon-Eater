@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//存储一些战斗体相关的上下文变量
+public class CombatantContext
+{
+    //多重攻击系数
+    public int MultiAtk { get; set; } = 1;
+}
+
 /*
  战斗个体 Model ：存储数据和数据变化
  注意子类初始化数据时初始化生命
@@ -15,6 +22,9 @@ public class Combatant
     public int ProficiencyBuff => GetStatusEffectStacks(StatusEffectType.PROFICIENCY);
     public int Flexbility { get; protected set; }
     public int FlexbilityBuff => GetStatusEffectStacks(StatusEffectType.FLEXBILITY);
+
+    //一些上下文,与子类的base的共同作用
+    public CombatantContext Contexts { get; set; } = new();
 
     //记录状态的堆叠数量
     private Dictionary<StatusEffectType, int> statusEffects = new();

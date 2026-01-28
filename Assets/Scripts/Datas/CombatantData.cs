@@ -14,5 +14,4 @@ public class CombatantData : ScriptableObject
 
     //敏捷项加值
     [field: SerializeField] public int Flexbility { get; private set; }
-
 }
