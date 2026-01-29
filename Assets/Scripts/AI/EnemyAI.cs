@@ -60,7 +60,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        //--------------------- 行为判断阶段 ----------------------
+        //--------------------- 行为判断阶段 ------------------------
         int idx = UnityEngine.Random.Range(0, RandIntendTable.Count);
 
         //---------------------更新ai环境上下文----------------------

@@ -95,11 +95,12 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
         //初始化敌人信息
         //使用专门的Generator
         List<EnemyData> enemyDatas;
-        //这种情况只有直接从该场景开始时才会出现
+        //这种情况只有直接从该场景开始(DEBUG)时才会出现
         if (GameManager.Instance.EnemyPool.EnemiesBuffer.Count == 0)
         {
-            enemyGroupGenerator = new();
-            enemyDatas = enemyGroupGenerator.GetEnemyGroup(Config.Instance.difficultScore);
+            enemyDatas = this.enemyDatas;
+            //enemyGroupGenerator = new();
+            //enemyDatas = enemyGroupGenerator.GetEnemyGroup(Config.Instance.difficultScore);
         }   
         else
         {

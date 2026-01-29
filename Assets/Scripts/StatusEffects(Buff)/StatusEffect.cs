@@ -13,6 +13,8 @@ public enum StatusEffectType
     BLESS, //专注: 祝福术
     DRUNK, //醉酒: +1d10攻击掷骰 -5精通
     POSIONED, //中毒
+
+    MUTIATK, //累积的战斗倍率
 }
 
 /*

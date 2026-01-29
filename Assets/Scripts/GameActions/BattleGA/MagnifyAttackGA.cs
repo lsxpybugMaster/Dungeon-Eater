@@ -10,13 +10,13 @@ public class MagnifyAttackGA : GameAction
 {
     public int damageOnce { get; private set; }
 
-    public CombatantView Attacker { get; private set; }
+    public List<CombatantView> Target { get; private set; }
     public CombatantView Caster { get; private set; }
 
 
-    public MagnifyAttackGA(CombatantView attacker, CombatantView caster, int dmg)
+    public MagnifyAttackGA(List<CombatantView> target, CombatantView caster, int dmg)
     {
-        Attacker = attacker;
+        Target = target;
         Caster = caster;
         damageOnce = dmg;
     }

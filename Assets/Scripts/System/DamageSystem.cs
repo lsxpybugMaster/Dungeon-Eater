@@ -42,6 +42,7 @@ public class DamageSystem : MonoBehaviour
     }
 
 
+    //----------------------------------最终的处理部分-----------------------------------------
     private IEnumerator MissGAPerformer(MissGA ga)
     {
         yield return AttackAnim(ga.Caster, new Vector2(0,2.5f), Config.Instance.attackTime);
@@ -60,6 +61,7 @@ public class DamageSystem : MonoBehaviour
         yield return AttackAnim(ga.Caster, new Vector2(3, 0), Config.Instance.attackTime);
         yield return DealDamage(ga.Targets, ga.Damage);
     }
+    //---------------------------------------------------------------------------------------
 
 
     //处理攻击掷骰(为处理伤害事件的预先反应)

@@ -9,6 +9,7 @@ public enum EnemySkill
     LightHit,
     HeavyHit,
     FixedHit, //必中的,伤害固定的攻击
+    SpecialAtk, //暂定,一些难以处理的攻击
     AddState,
     Defence,
     Heal,

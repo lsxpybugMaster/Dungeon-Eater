@@ -25,6 +25,7 @@ MonoBehaviour:
   <ConditionedIntendTable>k__BackingField: []
   <RandomIntendTable>k__BackingField:
   - rid: 2509721379855400960
+  - rid: 4226095655406534659
   references:
     version: 2
     RefIds:
@@ -36,9 +37,26 @@ MonoBehaviour:
         Condition:
           rid: -2
         Intend:
-          rid: 2509721379855400961
+          rid: 4226095655406534656
         P: 0
-    - rid: 2509721379855400961
-      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+    - rid: 4226095655406534656
+      type: {class: MagniAttackIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 0
+        skill: 3
+        dmgBase: 4
+    - rid: 4226095655406534659
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 4226095655406534660
+        P: 0
+    - rid: 4226095655406534660
+      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 4
+        statusEffectType: 8
+        stackCount: 1
+        targetMode:
+          rid: -2
