@@ -8,17 +8,17 @@ using UnityEngine;
  *  2. 在OnEnable 和 OnDisable 中注册和取消注册
  *  3. 在Effect中包装: 见AddStatusEffectEffect 
  */
-public class StatusEffectsSystem : MonoBehaviour
+public class StatusEffectsSystem : IActionPerformerSystem
 {
-    private void OnEnable()
+    public void Register()
     {
         ActionSystem.AttachPerformer<AddStatusEffectGA>(AddStatusEffectPerformer);
         ActionSystem.AttachPerformer<AddRandomStatusEffectGA>(AddRandomStatusEffectPerformer);
     }
 
-    private void OnDisable()
+    public void UnRegister()
     {
-        ActionSystem.DetachPerformer<AddStatusEffectGA>();   
+        ActionSystem.DetachPerformer<AddStatusEffectGA>();
         ActionSystem.DetachPerformer<AddRandomStatusEffectGA>();
     }
 

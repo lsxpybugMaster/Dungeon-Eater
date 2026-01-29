@@ -6,17 +6,18 @@ using UnityEngine;
 /// <summary>
 /// 与游戏流程有关的相关事件注册
 /// </summary>
-public class GameProgressSystem : MonoBehaviour
+public class GameProgressSystem : IActionPerformerSystem
 {
-    void OnEnable()
+    public void Register()
     {
         ActionSystem.AttachPerformer<PlayerFailGA>(PlayerFail);
     }
 
-    void OnDisable()
+    public void UnRegister()
     {
         ActionSystem.DetachPerformer<PlayerFailGA>();
     }
+
 
     //游戏结束相关准备,首先执行玩家失败的相关逻辑
     //NOTE: 如果后期玩家会死在非战斗场景,需要修改
@@ -32,9 +33,9 @@ public class GameProgressSystem : MonoBehaviour
         yield return tween.WaitForCompletion();
         //对应的UI显示
         UISystem.Instance.ShowFailUI();
-        
-
 
         //锁定逻辑
     }
+
+  
 }

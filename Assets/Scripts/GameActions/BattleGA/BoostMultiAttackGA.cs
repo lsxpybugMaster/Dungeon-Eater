@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete("可以用添加属性效果代替")]
 //增加属性: Context.MultiAtk
 public class BoostMultiAttackGA : GameAction
 {

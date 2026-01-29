@@ -6,18 +6,17 @@ using UnityEngine.Assertions.Must;
 /*
     AttackSystem决定战斗伤害细节 ==> 由DamageSystem掷骰处理 
  */
-public class AttackSystem : MonoBehaviour
+public class AttackSystem : IActionPerformerSystem
 {
-    void OnEnable()
+    public void Register()
     {
         ActionSystem.AttachPerformer<MagnifyAttackGA>(MagnifyAttackPerformer);
     }
 
-    void OnDisable()
+    public void UnRegister()
     {
         ActionSystem.DetachPerformer<MagnifyAttackGA>();
     }
-
 
     private IEnumerator MagnifyAttackPerformer(MagnifyAttackGA ga)
     {

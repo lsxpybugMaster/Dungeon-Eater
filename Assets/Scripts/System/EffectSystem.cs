@@ -5,14 +5,14 @@ using UnityEngine;
 /// <summary>
 /// 管理与Effect有关的Performer注册相关
 /// </summary>
-public class EffectSystem : MonoBehaviour
+public class EffectSystem : IActionPerformerSystem
 {
-    void OnEnable()
+    public void Register()
     {
         ActionSystem.AttachPerformer<PerformEffectGA>(PerformEffectPerformer);
     }
 
-    void OnDisable()
+    public void UnRegister()
     {
         ActionSystem.DetachPerformer<PerformEffectGA>();
     }
@@ -40,4 +40,6 @@ public class EffectSystem : MonoBehaviour
         ActionSystem.Instance.AddReaction(effectAction);
         yield return null;
     }
+
+  
 }

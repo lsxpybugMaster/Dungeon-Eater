@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete("暂时无需")]
 public class OtherPerformSystem : MonoBehaviour
 {
     private void OnEnable()

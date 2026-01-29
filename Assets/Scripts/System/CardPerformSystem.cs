@@ -4,14 +4,14 @@ using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 //统一管理卡牌Performer
-public class CardPerformSystem : MonoBehaviour
+public class CardPerformSystem : IActionPerformerSystem 
 {
-    private void OnEnable()
+    public void Register()
     {
         ActionSystem.AttachPerformer<HealGA>(HealGAPerformer);
     }
 
-    private void OnDisable()
+    public void UnRegister()
     {
         ActionSystem.DetachPerformer<HealGA>();
     }
@@ -31,4 +31,6 @@ public class CardPerformSystem : MonoBehaviour
             view.M.Heal(healGA.Amount);
         }
     }
+
+   
 }
