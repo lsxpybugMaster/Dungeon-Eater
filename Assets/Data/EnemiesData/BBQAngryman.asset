@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
+  m_Name: BBQAngryman
+  m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: -1255387141, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Health>k__BackingField: 35
+  <Proficiency>k__BackingField: 1
+  <Flexbility>k__BackingField: 1
+  ID: BBQAngryman
+  <Diffculty>k__BackingField: 1
+  <AppearLevels>k__BackingField: 000000000100000002000000
+  <FixedAttack>k__BackingField: 12
+  <LightAttackStr>k__BackingField: 1d8
+  <HeavyAttackStr>k__BackingField: 4d6
+  <ConditionedIntendTable>k__BackingField:
+  - rid: 4226095680224755712
+  <RandomIntendTable>k__BackingField:
+  - rid: 4226095680224755714
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4226095680224755712
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: 4226095680224755713
+        Intend:
+          rid: 4226095680224755716
+        P: 0
+    - rid: 4226095680224755713
+      type: {class: AICondition, ns: , asm: Assembly-CSharp}
+      data:
+        cond: 1
+        relation: 4
+        x: 1
+    - rid: 4226095680224755714
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 4226095680224755715
+        P: 0
+    - rid: 4226095680224755715
+      type: {class: ChangeAIContextIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 4
+        contextUpdateNumber: 1
+        contextType: 1
+    - rid: 4226095680224755716
+      type: {class: SequenceEnemyIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 1
+        enemyIntendSeq:
+        - rid: 4226095680224755717
+        - rid: 4226095680224755718
+    - rid: 4226095680224755717
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 1
+    - rid: 4226095680224755718
+      type: {class: ChangeAIContextIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 0
+        contextUpdateNumber: 0
+        contextType: 1

@@ -17,6 +17,7 @@ public class ActionsRegister : MonoBehaviour
         systems = new()
         {
             new AttackSystem(),
+            new NoAttackSystem(),
             new EffectSystem(),
             new StatusEffectsSystem(),
             new CardPerformSystem(),

@@ -4982,9 +4982,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroData: {fileID: 11400000, guid: aba8c53e6792dc2458c464dc64205a6a, type: 2}
   enemyDatas:
-  - {fileID: 11400000, guid: 3680b6e2343d0df4595f6959b7b03e95, type: 2}
-  - {fileID: 11400000, guid: 3680b6e2343d0df4595f6959b7b03e95, type: 2}
-  - {fileID: 11400000, guid: 3680b6e2343d0df4595f6959b7b03e95, type: 2}
+  - {fileID: 11400000, guid: edd4a767a314c1b4897509d49f4f80b6, type: 2}
+  - {fileID: 11400000, guid: edd4a767a314c1b4897509d49f4f80b6, type: 2}
   perkData: {fileID: 11400000, guid: 2ad045eb17163a349894181fbed1d3ad, type: 2}
 --- !u!1 &1567808580
 GameObject:

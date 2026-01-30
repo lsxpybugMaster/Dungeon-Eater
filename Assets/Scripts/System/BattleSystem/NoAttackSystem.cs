@@ -3,21 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class NoAttackSystem : MonoBehaviour
+public class NoAttackSystem : IActionPerformerSystem
 {
-    private void OnEnable()
+    public void Register()
     {
-        ActionSystem.AttachPerformer<BoostMultiAttackGA>(BoostMulyiAttackPerformer);
+        ActionSystem.AttachPerformer<UpdateAlContextGA>(UpdateAIContextPerformer);
     }
 
-    private void OnDisable()
+    public void UnRegister()
     {
-        ActionSystem.DetachPerformer<BoostMultiAttackGA>();
+        ActionSystem.DetachPerformer<UpdateAlContextGA>();
     }
 
-    private IEnumerator BoostMulyiAttackPerformer(BoostMultiAttackGA ga)
+    private IEnumerator UpdateAIContextPerformer(UpdateAlContextGA ga)
     {
-        ga.Caster.M.Contexts.MultiAtk += ga.add;
-        yield return null;
+        //TODO: 如何将这些耦合的动画剔除？
+
+        yield return MotionUtil.Dash(
+            ga.EnemyView.transform,
+            new Vector2(0, 0.8f),
+            Config.Instance.attackTime
+        );
+
+        ga.EnemyView.EnemyAI.aiContext.Set(ga.WhichContext, ga.ChangeNumber);
     }
 }
