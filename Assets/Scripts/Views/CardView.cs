@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// <see cref="Card">
+/// </summary>
 public class CardView : MonoBehaviour
 {
     [SerializeField] private TMP_Text title;
@@ -38,10 +41,19 @@ public class CardView : MonoBehaviour
         Card = card;
         title.text = card.Title;
         description.text = card.Description;
-        mana.text = card.Mana.ToString();
+        mana.text = ShowManaTextByType(card.ManaType, card.Mana); //card.Mana.ToString();
         imageSR.sprite = card.Image;
 
         cardTrigger = GetComponent<BoxCollider2D>();
+    }
+
+    public string ShowManaTextByType(ManaID manaID, int mana)
+    {
+        if (manaID == ManaID.CombatMaster)
+        {
+            return mana.ToString().ColorTo("red"); 
+        }
+        return mana.ToString();
     }
 
     public void EnableCardInteraction()
@@ -144,7 +156,7 @@ public class CardView : MonoBehaviour
             //如果是通过箭头进行卡牌功能触发,则不再使用射线检测而直接从箭头脚本返回目标
             EnemyView target = ManualTargetSystem.Instance.EndTargeting(MouseUtil.GetMousePositionInWorldSpace(-1));
 
-            if(target != null && ManaSystem.Instance.HasEnoughMana(Card.Mana))
+            if(target != null && ManaSystem.Instance.HasEnoughMana(Card.Mana, Card.ManaType))
             {
                 PlayCardGA playCardGA = new(Card, target);
                 ActionSystem.Instance.Perform(playCardGA);
@@ -155,7 +167,7 @@ public class CardView : MonoBehaviour
             //注意必须卡牌在对应作用区使用才会真正作用
             //要使用3D碰撞体!!!!!!
             //同时注意检查资源是否够
-            if (ManaSystem.Instance.HasEnoughMana(Card.Mana)
+            if (ManaSystem.Instance.HasEnoughMana(Card.Mana, Card.ManaType)
             && Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, 10f, dropLayer))
             {
                 //执行卡牌功能,该GA初始化时需额外传入参数,为所要删除的卡牌

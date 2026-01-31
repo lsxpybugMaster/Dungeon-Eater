@@ -14,18 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 1351559378, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <Health>k__BackingField: 1000
-  <Proficiency>k__BackingField: 2
+  <Proficiency>k__BackingField: 4
   <Flexbility>k__BackingField: 0
   <MaxMana>k__BackingField: 4
   <Deck>k__BackingField:
-  - {fileID: 11400000, guid: dcecd90d611553b418d7d5848a859b8d, type: 2}
+  - {fileID: 11400000, guid: 783c5e3f159fd9248b366201f3b64e06, type: 2}
   - {fileID: 11400000, guid: 12c0d5dd4727c164aaed6ebe5fa79da6, type: 2}
   - {fileID: 11400000, guid: cc67c0c693eff9a4bb8b7a1560ff8f06, type: 2}
-  - {fileID: 11400000, guid: cc67c0c693eff9a4bb8b7a1560ff8f06, type: 2}
-  - {fileID: 11400000, guid: d229d2d14025023489529988777d8d1b, type: 2}
-  - {fileID: 11400000, guid: d229d2d14025023489529988777d8d1b, type: 2}
+  - {fileID: 11400000, guid: 1bbc448dbe729834082e6ed5daf46a26, type: 2}
+  - {fileID: 11400000, guid: 1bbc448dbe729834082e6ed5daf46a26, type: 2}
+  - {fileID: 11400000, guid: 783c5e3f159fd9248b366201f3b64e06, type: 2}
   - {fileID: 11400000, guid: f5ca2dd1e05408c4bb1a666f3d604087, type: 2}
   - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
   - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
   - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
   - {fileID: 11400000, guid: a04671924f78240448d451dc628baa63, type: 2}
+  - {fileID: 11400000, guid: 114543198a4dec74d9bbd3d9a0754002, type: 2}
+  - {fileID: 11400000, guid: d4b2be80d56eb8143aa0c9807296e236, type: 2}
+  - {fileID: 11400000, guid: d4b2be80d56eb8143aa0c9807296e236, type: 2}

@@ -21,3 +21,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 10bc7e35f49c74449a00e3e0dc766504, type: 2}
     - {fileID: 11400000, guid: 8e4628ec52e667649b203d1b30df6866, type: 2}
     - {fileID: 11400000, guid: 8e4628ec52e667649b203d1b30df6866, type: 2}
+  - <Enemies>k__BackingField:
+    - {fileID: 11400000, guid: 3680b6e2343d0df4595f6959b7b03e95, type: 2}
+    - {fileID: 11400000, guid: edd4a767a314c1b4897509d49f4f80b6, type: 2}

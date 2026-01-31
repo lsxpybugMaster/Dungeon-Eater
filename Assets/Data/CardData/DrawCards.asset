@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Id>k__BackingField: DrawCards
   <Description>k__BackingField: Draw 2 Cards
+  <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 0
   <Image>k__BackingField: {fileID: 21300000, guid: 128b1274a4e58fc4e8985aafb91a3e14, type: 3}
   <ManualTargetEffect>k__BackingField:

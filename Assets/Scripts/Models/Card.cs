@@ -7,6 +7,9 @@ public enum CardTag
     Status, //状态卡牌
 }
 
+/// <summary>
+/// <see cref="CardView">
+/// </summary>
 public class Card
 {
     /// <summary>
@@ -16,6 +19,7 @@ public class Card
     public string Title => data.name;
     public string Description => data.Description;
     public Sprite Image => data.Image;
+
     public Effect ManualTargetEffect => data.ManualTargetEffect;
     public List<AutoTargetEffect> OtherEffects => data.OtherEffects;
     //燃烧,中毒等卡牌的效果
@@ -28,6 +32,7 @@ public class Card
     // 值型、会在运行时变化 —— 单独存储（深拷贝一份）
     // 需要生成隐藏字段，自动属性
     public int Mana { get; private set;}
+    public ManaID ManaType => data.SpendManaType; 
 
     public readonly CardData data;
 

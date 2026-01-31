@@ -10,35 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
-  m_Name: PommelStrike
+  m_Name: Combat_Ready
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: PommelStrike
-  <Description>k__BackingField: deal 1d4 damage, if meet will give dizzy effect
+  <Id>k__BackingField: Combat_Ready
+  <Description>k__BackingField: change 2 act point to CombantMasterPoint
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 2
-  <Image>k__BackingField: {fileID: 21300108, guid: 09e4c6a7d75923945afe43953ef58ad2, type: 3}
+  <Image>k__BackingField: {fileID: -1688518835, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <ManualTargetEffect>k__BackingField:
-    rid: 2509721291522834436
+    rid: -2
   <OtherEffects>k__BackingField:
   - <TargetMode>k__BackingField:
-      rid: 2509721291522834434
+      rid: 4226095702526918658
     <Effect>k__BackingField:
-      rid: 2509721291522834438
+      rid: 4226095702526918659
   <DiscardEffects>k__BackingField: []
   <CardTags>k__BackingField: 
   <UpdateCardInfo>k__BackingField: []
   references:
     version: 2
     RefIds:
-    - rid: 2509721291522834434
-      type: {class: SameAsManualTM, ns: , asm: Assembly-CSharp}
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4226095702526918658
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 2509721291522834436
-      type: {class: DealRandomDmgEffect, ns: , asm: Assembly-CSharp}
+    - rid: 4226095702526918659
+      type: {class: AddOtherManaEffect, ns: , asm: Assembly-CSharp}
       data:
-        diceString: 1d4
-    - rid: 2509721291522834438
-      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
-      data:
-        statusEffectType: 4
-        stackCount: 1
+        manaID: 0
+        addAmount: 1

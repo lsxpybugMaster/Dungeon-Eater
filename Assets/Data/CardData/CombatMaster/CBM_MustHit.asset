@@ -10,24 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
-  m_Name: Attack_Heavy
+  m_Name: CBM_MustHit
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: Attack_Heavy
-  <Description>k__BackingField: Deal 1d12 damage
-  <SpendManaType>k__BackingField: 999
+  <Id>k__BackingField: CBM_MustHit
+  <Description>k__BackingField: '[Must Hit] deal 12 attack'
+  <SpendManaType>k__BackingField: 0
   <Mana>k__BackingField: 1
-  <Image>k__BackingField: {fileID: 21300000, guid: 182d4995aa60fe1408e7d76d63bf6a21, type: 3}
+  <Image>k__BackingField: {fileID: -1208265138, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <ManualTargetEffect>k__BackingField:
-    rid: 2509721132496322560
+    rid: 4226095702526918660
   <OtherEffects>k__BackingField: []
   <DiscardEffects>k__BackingField: []
   <CardTags>k__BackingField: 
-  <UpdateCardInfo>k__BackingField:
-  - {fileID: 11400000, guid: a21a52a9803c06b45b50cae4de856b86, type: 2}
+  <UpdateCardInfo>k__BackingField: []
   references:
     version: 2
     RefIds:
-    - rid: 2509721132496322560
-      type: {class: DealRandomDmgEffect, ns: , asm: Assembly-CSharp}
+    - rid: 4226095702526918660
+      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        diceString: 1d12
+        damageAmount: 12

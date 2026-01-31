@@ -330,13 +330,22 @@ public class CardSystem : Singleton<CardSystem>
         //处理卡牌Tag
         yield return DealWithCardTag(cardView);
 
-        //减少对应的法力值
-        SpendManaGA spendManaGA = new(playCardGA.Card.Mana);
-        ActionSystem.Instance.AddReaction(spendManaGA);
+        //减少对应的法力值 
+        //TODO: 后期一定要优化这部分逻辑
+        if (cardView.Card.ManaType == ManaID.BasicMana)
+        {
+            SpendManaGA spendManaGA = new(playCardGA.Card.Mana);
+            ActionSystem.Instance.AddReaction(spendManaGA);
+        }
+        else if (cardView.Card.ManaType == ManaID.CombatMaster)
+        {
+            SpendOtherManaGA spendOtherManaGA = new(playCardGA.Card.Mana, cardView.Card.ManaType);
+            ActionSystem.Instance.AddReaction(spendOtherManaGA);
+        }
 
 
-        //当前的临时卡牌上下文
-        EffectContext context = new();
+            //当前的临时卡牌上下文
+            EffectContext context = new();
         //解析该卡牌的手动指示目标Effect
         if (playCardGA.Card.ManualTargetEffect != null)
         {

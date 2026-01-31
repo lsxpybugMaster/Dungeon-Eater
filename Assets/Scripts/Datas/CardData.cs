@@ -17,6 +17,9 @@ public class CardData : ScriptableObject, IHaveKey<string>
     public string GetKey() => Id; //其作为数据库索引
 
     [field: SerializeField] public string Description { get; private set; }
+
+    // SpendManaType 会确定具体消耗什么类型的
+    [field: SerializeField] public ManaID SpendManaType { get; private set; } = ManaID.BasicMana;
     [field: SerializeField] public int Mana { get; private set; }
     [field: SerializeField] public Sprite Image { get; private set; }
     //卡牌功能分解为Effect (使用了第三方库以在编辑器中显示)

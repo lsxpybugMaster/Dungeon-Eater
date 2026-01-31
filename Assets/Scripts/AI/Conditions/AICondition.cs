@@ -20,7 +20,6 @@ public class AICondition : IntendCondition
     {
         AIContext aIContext = enemy.EnemyAI.aiContext;
         int currentValue = aIContext.Get(cond);
-        Debug.Log($"{currentValue} , {x}");
         return Compare[relation](currentValue, x);
     }
 }

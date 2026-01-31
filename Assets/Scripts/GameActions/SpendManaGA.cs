@@ -11,3 +11,16 @@ public class SpendManaGA : GameAction
         Amount = amount;
     }
 }
+
+public class SpendOtherManaGA : GameAction
+{
+    public int Amount { get; set; }
+    public ManaID ManaType { get; set; }
+
+    public SpendOtherManaGA(int amount, ManaID manaType)
+    {
+        Amount = amount;
+        ManaType = manaType;
+    }
+}
+
