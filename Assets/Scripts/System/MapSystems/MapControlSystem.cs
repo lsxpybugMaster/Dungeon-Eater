@@ -5,6 +5,8 @@ using static GameManager;
 
 /// <summary>
 /// 负责初始化地图,以及存储一些地图配置信息(在编辑器中编辑的)
+/// <see cref="MapGenerator"> 对应的地图生成核心逻辑
+/// <see cref="MapState"/> 对应的持久化数据结构
 //DISCUSS: 有必要同时负责模式切换系统吗?
 /// </summary>
 //IMPORTANT: 整个Map的底层

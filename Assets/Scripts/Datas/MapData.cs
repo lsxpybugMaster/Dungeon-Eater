@@ -9,8 +9,9 @@ public class RoomCounts
     public int shopRoomNumbers;
     public int eventRoomNumbers;
     public int restRoomNumbers;
-    public int eliteRoomNumbers;
+    // public int eliteRoomNumbers;
     public int bossRoomNumbers;
+    public int blessRoomNumbers; //奖励房: 获取道具 or 卡牌操作一次
 }
 
 

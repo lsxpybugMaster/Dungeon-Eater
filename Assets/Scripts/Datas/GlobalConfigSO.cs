@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Data/GlobalConfigSO")]
 public class GlobalConfigSO : ScriptableObject
 {
-    [Header("全局信息")]
+    [Header("全局信息(为 0 时代表种子随机)")]
     public int seed; //随机数种子
 
     [Header("战斗数值相关系统")]

@@ -29,6 +29,7 @@ public class MapGenerator
     /// <summary>
     /// 生成基本的随机地图,先以一维数组形式返回
     /// //TODO: 目前地图的形状是固定的,所以生成的部分有随机有预设 
+    /// //OPTIMIZE: 使用了洗牌算法
     /// </summary>
     /// <param name="levelIndex"></param>
     /// <returns></returns>
@@ -38,58 +39,40 @@ public class MapGenerator
 
         string mapInfo = levelConfig.levelInfostr;
 
-        //分析各个房间格子数量
+        // 分析各个房间格子数量
         int totalGrids = mapInfo.Length;
-        int shopGrids = levelConfig.roomCounts.shopRoomNumbers;
-        int restGrids = levelConfig.roomCounts.restRoomNumbers;
-        int bossGrids = levelConfig.roomCounts.bossRoomNumbers;
 
+        // 封装房间格子数量信息
+        RoomCounts cnt = levelConfig.roomCounts;
+        
+        // 格子信息数组
         List<MapGrid> grids = new(totalGrids);
-        //后面生成时判重
-        HashSet<int> used = new();
-
-        //首先做初始化: 默认房间类型,以及匹配方向
+        // 先默认所有格子是Enemy(考虑到该格子最多)
         for (int i = 0; i < totalGrids; i++)
         {
             grids.Add(new MapGrid
             {
                 gridIndex = i,
-                gridType = i % 2 == 0 ? GridType.Enemy : GridType.Boss,
+                gridType = GridType.Enemy,
                 nextDirection = mapInfo[i],
             });
         }
 
-        //IDEA: 继续使用洗牌算法?
-        //后续的生成方法
-        for (int i = 0; i < shopGrids; i++)
-        {
-            int idx;
-            //防止重复
-            do
-            {
-                //使用Map随机流生成随机数
-                idx = rng.Next(0, totalGrids);
-            }
-            while (used.Contains(idx));
-            used.Add(idx);
-            grids[idx].gridType = GridType.Shop;
-        }
+        // 构造索引数组,执行洗牌算法,获取打乱后的索引数组
+        List<int> indices = new(totalGrids);
+        for (int i = 0; i < totalGrids; i++)
+            indices.Add(i);
 
-        for (int i = 0; i < restGrids; i++)
-        {
-            int idx;
-            //防止重复
-            do
-            {
-                //使用Map随机流生成随机数
-                idx = rng.Next(0, totalGrids);
-            }
-            while (used.Contains(idx));
-            used.Add(idx);
-            grids[idx].gridType = GridType.Rest;
-        }
+        Shuffle(indices, rng);
 
-        //仅供测试
+        // 分配房间
+        int cursor = 0; //指向当前分配的房间索引
+        Assign(grids, indices, ref cursor, cnt.shopRoomNumbers,  GridType.Shop);
+        Assign(grids, indices, ref cursor, cnt.restRoomNumbers,  GridType.Rest);
+        //Assign(grids, indices, ref cursor, cnt.blessRoomNumbers, GridType.Event);
+        Assign(grids, indices, ref cursor, cnt.bossRoomNumbers,  GridType.Boss);
+        //auto Assign Eneny Room
+
         for (int i = 0; i < totalGrids; i++)
         {
             if (grids[i].gridType == GridType.Enemy)
@@ -104,5 +87,35 @@ public class MapGenerator
         }
 
         return grids;       
+    }
+
+    /// <summary>
+    /// Fisher–Yates洗牌 (确定性由rng保证)
+    /// 只操作索引序列
+    /// </summary>
+    private static void Shuffle(List<int> list, System.Random rng)
+    {
+        for (int i = list.Count - 1; i > 0; i--)
+        {
+            int j = rng.Next(i + 1);
+            (list[i], list[j]) = (list[j], list[i]);
+        }
+    }
+
+    /// <summary>
+    /// 从洗牌后的索引中分配指定数量的房间
+    /// </summary>
+    private static void Assign(
+        List<MapGrid> grids,
+        List<int> indices,
+        ref int cursor,
+        int count,
+        GridType type)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            int idx = indices[cursor++];
+            grids[idx].gridType = type;
+        }
     }
 }
