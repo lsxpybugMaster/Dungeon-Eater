@@ -1,16 +1,18 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MapViewCreator : MonoBehaviour {
 
     [SerializeField] private MapGridView mapGridPrefab;
-    [SerializeField] private Transform mapGridParent; //Éú³ÉµÄ¸ñ×Ó¹ÒÔØÔÚÄÄÀï
-    //ÕâÁ½¸ö×Ö¶ÎÊÇÎªÁË±ãÓÚÒıÓÃµ¥ÀıMapControlSystemÊôĞÔ
-    private float gridGenerateInterval; //¿ØÖÆµØÍ¼¸ñ×ÓÉú³ÉÖ®¼äµÄ¾àÀë
+    [SerializeField] private Transform mapGridParent; //ç”Ÿæˆçš„æ ¼å­æŒ‚è½½åœ¨å“ªé‡Œ
+    //è¿™ä¸¤ä¸ªå­—æ®µæ˜¯ä¸ºäº†ä¾¿äºå¼•ç”¨å•ä¾‹MapControlSystemå±æ€§
+    private float gridGenerateInterval; //æ§åˆ¶åœ°å›¾æ ¼å­ç”Ÿæˆä¹‹é—´çš„è·ç¦»
     private float girdSize;
 
-    [SerializeField] private Transform mapStartPoint; //µØÍ¼ÆğÊ¼µã
+    [SerializeField] private Transform mapStartPoint; //åœ°å›¾èµ·å§‹ç‚¹
+
+    public List<MapGridView> mapGridViewList { get; set; } = new();
 
     private void Awake()
     {
@@ -22,8 +24,8 @@ public class MapViewCreator : MonoBehaviour {
     
     void Start()
     {
-        /* //DISCUSS: ÈÎºÎ¹©Íâ²¿µ÷ÓÃµÄ³õÊ¼»¯£¨ÀıÈç Setup¡¢Init¡¢LoadData£©ËùÒÀÀµµÄ±äÁ¿£¬¶¼²»ÒªÔÚ Start ³õÊ¼»¯¡£
-          Ó¦¸Ã·ÅÔÚ£º×Ö¶ÎÉùÃ÷Ê± »ò Awake() ÖĞ*/
+        /* //DISCUSS: ä»»ä½•ä¾›å¤–éƒ¨è°ƒç”¨çš„åˆå§‹åŒ–ï¼ˆä¾‹å¦‚ Setupã€Initã€LoadDataï¼‰æ‰€ä¾èµ–çš„å˜é‡ï¼Œéƒ½ä¸è¦åœ¨ Start åˆå§‹åŒ–ã€‚
+          åº”è¯¥æ”¾åœ¨ï¼šå­—æ®µå£°æ˜æ—¶ æˆ– Awake() ä¸­*/
     }
 
     // Update is called once per frame
@@ -40,11 +42,11 @@ public class MapViewCreator : MonoBehaviour {
             case 'D': lastPos.y -= interval; break;
             case 'L': lastPos.x -= interval; break;
             case 'R': lastPos.x += interval; break;
-            default: Debug.LogWarning($"Î´ÖªµÄ·½Ïò: {direction}"); break;
+            default: Debug.LogWarning($"æœªçŸ¥çš„æ–¹å‘: {direction}"); break;
         }
     }
 
-    //NOTE: Ã¿´Î³õÊ¼»¯Ê±¶¼ÒªÉú³ÉÒ»´Î, ÏÖÔÚ»¹Ğè¿ØÖÆ÷»×ÓÉú³ÉÎ»ÖÃ
+    //NOTE: æ¯æ¬¡åˆå§‹åŒ–æ—¶éƒ½è¦ç”Ÿæˆä¸€æ¬¡, ç°åœ¨è¿˜éœ€æ§åˆ¶éª°å­ç”Ÿæˆä½ç½®
     public void CreateMapWithDice(List<MapGrid> gridList, List<MapDice> mapDices)
     {
         Vector3 lastPos = mapStartPoint.position;
@@ -65,13 +67,16 @@ public class MapViewCreator : MonoBehaviour {
             mygo.transform.SetParent(mapGridParent);
             mygo.transform.localScale = Vector3.one * girdSize;
 
-            //Èç¹ûµ±Ç°¸ñ×ÓÓëdiceÖĞÄ³idÒ»ÖÂ,ÄÇÃ´¸ÃÎ»ÖÃ»á±»Ğ´Èëdice¹©ºóĞøÉú³É°ó¶¨
+            // ç°åœ¨éœ€è¦è®°å½•äº†,è¦ä¿®æ”¹
+            mapGridViewList.Add(mygo); 
+
+            //å¦‚æœå½“å‰æ ¼å­ä¸diceä¸­æŸidä¸€è‡´,é‚£ä¹ˆè¯¥ä½ç½®ä¼šè¢«å†™å…¥diceä¾›åç»­ç”Ÿæˆç»‘å®š
             if (diceDict.TryGetValue(i, out MapDice dice))
             {
                 dice.start_pos = lastPos;
             }
               
-            //¸ù¾İµØÍ¼·½¸ñÖĞÊı¾İÅĞ¶ÏÏÂÒ»¸ö·½¸ñÉú³ÉÔÚÄÄÀï
+            //æ ¹æ®åœ°å›¾æ–¹æ ¼ä¸­æ•°æ®åˆ¤æ–­ä¸‹ä¸€ä¸ªæ–¹æ ¼ç”Ÿæˆåœ¨å“ªé‡Œ
             UpdateLastPos(ref lastPos, grid.nextDirection, gridGenerateInterval);
         }
         

@@ -110,6 +110,7 @@ public class GameManager : PersistentSingleton<GameManager>
         //每次进入新的关卡,需要重设敌人池和地图
         //IMPORTANT: 注意传入是从0开始的,配置也要从0开始
         EnemyPool = new(level);
+        MapState?.OnDestroy(); //把上一个Mapstate处理(取消订阅事件,防止内存泄漏)        
         MapState = new MapState(level);
 
         LevelProgress.MaxLevel = MapState.GetMaxLevels();

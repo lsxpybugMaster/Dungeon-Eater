@@ -7,7 +7,7 @@ using UnityEngine;
     保存持久化数据
     MapControlSystem直接读取并修改内容
  */
-public class MapState : BaseState<MapData>
+public class MapState : BaseState<MapData>, IOnDestroy
 {
     //如果需要地图配置文件,在这里加载
 
@@ -30,9 +30,8 @@ public class MapState : BaseState<MapData>
     public List<MapGrid> Map {  get; private set; } //当前的地图
     public List<MapDice> MapDiceList { get; set; } //当前地图对应的骰子,可以被Map编辑
 
-    private List<int> EnemyRoomIdx;  //存储敌人房间编号信息,用于替换为boss房
-
     // 与动态地图相关功能有关: BOSS 房覆盖敌人房
+    private int bossRoomCursor = 0; //下一个BOSS房指向第几个
     private MapSnapshot mapSnapshot;
  
     public MapState(int level)
@@ -46,6 +45,15 @@ public class MapState : BaseState<MapData>
 
         GenerateMap();
         GenerateDiceState();
+
+        //订阅事件
+        //GameManager.Instance.LevelProgress.OnRoundIncreased += ChangeEnemyRoomToBoss;
+    }
+
+    //这是我们在非 Mono 脚本中手动定义的
+    public void OnDestroy()
+    {
+        //GameManager.Instance.LevelProgress.OnRoundIncreased -= ChangeEnemyRoomToBoss;
     }
 
     public int GetMaxLevels()
@@ -87,26 +95,27 @@ public class MapState : BaseState<MapData>
 
     /// <summary>
     /// 特殊动态地图功能: 将地图数据替换
+    /// 加参数的意义是匹配 Action 委托事件, 实际不用
     /// </summary>
-    //public void MutateEnemyRoomToBoss()
-    //{
-    //    if (EnemyGridIndices.Count == 0)
-    //        return;
+    public void ChangeEnemyRoomToBoss(LevelProgress levelProgress = null)
+    {
+        var bossGridList = mapSnapshot.BossGridBuffer;
+        int len = bossGridList.Count;
 
-    //    // 使用 Boss 生成流
-    //    var rng = GameManager.Instance.RogueController.GetStream("MapBoss");
+        if (bossRoomCursor >= len)
+            return;
+        
+        // 提取代替的信息
+        var (index, bossgrid) = bossGridList[bossRoomCursor];
 
-    //    int idx = rng.Next(EnemyGridIndices.Count);
-    //    int gridIndex = EnemyGridIndices[idx];
+        // 状态变更
+        Map[index] = bossgrid;
 
-    //    // 状态变更
-    //    EnemyGridIndices.RemoveAt(idx);
-    //    BossGridIndices.Add(gridIndex);
+        // 更新显示层
+        MapControlSystem.Instance.UpdateMapGrid(index, GridType.Boss);
 
-    //    var grid = Map[gridIndex];
-    //    grid.gridType = GridType.Boss;
+        bossRoomCursor++;
+    }
 
-    //    // 敌人替换（可延迟）
-    //    grid.roomEnemies = enemyGroupGenerator.GetBossGroup();
-    //}
+
 }

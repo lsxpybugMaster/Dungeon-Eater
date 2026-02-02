@@ -1,6 +1,7 @@
 ﻿using System;
 
 //记录当前的关卡流程信息
+//注意LevelProgress早于MapState初始化
 public class LevelProgress : IModelForUI<LevelProgress>
 {
     public int MaxLevel { get; set; }
@@ -21,7 +22,10 @@ public class LevelProgress : IModelForUI<LevelProgress>
         Round = 0;
     }
 
+    //这个专门与 UI 连接, 其他的额外
     public event Action<LevelProgress> OnModelChanged;
+
+    public event Action<LevelProgress> OnRoundIncreased;
 
     //判断是否最后一大关也通关,由此判断胜利条件
     public bool IsFinalLevel()
@@ -30,6 +34,9 @@ public class LevelProgress : IModelForUI<LevelProgress>
         return Level == MaxLevel - 1;
     }
 
+    /// <summary>
+    /// 在这里分发level增加的信息
+    /// </summary>
     public void IncreaseLevel()
     {
         Level++;
@@ -38,10 +45,14 @@ public class LevelProgress : IModelForUI<LevelProgress>
         // OnModelChanged.Invoke(this);
     }
 
+    /// <summary>
+    /// 在这里分发round增加的信息
+    /// </summary>
     public void IncreaseRound()
     {
         Round++;
         OnModelChanged.Invoke(this);
+        OnRoundIncreased?.Invoke(this);
     }
     
 }

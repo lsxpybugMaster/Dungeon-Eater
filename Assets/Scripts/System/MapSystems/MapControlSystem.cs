@@ -82,6 +82,11 @@ public class MapControlSystem : Singleton<MapControlSystem>, IRequireGameManager
         SetupOtherLogic();
     }
 
+    public void UpdateMapGrid(int index, GridType type)
+    {
+        mapViewcreator.mapGridViewList[index].UpdateView(type);
+    }
+
     private void SetupOtherLogic()
     {
         levelProgressUI.gameObject.SetActive(true);
