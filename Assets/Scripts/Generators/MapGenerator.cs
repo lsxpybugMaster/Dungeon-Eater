@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 我们需要动态地图,然而 MapGenerator 是一次性的,所以需要返回相关数据给state供其后期逻辑
+/// </summary>
+public class MapSnapshot
+{
+    public List<MapGrid> Grids; //最基本的地图
+
+    //tuple含义 (Boss覆盖对应的id, 具体的id信息)
+    public List<(int, MapGrid)> BossGridBuffer; //预计算好的Boss信息,与enemy按位置对应
+}
+
 /*
     随机地图生成器,提供接口进行随机数据生成
     数据流向:    
@@ -30,11 +41,16 @@ public class MapGenerator
     /// 生成基本的随机地图,先以一维数组形式返回
     /// //TODO: 目前地图的形状是固定的,所以生成的部分有随机有预设 
     /// //OPTIMIZE: 使用了洗牌算法
+    /// //NOTE: 这个函数产生了静态的地图后,后续修改逻辑需要在动态的MapState中完成
     /// </summary>
-    /// <param name="levelIndex"></param>
+    /// <param name="levelIndex">关卡索引,用于从数据中读取</param>
+    /// <param name="enemyRoomIdx">额外返回的敌人房位置索引,用于敌人房覆盖功能</param>
     /// <returns></returns>
-    public List<MapGrid> GenerateLevel(int levelIndex)
+    public MapSnapshot GenerateLevel(int levelIndex)
     {
+        //存储的重要信息,在该类销毁时返回给上层的 MapState
+        MapSnapshot mapSnapshot = new MapSnapshot();
+
         var levelConfig = baseData.levels[levelIndex];
 
         string mapInfo = levelConfig.levelInfostr;
@@ -69,24 +85,42 @@ public class MapGenerator
         int cursor = 0; //指向当前分配的房间索引
         Assign(grids, indices, ref cursor, cnt.shopRoomNumbers,  GridType.Shop);
         Assign(grids, indices, ref cursor, cnt.restRoomNumbers,  GridType.Rest);
-        //Assign(grids, indices, ref cursor, cnt.blessRoomNumbers, GridType.Event);
-        Assign(grids, indices, ref cursor, cnt.bossRoomNumbers,  GridType.Boss);
+        // Assign(grids, indices, ref cursor, cnt.blessRoomNumbers, GridType.Event);
+        // Assign(grids, indices, ref cursor, cnt.bossRoomNumbers,  GridType.Boss);
         //auto Assign Eneny Room
 
+        // 给战斗房间生成对应敌人
+        List<(int, MapGrid)> bossGridList = new();
         for (int i = 0; i < totalGrids; i++)
         {
-            if (grids[i].gridType == GridType.Enemy)
+            if (grids[i].gridType != GridType.Enemy)
+                continue;
+            
+            grids[i].roomEnemies = enemyGroupGenerator.GetEnemyGroup(Config.Instance.difficultScore);
+            
+            // 同时生成对应的boss代替信息
+            var bossGrid = new MapGrid
             {
-                grids[i].roomEnemies = enemyGroupGenerator.GetEnemyGroup(Config.Instance.difficultScore);
-            }
-            else if (grids[i].gridType == GridType.Boss)
-            {
-                //非Enemy级别敌人无需组装
-                grids[i].roomEnemies = enemyGroupGenerator.GetBossGroup();
-            }
+                gridIndex = i,
+                gridType = GridType.Boss,
+                nextDirection = grids[i].nextDirection, // 需要拷贝当前敌人信息
+                roomEnemies = enemyGroupGenerator.GetBossGroup()
+            };
+
+            bossGridList.Add((i, bossGrid));
+
+            // 现在敌人房不再直接生成而是随后替换
+            //else if (grids[i].gridType == GridType.Boss)
+            //{
+            //    //非Enemy级别敌人无需组装
+            //    grids[i].roomEnemies = enemyGroupGenerator.GetBossGroup();
+            //}
         }
 
-        return grids;       
+        mapSnapshot.Grids = grids;  
+        mapSnapshot.BossGridBuffer = bossGridList;
+
+        return mapSnapshot;       
     }
 
     /// <summary>

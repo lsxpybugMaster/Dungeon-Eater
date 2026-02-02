@@ -18,7 +18,6 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
 
     [SerializeField] private PerkData perkData;
 
-    private EnemyGroupGenerator enemyGroupGenerator;
 
     private void OnEnable()
     {
@@ -99,8 +98,6 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
         if (GameManager.Instance.EnemyPool.EnemiesBuffer.Count == 0)
         {
             enemyDatas = this.enemyDatas;
-            //enemyGroupGenerator = new();
-            //enemyDatas = enemyGroupGenerator.GetEnemyGroup(Config.Instance.difficultScore);
         }   
         else
         {

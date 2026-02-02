@@ -14,13 +14,12 @@ public class MapGridView : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         sr.color = RoomDataBase.GetRoomData(type).RoomColor;
+    }
 
-        //if (type == GridType.Enemy)
-        //    sr.color = Color.red;
-        //else if (type == GridType.Rest)
-        //    sr.color = Color.green;
-        //else
-        //    sr.color = Color.yellow;
+    //动态地图时需要
+    public void UpdateView(GridType type)
+    {
+        sr.color = RoomDataBase.GetRoomData(type).RoomColor;
     }
 
     public void SetIndex(int index)

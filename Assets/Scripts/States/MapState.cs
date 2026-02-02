@@ -24,12 +24,17 @@ public class MapState : BaseState<MapData>
     /// </summary>
     public int mapDices { get; private set; }
 
+
+    //------------------------持久化数据---------------------------
     //IMPORTANT: 我们的持久化地图就在里面,存储的都是Model(MVC=>M)
     public List<MapGrid> Map {  get; private set; } //当前的地图
     public List<MapDice> MapDiceList { get; set; } //当前地图对应的骰子,可以被Map编辑
+
+    private List<int> EnemyRoomIdx;  //存储敌人房间编号信息,用于替换为boss房
+
+    // 与动态地图相关功能有关: BOSS 房覆盖敌人房
+    private MapSnapshot mapSnapshot;
  
-    //------------------------持久化数据---------------------------
-    //NOTE: 
     public MapState(int level)
     {
         //自己去获取数据文件,不再由GameManager管理
@@ -57,7 +62,8 @@ public class MapState : BaseState<MapData>
     private void GenerateMap()
     {
         var generator = new MapGenerator(BaseData);
-        Map = generator.GenerateLevel(currentLevel);
+        mapSnapshot = generator.GenerateLevel(currentLevel);
+        Map = mapSnapshot.Grids;
     }
 
 
@@ -78,4 +84,29 @@ public class MapState : BaseState<MapData>
             MapDiceList.Add(dice);
         }
     }
+
+    /// <summary>
+    /// 特殊动态地图功能: 将地图数据替换
+    /// </summary>
+    //public void MutateEnemyRoomToBoss()
+    //{
+    //    if (EnemyGridIndices.Count == 0)
+    //        return;
+
+    //    // 使用 Boss 生成流
+    //    var rng = GameManager.Instance.RogueController.GetStream("MapBoss");
+
+    //    int idx = rng.Next(EnemyGridIndices.Count);
+    //    int gridIndex = EnemyGridIndices[idx];
+
+    //    // 状态变更
+    //    EnemyGridIndices.RemoveAt(idx);
+    //    BossGridIndices.Add(gridIndex);
+
+    //    var grid = Map[gridIndex];
+    //    grid.gridType = GridType.Boss;
+
+    //    // 敌人替换（可延迟）
+    //    grid.roomEnemies = enemyGroupGenerator.GetBossGroup();
+    //}
 }
