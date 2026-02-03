@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static GameManager;
 
 /// <summary>
 /// 负责初始化地图,以及存储一些地图配置信息(在编辑器中编辑的)

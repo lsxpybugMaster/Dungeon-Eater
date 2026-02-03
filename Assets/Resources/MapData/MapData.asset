@@ -37,9 +37,9 @@ MonoBehaviour:
         levelSetCode: U2R6D5L6U3
         levelInfostr: UURRRRRRDDDDDLLLLLLUUU
         roomCounts:
-          shopRoomNumbers: 3
+          shopRoomNumbers: 6
           eventRoomNumbers: 0
-          restRoomNumbers: 6
+          restRoomNumbers: 8
           bossRoomNumbers: 2
           blessRoomNumbers: 0
         mapDices: 4

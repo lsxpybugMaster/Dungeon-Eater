@@ -8,6 +8,10 @@ public static class RoomUIEvents
 
 public class RoomUIManager : MonoBehaviour
 {
+    //先这样统一管理UI, 项目小可以接受
+    [SerializeField] private RestUI restUI;
+    [SerializeField] private ShopUI shopUI;
+    private RoomUI curUI;
 
     private void OnEnable()
     {
@@ -27,16 +31,17 @@ public class RoomUIManager : MonoBehaviour
         switch (state)
         {
             case GameState.Resting:
-                UIManager.Instance.Show<RestUI>();
+                restUI.Show();
+                curUI = restUI;
                 break;
 
             case GameState.Shopping:
-                UIManager.Instance.Show<ShopUI>();
+                shopUI.Show();
+                curUI = shopUI;
                 break;
 
             default:
-                UIManager.Instance.Hide<RestUI>();
-                UIManager.Instance.Hide<ShopUI>();
+                curUI.Hide();                
                 break;
         }
     }

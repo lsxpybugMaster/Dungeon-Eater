@@ -47,13 +47,13 @@ public class MapState : BaseState<MapData>, IOnDestroy
         GenerateDiceState();
 
         //订阅事件
-        //GameManager.Instance.LevelProgress.OnRoundIncreased += ChangeEnemyRoomToBoss;
+        GameManager.Instance.LevelProgress.OnRoundIncreased += ChangeEnemyRoomToBoss;
     }
 
     //这是我们在非 Mono 脚本中手动定义的
     public void OnDestroy()
     {
-        //GameManager.Instance.LevelProgress.OnRoundIncreased -= ChangeEnemyRoomToBoss;
+        GameManager.Instance.LevelProgress.OnRoundIncreased -= ChangeEnemyRoomToBoss;
     }
 
     public int GetMaxLevels()

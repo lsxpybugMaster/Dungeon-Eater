@@ -87,7 +87,7 @@ public class MapGenerator
         Assign(grids, indices, ref cursor, cnt.restRoomNumbers,  GridType.Rest);
         // Assign(grids, indices, ref cursor, cnt.blessRoomNumbers, GridType.Event);
         // Assign(grids, indices, ref cursor, cnt.bossRoomNumbers,  GridType.Boss);
-        //auto Assign Eneny Room
+        // auto Assign Eneny Room
 
         // 给战斗房间生成对应敌人
         List<(int, MapGrid)> bossGridList = new();
