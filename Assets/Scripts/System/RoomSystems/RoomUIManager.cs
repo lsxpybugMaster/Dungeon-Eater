@@ -41,7 +41,7 @@ public class RoomUIManager : MonoBehaviour
                 break;
 
             default:
-                curUI.Hide();                
+                curUI?.Hide(); //注意防止curUI空指针                
                 break;
         }
     }

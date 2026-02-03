@@ -3,10 +3,9 @@ using System;
 
 public enum UILayer
 {
-    Global,
-    Page,
-    Popup,
-    Overlay
+    DynamicUI, //最顶层
+    RoomUI,
+    MapUI, //最底层
 }
 
 public abstract class BaseUI : MonoBehaviour
@@ -15,20 +14,21 @@ public abstract class BaseUI : MonoBehaviour
     public abstract UILayer Layer { get; }
 
     /// <summary>
-    /// 注入依赖（子类实现）
+    /// 子类实现额外的初始化功能
     /// </summary>
-    protected virtual void Inject() { }
+    protected virtual void OnShow() { }
+    protected virtual void OnHide() { }
+
 
     public void Show(object param = null)
     {
         if (IsVisible) return;
 
-        Inject();
-
         IsVisible = true;
         gameObject.SetActive(true);
 
-        OnShow(param);
+        OnShow();
+
         PlayEnterAnimation();
     }
 
@@ -45,8 +45,6 @@ public abstract class BaseUI : MonoBehaviour
         });
     }
 
-    protected virtual void OnShow(object param) { }
-    protected virtual void OnHide() { }
 
     protected virtual void PlayEnterAnimation() { }
     protected virtual void PlayExitAnimation(Action onComplete)
