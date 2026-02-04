@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TestSystem : MonoBehaviour
 {
+
     private void Start()
     {
         
@@ -11,6 +12,10 @@ public class TestSystem : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            GameManager.Instance.HeroState.GainCoins(5);
+        }
     }
 }
 //TODO:

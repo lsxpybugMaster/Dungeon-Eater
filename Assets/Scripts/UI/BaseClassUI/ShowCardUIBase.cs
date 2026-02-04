@@ -9,7 +9,7 @@ public class ShowCardUIBase : MonoBehaviour
 {
     //复用事件注册
     public event Action OnCardUIClicked;
-
+    
 
     //复用跟动画相关的代码
 
@@ -19,11 +19,19 @@ public class ShowCardUIBase : MonoBehaviour
     [SerializeField] protected CardUI cardUIPrefab;
 
 
+    //限制使用的次数(有些子类不需要),如只允许1次卡牌升级的功能
+    protected int AvailableTimes = 1;
+    public void Setup()
+    {
+        AvailableTimes = 1;
+    }
+
+
     protected void Awake()
     {
         originCardScale = cardUIPrefab.transform.localScale;
     }
-
+    
 
     //建立卡牌UI点击与调用的联系
     public void RegistCardUI(CardUI cardUI)

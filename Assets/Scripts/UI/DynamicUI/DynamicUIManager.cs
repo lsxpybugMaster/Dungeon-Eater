@@ -8,11 +8,11 @@ using UnityEngine;
 /// </summary>
 public class DynamicUIManager : Singleton<DynamicUIManager>
 {
-    [SerializeReference] private UpdateCardMenu UpdateCardMenu; //卡牌升级选择菜单
-    [SerializeReference] private DeleteCardUI DeleteCardMenu;
+    [SerializeReference] private UpdateCardMenu UpgradeCardMenu; //卡牌升级选择菜单
+    [SerializeReference] private UpdateCardMenu DeleteCardMenu;
 
-    public UpdateCardMenu updateCardMenu => UpdateCardMenu;
-    public DeleteCardUI deleteCardMenu => DeleteCardMenu;
+    public UpdateCardMenu updateCardMenu => UpgradeCardMenu;
+    public UpdateCardMenu deleteCardMenu => DeleteCardMenu;
 
     void Start()
     {

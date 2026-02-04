@@ -90,6 +90,11 @@ public class UpdateCardUI : ShowCardUIBase
     /// <param name="i"></param>
     public void UpdateCard(int i)
     {
+        if (AvailableTimes <= 0)
+            return;
+
+        AvailableTimes--;
+
         Card origin = choosenCardUI.cardData;
         Card target = updateCardUIList[i].cardData;
 

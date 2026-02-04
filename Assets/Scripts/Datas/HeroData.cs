@@ -11,6 +11,8 @@ public class HeroData : CombatantData
     //[field: SerializeField] public Sprite Image {  get; private set; }
     //[field: SerializeField] public int Health { get; private set; }
 
+    [field: SerializeField] public int initialCoins {  get; private set; }
+
     [field: SerializeField] public int MaxMana { get; private set; }
 
     //给每个英雄其自己的卡组

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -16,8 +17,24 @@ public class HeroState : BaseState<HeroData>
     public int CurrentHealth { get; private set; }
     public int Proficiency { get; private set; }
     public int Flexbility { get; private set; }
-    public int MaxMana { get; private set; }    
+    public int MaxMana { get; private set; }
 
+#region 金币数值系统
+    public int Coins { get; private set; }
+    public event Action<int> OnCoinChange;
+    public bool CheckCoinsEnough(int amount) => Coins >= amount;
+    public void SpendCoins(int amount)
+    {
+        Coins -= amount;   
+        OnCoinChange?.Invoke(Coins);
+    }
+
+    public void GainCoins(int amount)
+    {
+        Coins += amount;
+        OnCoinChange?.Invoke(Coins);
+    }
+#endregion
 
     /// <summary>
     /// 玩家局外卡组信息在此
@@ -28,7 +45,6 @@ public class HeroState : BaseState<HeroData>
     public Sprite HeroSprite => BaseData.Image;
 
     public int DeckSize => Deck.Count;
-
 
     //仅初始化一次初始数据
     public HeroState()
@@ -44,6 +60,7 @@ public class HeroState : BaseState<HeroData>
         Proficiency = BaseData.Proficiency;
         Flexbility = BaseData.Flexbility;
         MaxMana = BaseData.MaxMana;
+        Coins = BaseData.initialCoins;
 
         //别忘记初始化!
         Deck = new List<Card>();
@@ -72,7 +89,6 @@ public class HeroState : BaseState<HeroData>
         CurrentHealth = currentHealth;
     }
 
-
     /// <summary>
     /// 向牌组添加卡牌
     /// </summary>
@@ -95,5 +111,4 @@ public class HeroState : BaseState<HeroData>
         }
         else Debug.LogError("未发现应该删除的卡牌");
     }
-
 }

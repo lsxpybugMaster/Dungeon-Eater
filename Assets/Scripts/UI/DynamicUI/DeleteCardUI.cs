@@ -45,6 +45,11 @@ public class DeleteCardUI : ShowCardUIBase
 
     private void Delete()
     {
+        if (AvailableTimes <= 0)
+            return;
+
+        AvailableTimes--;
+
         deleteCardbtn.interactable = false;
         DeleteChoosenCard(choosenCardUI.cardData);
         HideCardUIEffect(choosenCardUI.transform);
