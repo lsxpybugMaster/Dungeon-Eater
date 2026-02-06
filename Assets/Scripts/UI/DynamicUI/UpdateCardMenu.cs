@@ -11,7 +11,7 @@ public class UpdateCardMenu : AnimatedUI
 
     // 由两个子部分构成: UI显示部分 + 卡牌操作显示部分
 
-    [SerializeField] private ShowDeckUI showDeckUI;      //展示牌组信息UI
+    [SerializeField] private ShowCardViewListUI showDeckUI;      //展示牌组信息UI
     [SerializeField] private ShowCardUIBase showCardUI;//展示卡牌选择结果UI(含逻辑)
     [SerializeField] private Button backAndHideBtn;       
 

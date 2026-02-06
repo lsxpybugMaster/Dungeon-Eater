@@ -5645,6 +5645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heroHpTMP: {fileID: 1106747946}
   deckSizeTMP: {fileID: 0}
+  coinTMP: {fileID: 0}
   debugTMP: {fileID: 0}
   showDeckBtn: {fileID: 0}
 --- !u!114 &1726526959

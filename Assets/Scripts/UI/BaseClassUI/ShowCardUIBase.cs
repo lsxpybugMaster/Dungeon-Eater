@@ -3,7 +3,8 @@ using System;
 using UnityEngine;
 
 /// <summary>
-/// 一些需要展示卡牌(含动画)的基类,用于代码复用
+/// 与卡牌选中事件的绑定及效果展示有关
+/// 该类用于展示卡牌删除/升级时的事件绑定及效果
 /// </summary>
 public class ShowCardUIBase : MonoBehaviour
 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +20,8 @@ public class CardUI : MonoBehaviour
 
     private Color originColor;
     private Image cardViewImage;
+    private Vector3 oriScale;
+
     //必须保留原来Card的引用,以保证删除
     public Card cardData { get; set; }
 
@@ -44,6 +47,8 @@ public class CardUI : MonoBehaviour
             uiRayCastArea.OnHoverExit += HandleHoverExit;
             uiRayCastArea.OnClick += HandleClick;
         }
+
+        oriScale = transform.localScale;
     }
 
     //取消该卡牌的交互功能
@@ -54,12 +59,14 @@ public class CardUI : MonoBehaviour
         uiRayCastArea.OnClick -= HandleClick;
     }
 
+
     //将作为一组CardUI中的一个,比正常的SetUp复杂些
     public void SetupForGroup(Card card, int idx)
     {
         Setup(card);
         this.idx = idx; 
     }
+
 
     public void Setup(Card card)
     {
@@ -75,8 +82,7 @@ public class CardUI : MonoBehaviour
 
     private void HandleHoverEnter()
     {
-        cardViewImage.color = hoverColor;
-        image.color = hoverColor;
+        MouseEnterEffect();
     }
 
     private void HandleClick()
@@ -87,9 +93,24 @@ public class CardUI : MonoBehaviour
 
     private void HandleHoverExit()
     {
-        cardViewImage.color = originColor;
-        image.color = originColor;
+        MouseExitEffect();
     }
 
-    
+    public void MouseEnterEffect()
+    {
+        cardViewImage.color = hoverColor;
+        image.color = hoverColor;
+
+        transform.DOScale(oriScale * 1.05f, 0.15f)
+                 .SetEase(Ease.OutBack);
+    }
+
+    public void MouseExitEffect()
+    {
+        cardViewImage.color = originColor;
+        image.color = originColor;
+
+        transform.DOScale(oriScale, 0.15f)
+                 .SetEase(Ease.OutQuad);
+    }
 }
