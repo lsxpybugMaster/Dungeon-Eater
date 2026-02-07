@@ -4,7 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// 与卡牌选中事件的绑定及效果展示有关
-/// 该类用于展示卡牌删除/升级时的事件绑定及效果
+/// 该类用于展示卡牌删除/升级时/卡牌多选1的事件绑定及效果
 /// </summary>
 public class ShowCardUIBase : MonoBehaviour
 {

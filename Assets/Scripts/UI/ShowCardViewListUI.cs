@@ -8,7 +8,14 @@ public class ShowCardViewListUI : MonoBehaviour
     [SerializeField] private GameObject cardUIPrefab;
     [SerializeField] private GameObject cardUIRoot; //UI放置位置
 
+    //这两个都能够处理卡牌选中后结果, ShowCardUIBase子类的功能更多 
+    //TODO: 能否分解showCardUIBase?
     [SerializeField] private ShowCardUIBase showCardUI;
+    //当卡牌生成时, 向对应的 Model 注册
+    public CardUISelectController CardSelectedController { get; set; }
+
+    //现在还需保存所有CardUI; 因为ShopUI要统一管理
+    public List<CardUI> cardUIs { get; set; } = new();
 
     private void OnEnable()
     {
@@ -36,6 +43,7 @@ public class ShowCardViewListUI : MonoBehaviour
     public void Show(List<Card> cardPile, bool isGroup)
     {
         //删除已有的预制体
+        cardUIs.Clear();
         for (int i = cardUIRoot.transform.childCount - 1; i >= 0; i--)
         {
             Destroy(cardUIRoot.transform.GetChild(i).gameObject);
@@ -63,11 +71,15 @@ public class ShowCardViewListUI : MonoBehaviour
         else
             cardUIInst.Setup(card);
 
-        //绑定其至显示UI
-        //商店房的绑定UI
+        //加入列表中
+        cardUIs.Add(cardUIInst);
 
+        //绑定其至显示UI
+        //TODO: 这里是否能够统一?
         //卡牌升级/删除的绑定UI
         showCardUI?.RegistCardUI(cardUIInst);
+        //商店系统绑定的UI
+        CardSelectedController?.RegistCardUI(cardUIInst);
     }
 
 

@@ -20,7 +20,7 @@ public class CardUI : MonoBehaviour
 
     private Color originColor;
     private Image cardViewImage;
-    private Vector3 oriScale;
+    public Vector3 oriScale {get; set;}
 
     //必须保留原来Card的引用,以保证删除
     public Card cardData { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -30,5 +31,14 @@ public static class AnimStatic
         yield return JumpAnim(view);
     }
 
+    /// <summary>
+    /// 缩放卡牌大小
+    /// </summary>
+    public static void CardScaleAnim(CardUI card, Vector3 toScale)
+    {
+        card.transform.DOScale(toScale, Config.Instance.showCardTime)
+            .SetEase(Ease.OutCubic)
+            .SetLink(card.gameObject, LinkBehaviour.KillOnDestroy); //保证不会出现原对象删除导致进入SafeMode
+    }
 
 }

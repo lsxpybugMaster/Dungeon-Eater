@@ -18,14 +18,17 @@ public class ShopItem
 
 
 //商店 UIView 对应的 Model
-public class ShopModel : IamUIModel
+public class ShopModel
 {
+    private HeroState heroState;
+
     public List<ShopItem> Items { get; } = new();
     private int shopCardsCount; //商店房展示多少商品
 
     public ShopModel(int shopCount) 
     {
         shopCardsCount = shopCount;
+        heroState = GameManager.Instance.HeroState;
         GenerateCards();
     }
 
@@ -38,5 +41,21 @@ public class ShopModel : IamUIModel
             ShopItem item = new ShopItem(d, 10);
             Items.Add(item);
         }
+    }
+
+    public bool TryBuyCard(int id)
+    {
+        ShopItem buyItem = Items[id];
+        int price = buyItem.Price;
+        //钱不够直接返回
+        if (!heroState.CheckCoinsEnough(price))
+            return false;
+              
+        //钱够了则更新信息
+        //更新商品信息
+        buyItem.IsSold = true;
+        heroState.SpendCoins(price);
+        
+        return true;
     }
 }
