@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Id>k__BackingField: Cursed
   <Description>k__BackingField: Cursed, when discard, get 10d4 damage
+  <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 813061457, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <ManualTargetEffect>k__BackingField:
@@ -26,6 +27,7 @@ MonoBehaviour:
       rid: 4226095564354486273
   <CardTags>k__BackingField: 01000000
   <UpdateCardInfo>k__BackingField: []
+  <CardPrice>k__BackingField: 15
   references:
     version: 2
     RefIds:

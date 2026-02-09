@@ -38,7 +38,7 @@ public class ShopModel
         for (int i = 0; i < shopCardsCount; i++)
         {
             CardData d = CardDatabase.GetRandomCard();
-            ShopItem item = new ShopItem(d, 10);
+            ShopItem item = new ShopItem(d, d.CardPrice);
             Items.Add(item);
         }
     }

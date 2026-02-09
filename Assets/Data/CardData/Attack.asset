@@ -25,6 +25,7 @@ MonoBehaviour:
   <UpdateCardInfo>k__BackingField:
   - {fileID: 11400000, guid: 6777f8e8b5c9d1645a84fad8945c45ed, type: 2}
   - {fileID: 11400000, guid: afd1747a59c9f00428516a5a0ce17a0e, type: 2}
+  <CardPrice>k__BackingField: 4
   references:
     version: 2
     RefIds:

@@ -23,6 +23,7 @@ MonoBehaviour:
   <DiscardEffects>k__BackingField: []
   <CardTags>k__BackingField: 
   <UpdateCardInfo>k__BackingField: []
+  <CardPrice>k__BackingField: 20
   references:
     version: 2
     RefIds:

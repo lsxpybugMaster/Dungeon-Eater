@@ -26,8 +26,20 @@ public class ShopUI : RoomUI
     {
         base.OnShow();
         showShopCardUI.Show(GetCardDataList(shopModel), isGroup : true);
+        ShowCardPrice();
     }
 
+    //显示卡牌的价格
+    private void ShowCardPrice()
+    {
+        List<CardUI> cardUIs = showShopCardUI.cardUIs;
+        List<ShopItem> shopItems = shopModel.Items;
+        for (int i = 0; i < cardUIs.Count; i++)
+        {
+            PriceUI priceUI = cardUIs[i].gameObject.GetComponent<PriceUI>();
+            priceUI.Init(shopItems[i].Price);
+        }
+    }
 
     //UI将逻辑交付给 Model 处理,自己只做卡牌 View 的对应修改
     private void BuyCard(Card card, int id)

@@ -37,6 +37,8 @@ public class CardData : ScriptableObject, IHaveKey<string>
     //存储卡牌升级后的效果
     [field: SerializeField] public List<CardData> UpdateCardInfo { get; private set; }
 
+    //卡牌价格: 这个价格是底价, 之后会在 ShopModel 中计算真正的价格并保存在 ShopItem 中 
+    [field: SerializeField] public int CardPrice { get; private set; } = 10;
 
 #if UNITY_EDITOR
     // Unity 的编辑器回调方法

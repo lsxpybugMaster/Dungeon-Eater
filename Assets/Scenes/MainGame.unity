@@ -7284,7 +7284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0018db3594611f47aef2f96b7c30c6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardUIPrefab: {fileID: 1010246527308292751, guid: 6c2babac23ebf51409905ecf6a51fc07, type: 3}
+  cardUIPrefab: {fileID: 7605792052535064749, guid: 6f9124029a8e0864992f9738861e55c7, type: 3}
   cardUIRoot: {fileID: 689925403}
   showCardUI: {fileID: 0}
 --- !u!1 &1743781238

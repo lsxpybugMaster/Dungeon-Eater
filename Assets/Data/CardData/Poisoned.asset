@@ -27,6 +27,7 @@ MonoBehaviour:
       rid: 4226095612203892736
   <CardTags>k__BackingField: 0000000001000000
   <UpdateCardInfo>k__BackingField: []
+  <CardPrice>k__BackingField: 10
   references:
     version: 2
     RefIds:
