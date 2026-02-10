@@ -85,7 +85,7 @@ public class MapGenerator
         int cursor = 0; //指向当前分配的房间索引
         Assign(grids, indices, ref cursor, cnt.shopRoomNumbers,  GridType.Shop);
         Assign(grids, indices, ref cursor, cnt.restRoomNumbers,  GridType.Rest);
-        // Assign(grids, indices, ref cursor, cnt.blessRoomNumbers, GridType.Event);
+        Assign(grids, indices, ref cursor, cnt.eventRoomNumbers, GridType.Event);
         // Assign(grids, indices, ref cursor, cnt.bossRoomNumbers,  GridType.Boss);
         // auto Assign Eneny Room
 

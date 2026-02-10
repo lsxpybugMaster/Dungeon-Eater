@@ -13,7 +13,8 @@ public enum GameState
     Battle,         //战斗
     BattleVictory,  //胜利结算 ==> 禁用玩家战斗
     Shopping,       //进入商店界面 ==> 禁用地图交互
-    Resting,
+    Resting,        //进入休息界面 ==> 禁用地图交互
+    InEvent,        //进入事件界面 ==> 禁用地图交互
     Fail, //失败,注意此时要限制许多逻辑!!
     Win,
 }
@@ -136,9 +137,7 @@ public class GameManager : PersistentSingleton<GameManager>
     /// <param name="gameState"></param>
     public void ChangeGameState(GameState gameState)
     {
-        Debug.Log("Change game state to" +  gameState.ToString());
         GameState = gameState;
-
         //调用事件激活相关的监听者
         OnGameStateChanged?.Invoke(gameState);
     }

@@ -11,7 +11,7 @@ public class ManaSystem : Singleton<ManaSystem>
     private int currentMana;
 
     // 特殊行动点: 战斗大师点数: 只会获取无法补充
-    private int maxCombatMasterPoint = 5; 
+    // private int maxCombatMasterPoint = 5; 
     private int currentCombatMasterPoint = 0;
 
     // 很后期的代码 : 法师的法术位 (可能无法实现)

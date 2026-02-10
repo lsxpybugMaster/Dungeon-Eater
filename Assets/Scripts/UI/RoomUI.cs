@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 
+/// <summary>
+/// RoomUI 由 <see cref="RoomUIManager"/> 管理
+/// </summary>
 public class RoomUI : AnimatedUI
 {
     public Button btn;

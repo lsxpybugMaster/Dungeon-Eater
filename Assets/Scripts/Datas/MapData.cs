@@ -11,7 +11,7 @@ public class RoomCounts
     public int restRoomNumbers;
     // public int eliteRoomNumbers;
     public int bossRoomNumbers;
-    public int blessRoomNumbers; //奖励房: 获取道具 or 卡牌操作一次
+    // public int blessRoomNumbers; //(目前弃用) 奖励房: 获取道具 or 卡牌操作一次 
 }
 
 

@@ -11,6 +11,7 @@ public class RoomUIManager : MonoBehaviour
     //先这样统一管理UI, 项目小可以接受
     [SerializeField] private RestUI restUI;
     [SerializeField] private ShopUI shopUI;
+    [SerializeField] private EventUI eventUI;
     private RoomUI curUI;
 
     private void OnEnable()
@@ -27,7 +28,6 @@ public class RoomUIManager : MonoBehaviour
 
     private void HandleGameStateChanged(GameState state)
     {
-        Debug.Log("HandleGameStateChanged");
         switch (state)
         {
             case GameState.Resting:
@@ -38,6 +38,11 @@ public class RoomUIManager : MonoBehaviour
             case GameState.Shopping:
                 shopUI.Show();
                 curUI = shopUI;
+                break;
+
+            case GameState.InEvent:
+                eventUI.Show();
+                curUI = eventUI;
                 break;
 
             default:

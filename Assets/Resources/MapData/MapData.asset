@@ -26,10 +26,9 @@ MonoBehaviour:
         levelInfostr: RRRUURRRRRDDDLLLDLLLLLUU
         roomCounts:
           shopRoomNumbers: 3
-          eventRoomNumbers: 0
+          eventRoomNumbers: 2
           restRoomNumbers: 8
           bossRoomNumbers: 0
-          blessRoomNumbers: 0
         mapDices: 3
     - rid: 8501354094988886019
       type: {class: LevelData, ns: , asm: Assembly-CSharp}
@@ -38,10 +37,9 @@ MonoBehaviour:
         levelInfostr: UURRRRRRDDDDDLLLLLLUUU
         roomCounts:
           shopRoomNumbers: 8
-          eventRoomNumbers: 0
+          eventRoomNumbers: 4
           restRoomNumbers: 8
           bossRoomNumbers: 2
-          blessRoomNumbers: 0
         mapDices: 4
     - rid: 8501354094988886020
       type: {class: LevelData, ns: , asm: Assembly-CSharp}
@@ -50,8 +48,7 @@ MonoBehaviour:
         levelInfostr: RRRRUURRRDDRRDDLLLLLLLLLUU
         roomCounts:
           shopRoomNumbers: 3
-          eventRoomNumbers: 0
+          eventRoomNumbers: 2
           restRoomNumbers: 4
           bossRoomNumbers: 0
-          blessRoomNumbers: 0
         mapDices: 8

@@ -48,6 +48,11 @@ public class SceneModeManager
         gm.ChangeGameState(GameState.Shopping);
     }
 
+    public void ToEventMode()
+    {
+        gm.ChangeGameState(GameState.InEvent);
+    }
+
     //从战斗场景返回地图场景时,判断是否需要更新大关卡
     public void ToMapMode()
     {
