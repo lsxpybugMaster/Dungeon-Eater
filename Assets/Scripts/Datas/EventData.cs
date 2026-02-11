@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SerializeReferenceEditor;
+using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 [Serializable]
@@ -14,9 +14,8 @@ public class EventChoice
     [SerializeField] private int pointNeed;
     public int PointNeed { get => pointNeed; set => pointNeed = value; }
 
-    [SerializeField] private EditableEvents clickEvent;
-    public EditableEvents Event => clickEvent;
-
+    //外部配置事件参数类, 需要使用插件扩展Unity对多态的支持
+    [field: SerializeReference, SR] public EditableEvents ClickEvent { get; private set; } = null;    
 }
 
 

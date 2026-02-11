@@ -15,11 +15,22 @@ MonoBehaviour:
   <EventName>k__BackingField: Money
   <EventDescription>k__BackingField: Get Money
   <EventChoice>k__BackingField:
-  - choiceInfo: A
-    pointNeed: 0
-    clickEvent:
-      x: 20
-  - choiceInfo: B
-    pointNeed: 0
-    clickEvent:
-      x: 20
+  - choiceInfo: Get20
+    pointNeed: 2
+    <ClickEvent>k__BackingField:
+      rid: 5827088628661878787
+  - choiceInfo: Get21
+    pointNeed: -2
+    <ClickEvent>k__BackingField:
+      rid: 5827088628661878785
+  references:
+    version: 2
+    RefIds:
+    - rid: 5827088628661878785
+      type: {class: EEvent2, ns: , asm: Assembly-CSharp}
+      data:
+        y: 10000
+    - rid: 5827088628661878787
+      type: {class: EEvent2, ns: , asm: Assembly-CSharp}
+      data:
+        y: 0

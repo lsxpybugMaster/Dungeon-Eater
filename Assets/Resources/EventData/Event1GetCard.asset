@@ -15,11 +15,22 @@ MonoBehaviour:
   <EventName>k__BackingField: Card
   <EventDescription>k__BackingField: Get Card
   <EventChoice>k__BackingField:
-  - choiceInfo: C
+  - choiceInfo: Get10
     pointNeed: 0
-    clickEvent:
-      x: 10
-  - choiceInfo: D
+    <ClickEvent>k__BackingField:
+      rid: 5827088628661878786
+  - choiceInfo: Get11
     pointNeed: 0
-    clickEvent:
-      x: 10
+    <ClickEvent>k__BackingField:
+      rid: 5827088628661878784
+  references:
+    version: 2
+    RefIds:
+    - rid: 5827088628661878784
+      type: {class: EEvent1, ns: , asm: Assembly-CSharp}
+      data:
+        x: 1
+    - rid: 5827088628661878786
+      type: {class: EEvent1, ns: , asm: Assembly-CSharp}
+      data:
+        x: -1

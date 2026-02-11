@@ -53,6 +53,7 @@ public static class EventBus
     }
 
     //广播事件 evt 将参数封装 给委托进行调用
+    //泛型版本,不支持多态
     public static void Publish<T>(T evt)
     {
         if (eventTable.TryGetValue(typeof(T), out var act)) 
@@ -61,8 +62,32 @@ public static class EventBus
         }
     }
 
+    //非泛型版本,支持多态,有性能开销
+    //适合调用Editable事件
+    public static void Publish_Dynamic(EditableEvents evt)
+    {
+        Type type = evt.GetType();
+
+        if (eventTable.TryGetValue(type, out var act))
+        {
+            act.DynamicInvoke(evt);
+        }
+    }
+
+
     public static void ClearAll()
     {
         eventTable.Clear();
     }
+}
+
+/// <summary>
+/// ActBus 和 EventBus 类似
+/// EventBus 存取 Delegate
+/// ActBus 存取 Func<object, IEnumrator>
+/// 是真正的轻量化 ActionSystem
+/// </summary>
+public static class ActBus
+{
+    
 }

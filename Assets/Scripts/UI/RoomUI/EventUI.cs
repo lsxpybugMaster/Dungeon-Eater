@@ -12,23 +12,58 @@ public class EventUI : RoomUI
 
     private void OnEnable()
     {
-        EventBus.Subscribe<EditableEvents>(OnEvent);
+        EventBus.Subscribe<EEvent1>(OnEEvent1);
+        EventBus.Subscribe<EEvent2>(OnEEvent2);
     }
 
     private void OnDisable()
     {
-        EventBus.UnSubscribe<EditableEvents>(OnEvent);
+        EventBus.UnSubscribe<EEvent1>(OnEEvent1);
+        EventBus.UnSubscribe<EEvent2>(OnEEvent2);
     }
 
-    private void OnEvent(EditableEvents e)
+    private void OnEEvent1(EEvent1 e)
     {
-        Debug.Log($"事件激活 : {e.x}");
+        StartCoroutine(Wait());
+        Debug.Log($"事件EEvent1激活 : {e.x}");
+        
+    }
+    private void OnEEvent2(EEvent2 e)
+    {
+        StartCoroutine(Wait());
+        Debug.Log($"事件EEvent2激活 : {e.y}");
+        
+    }
+
+    private IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(1.0f);
     }
 
     protected override void OnShow()
     {
         base.OnShow();
+        EnableButtons();
         initEvent();
+    }
+
+    private void EnableButtons()
+    {
+        //隐藏退出按钮
+        btn.gameObject.SetActive(false);
+
+        for (int i = 0; i < eventChoiceBtns.Count; i++)
+        {
+            eventChoiceBtns[i].EnableButton();
+        }
+    }
+
+    private void DisableButtons()
+    {
+        for (int i = 0; i < eventChoiceBtns.Count; i++)
+        {
+            eventChoiceBtns[i].DisableButton();
+        }
     }
 
     private void initEvent()
@@ -42,10 +77,18 @@ public class EventUI : RoomUI
         for (int i = 0; i < eventChoices.Count; i++)
         {
             eventChoiceBtns[i].ButtonText = eve.EventChoice[i].ChoiceInfo;
-            eventChoiceBtns[i].Btn.onClick.RemoveAllListeners();
-            //eventChoiceBtns[i].RemoveAndAddListenerOnClick(
-            //    //() => EventBus.Subscribe<>()
-            //);
+            //防止出现闭包
+            EditableEvents _event = eve.EventChoice[i].ClickEvent;
+
+            //绑定函数
+            eventChoiceBtns[i].AddListenerOnClick(
+                () => {
+                    DisableButtons();
+                    EventBus.Publish_Dynamic(_event); //注意需要动态调用Dynamic_Event
+                    //重新显示退出按钮
+                    btn.gameObject.SetActive(true);
+                }
+            );
         }
     }
 }

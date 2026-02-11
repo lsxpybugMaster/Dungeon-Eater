@@ -21,14 +21,33 @@ public class UButton : MonoBehaviour
     public Button Btn => button;
 
     /// <summary>
-    /// 先清空再绑定,避免反复绑定相同的函数
+    /// 绑定点击时的函数 , 注意要避免反复绑定相同的函数
     /// </summary>
     /// <param name="a"></param>
-    public void RemoveAndAddListenerOnClick(UnityAction a)
+    public void AddListenerOnClick(UnityAction a)
     {
-        button.onClick.RemoveAllListeners();
         button.onClick.AddListener(a);
     }
+
+    /// <summary>
+    /// 禁止按钮的交互功能
+    /// </summary>
+    public void DisableButton(bool clearAllListeners = true)
+    {
+        //如果需要, 清空之前的所有监听事件, 避免重复绑定
+        if (clearAllListeners)
+            button.onClick.RemoveAllListeners();
+        button.interactable = false;
+    }
+
+    /// <summary>
+    /// 重启按钮的交互功能
+    /// </summary>
+    public void EnableButton()
+    {
+        button.interactable = true;
+    }
+
 
     //自动识别组件是否配置,没配置则自动配置,若再没有则报错
     public void Awake()
