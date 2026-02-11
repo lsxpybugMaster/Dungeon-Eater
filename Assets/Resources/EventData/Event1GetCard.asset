@@ -16,7 +16,7 @@ MonoBehaviour:
   <EventDescription>k__BackingField: Get Card
   <EventChoice>k__BackingField:
   - choiceInfo: Get10
-    pointNeed: 0
+    pointNeed: 1
     <ClickEvent>k__BackingField:
       rid: 5827088628661878786
   - choiceInfo: Get11

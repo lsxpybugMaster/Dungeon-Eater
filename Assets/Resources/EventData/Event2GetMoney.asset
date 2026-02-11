@@ -20,7 +20,7 @@ MonoBehaviour:
     <ClickEvent>k__BackingField:
       rid: 5827088628661878787
   - choiceInfo: Get21
-    pointNeed: -2
+    pointNeed: 0
     <ClickEvent>k__BackingField:
       rid: 5827088628661878785
   references:

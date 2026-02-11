@@ -62,19 +62,6 @@ public static class EventBus
         }
     }
 
-    //非泛型版本,支持多态,有性能开销
-    //适合调用Editable事件
-    public static void Publish_Dynamic(EditableEvents evt)
-    {
-        Type type = evt.GetType();
-
-        if (eventTable.TryGetValue(type, out var act))
-        {
-            act.DynamicInvoke(evt);
-        }
-    }
-
-
     public static void ClearAll()
     {
         eventTable.Clear();
@@ -89,5 +76,39 @@ public static class EventBus
 /// </summary>
 public static class ActBus
 {
-    
+    private static readonly Dictionary<Type, Func<EditableEvents, IEnumerator>> eventTable = new();
+
+    //由于这种注册法使用了Lambda无法取消注册,所以目前仅允许注册一个事件
+    public static void Subscribe<T>(Func<T, IEnumerator> listener) where T : EditableEvents
+    {
+        //必须额外包装一层, 因为不允许泛型逆变
+        eventTable[typeof(T)] = (evt) =>
+        {
+            return listener((T)evt);
+        };
+    }
+
+    public static void UnSubscribe<T>() where T : EditableEvents
+    {
+        if (eventTable.ContainsKey(typeof(T)))
+        {
+            eventTable[typeof(T)] = null;
+        }
+    }
+
+    //ActBus 无法支持泛型, 需要运行时多态确保事件依据子类类型具体分发
+    public static IEnumerator Perform(EditableEvents evt)
+    {
+        Type type = evt.GetType();
+
+        if (eventTable.TryGetValue(type, out var act))
+        {
+            yield return act(evt);
+        }
+    }
+
+    public static void ClearAll()
+    {
+        eventTable.Clear();
+    }
 }

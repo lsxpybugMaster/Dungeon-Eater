@@ -204,6 +204,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
         //ActionSystem会在场景切换时自动清空字典,所以不用管
         EventBus.ClearAll();
+        ActBus.ClearAll();
 
         //确保最后执行
         Destroy(gameObject);
