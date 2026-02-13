@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class EventUI : RoomUI
 {
@@ -35,15 +34,20 @@ public class EventUI : RoomUI
         if (model.ChoiceNeedCheck)
         {
             //检定
-
+            int pt;
+            Result result = CheckUtil.EventCheck(model.CheckPoint, 0, out pt);
             //EventModel 作检定 EventResultUI做展示
-            yield return eventResultUI.ShowEventResult(99, 20, "fuck", 2);
+            yield return eventResultUI.ShowEventResult(pt, model.CheckPoint, result.ToString());
+            if (result.IsSuccess())
+                yield return ActBus.Perform(evt);       
         }
         else //无需检定
+        {
             yield return eventResultUI.ShowEventResult("we don't need check anymore");
-
-        //在协程中处理事件, 具体实现见EventModel
-        yield return ActBus.Perform(evt);
+            //在协程中处理事件, 具体实现见EventModel
+            yield return ActBus.Perform(evt);
+        }
+        
 
         //协程处理完毕后, 将 back 按钮显示
         btn.gameObject.SetActive(true);

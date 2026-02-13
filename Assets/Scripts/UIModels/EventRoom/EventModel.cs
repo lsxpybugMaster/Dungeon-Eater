@@ -13,6 +13,7 @@ public class EventModel
     public EventData CurrentEvent { get; set; }         //事件
     public EventChoice CurrentEventChoice { get; set; } //玩家选择的事件分支
     public bool ChoiceNeedCheck => CurrentEventChoice.PointNeed != 0;
+    public int CheckPoint => CurrentEventChoice.PointNeed;
 
     public EventModel()
     {

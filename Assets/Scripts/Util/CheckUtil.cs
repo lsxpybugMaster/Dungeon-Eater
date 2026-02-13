@@ -11,6 +11,15 @@ public enum Result
     GiantSuccess
 }
 
+public static class ResultExtensions
+{
+    public static bool IsSuccess(this Result result)
+    {
+        return result == Result.Success || result == Result.GiantSuccess;
+    }
+}
+
+
 //方便UI提取
 //public struct AttackResult
 //{
@@ -31,7 +40,6 @@ public static class CheckUtil
     /// <param name="proficiency">攻击者熟练项</param>
     /// <param name="flexbility">目标的敏捷值</param>
     /// <returns>返回结果</returns>
-
     public static Result AttackRoll(CombatantView caster, CombatantView target, int plus)
     {
         
@@ -69,6 +77,27 @@ public static class CheckUtil
             return Result.Success;
         }
     }
+
+    /// <summary>
+    /// 事件相关检定
+    /// </summary>
+    /// <param name="checkPt">检定成功所需数值</param>
+    /// <param name="adder">额外的掷骰加值</param>
+    /// <param name="pt">参数返回掷骰数值</param>
+    /// <returns>返回掷骰结果</returns>
+    public static Result EventCheck(int checkPt, int adder, out int pt)
+    {
+        pt = DiceRollUtil.D20();
+        if (pt == 20)
+            return Result.GiantSuccess;
+        else if (pt == 1)
+            return Result.GiantFail;
+
+        if (pt + adder >= checkPt)
+            return Result.Success;
+        else return Result.Failure;
+    }
+
 
     //提供一个数值,同时处理其UI显示
     public static int Throw(string diceStr, string addtionInfo)

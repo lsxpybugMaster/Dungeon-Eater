@@ -7288,7 +7288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d87bfa9697998408cf5135343f9062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberChangeInterval: 0.5
+  showRandomNumberTime: 1
+  numberChangeInterval: 0.05
   dicePointTMP: {fileID: 1143632860}
   needPointTMP: {fileID: 127458115}
   eventResultTMP: {fileID: 1289994395}
