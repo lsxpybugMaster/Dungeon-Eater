@@ -10,8 +10,10 @@ using UnityEngine;
 /// </summary>
 public class EventModel
 {
+    //事件 => 玩家选择 => 对应选择失败/成功 => 最终执行的事件
     public EventData CurrentEvent { get; set; }         //事件
     public EventChoice CurrentEventChoice { get; set; } //玩家选择的事件分支
+
     public bool ChoiceNeedCheck => CurrentEventChoice.PointNeed != 0;
     public int CheckPoint => CurrentEventChoice.PointNeed;
 

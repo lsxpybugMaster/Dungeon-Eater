@@ -15,7 +15,10 @@ public class EventChoice
     public int PointNeed { get => pointNeed; set => pointNeed = value; }
 
     //外部配置事件参数类, 需要使用插件扩展Unity对多态的支持
-    [field: SerializeReference, SR] public EditableEvents ClickEvent { get; private set; } = null;    
+    //需要分为判断成功和失败事件
+    [field: SerializeReference, SR] public EditableEvents SuccessEvent { get; private set; } = null;
+    [field: SerializeReference, SR] public EditableEvents FailedEvent  { get; private set; } = null;
+    
 }
 
 

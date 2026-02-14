@@ -16,21 +16,35 @@ MonoBehaviour:
   <EventDescription>k__BackingField: Get Card
   <EventChoice>k__BackingField:
   - choiceInfo: Get10
-    pointNeed: 10
-    <ClickEvent>k__BackingField:
-      rid: 5827088628661878786
+    pointNeed: 0
+    <SuccessEvent>k__BackingField:
+      rid: 5827088702098112512
+    <FailedEvent>k__BackingField:
+      rid: 5827088702098112513
   - choiceInfo: Get11
     pointNeed: 10
-    <ClickEvent>k__BackingField:
-      rid: 5827088628661878784
+    <SuccessEvent>k__BackingField:
+      rid: 5827088702098112514
+    <FailedEvent>k__BackingField:
+      rid: 5827088702098112515
   references:
     version: 2
     RefIds:
-    - rid: 5827088628661878784
+    - rid: 5827088702098112512
       type: {class: EEvent1, ns: , asm: Assembly-CSharp}
       data:
-        x: 1
-    - rid: 5827088628661878786
-      type: {class: EEvent1, ns: , asm: Assembly-CSharp}
+        <EventResultInfo>k__BackingField: '[Result] You get card'
+        x: 0
+    - rid: 5827088702098112513
+      type: {class: EmptyEvent, ns: , asm: Assembly-CSharp}
       data:
-        x: -1
+        <EventResultInfo>k__BackingField: '[Error] How can you fail this?'
+    - rid: 5827088702098112514
+      type: {class: EEvent2, ns: , asm: Assembly-CSharp}
+      data:
+        <EventResultInfo>k__BackingField: '[Success] You get card'
+        y: 0
+    - rid: 5827088702098112515
+      type: {class: EmptyEvent, ns: , asm: Assembly-CSharp}
+      data:
+        <EventResultInfo>k__BackingField: '[Failed] You failed to get card'

@@ -10,7 +10,7 @@ public class EventUI : RoomUI
     [SerializeField] private TMP_Text eventTitle;
     [SerializeField] private TMP_Text eventDescription;
     [SerializeField] private List<EventChoiceButton> eventChoiceBtns;
-    public EventModel model {  get; private set; }
+    public EventModel model { get; private set; }
 
     private new void Awake()
     {
@@ -25,29 +25,34 @@ public class EventUI : RoomUI
 
 
     //处理按钮点击事件, 给其添加上下文
-    private IEnumerator HandleEvent(EditableEvents evt)
+    //处理玩家选择的结果,依据结果分发事件
+    private IEnumerator HandleEvent(EventChoice choice)
     {
         //处理事件前禁用按钮
         DisableButtons();
 
+        EditableEvents evt;
         //判定事件是否需要检定
         if (model.ChoiceNeedCheck)
         {
             //检定
             int pt;
             Result result = CheckUtil.EventCheck(model.CheckPoint, 0, out pt);
+
+            evt = result.IsSuccess() ? choice.SuccessEvent
+                                     : choice.FailedEvent;
+
             //EventModel 作检定 EventResultUI做展示
-            yield return eventResultUI.ShowEventResult(pt, model.CheckPoint, result.ToString());
-            if (result.IsSuccess())
-                yield return ActBus.Perform(evt);       
+            yield return eventResultUI.ShowEventResult(pt, model.CheckPoint, evt.EventResultInfo);
         }
         else //无需检定
         {
-            yield return eventResultUI.ShowEventResult("we don't need check anymore");
-            //在协程中处理事件, 具体实现见EventModel
-            yield return ActBus.Perform(evt);
+            evt = choice.SuccessEvent;
+            //无需检定的显示效果不同
+            yield return eventResultUI.ShowEventResult(evt.EventResultInfo);
         }
-        
+
+        yield return ActBus.Perform(evt);
 
         //协程处理完毕后, 将 back 按钮显示
         btn.gameObject.SetActive(true);
@@ -59,6 +64,12 @@ public class EventUI : RoomUI
         base.OnShow();   //RoomUI基类相应初始化
         EnableButtons(); //显示相关的事件按钮
         initEvent();     //初始化事件绑定以及展示
+        OtherComponentInit(); //其管理的子对象的初始化
+    }
+
+    private void OtherComponentInit()
+    {
+        eventResultUI.OnShow();
     }
 
     private void EnableButtons()
@@ -81,7 +92,6 @@ public class EventUI : RoomUI
         }
     }
 
-
     private void initEvent()
     {
         //随机从数据库获取事件
@@ -95,16 +105,16 @@ public class EventUI : RoomUI
         for (int i = 0; i < eventChoices.Count; i++)
         {
             eventChoiceBtns[i].ButtonText = eve.EventChoice[i].ChoiceInfo;
+           
             //防止出现闭包
-            EditableEvents _event = eve.EventChoice[i].ClickEvent;
             int idx = i;
+
             //绑定函数
             //注意与 ActionSystem 类似, 绑定的是一个协程, 在这里进行事件的相关判定
             eventChoiceBtns[i].AddListenerOnClick(
                 () => { 
                     model.CurrentEventChoice = eventChoices[idx];
-                    Debug.Log($"玩家选择:: {eventChoices[idx].ChoiceInfo}");
-                    StartCoroutine(HandleEvent(_event)); 
+                    StartCoroutine(HandleEvent(model.CurrentEventChoice)); 
                 }
             );
         }

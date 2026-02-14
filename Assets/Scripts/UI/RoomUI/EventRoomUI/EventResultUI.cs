@@ -13,6 +13,12 @@ public class EventResultUI : MonoBehaviour
     [SerializeField] private TMP_Text needPointTMP;
     [SerializeField] private TMP_Text eventResultTMP;
    
+    //由上层EventUI调用, 做一些初始化
+    public void OnShow()
+    {
+        eventResultTMP.text = "";
+    }
+
     /// <summary>
     /// 展示事件判定结果
     /// </summary>
