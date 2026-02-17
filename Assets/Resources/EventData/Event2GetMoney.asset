@@ -15,22 +15,35 @@ MonoBehaviour:
   <EventName>k__BackingField: Money
   <EventDescription>k__BackingField: Get Money
   <EventChoice>k__BackingField:
-  - choiceInfo: Get20
-    pointNeed: 17
-    <ClickEvent>k__BackingField:
-      rid: 5827088628661878787
-  - choiceInfo: Get21
-    pointNeed: 11
-    <ClickEvent>k__BackingField:
-      rid: 5827088628661878785
+  - choiceInfo: 'Get 5 money '
+    pointNeed: 0
+    <SuccessEvent>k__BackingField:
+      rid: 5827088769713963008
+    <FailedEvent>k__BackingField:
+      rid: -2
+  - choiceInfo: '[Check 12] Get 10 money or lose 2 money'
+    pointNeed: 12
+    <SuccessEvent>k__BackingField:
+      rid: 5827088769713963009
+    <FailedEvent>k__BackingField:
+      rid: 5827088769713963010
   references:
     version: 2
     RefIds:
-    - rid: 5827088628661878785
-      type: {class: EEvent2, ns: , asm: Assembly-CSharp}
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 5827088769713963008
+      type: {class: ChangeMoneyEvent, ns: , asm: Assembly-CSharp}
       data:
-        y: 10000
-    - rid: 5827088628661878787
-      type: {class: EEvent2, ns: , asm: Assembly-CSharp}
+        <EventResultInfo>k__BackingField: You Get 5 money
+        money: 5
+    - rid: 5827088769713963009
+      type: {class: ChangeMoneyEvent, ns: , asm: Assembly-CSharp}
       data:
-        y: 0
+        <EventResultInfo>k__BackingField: You win and get Get 10 money
+        money: 10
+    - rid: 5827088769713963010
+      type: {class: ChangeMoneyEvent, ns: , asm: Assembly-CSharp}
+      data:
+        <EventResultInfo>k__BackingField: You lose and lost 2 money
+        money: -2

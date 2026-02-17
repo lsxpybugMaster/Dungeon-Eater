@@ -37,6 +37,7 @@ public class EventModel
     {
         ActBus.Subscribe<EEvent1>(OnEEvent1);
         ActBus.Subscribe<EEvent2>(OnEEvent2);
+        ActBus.Subscribe<ChangeMoneyEvent>(OnChangeMoneyEvent);
     }
 
     //需要View被销毁时手动调用
@@ -44,6 +45,7 @@ public class EventModel
     {
         ActBus.UnSubscribe<EEvent1>();
         ActBus.UnSubscribe<EEvent2>();
+        ActBus.UnSubscribe<ChangeMoneyEvent>();
     }
 
 
@@ -61,5 +63,15 @@ public class EventModel
         Debug.Log($"事件EEvent2激活 : {e.y}");
         yield return new WaitForSeconds(0.5f);
         Debug.Log($"事件EEvent2结束");
+    }
+
+    private IEnumerator OnChangeMoneyEvent(ChangeMoneyEvent e)
+    {
+        HeroState heroState = GameManager.Instance.HeroState;
+        if (e.money > 0)
+            heroState.GainCoins(e.money);  
+        else
+            heroState.SpendCoins(-e.money);
+        yield return null;
     }
 }

@@ -37,3 +37,12 @@ public class EmptyEvent : EditableEvents
 {
 
 }
+
+/// <summary>
+/// 改变玩家金钱
+/// </summary>
+[Serializable]
+public class ChangeMoneyEvent : EditableEvents
+{
+    public int money = 0;
+}

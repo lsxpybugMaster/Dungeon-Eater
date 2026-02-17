@@ -17,6 +17,7 @@ public class EventResultUI : MonoBehaviour
     public void OnShow()
     {
         eventResultTMP.text = "";
+        dicePointTMP.text = "20";
     }
 
     /// <summary>
