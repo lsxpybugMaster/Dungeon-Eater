@@ -41,6 +41,8 @@ public class HeroState : BaseState<HeroData>
     /// </summary>
     public List<Card> Deck { get; private set; }
 
+    public List<PerkData> Perks { get; private set; }
+
     //------------------------持久化数据---------------------------
     public Sprite HeroSprite => BaseData.Image;
 
@@ -62,15 +64,7 @@ public class HeroState : BaseState<HeroData>
         MaxMana = BaseData.MaxMana;
         Coins = BaseData.initialCoins;
 
-        //别忘记初始化!
-        Deck = new List<Card>();
-
-        //DISCUSS: 我们实际上应当保管Card作为动态数据,否则会修改CardData
-        foreach (var cardData in BaseData.Deck)
-        {
-            Card card = new(cardData);
-            Deck.Add(card);
-        }
+        InitLists();
 
         //IMPORTANT: C# 中 '=' 永远是浅拷贝
         /* 
@@ -80,6 +74,27 @@ public class HeroState : BaseState<HeroData>
          * Deck = heroData.Deck;
         */
     }
+
+    /// <summary>
+    /// 用于初始化以List为主要形式的信息
+    /// </summary>
+    private void InitLists()
+    {
+        //初始化卡组
+        Deck = new List<Card>();
+
+        //DISCUSS: 我们实际上应当保管Card作为动态数据,否则会修改CardData
+        foreach (var cardData in BaseData.Deck)
+        {
+            Card card = new(cardData);
+            Deck.Add(card);
+        }
+
+        //初始化道具信息
+        Perks = new List<PerkData>(BaseData.InitPerkData);
+
+    }
+
 
 
     //及时接受更新的临时数据

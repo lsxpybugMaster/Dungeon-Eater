@@ -16,7 +16,7 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
 
     [SerializeField] private List<EnemyData> enemyDatas;
 
-    [SerializeField] private PerkData perkData;
+    //[SerializeField] private PerkData perkData;
 
 
     private void OnEnable()
@@ -113,7 +113,7 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
 
         // 这部分是持久化数据,目前不应放在该位置
         // 初始化天赋
-        // PerkSystem.Instance.AddPerk(new Perk(perkData));
+        PerkSystem.Instance.Setup(heroState.Perks);
 
         ManaSystem.Instance.Setup(heroState.MaxMana);
 

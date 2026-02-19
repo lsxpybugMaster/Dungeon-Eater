@@ -18,4 +18,7 @@ public class HeroData : CombatantData
     //给每个英雄其自己的卡组
     [field: SerializeField] public List<CardData> Deck {  get; private set; }
 
+    //英雄初始化天赋
+    [field: SerializeField] public List<PerkData> InitPerkData { get; private set; }
+
 }

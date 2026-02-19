@@ -1,4 +1,4 @@
-using System.Collections;
+锘縰sing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,7 +42,7 @@ public class Perk
             {
                 targets.AddRange(effect.TargetMode.GetTargets(null));
             }
-            //动作的执行者为敌人
+            //鍔ㄤ綔鐨勬墽琛岃�呬负鏁屼汉
             GameAction perkEffectAction = effect.Effect.GetGameAction(targets, HeroSystem.Instance.HeroView, null);
 
             ActionSystem.Instance.AddReaction(perkEffectAction);
