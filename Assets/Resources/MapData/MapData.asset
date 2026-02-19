@@ -37,7 +37,7 @@ MonoBehaviour:
         levelInfostr: UURRRRRRDDDDDLLLLLLUUU
         roomCounts:
           shopRoomNumbers: 4
-          eventRoomNumbers: 12
+          eventRoomNumbers: 2
           restRoomNumbers: 4
           bossRoomNumbers: 2
         mapDices: 4

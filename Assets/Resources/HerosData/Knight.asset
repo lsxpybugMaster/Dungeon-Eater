@@ -33,3 +33,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 114543198a4dec74d9bbd3d9a0754002, type: 2}
   - {fileID: 11400000, guid: d4b2be80d56eb8143aa0c9807296e236, type: 2}
   - {fileID: 11400000, guid: d4b2be80d56eb8143aa0c9807296e236, type: 2}
+  <InitPerkData>k__BackingField:
+  - {fileID: 11400000, guid: 2ad045eb17163a349894181fbed1d3ad, type: 2}
+  - {fileID: 11400000, guid: 64e3f5432a47cac41b54269d97cd7505, type: 2}

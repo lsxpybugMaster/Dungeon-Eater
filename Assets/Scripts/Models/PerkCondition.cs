@@ -6,6 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 触发天赋天赋的控制系统
 /// 通过将天赋订阅对应的GameAction实现
+/// SR, 可外部配置
 /// </summary>
 public abstract class PerkCondition
 {
