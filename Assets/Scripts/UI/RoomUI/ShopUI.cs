@@ -7,7 +7,9 @@ public class ShopUI : RoomUI
     [SerializeField] private int shopCardCount;
     //展示出售的卡牌
     [SerializeField] private ShowCardViewListUI showShopCardUI;
-    
+
+    [SerializeField] private ShowFoodListUI showFoodListUI;
+
     private ShopModel shopModel;
 
     private CardUISelectController cardUISelectController;
@@ -26,6 +28,10 @@ public class ShopUI : RoomUI
     {
         base.OnShow();
         showShopCardUI.Show(GetCardDataList(shopModel), isGroup : true);
+
+        ///调试中
+        showFoodListUI.Show(null, true);
+        
         ShowCardPrice();
     }
 

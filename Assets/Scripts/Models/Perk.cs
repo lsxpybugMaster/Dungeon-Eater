@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Perk 
+public class Perk : IFood
 {
     public Sprite Image => data.Image;
 
@@ -47,5 +47,15 @@ public class Perk
 
             ActionSystem.Instance.AddReaction(perkEffectAction);
         }
+    }
+
+    public void OnPickup()
+    {
+        
+    }
+
+    public void OnReMove()
+    {
+      
     }
 }
