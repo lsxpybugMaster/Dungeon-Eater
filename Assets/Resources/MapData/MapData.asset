@@ -36,10 +36,10 @@ MonoBehaviour:
         levelSetCode: U2R6D5L6U3
         levelInfostr: UURRRRRRDDDDDLLLLLLUUU
         roomCounts:
-          shopRoomNumbers: 4
-          eventRoomNumbers: 2
-          restRoomNumbers: 4
-          bossRoomNumbers: 2
+          shopRoomNumbers: 18
+          eventRoomNumbers: 1
+          restRoomNumbers: 2
+          bossRoomNumbers: 1
         mapDices: 4
     - rid: 8501354094988886020
       type: {class: LevelData, ns: , asm: Assembly-CSharp}

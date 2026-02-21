@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc84693b7e6cb8445954284c58308040, type: 3}
   m_Name: Food2
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: -1564885656, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Image>k__BackingField: {fileID: -423754286, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <Type>k__BackingField: 0
-  perkData: {fileID: 0}
-  ImmediateData: {fileID: 11400000, guid: 2a22e3ef5d530ca4c92761060318a2bf, type: 2}
+  perkData: {fileID: 11400000, guid: 64e3f5432a47cac41b54269d97cd7505, type: 2}
+  ImmediateData: {fileID: 0}

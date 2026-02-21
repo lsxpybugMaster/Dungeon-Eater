@@ -1,61 +1,55 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopItem
+public class ShopItem<TData>
 {
-    public CardData Card;
-    public int Price;
+    public TData data;
+    public int Price; //可能与data.basePrice不同
     public bool IsSold;
 
-    public ShopItem(CardData card, int price, bool isSold = false)
+    public ShopItem(TData data, int price, bool isSold = false)
     {
-        Card = card;
+        this.data = data;
         Price = price;
         IsSold = isSold;
     }
 }
 
-
-//商店 UIView 对应的 Model
-public class ShopModel
+//ShopUI(View) 对应的 Model
+public class ShopModel<TData>
 {
-    private HeroState heroState;
+    //从外部注入与金钱判断有关的函数
+    private readonly Func<int, bool> checkEnough; //判断钱币是否足够
+    private readonly Action<int> spendCoins;      //消耗钱币
 
-    public List<ShopItem> Items { get; } = new();
-    private int shopCardsCount; //商店房展示多少商品
+    public List<ShopItem<TData>> shopItems { get; } = new();
+    private int shopItemsCount;
 
-    public ShopModel(int shopCount) 
+    public ShopModel(int shopItemsCount, Func<int, bool> checkEnough, Action<int> spendCoins)
     {
-        shopCardsCount = shopCount;
-        heroState = GameManager.Instance.HeroState;
-        GenerateCards();
+        this.shopItemsCount = shopItemsCount;
+        this.checkEnough = checkEnough;
+        this.spendCoins = spendCoins;
+        GenerateItems();
     }
 
-    public void GenerateCards()
+    public virtual void GenerateItems()
     {
-        Items.Clear();
-        for (int i = 0; i < shopCardsCount; i++)
-        {
-            CardData d = CardDatabase.GetRandomCard();
-            ShopItem item = new ShopItem(d, d.CardPrice);
-            Items.Add(item);
-        }
     }
 
-    public bool TryBuyCard(int id)
+    public bool TryBuyItem(int id)
     {
-        ShopItem buyItem = Items[id];
+        ShopItem<TData> buyItem = shopItems[id];
         int price = buyItem.Price;
         //钱不够直接返回
-        if (!heroState.CheckCoinsEnough(price))
+        if (!checkEnough(price))
             return false;
-              
         //钱够了则更新信息
         //更新商品信息
         buyItem.IsSold = true;
-        heroState.SpendCoins(price);
-        
+        spendCoins(price);
         return true;
     }
 }

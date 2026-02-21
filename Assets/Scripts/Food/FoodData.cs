@@ -11,11 +11,14 @@ public enum FoodType
 /// 道具系统
 /// </summary>
 [CreateAssetMenu(menuName = "Data/Food")]
-public class FoodData : ScriptableObject
+public class FoodData : ScriptableObject, IShopItem
 {
     //图标
     [field: SerializeField] public Sprite Image { get; private set; }
     [field: SerializeField] public FoodType Type { get; private set; }
+    [field: SerializeField] public int price { get; private set; }
+
+    public int BasePrice => price;
 
     //如果是Perk类道具, 需要perkData
     [field: SerializeField] public PerkData perkData;

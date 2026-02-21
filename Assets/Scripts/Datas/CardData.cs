@@ -6,6 +6,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Data/Card")]
 public class CardData : ScriptableObject, IHaveKey<string>
+, IShopItem
 {
     /*
         区分属性与字段
@@ -39,6 +40,7 @@ public class CardData : ScriptableObject, IHaveKey<string>
 
     //卡牌价格: 这个价格是底价, 之后会在 ShopModel 中计算真正的价格并保存在 ShopItem 中 
     [field: SerializeField] public int CardPrice { get; private set; } = 10;
+    public int BasePrice => CardPrice;
 
 #if UNITY_EDITOR
     // Unity 的编辑器回调方法

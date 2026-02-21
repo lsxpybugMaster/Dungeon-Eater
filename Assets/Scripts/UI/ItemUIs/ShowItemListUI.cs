@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 展示一系列 UI 的
 /// </summary>
-public class ShowItemListUI<TData> : MonoBehaviour 
+public class ShowItemListUI<TData> : MonoBehaviour
 {
     [Header("生成的UI预制体")]
     [SerializeField] private GameObject itemUIPrefab;
@@ -36,7 +37,7 @@ public class ShowItemListUI<TData> : MonoBehaviour
         {
             var data = datas[i];
             int id = isGroup ? i : -1;
-            InstantiateItemUIPrefab(data, idx:id);
+            InstantiateItemUIPrefab(data, idx: id);
         }
     }
 
@@ -56,5 +57,22 @@ public class ShowItemListUI<TData> : MonoBehaviour
             inst?.Setup(data);
 
         itemUIs.Add(inst);
+    }
+
+    //绑定选择事件, 由顶层进行具体的调用
+    public void BindOnItemSelected(Action<TData> onItemSelected)
+    {
+        foreach (var item in itemUIs)
+        {
+            item.OnItemSelected += onItemSelected;
+        }
+    }
+
+    public void BindOnItemSelectedInGroup(Action<TData, int> onItemSelected)
+    {
+        foreach (var item in itemUIs)
+        {
+            item.OnItemSelectedInGroup += onItemSelected;
+        }
     }
 }

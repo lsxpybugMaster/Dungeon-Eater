@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Food1
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: -1564885656, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
-  <Type>k__BackingField: 0
+  <Type>k__BackingField: 1
   perkData: {fileID: 0}
   ImmediateData: {fileID: 11400000, guid: 2a22e3ef5d530ca4c92761060318a2bf, type: 2}

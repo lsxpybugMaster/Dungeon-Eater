@@ -10,7 +10,7 @@ public class ShopUI : RoomUI
 
     [SerializeField] private ShowFoodListUI showFoodListUI;
 
-    private ShopModel shopModel;
+    private ShopCardModel shopModel;
 
     private CardUISelectController cardUISelectController;
     
@@ -30,9 +30,16 @@ public class ShopUI : RoomUI
         showShopCardUI.Show(GetCardDataList(shopModel), isGroup : true);
 
         ///调试中
-        showFoodListUI.Show(null, true);
+        showFoodListUI.Show(null, isGroup:true);
+        showFoodListUI.BindOnItemSelectedInGroup((FoodData d, int id) =>
+        {
+            Debug.Log($"选择了食物: {d.name}, 索引: {id}");
+        });
         
         ShowCardPrice();
+
+        ///dev
+        ShowPrice(showFoodListUI.itemUIs);
     }
 
     //显示卡牌的价格
@@ -44,6 +51,15 @@ public class ShopUI : RoomUI
         {
             PriceUI priceUI = cardUIs[i].gameObject.GetComponent<PriceUI>();
             priceUI.Init(shopItems[i].Price);
+        }
+    }
+
+    private void ShowPrice<TData>(List<ItemUI<TData>> itemUIs) where TData : IShopItem
+    {
+        for (int i = 0; i < itemUIs.Count; i++)
+        {
+            PriceUI priceUI = itemUIs[i].gameObject.GetComponent<PriceUI>();
+            priceUI.Init(itemUIs[i].Data.BasePrice);
         }
     }
 
@@ -60,9 +76,10 @@ public class ShopUI : RoomUI
         cardUI.DisableCasting();
         AnimStatic.CardScaleAnim(cardUI, Vector3.zero);
     }
+    
 
     //生成新的商店卡牌
-    private List<Card> GetCardDataList(ShopModel shopModel)
+    private List<Card> GetCardDataList(ShopCardModel shopModel)
     {
         shopModel.GenerateCards();
         List<ShopItem> shopItems = shopModel.Items;
