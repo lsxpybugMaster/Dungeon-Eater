@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using ActionSystemTest;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,13 @@ public static class AnimStatic
         card.transform.DOScale(toScale, Config.Instance.showCardTime)
             .SetEase(Ease.OutCubic)
             .SetLink(card.gameObject, LinkBehaviour.KillOnDestroy); //保证不会出现原对象删除导致进入SafeMode
+    }
+
+    public static void ItemScaleAnim(Transform transform, Vector3 toScale)
+    {
+        transform.DOScale(toScale, Config.Instance.showCardTime)
+            .SetEase(Ease.OutCubic)
+            .SetLink(transform.gameObject, LinkBehaviour.KillOnDestroy); //保证不会出现原对象删除导致进入SafeMode
     }
 
 }

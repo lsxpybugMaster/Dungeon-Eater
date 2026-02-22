@@ -1519,6 +1519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btn: {fileID: 116673110}
   shopCardCount: 5
+  shopFoodCount: 6
   showShopCardUI: {fileID: 1728091433}
   showFoodListUI: {fileID: 335141490}
 --- !u!114 &185163428
@@ -2138,11 +2139,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemUIPrefab: {fileID: 3599786629175744633, guid: 1362d961711c8fa459398893cae7e6ec, type: 3}
   itemUIRoot: {fileID: 833092293}
-  d:
-  - {fileID: 11400000, guid: c48a47f9bfd84814198099b1c9e11e0f, type: 2}
-  - {fileID: 11400000, guid: 8df6a3c44778472419ec9d62dd76b4c8, type: 2}
-  - {fileID: 11400000, guid: c48a47f9bfd84814198099b1c9e11e0f, type: 2}
-  - {fileID: 11400000, guid: 8df6a3c44778472419ec9d62dd76b4c8, type: 2}
 --- !u!1 &386193010
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,18 +5,37 @@ using UnityEngine;
 public class ShopUI : RoomUI
 {
     [SerializeField] private int shopCardCount;
+    [SerializeField] private int shopFoodCount;
+
+    #region [ViewList] 展示商品列表
     //展示出售的卡牌
     [SerializeField] private ShowCardViewListUI showShopCardUI;
 
     [SerializeField] private ShowFoodListUI showFoodListUI;
+    #endregion
 
+    #region [Model] Model部分, 实际的道具生成在Model中
     private ShopCardModel shopModel;
+    //private ShopModel<FoodData> shopFoodModel;
+    //OPTIMIZE: 这里是否可以进一步依赖注入, 不使用新的子类？
+    private ShopFoodModel shopFoodModel;
+
+    #endregion
 
     private CardUISelectController cardUISelectController;
     
     private new void Awake()
     {
         base.Awake();
+       
+
+        HeroState heroState = GameManager.Instance.HeroState;
+        shopFoodModel = new(
+            shopFoodCount,
+            heroState.CheckCoinsEnough,
+            heroState.SpendCoins
+        );
+
         shopModel = new(shopCardCount);
         cardUISelectController = new((Card c, int id) => BuyCard(c, id));
         showShopCardUI.CardSelectedController = cardUISelectController;
@@ -27,13 +46,15 @@ public class ShopUI : RoomUI
     protected override void OnShow()
     {
         base.OnShow();
-        showShopCardUI.Show(GetCardDataList(shopModel), isGroup : true);
+        showShopCardUI.Show(GetCardDataList(shopModel), isGroup:true);
 
-        ///调试中
-        showFoodListUI.Show(null, isGroup:true);
+        //STEP: View 调用 Model 先生成道具
+        shopFoodModel.GenerateItems();
+        showFoodListUI.Show(shopFoodModel.GetDataForView(), isGroup:true);
         showFoodListUI.BindOnItemSelectedInGroup((FoodData d, int id) =>
         {
             Debug.Log($"选择了食物: {d.name}, 索引: {id}");
+            Buy(d, id, showFoodListUI, shopFoodModel);
         });
         
         ShowCardPrice();
@@ -54,6 +75,11 @@ public class ShopUI : RoomUI
         }
     }
 
+    /// <summary>
+    /// [通用函数]
+    /// </summary>
+    /// <typeparam name="TData"></typeparam>
+    /// <param name="itemUIs"></param>
     private void ShowPrice<TData>(List<ItemUI<TData>> itemUIs) where TData : IShopItem
     {
         for (int i = 0; i < itemUIs.Count; i++)
@@ -61,6 +87,21 @@ public class ShopUI : RoomUI
             PriceUI priceUI = itemUIs[i].gameObject.GetComponent<PriceUI>();
             priceUI.Init(itemUIs[i].Data.BasePrice);
         }
+    }
+
+    /// <summary>
+    /// 通用购买函数
+    /// </summary>
+    private void Buy<TData>(TData itemData, int id, ShowItemListUI<TData> listUI,
+        ShopModel<TData> shopModel)
+    {
+        ItemUI<TData> itemUI = listUI.itemUIs[id];
+
+        if (!shopModel.TryBuyItem(id))
+            return;
+
+        itemUI.DisableInteraction();
+        AnimStatic.ItemScaleAnim(itemUI.transform, Vector3.zero);
     }
 
     //UI将逻辑交付给 Model 处理,自己只做卡牌 View 的对应修改

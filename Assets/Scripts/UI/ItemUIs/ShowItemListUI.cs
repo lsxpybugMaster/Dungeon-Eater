@@ -13,8 +13,6 @@ public class ShowItemListUI<TData> : MonoBehaviour
     [Header("UI生成在哪个父节点下")]
     [SerializeField] private GameObject itemUIRoot; //UI放置位置
 
-    //调试的功能
-    public List<TData> d;
 
     //保存所有itemUI; 以便于后续管理
     public List<ItemUI<TData>> itemUIs { get; set; } = new();
@@ -23,8 +21,6 @@ public class ShowItemListUI<TData> : MonoBehaviour
     public virtual void Show(List<TData> datas, bool isGroup)
     {
         itemUIs.Clear();
-
-        datas = d;
 
         //清空之前的
         for (int i = itemUIRoot.transform.childCount - 1; i >= 0; i--)
