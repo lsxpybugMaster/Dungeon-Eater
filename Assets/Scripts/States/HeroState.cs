@@ -40,13 +40,14 @@ public class HeroState : BaseState<HeroData>
     /// 玩家局外卡组信息在此
     /// </summary>
     public List<Card> Deck { get; private set; }
-
-    public List<PerkData> Perks { get; private set; }
+    public List<PerkData> Perks { get; private set; } //特殊的道具(天赋类道具)需要单独存放
+    public List<FoodData> Foods { get; private set; } //即玩家持有的道具信息
 
     //------------------------持久化数据---------------------------
     public Sprite HeroSprite => BaseData.Image;
 
     public int DeckSize => Deck.Count;
+    public int FoodsSize => Foods.Count;
 
     //仅初始化一次初始数据
     public HeroState()
@@ -92,9 +93,8 @@ public class HeroState : BaseState<HeroData>
 
         //初始化道具信息
         Perks = new List<PerkData>(BaseData.InitPerkData);
-
+        Foods = new List<FoodData>();
     }
-
 
 
     //及时接受更新的临时数据

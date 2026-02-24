@@ -28,7 +28,6 @@ public class ShopUI : RoomUI
     {
         base.Awake();
        
-
         HeroState heroState = GameManager.Instance.HeroState;
         shopFoodModel = new(
             shopFoodCount,
@@ -53,7 +52,6 @@ public class ShopUI : RoomUI
         showFoodListUI.Show(shopFoodModel.GetDataForView(), isGroup:true);
         showFoodListUI.BindOnItemSelectedInGroup((FoodData d, int id) =>
         {
-            Debug.Log($"选择了食物: {d.name}, 索引: {id}");
             Buy(d, id, showFoodListUI, shopFoodModel);
         });
         
@@ -102,7 +100,10 @@ public class ShopUI : RoomUI
 
         itemUI.DisableInteraction();
         AnimStatic.ItemScaleAnim(itemUI.transform, Vector3.zero);
+
+
     }
+
 
     //UI将逻辑交付给 Model 处理,自己只做卡牌 View 的对应修改
     private void BuyCard(Card card, int id)
@@ -116,6 +117,9 @@ public class ShopUI : RoomUI
         //首先取消交互
         cardUI.DisableCasting();
         AnimStatic.CardScaleAnim(cardUI, Vector3.zero);
+
+        //购买后的商品获取逻辑:
+        GameManager.Instance.PlayerDeckController.AddCardToDeck(card.data);
     }
     
 

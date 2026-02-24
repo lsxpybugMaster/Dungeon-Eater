@@ -53,6 +53,12 @@ public class ShopModel<TData>
         shopItems.Clear();
     }
 
+    //View 向 Model 调用, 以具体获取该商品
+    public virtual void GainItemLogic()
+    {
+
+    }
+
     public bool TryBuyItem(int id)
     {
         ShopItem<TData> buyItem = shopItems[id];
