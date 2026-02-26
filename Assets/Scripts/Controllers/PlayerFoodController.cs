@@ -10,18 +10,28 @@ public class PlayerFoodController : PlayerItemController<FoodData>
 
     public override int Size => heroState.FoodsSize;
 
-    public override void AddToPlayer()
+    public override List<FoodData> Datas => heroState.Foods;
+
+    public override void AddToPlayer(FoodData data)
     {
-        throw new System.NotImplementedException();
+        heroState.AddFood(data);
+        Raise_AddToPlayer(data); //激活事件
+
+        PersistUIUpdate();
     }
 
-    public override void RemoveFromPlayer()
+    public override void RemoveFromPlayer(FoodData data)
     {
-        throw new System.NotImplementedException();
+        //暂时不提供移除功能, 因为目前没有任何道具会被移除
     }
 
-    public override void UpdateItems()
+    public override void UpdateItems(FoodData data)
     {
-        throw new System.NotImplementedException();
+        //无需提供升级功能
+    }
+
+    public override void PersistUIUpdate()
+    {
+        GameManager.Instance.PersistUIController.FoodUI.Show(heroState.Foods, isGroup: false);
     }
 }

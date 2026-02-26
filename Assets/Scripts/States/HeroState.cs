@@ -93,7 +93,7 @@ public class HeroState : BaseState<HeroData>
 
         //初始化道具信息
         Perks = new List<PerkData>(BaseData.InitPerkData);
-        Foods = new List<FoodData>();
+        Foods = new List<FoodData>(BaseData.InitFoodDatas);
     }
 
 
@@ -104,12 +104,13 @@ public class HeroState : BaseState<HeroData>
         CurrentHealth = currentHealth;
     }
 
+
+    #region 对Deck的操作接口
     /// <summary>
     /// 向牌组添加卡牌
     /// </summary>
     public void AddCardToDeck(CardData cardData)
     {
-        DebugUtil.Magenta("Add Card!");
         Card card = new(cardData);
         Deck.Add(card);
     }
@@ -126,4 +127,21 @@ public class HeroState : BaseState<HeroData>
         }
         else Debug.LogError("未发现应该删除的卡牌");
     }
+    #endregion
+
+
+    #region 对Foods的操作接口
+    public void AddFood(FoodData foodData)
+    {
+        Foods.Add(foodData);
+    }
+
+    public void RemoveFood(FoodData foodData)
+    {
+        if (Foods.Contains(foodData))
+        {
+            Foods.Remove(foodData);
+        }
+    }
+    #endregion
 }

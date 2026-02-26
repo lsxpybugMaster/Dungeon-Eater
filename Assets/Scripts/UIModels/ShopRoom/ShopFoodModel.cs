@@ -14,7 +14,6 @@ public class ShopFoodModel : ShopModel<FoodData>
     /// </summary>
     public override void GenerateItems()
     {
-        Debug.Log("FOOD ITEM GEN");
         base.GenerateItems();
         for (int i = 0; i < shopItemsCount; i++)
         {
@@ -22,5 +21,10 @@ public class ShopFoodModel : ShopModel<FoodData>
             var item = new ShopItem<FoodData>(foodData, foodData.BasePrice);
             shopItems.Add(item);
         }
+    }
+
+    public override void GainItemLogic(FoodData data)
+    {
+        GameManager.Instance.PlayerFoodController.AddToPlayer(data);
     }
 }

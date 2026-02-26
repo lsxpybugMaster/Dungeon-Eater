@@ -54,7 +54,7 @@ public class ShopModel<TData>
     }
 
     //View 向 Model 调用, 以具体获取该商品
-    public virtual void GainItemLogic()
+    public virtual void GainItemLogic(TData data)
     {
 
     }

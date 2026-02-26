@@ -21,4 +21,6 @@ public class HeroData : CombatantData
     //英雄初始化天赋
     [field: SerializeField] public List<PerkData> InitPerkData { get; private set; }
 
+
+    [field: SerializeField] public List<FoodData> InitFoodDatas { get; private set; }
 }

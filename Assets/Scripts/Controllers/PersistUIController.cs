@@ -12,9 +12,12 @@ public class PersistUIController : MonoBehaviour
     //UI引用
     [SerializeField] private DeckUI deckUI;
     [SerializeField] private TopUI topUI;
+    [SerializeField] private ShowFoodListUI foodUI;
 
     public DeckUI DeckUI => deckUI;
     public TopUI TopUI => topUI;
+
+    public ShowFoodListUI FoodUI => foodUI;
 
     /// <summary>
     /// 初始化基本信息
@@ -29,6 +32,8 @@ public class PersistUIController : MonoBehaviour
         });
 
         deckUI.Setup();
+
+        foodUI.Show(heroState.Foods, isGroup:false);
     }
 
     /// <summary>

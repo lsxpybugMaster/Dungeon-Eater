@@ -36,3 +36,6 @@ MonoBehaviour:
   <InitPerkData>k__BackingField:
   - {fileID: 11400000, guid: 2ad045eb17163a349894181fbed1d3ad, type: 2}
   - {fileID: 11400000, guid: 64e3f5432a47cac41b54269d97cd7505, type: 2}
+  <InitFoodDatas>k__BackingField:
+  - {fileID: 11400000, guid: c48a47f9bfd84814198099b1c9e11e0f, type: 2}
+  - {fileID: 11400000, guid: 8df6a3c44778472419ec9d62dd76b4c8, type: 2}

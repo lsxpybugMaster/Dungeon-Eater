@@ -51,8 +51,10 @@ public class GameManager : PersistentSingleton<GameManager>
     public SceneModeManager SceneModeManager { get; private set; }
     public LevelProgress LevelProgress { get; private set; }
 
-    //=========================保存功能模块(纯C#类)=========================
+    //=========================玩家资源控制器模块(纯C#类)=========================
     public PlayerDeckController PlayerDeckController { get; private set; }
+    public PlayerFoodController PlayerFoodController { get; private set; }
+    
     /// <summary>
     /// 全局随机数生成器,支持配发随机流
     /// </summary>
@@ -61,8 +63,6 @@ public class GameManager : PersistentSingleton<GameManager>
     //=========================保存跨场景Mono实例=========================
     public TopUI GlobalUI { get; private set; }
     public PersistUIController PersistUIController { get; private set; }
-
-
     //==============================相关事件==============================
 
     // 初始化事件,GameManager初始化完毕后立刻通知其他脚本执行
@@ -95,6 +95,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
         //注意初始化顺序
         PlayerDeckController = new PlayerDeckController(HeroState);
+        PlayerFoodController = new PlayerFoodController(HeroState);
 
         //通知其他注册了该事件的脚本进行初始化,以此确保该脚本的执行在它们前面
         //改为使用协程直接停等

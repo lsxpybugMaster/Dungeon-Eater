@@ -101,7 +101,8 @@ public class ShopUI : RoomUI
         itemUI.DisableInteraction();
         AnimStatic.ItemScaleAnim(itemUI.transform, Vector3.zero);
 
-
+        //激活具体的获取道具的逻辑
+        shopModel.GainItemLogic(itemData);
     }
 
 
