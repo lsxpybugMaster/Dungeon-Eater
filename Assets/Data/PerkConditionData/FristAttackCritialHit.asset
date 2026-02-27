@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5701cd117caf1a344bde801b889d285a, type: 3}
+  m_Name: FristAttackCritialHit
+  m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: -1039123288, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  effectTimes: 1
+  <PerkCondition>k__BackingField:
+    rid: 5827088989283942407
+  <AutoTargetEffect>k__BackingField:
+    rid: 5827088989283942408
+  <UseAutoTarget>k__BackingField: 1
+  <UseActionCasterAsTarget>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 5827088989283942407
+      type: {class: OnBattleSetupCondition, ns: , asm: Assembly-CSharp}
+      data:
+        reactionTiming: 0
+    - rid: 5827088989283942408
+      type: {class: AutoTargetEffect, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetMode>k__BackingField:
+          rid: 5827088989283942409
+        <Effect>k__BackingField:
+          rid: 5827088989283942410
+    - rid: 5827088989283942409
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5827088989283942410
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 9
+        stackCount: 1

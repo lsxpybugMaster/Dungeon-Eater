@@ -126,6 +126,12 @@ public class BattleAttackSystem : Singleton<BattleAttackSystem>
             dealAttackGA.DiceStr_Buff += "+1d10";
             dealAttackGA.AttackThrowStr_Buff += "-5";
         }
+
+        if (caster.M.GetStatusEffectStacks(StatusEffectType.HEAVYHIT) > 0)
+        {
+            dealAttackGA.OverrideAttackResult = Result.GiantSuccess;
+            caster.M.RemoveStatusEffect(StatusEffectType.HEAVYHIT, 1); //注意减1层
+        }
     }
 
 
@@ -143,16 +149,16 @@ public class BattleAttackSystem : Singleton<BattleAttackSystem>
 
         //计算全局修正值
         //判断是否覆盖掷骰结果
-        Result overrideRes = ModifierContext.ConsumeModifyResult();
         Result res;
 
-        if (overrideRes != Result.None)
+        if (ga.OverrideAttackResult != Result.None)
         {
-            res = overrideRes;
+            res = ga.OverrideAttackResult;
             BattleInfoUI.Instance.AddInfo("[FixedDice!] Gaint Success",Color.cyan);
         }
         else
             res = CheckUtil.AttackRoll(ga.Caster, ga.Targets[0], attackThrowBuff);
+
 
         switch (res)
         {

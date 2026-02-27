@@ -21,9 +21,9 @@ MonoBehaviour:
     rid: -2
   <OtherEffects>k__BackingField:
   - <TargetMode>k__BackingField:
-      rid: 5827088989283942402
+      rid: 5827088989283942405
     <Effect>k__BackingField:
-      rid: 5827088989283942403
+      rid: 5827088989283942406
   <DiscardEffects>k__BackingField: []
   <CardTags>k__BackingField: 
   <UpdateCardInfo>k__BackingField: []
@@ -33,10 +33,11 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 5827088989283942402
-      type: {class: NoTM, ns: , asm: Assembly-CSharp}
+    - rid: 5827088989283942405
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 5827088989283942403
-      type: {class: ModifyAtkResEffect, ns: , asm: Assembly-CSharp}
+    - rid: 5827088989283942406
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
       data:
-        overrideResult: 3
+        statusEffectType: 9
+        stackCount: 1

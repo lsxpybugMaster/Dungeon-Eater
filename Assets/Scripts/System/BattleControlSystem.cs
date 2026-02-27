@@ -24,14 +24,26 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
         // GameManager.OnGameManagerInitialized += SetupBattle;
         
         //监听事件,一旦所有敌人被杀死,则执行胜利结算的相关工作
+        ActionSystem.AttachPerformer<BattleSetupGA>(BattleSetupPerformer);
         ActionSystem.SubscribeReaction<KillAllEnemyGA>(BattleWin, ReactionTiming.POST);
     }
 
     private void OnDisable()
     {
         //GameManager.OnGameManagerInitialized -= SetupBattle;
-
+        ActionSystem.DetachPerformer<BattleSetupGA>();
         ActionSystem.UnsubscribeReaction<KillAllEnemyGA>(BattleWin, ReactionTiming.POST);
+    }
+
+
+
+    //空, 真正作用的是PRE reaction
+    private IEnumerator BattleSetupPerformer(BattleSetupGA ga)
+    {
+        ActionSystem.Instance.AddReaction(new DrawCardsGA(5));
+        ActionSystem.Instance.AddReaction(new DecideEnemyIntendGA());
+
+        yield return null;
     }
 
     // private bool hasSetup = false;
@@ -129,14 +141,21 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
              Reaction 里的 GA 是“同一个主 GA 的一部分链式动作”，不会冲突。
              Setup 阶段的连续 Perform 是“独立的多个行动”，会触发并发冲突。
             所以不能按顺序声明两个Perform
+
+           //OPTIMIZE:
+             如果想多个GA依据管线执行, 需要一个Performer + 内部使用AddReaction组合GA
+             这样就不会造成Performer冲突
         */
 
-        var performAllGA = new SeqenceGameAction(
-            new DrawCardsGA(5),
-            new DecideEnemyIntendGA()
-        );
+        //var performAllGA = new SeqenceGameAction(
+        //    new DrawCardsGA(5),
+        //    new DecideEnemyIntendGA()
+        //);
 
-        ActionSystem.Instance.Perform(performAllGA);
+        //ActionSystem.Instance.Perform(performAllGA);
+
+
+        ActionSystem.Instance.Perform(new BattleSetupGA());
     }
 
     /// <summary>

@@ -15,6 +15,7 @@ public enum StatusEffectType
     POSIONED, //中毒
 
     MUTIATK, //累积的战斗倍率
+    HEAVYHIT, //下次攻击必定重击
 }
 
 /*

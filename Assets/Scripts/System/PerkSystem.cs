@@ -9,6 +9,7 @@ public class PerkSystem : Singleton<PerkSystem>
 
     [SerializeField] private PerksUI perksUI;
 
+
     //初始化Perk信息序列
     public void Setup(List<PerkData> perkDatas)
     {
