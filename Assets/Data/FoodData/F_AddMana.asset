@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc84693b7e6cb8445954284c58308040, type: 3}
-  m_Name: Food3
+  m_Name: F_AddMana
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: Food3
-  <Image>k__BackingField: {fileID: 1107126306, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
-  <Type>k__BackingField: 0
-  <price>k__BackingField: 12
-  perkData: {fileID: 11400000, guid: 64e3f5432a47cac41b54269d97cd7505, type: 2}
+  <Id>k__BackingField: F_AddMana
+  <Image>k__BackingField: {fileID: 21300000, guid: 2ee2502f33a8197489312b63b391026e, type: 3}
+  <Type>k__BackingField: 1
+  <price>k__BackingField: 10
+  perkData: {fileID: 0}
   ImmediateData:
-    rid: -2
+    rid: 5827088989283942401
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 5827088989283942401
+      type: {class: Imm_AddMaxMana, ns: , asm: Assembly-CSharp}
+      data:
+        manaAmount: 1

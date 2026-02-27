@@ -15,6 +15,14 @@ MonoBehaviour:
   <Id>k__BackingField: Food1
   <Image>k__BackingField: {fileID: -1564885656, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <Type>k__BackingField: 1
-  <price>k__BackingField: 25
+  <price>k__BackingField: 3
   perkData: {fileID: 0}
-  ImmediateData: {fileID: 11400000, guid: 2a22e3ef5d530ca4c92761060318a2bf, type: 2}
+  ImmediateData:
+    rid: 5827088989283942400
+  references:
+    version: 2
+    RefIds:
+    - rid: 5827088989283942400
+      type: {class: Imm_GetMoney, ns: , asm: Assembly-CSharp}
+      data:
+        moneyAmount: 100

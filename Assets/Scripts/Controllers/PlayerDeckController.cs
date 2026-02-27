@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 /// <summary>
 /// Controller将作为纯C#脚本管理数据或逻辑,由GameManager统一实例化与管理

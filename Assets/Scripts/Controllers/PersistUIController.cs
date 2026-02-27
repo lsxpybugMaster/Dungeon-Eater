@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 //OPTIMIZE: 现在所有持久化UI由其统一管理, GlobalUI降级为普通类
 /// <summary>

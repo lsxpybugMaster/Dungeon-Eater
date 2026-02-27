@@ -27,7 +27,7 @@ public class FoodData : ScriptableObject, IShopItem, IHaveKey<string>
 
     //如果是Perk类道具, 需要perkData
     [field: SerializeField] public PerkData perkData;
-    [field: SerializeField] public ImmediateData ImmediateData;
+    [field:SerializeReference, SR] public ImmediateData ImmediateData;
 
 
 #if UNITY_EDITOR

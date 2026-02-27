@@ -18,6 +18,8 @@ public class HeroState : BaseState<HeroData>
     public int Proficiency { get; private set; }
     public int Flexbility { get; private set; }
     public int MaxMana { get; private set; }
+    //对于属性的修改接口, 以保证数据修改的正确性
+    public void AddMaxMana(int mana) => MaxMana += mana;
 
 #region 金币数值系统
     public int Coins { get; private set; }
@@ -35,7 +37,6 @@ public class HeroState : BaseState<HeroData>
         OnCoinChange?.Invoke(Coins);
     }
 #endregion
-
     /// <summary>
     /// 玩家局外卡组信息在此
     /// </summary>

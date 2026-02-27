@@ -17,4 +17,10 @@ MonoBehaviour:
   <Type>k__BackingField: 0
   <price>k__BackingField: 33
   perkData: {fileID: 11400000, guid: 64e3f5432a47cac41b54269d97cd7505, type: 2}
-  ImmediateData: {fileID: 0}
+  ImmediateData:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
