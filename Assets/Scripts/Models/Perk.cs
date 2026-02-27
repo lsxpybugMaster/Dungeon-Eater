@@ -12,11 +12,16 @@ public class Perk : IFood
 
     private readonly AutoTargetEffect effect;
 
+    //会被修改的相关信息
+    public int Effectimes { get; private set; }
+
     public Perk(PerkData perkData)
     {
         data = perkData;
         condition = data.PerkCondition;
         effect = data.AutoTargetEffect;
+        
+        Effectimes = data.EffectTimes;
     }
 
     public void OnAdd()
@@ -31,6 +36,12 @@ public class Perk : IFood
 
     private void Reaction(GameAction gameAction)
     {
+        //只有有触发次数的天赋,该变量才会变为0, 之后不再触发
+        if (Effectimes == 0)
+        {
+            return;
+        }
+
         if (condition.SubConditionIsMet(gameAction))
         {
             List<CombatantView> targets = new();
@@ -46,6 +57,8 @@ public class Perk : IFood
             GameAction perkEffectAction = effect.Effect.GetGameAction(targets, HeroSystem.Instance.HeroView, null);
 
             ActionSystem.Instance.AddReaction(perkEffectAction);
+
+            Effectimes--; //每次触发后, 触发次数-1 
         }
     }
 

@@ -9,6 +9,11 @@ using UnityEngine;
 public class PerkData : ScriptableObject
 {
     [field: SerializeField] public Sprite Image { get; private set; }
+
+    [Header("效果触发次数, -1为无限次")]
+    [SerializeField] private int effectTimes = -1; 
+    public int EffectTimes => effectTimes;
+
     [field: SerializeReference, SR] public PerkCondition PerkCondition { get; private set; }
     [field: SerializeReference, SR] public AutoTargetEffect AutoTargetEffect { get; private set; }
     [field: SerializeField] public bool UseAutoTarget {  get; private set; } = true;

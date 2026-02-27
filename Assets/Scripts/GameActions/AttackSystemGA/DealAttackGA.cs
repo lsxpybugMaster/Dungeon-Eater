@@ -13,6 +13,9 @@ public class DealAttackGA : GameAction, IHaveCaster, INeedContext, IBuffable
     //攻击掷骰修正值
     public string AttackThrowStr_Buff { get; set; }
 
+    //是否需要强制覆盖攻击结果(如某些技能可以强制暴击)
+    public Result OverrideAttackResult { get; set; } = Result.None;
+
     //由子类计算
     public int Damage { get; set; } 
 

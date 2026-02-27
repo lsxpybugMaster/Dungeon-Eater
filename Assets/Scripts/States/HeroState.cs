@@ -145,4 +145,16 @@ public class HeroState : BaseState<HeroData>
         }
     }
     #endregion
+
+    #region 对Perks的操作窗口
+    /// <summary>
+    /// 与OnAdd/OnMove区分,这里只负责添加记录Perk的List元素,没有具体实现逻辑
+    /// </summary>
+    /// <param name="perkData"></param>
+    public void AddPerk(PerkData perkData)
+    {
+        Perks.Add(perkData);
+    }
+    #endregion
+
 }

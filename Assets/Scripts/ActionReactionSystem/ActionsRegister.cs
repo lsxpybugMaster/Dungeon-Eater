@@ -16,7 +16,7 @@ public class ActionsRegister : MonoBehaviour
         //在这里进行依赖注入, 而不是在场景中挂载, 让真正有意义的 System 在场景中发挥作用
         systems = new()
         {
-            new AttackSystem(),
+            new AttackModifySystem(),
             new NoAttackSystem(),
             new EffectSystem(),
             new StatusEffectsSystem(),

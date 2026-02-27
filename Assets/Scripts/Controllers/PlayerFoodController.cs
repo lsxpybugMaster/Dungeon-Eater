@@ -21,18 +21,22 @@ public class PlayerFoodController : PlayerItemController<FoodData>
     {
         heroState.AddFood(data);
 
+        //根据道具的生效属性确定道具效果
+        //立即道具: 立即执行, 之后不再有功能, 仅可显示
         if (data.Type == FoodType.Immediate)
         {
-            Debug.Log("立即执行相关代码::");
             data.ImmediateData.OnPickup(); //调用多态方法
         }
+        //天赋道具: 记录在Perk中, 每次战斗中动态地读取 + 注册
         else
         {
-            Debug.Log("更新天赋系统");
+            heroState.AddPerk(data.perkData);
         }
 
-        Raise_AddToPlayer(data); //激活事件
+        //激活其他相关的外部事件
+        Raise_AddToPlayer(data); 
 
+        //更新 UI 系统
         PersistUIUpdate();
     }
 

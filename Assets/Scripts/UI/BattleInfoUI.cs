@@ -41,6 +41,11 @@ public class BattleInfoUI : Singleton<BattleInfoUI>
     }
 
 
+    public void AddInfo(string infoStr, Color color)
+    {
+        AddLine(infoStr.ColorTo(color));
+    }
+
     /// <summary>
     /// 数值掷骰
     /// </summary>

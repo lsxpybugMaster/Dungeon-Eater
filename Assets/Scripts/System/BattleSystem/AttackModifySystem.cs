@@ -1,18 +1,20 @@
 ﻿using System.Collections;
 
 /*
-    AttackSystem决定战斗伤害细节 ==> 由DamageSystem掷骰处理 
+    AttackModifySystem 决定战斗伤害细节 ==> 由DamageSystem掷骰处理 
  */
-public class AttackSystem : IActionPerformerSystem
+public class AttackModifySystem : IActionPerformerSystem
 {
     public void Register()
     {
         ActionSystem.AttachPerformer<MagnifyAttackGA>(MagnifyAttackPerformer);
+        ActionSystem.AttachPerformer<ModifyAttackResGA>(ModifyAttackResPerformer);
     }
 
     public void UnRegister()
     {
         ActionSystem.DetachPerformer<MagnifyAttackGA>();
+        ActionSystem.DetachPerformer<ModifyAttackResGA>();
     }
 
     private IEnumerator MagnifyAttackPerformer(MagnifyAttackGA ga)
@@ -29,4 +31,15 @@ public class AttackSystem : IActionPerformerSystem
 
         yield return null;
     }
+
+    private IEnumerator ModifyAttackResPerformer(ModifyAttackResGA ga)
+    {
+        Result overrideRes = ga.OverrideResult;
+        //直接修改上下文(不安全)
+
+        BattleAttackSystem.Instance.ModifierContext.ModifyResult(overrideRes);
+    
+        yield return null;
+    }
+
 }

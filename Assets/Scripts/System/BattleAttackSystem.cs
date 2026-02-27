@@ -3,11 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
+//NOTE: 更好的设计是创建一个GA修改系统
+/// 为了简化设计,直接适用单例 + 全局上下文来管理
+/// 可能会导致全局的污染问题, 需要及时Reset
+/// </summary>
+public class BattleModifierContext
+{
+    private Result modifyResult = Result.None;
+
+    public void ModifyResult(Result newResult)
+    {
+        modifyResult = newResult;
+    }
+
+    /// <summary>
+    /// 安全获取修改结果，获取后自动重置为None
+    /// </summary>
+    public Result ConsumeModifyResult()
+    {
+        var result = modifyResult;
+        //[注意] 由于enum是值拷贝, 所以result不会被修改
+        modifyResult = Result.None; // 获取后立即重置
+        return result;
+    }
+}
+
+/// <summary>
 /// 战斗数值相关系统
 /// </summary>
-public class BattleAttackSystem : MonoBehaviour
+public class BattleAttackSystem : Singleton<BattleAttackSystem>
 {
-    [SerializeField] private GameObject damageVFX;
+    public BattleModifierContext ModifierContext { get; private set; } = new();
+
 
     void OnEnable()
     {
@@ -113,10 +140,21 @@ public class BattleAttackSystem : MonoBehaviour
 
         //计算攻击掷骰的修正值
         int attackThrowBuff = DiceRollUtil.DfromString(ga.AttackThrowStr_Buff);
-      
 
+        //计算全局修正值
+        //判断是否覆盖掷骰结果
+        Result overrideRes = ModifierContext.ConsumeModifyResult();
         Result res;
-        switch (res = CheckUtil.AttackRoll(ga.Caster, ga.Targets[0], attackThrowBuff))
+
+        if (overrideRes != Result.None)
+        {
+            res = overrideRes;
+            BattleInfoUI.Instance.AddInfo("[FixedDice!] Gaint Success",Color.cyan);
+        }
+        else
+            res = CheckUtil.AttackRoll(ga.Caster, ga.Targets[0], attackThrowBuff);
+
+        switch (res)
         {
             case Result.GiantSuccess:
                 BattleInfoUI.Instance.AddThrowResult(2 * damageDice, ga.DiceStr);

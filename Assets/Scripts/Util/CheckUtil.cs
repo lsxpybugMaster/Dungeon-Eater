@@ -8,7 +8,8 @@ public enum Result
     GiantFail,
     Failure,
     Success,
-    GiantSuccess
+    GiantSuccess,
+    None, //未检定/没有结果 适用与特殊情况,如是否强制覆盖结果
 }
 
 public static class ResultExtensions
