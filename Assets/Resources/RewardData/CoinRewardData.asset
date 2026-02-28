@@ -15,5 +15,6 @@ MonoBehaviour:
   <RewardType>k__BackingField: 0
   <SmallIcon>k__BackingField: G
   descriptionTemplate: Get {coin} coins
+  param: coin
   <Title>k__BackingField: Get Coins !!
   <Image>k__BackingField: {fileID: 21300000, guid: 984233b4bf004244981ddd759ea44285, type: 3}

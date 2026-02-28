@@ -15,5 +15,6 @@ MonoBehaviour:
   <RewardType>k__BackingField: 3
   <SmallIcon>k__BackingField: C
   descriptionTemplate: 'Choose 1 card from {card} '
+  param: card
   <Title>k__BackingField: ChooseCards!!
   <Image>k__BackingField: {fileID: 21300056, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}

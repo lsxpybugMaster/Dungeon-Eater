@@ -25,9 +25,19 @@ public class RewardData : ScriptableObject, IHaveKey<RewardType>
 
     [Header("描述模板, 使用{ }来包含想要模板化的部分并添加变量名")]
     [SerializeField] private string descriptionTemplate;
-    public string DescriptionTemplate => descriptionTemplate;
+    [Header("指定变量名")]
+    [SerializeField] private string param;
 
     [field: SerializeField] public string Title { get; set; }
 
     [field: SerializeField] public Sprite Image { get; set; }
+
+    public string GetDescription(int num1)
+    {
+        return descriptionTemplate.FormatNamed(
+            new Dictionary<string, object> {
+                { param, num1 }
+            }
+        );
+    }    
 }

@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b82fa9e4edfae14e9a90ce20b156c70, type: 3}
   m_Name: RewardDataBase
   m_EditorClassIdentifier: 
-  datas: []
+  datas:
+  - {fileID: 11400000, guid: f72a5485380a74343b0e3d6160aaf5c7, type: 2}
+  - {fileID: 11400000, guid: f8e41bc7303b92745917ba7f7f27c3ef, type: 2}
