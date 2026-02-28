@@ -9,7 +9,7 @@ using UnityEngine;
 /// 对外提供只读接口，禁止外部直接修改或访问底层列表。
 /// </summary>
 [CreateAssetMenu(menuName = "DataBase/CardDatabase")]
-public class CardDatabase : DataBase<string,CardData> 
+public class CardDatabase : DataBase<string, CardData> 
 {
     //// 外部配置卡牌总数据
     //[SerializeField] private List<CardData> allCards = new();

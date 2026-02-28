@@ -29,6 +29,7 @@ public class Config : PersistentSingleton<Config>
         attackTime = so.attackTime;
         showCardTime = so.showCardTime;
         logicBetweentime = so.logicBetweentime;  //如击败全部敌人后显示胜利的时间间隔
+        basicReward = so.basicReward;
     }
 
     private int seed; //随机数种子
@@ -36,6 +37,9 @@ public class Config : PersistentSingleton<Config>
 
     //战斗数值相关系统
     [HideInInspector] public int difficultScore;
+
+    //其余系统数值
+    [HideInInspector] public int basicReward; //多选1卡牌的基础数目
 
     //卡牌系统相关参数
     //卡牌大小

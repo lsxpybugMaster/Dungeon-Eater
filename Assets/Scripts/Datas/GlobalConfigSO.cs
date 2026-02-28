@@ -11,6 +11,9 @@ public class GlobalConfigSO : ScriptableObject
     [Header("战斗数值相关系统")]
     public int difficultScore;
 
+    [Header("系统数值")]
+    public int basicReward = 3; //多选1卡牌的基础数目
+
     [Header("卡牌系统相关参数")]
     //卡牌大小
     [Range(0, 2f)] public float cardSize;

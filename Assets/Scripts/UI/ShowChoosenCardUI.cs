@@ -81,8 +81,11 @@ public class ShowChoosenCardUI : ShowCardUIBase
                 AnimUtil.DetachFromLayoutGroup(rect, GetComponent<RectTransform>());
                 CardSelectedEffect(rect);
             }
-            else         
+            else
+            {
                 HideCardUIEffect(cardUI.transform);
+
+            }
         }
 
         //DisableAllRewardCards();
