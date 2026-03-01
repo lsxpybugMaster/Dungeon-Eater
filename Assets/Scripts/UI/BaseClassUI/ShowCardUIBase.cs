@@ -77,34 +77,12 @@ public class ShowCardUIBase : MonoBehaviour
         t.DOScale(toScale, Config.Instance.showCardTime)
          .SetEase(Ease.OutCubic)
          .SetLink(t.gameObject, LinkBehaviour.KillOnDestroy); //保证不会出现原对象删除导致进入SafeMode
+         
     }
 
     //目前只供 多选1 UI 使用
-    protected void CardSelectedEffect(RectTransform rect)
+    protected virtual void CardSelectedEffect(RectTransform rect)
     {
-
-        // 防止重复点击叠加 Tween
-        rect.DOKill();
-
-        Sequence seq = DOTween.Sequence()
-                              .SetLink(rect.gameObject, LinkBehaviour.KillOnDestroy);
-
-        seq.Append(
-            rect.DOScale(originCardScale * 1.2f, 0.5f)
-                .SetEase(Ease.OutBack)
-        );
-
-        seq.Append(
-            rect.DOAnchorPos(Vector2.zero, 0.5f)
-                .SetEase(Ease.OutCubic)
-        );
-
-        seq.Append(
-            rect.DOScale(Vector3.zero, 0.5f)
-                .SetEase(Ease.InBack)
-        );
-
-        seq.Play();
     }
 
     //保证杀掉所有 Target / Link 在这个 GameObject 上的 Tween

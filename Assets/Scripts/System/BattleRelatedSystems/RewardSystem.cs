@@ -92,8 +92,9 @@ public class RewardSystem : Singleton<RewardSystem>
             )
         );
 
-        //决定卡牌奖励
-        int cardRewardNumBouns = Config.Instance.basicReward + 2; //根据当前关卡等级,在合适的范围内生成战利品,暂时先固定为3张
+
+        //决定额外卡牌奖励
+        int cardRewardNumBouns = Config.Instance.basicReward + Random.Range(0,2); //根据当前关卡等级,在合适的范围内生成战利品,暂时先固定为3张
         rewards.Add(
             new RewardContext(
                 RewardDataBase.GetRewardDataByType(RewardType.CARDCHOOSE),
@@ -111,6 +112,7 @@ public class RewardSystem : Singleton<RewardSystem>
             (RewardContext rewardContext, int idx) => DoRewardLogic(rewardContext, idx)
         );
     }
+
 
     private void DoRewardLogic(RewardContext rewardContext, int idx)
     {
@@ -137,6 +139,7 @@ public class RewardSystem : Singleton<RewardSystem>
 
         EventBus.Publish(new RewardCardEvent(rewardDatas));
     }
+
 
     #region RewardGA 相关事件
     
