@@ -79,7 +79,7 @@ public class ShowCardUIBase : MonoBehaviour
          .SetLink(t.gameObject, LinkBehaviour.KillOnDestroy); //保证不会出现原对象删除导致进入SafeMode
     }
 
-
+    //目前只供 多选1 UI 使用
     protected void CardSelectedEffect(RectTransform rect)
     {
 
@@ -99,10 +99,10 @@ public class ShowCardUIBase : MonoBehaviour
                 .SetEase(Ease.OutCubic)
         );
 
-        //seq.Append(
-        //    rect.DOScale(Vector3.zero, 0.5f)
-        //        .SetEase(Ease.InBack)
-        //);
+        seq.Append(
+            rect.DOScale(Vector3.zero, 0.5f)
+                .SetEase(Ease.InBack)
+        );
 
         seq.Play();
     }

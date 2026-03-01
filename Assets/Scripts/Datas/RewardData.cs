@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using SerializeReferenceEditor;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +31,9 @@ public class RewardData : ScriptableObject, IHaveKey<RewardType>
     [field: SerializeField] public string Title { get; set; }
 
     [field: SerializeField] public Sprite Image { get; set; }
+
+    //可以直接通过 IamRewardEffect 接口约束可配置的 Effect 类型
+    [field: SerializeReference, SR] public IamRewardEffect RewardEffect { get; set; }
 
     public string GetDescription(int num1)
     {

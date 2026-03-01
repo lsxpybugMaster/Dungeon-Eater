@@ -18,3 +18,12 @@ MonoBehaviour:
   param: coin
   <Title>k__BackingField: Get Coins !!
   <Image>k__BackingField: {fileID: 21300000, guid: 984233b4bf004244981ddd759ea44285, type: 3}
+  <RewardEffect>k__BackingField:
+    rid: 5600171191398563841
+  references:
+    version: 2
+    RefIds:
+    - rid: 5600171191398563841
+      type: {class: GetMoneyEffect, ns: , asm: Assembly-CSharp}
+      data:
+        Amount: 0

@@ -68,8 +68,8 @@ public abstract class ItemUI<TData> : MonoBehaviour
     private void HandleHoverEnter() => MouseEnterEffect();
     private void HandleHoverExit() => MouseExitEffect();
 
-    private void HandleClick()
-    {
+    public virtual void HandleClick()
+    {   
         OnItemSelected?.Invoke(Data);
         OnItemSelectedInGroup?.Invoke(Data, groupIndex);
     }

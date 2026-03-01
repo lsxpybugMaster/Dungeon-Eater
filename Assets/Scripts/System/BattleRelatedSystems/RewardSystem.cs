@@ -1,8 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Net;
-using Unity.VisualScripting;
 using UnityEngine;
+
+/// <summary>
+/// 指定 Effect 为 RewardEffect, 可以使用接口函数直接获取GA
+//NOTE: SR插件 可以直接通过 IamRewardEffect 接口约束可配置的 Effect 类型
+/// </summary>
+public interface IamRewardEffect
+{
+    //如果后期参数不够用, 使用param object[]
+    public GameAction GetRewardGameAction(int amount);
+}
 
 //战利品数据上下文: 包含动态数据 + 静态信息
 public class RewardContext
@@ -20,6 +28,12 @@ public class RewardContext
         rewardData = _rewardData;
         number = num;
     }
+
+    //获取该奖励对应的GameAction, 以便在选择奖励后执行
+    public GameAction GetRewardGameAction()
+    {
+        return rewardData.RewardEffect.GetRewardGameAction(number);
+    }
 }
 
 
@@ -27,7 +41,22 @@ public class RewardContext
 public class RewardSystem : Singleton<RewardSystem>
 {
     //MVP阶段: 只要求实现随机生成 n 张战利品
+
+    //直接引用该UI, 因为只会有一个, 不需要担心重复引用的问题, 也不需要担心跨场景的问题
     [SerializeField] private ShowRewardUI showRewardUI;
+
+    private void OnEnable()
+    {
+        ActionSystem.AttachPerformer<GetMoneyGA>(GetMoneyPerformer);
+        ActionSystem.AttachPerformer<ChooseRewardCardGA>(GetChoosenCardPerformer);
+    }
+
+    private void OnDisable()
+    {
+        ActionSystem.DetachPerformer<GetMoneyGA>();
+        ActionSystem.DetachPerformer<ChooseRewardCardGA>();
+    }
+
 
     public void GetReward()
     {
@@ -63,15 +92,43 @@ public class RewardSystem : Singleton<RewardSystem>
             )
         );
 
-        showRewardUI.Show(rewards, isGroup:false);
+        //决定卡牌奖励
+        int cardRewardNumBouns = Config.Instance.basicReward + 2; //根据当前关卡等级,在合适的范围内生成战利品,暂时先固定为3张
+        rewards.Add(
+            new RewardContext(
+                RewardDataBase.GetRewardDataByType(RewardType.CARDCHOOSE),
+                cardRewardNumBouns
+            )
+        );
 
-        ChooseCardLogic();
+        //IMPORTANT: 注意要先Show再绑定事件, 因为Show会刷新实例, 导致原来绑定的事件清空
+
+        showRewardUI.Show(rewards, isGroup:true);
+        // ChooseCardLogic();
+
+        //绑定选中卡牌奖励后执行的函数
+        showRewardUI.BindOnItemSelectedInGroup(
+            (RewardContext rewardContext, int idx) => DoRewardLogic(rewardContext, idx)
+        );
     }
 
-    private void ChooseCardLogic()
+    private void DoRewardLogic(RewardContext rewardContext, int idx)
+    {
+        //获取事件
+        GameAction rewardGA = rewardContext.GetRewardGameAction();
+        ActionSystem.Instance.Perform(rewardGA);
+
+        //如果确定玩家决定获取, 获取item对象并播放选中效果
+        RewardUI rewardUI = showRewardUI.itemUIs[idx].GetComponent<RewardUI>();
+        rewardUI.DisableInteraction();
+        AnimStatic.ItemScaleAnim(rewardUI.transform, Vector3.zero);
+    }    
+    
+
+    private void ChooseCardLogic(int choices)
     {
         List<CardData> rewardDatas = new List<CardData>();
-        int n = Config.Instance.basicReward; //根据当前关卡等级,在合适的范围内生成战利品,暂时先固定为3张
+        int n = choices; //根据当前关卡等级,在合适的范围内生成战利品
         for (int i = 0; i < n; i++)
         {
             CardData d = CardDatabase.GetRandomCard();
@@ -79,5 +136,21 @@ public class RewardSystem : Singleton<RewardSystem>
         }
 
         EventBus.Publish(new RewardCardEvent(rewardDatas));
-    }       
+    }
+
+    #region RewardGA 相关事件
+    
+    private IEnumerator GetMoneyPerformer(GetMoneyGA getMoneyGA)
+    {
+        GameManager.Instance.HeroState.GainCoins(getMoneyGA.Amount);
+        yield return null;
+    }
+
+    private IEnumerator GetChoosenCardPerformer(ChooseRewardCardGA chooseRewardCardGA)
+    {
+        ChooseCardLogic(chooseRewardCardGA.Choices);
+        yield return null;
+    }
+
+    #endregion
 }

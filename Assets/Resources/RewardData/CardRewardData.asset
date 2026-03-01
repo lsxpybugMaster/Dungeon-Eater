@@ -18,3 +18,12 @@ MonoBehaviour:
   param: card
   <Title>k__BackingField: ChooseCards!!
   <Image>k__BackingField: {fileID: 21300056, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+  <RewardEffect>k__BackingField:
+    rid: 5600171191398563842
+  references:
+    version: 2
+    RefIds:
+    - rid: 5600171191398563842
+      type: {class: ChooseCardRewardEffect, ns: , asm: Assembly-CSharp}
+      data:
+        choices: 3

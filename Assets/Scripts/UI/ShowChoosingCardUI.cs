@@ -1,13 +1,16 @@
-﻿using DG.Tweening;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 //目前在VictoryUI下
 //展示一些 n 选 1 的卡牌选项
-public class ShowChoosenCardUI : ShowCardUIBase
+public class ShowChoosingCardUI : ShowCardUIBase
 {
-    [SerializeField] private RectTransform layoutGroup;
+    //控制UI的显示/隐藏
+    [SerializeField] private GameObject content;
+    private RectTransform layoutGroup;
+
     private float layoutGroupWidth; //如果牌数过多,会增加宽度
     //[SerializeField] private CardUI cardUIPrefab;
     [SerializeField] private float additionalSpaceSize;
@@ -22,6 +25,7 @@ public class ShowChoosenCardUI : ShowCardUIBase
     private new void Awake()
     {
         base.Awake();
+        layoutGroup = content.GetComponent<RectTransform>();    
         layoutGroupWidth = layoutGroup.sizeDelta.x;
         //originCardScale = cardUIPrefab.transform.localScale;
     }
@@ -34,11 +38,13 @@ public class ShowChoosenCardUI : ShowCardUIBase
 
     private void OnDisable()
     {
-        EventBus.UnSubscribe<RewardCardEvent>(ShowReward);
+        EventBus.UnSubscribe<RewardCardEvent>(ShowReward);  
     }
 
     private void ShowReward(RewardCardEvent evt)
     {
+        content.SetActive(true);
+
         var rewardCardDataList = evt.rewardCards;
 
         // layoutGroup.SetActive(true);
@@ -64,7 +70,6 @@ public class ShowChoosenCardUI : ShowCardUIBase
         }
     }
 
-
     //选择一张卡牌,然后隐藏其他卡牌
     private void ChooseCard(Card card, int id)
     {
@@ -84,10 +89,12 @@ public class ShowChoosenCardUI : ShowCardUIBase
             else
             {
                 HideCardUIEffect(cardUI.transform);
-
             }
         }
 
+        //这里清空所有卡牌对象, 以便后续重新应用
+        Debug.Log("清空卡牌对象");
+        content.SetActive(false);
         //DisableAllRewardCards();
     }
 }
