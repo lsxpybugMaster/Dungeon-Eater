@@ -19,18 +19,15 @@ MonoBehaviour:
   <initialCoins>k__BackingField: 15
   <MaxMana>k__BackingField: 4
   <Deck>k__BackingField:
-  - {fileID: 11400000, guid: 783c5e3f159fd9248b366201f3b64e06, type: 2}
-  - {fileID: 11400000, guid: 12c0d5dd4727c164aaed6ebe5fa79da6, type: 2}
-  - {fileID: 11400000, guid: cc67c0c693eff9a4bb8b7a1560ff8f06, type: 2}
-  - {fileID: 11400000, guid: 1bbc448dbe729834082e6ed5daf46a26, type: 2}
-  - {fileID: 11400000, guid: 783c5e3f159fd9248b366201f3b64e06, type: 2}
-  - {fileID: 11400000, guid: f5ca2dd1e05408c4bb1a666f3d604087, type: 2}
-  - {fileID: 11400000, guid: cc67c0c693eff9a4bb8b7a1560ff8f06, type: 2}
-  - {fileID: 11400000, guid: cc67c0c693eff9a4bb8b7a1560ff8f06, type: 2}
   - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
-  - {fileID: 11400000, guid: 114543198a4dec74d9bbd3d9a0754002, type: 2}
-  - {fileID: 11400000, guid: d4b2be80d56eb8143aa0c9807296e236, type: 2}
-  - {fileID: 11400000, guid: cc67c0c693eff9a4bb8b7a1560ff8f06, type: 2}
-  - {fileID: 11400000, guid: 04b5f68d0a85a9e4a8d16c9d0d73c082, type: 2}
+  - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
+  - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
+  - {fileID: 11400000, guid: cd371fcc5c6dc214988b4feaee9a7cd8, type: 2}
+  - {fileID: 11400000, guid: c2ddd1391867c6742a7dffd0e27f312c, type: 2}
+  - {fileID: 11400000, guid: c2ddd1391867c6742a7dffd0e27f312c, type: 2}
+  - {fileID: 11400000, guid: a5f04efada4ea734aa2c4347c58a8163, type: 2}
+  - {fileID: 11400000, guid: 1bbc448dbe729834082e6ed5daf46a26, type: 2}
+  - {fileID: 11400000, guid: 11b16000ff00e5a4faa56826d9c5ead3, type: 2}
+  - {fileID: 11400000, guid: 12c0d5dd4727c164aaed6ebe5fa79da6, type: 2}
   <InitPerkData>k__BackingField: []
   <InitFoodDatas>k__BackingField: []
