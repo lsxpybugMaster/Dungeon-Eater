@@ -1,8 +1,7 @@
 ﻿using DG.Tweening;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using UnityEngine.UI;
 
 
 //目前在VictoryUI下
@@ -19,7 +18,8 @@ public class ShowChoosingCardUI : ShowCardUIBase
     // [SerializeField] private float additionalSpaceSize;
     [SerializeField] private RectTransform targetRectForAni;
 
-    
+    //跳过选牌的按钮
+    [SerializeField] private Button skipButton;
 
     //private Vector3 originCardScale;
 
@@ -30,6 +30,7 @@ public class ShowChoosingCardUI : ShowCardUIBase
     //注意C# 中需要初始化
     private List<CardUI> rewardCardUIList = new();
 
+
     private new void Awake()
     {
         base.Awake();
@@ -37,6 +38,9 @@ public class ShowChoosingCardUI : ShowCardUIBase
         //originCardScale = cardUIPrefab.transform.localScale;
         uiContentRect = uiContent.GetComponent<RectTransform>();
         originContentScale = uiContentRect.localScale;
+        uiContentRect.localScale = new Vector3(0f, originContentScale.y, originContentScale.z); //初始状态先隐藏UI, 以便后续动画播放
+
+        skipButton.onClick.AddListener(Skip);
     }
 
     private void OnEnable()
@@ -50,24 +54,7 @@ public class ShowChoosingCardUI : ShowCardUIBase
         EventBus.UnSubscribe<RewardCardEvent>(ShowReward);  
     }
 
-    //在进行新的展示之前:
-    //1. 清空之前的卡牌对象
-    //2. 激活UI
-    private void LogicBeforeShow()
-    {
-        rewardCardUIList.Clear();
-        for (int i = layoutGroup.childCount - 1; i >= 0; i--)
-        {
-            Destroy(layoutGroup.GetChild(i).gameObject);
-        }
-
-        // 恢复UI的大小(之前动画将其大小归零了)
-        uiContentRect.localScale = originContentScale;
-
-
-        uiContent.SetActive(true);
-    }
-
+  
     //在展示结束后:
     //1. 隐藏UI
     //注意是由动画结束的回调调用,而不是直接调用,以保证动画效果完整播放
@@ -94,8 +81,34 @@ public class ShowChoosingCardUI : ShowCardUIBase
 
     private void ShowReward(RewardCardEvent evt)
     {
-        LogicBeforeShow();
+        //在进行新的展示之前:
+        //1. 清空之前的卡牌对象
+        //2. 激活UI 和 skip 按钮
+    
+        rewardCardUIList.Clear();
+        for (int i = layoutGroup.childCount - 1; i >= 0; i--)
+        {
+            Destroy(layoutGroup.GetChild(i).gameObject);
+        }
 
+        // 恢复UI的大小(之前动画将其大小归零了)
+        uiContent.SetActive(true);
+
+        uiContentRect.DOScaleX(originContentScale.x, 0.35f)
+                     .SetEase(Ease.OutBack)
+                     .OnComplete(() =>
+                      {
+                          skipButton.interactable = true;
+                          ShowRewardLogic(evt);
+                      });
+        // uiContentRect.localScale = originContentScale;
+
+        
+    }
+
+
+    private void ShowRewardLogic(RewardCardEvent evt)
+    {
         var rewardCardDataList = evt.rewardCards;
         int len = rewardCardDataList.Count;
 
@@ -113,7 +126,7 @@ public class ShowChoosingCardUI : ShowCardUIBase
             CardUI cardUIInst = Instantiate(cardUIPrefab);
             //挂载到指定父节点下管理
             cardUIInst.transform.SetParent(layoutGroup);
-            
+
             cardUIInst.SetupForGroup(new Card(rewardCardDataList[i]), i);
 
             cardUIInst.OnCardSelectedInGroup += ChooseCard;
@@ -122,9 +135,25 @@ public class ShowChoosingCardUI : ShowCardUIBase
         }
     }
 
+
+    private void Skip()
+    {
+        //需要立刻取消卡牌交互功能, 以防止玩家在点击跳过的同时点击了某张卡牌
+        for (int i = 0; i < rewardCardUIList.Count; i++)
+        {
+            var cardUI = rewardCardUIList[i];
+            cardUI.DisableCasting();    
+            //HideCardUIEffect(cardUI.transform);       
+        }
+        LogicAfterShowOver();
+    }
+
+
     //选择一张卡牌,然后隐藏其他卡牌
     private void ChooseCard(Card card, int id)
     {
+        skipButton.interactable = false;
+
         GameManager.Instance.PlayerDeckController.AddCardToDeck(card.data);
 
         //简单效果

@@ -123,7 +123,9 @@ public class RewardSystem : Singleton<RewardSystem>
         //如果确定玩家决定获取, 获取item对象并播放选中效果
         RewardUI rewardUI = showRewardUI.itemUIs[idx].GetComponent<RewardUI>();
         rewardUI.DisableInteraction();
-        AnimStatic.ItemScaleAnim(rewardUI.transform, Vector3.zero);
+        // AnimStatic.ItemScaleAnim(rewardUI.transform, Vector3.zero);
+        
+        AnimStatic.ScaleToZeroAndDestroyAnim(rewardUI.transform);
     }    
     
 

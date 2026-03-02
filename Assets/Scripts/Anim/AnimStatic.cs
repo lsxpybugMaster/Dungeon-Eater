@@ -3,6 +3,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEngine.GraphicsBuffer;
 
 //静态类,对 AnimUtil / MotionUtil的终极封装 
@@ -46,7 +47,14 @@ public static class AnimStatic
     {
         transform.DOScale(toScale, Config.Instance.showCardTime)
             .SetEase(Ease.OutCubic)
-            .SetLink(transform.gameObject, LinkBehaviour.KillOnDestroy); //保证不会出现原对象删除导致进入SafeMode
+            .SetLink(transform.gameObject, LinkBehaviour.KillOnDestroy); //保证不会出现原对象删除导致进入SafeMode      
     }
 
+    public static void ScaleToZeroAndDestroyAnim(Transform transform)
+    {
+        transform.DOScale(Vector3.zero, Config.Instance.showCardTime)
+            .SetEase(Ease.OutCubic)
+            .SetLink(transform.gameObject, LinkBehaviour.KillOnDestroy)
+            .OnComplete(() => GameObject.Destroy(transform.gameObject));
+    }
 }

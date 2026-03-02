@@ -9,9 +9,9 @@ using UnityEngine;
 public class ShowItemListUI<TData> : MonoBehaviour
 {
     [Header("生成的UI预制体")]
-    [SerializeField] private GameObject itemUIPrefab;
+    [SerializeField] protected GameObject itemUIPrefab;
     [Header("UI生成在哪个父节点下")]
-    [SerializeField] private GameObject itemUIRoot; //UI放置位置
+    [SerializeField] protected GameObject itemUIRoot; //UI放置位置
 
 
     //保存所有itemUI; 以便于后续管理
@@ -42,7 +42,7 @@ public class ShowItemListUI<TData> : MonoBehaviour
     /// </summary>
     /// <param name="data"></param>
     /// <param name="idx"></param>
-    private void InstantiateItemUIPrefab(TData data, int idx)
+    protected virtual void InstantiateItemUIPrefab(TData data, int idx)
     {
         var inst = Instantiate(itemUIPrefab).GetComponent<ItemUI<TData>>();
         inst.transform.SetParent(itemUIRoot.transform);
