@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4326924531525844587}
   - component: {fileID: 6905195765115931490}
+  - component: {fileID: 6392003733527521148}
+  - component: {fileID: 6101420153049814048}
   m_Layer: 5
   m_Name: UIraycast
   m_TagString: Untagged
@@ -48,6 +50,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e36855deefdcb47a98e71756982c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!222 &6392003733527521148
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520335131217553834}
+  m_CullTransparentMesh: 1
+--- !u!114 &6101420153049814048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520335131217553834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2035957130853373010
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -137,6 +177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c3be7533a1a5942826f66cb2dd8f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiRayCastArea: {fileID: 0}
+  uiRayCastArea: {fileID: 6905195765115931490}
   image: {fileID: 3178260087715157666}
-  hoverColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverColor: {r: 0.9647059, g: 0.9490196, b: 0.9490196, a: 1}

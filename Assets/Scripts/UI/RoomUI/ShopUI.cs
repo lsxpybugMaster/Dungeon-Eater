@@ -99,6 +99,7 @@ public class ShopUI : RoomUI
             return;
 
         itemUI.DisableInteraction();
+        itemUI.OnClickSuccess(); //触发点击成功的事件,如隐藏Tooptip
         AnimStatic.ItemScaleAnim(itemUI.transform, Vector3.zero);
 
         //激活具体的获取道具的逻辑

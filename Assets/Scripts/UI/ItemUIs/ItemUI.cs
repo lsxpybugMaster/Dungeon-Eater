@@ -74,6 +74,12 @@ public abstract class ItemUI<TData> : MonoBehaviour
         OnItemSelectedInGroup?.Invoke(Data, groupIndex);
     }
 
+    //当玩家点击事件成功执行时立即触发
+    public virtual void OnClickSuccess()
+    {
+
+    }
+
     public virtual void DisableInteraction()
     {
         if (uiRayCastArea == null) return;

@@ -11,6 +11,11 @@ public class FoodUI : ItemUI<FoodData>, ITooltipProvider
         image.sprite = data.Image;
     }
 
+    public override void OnClickSuccess()
+    {
+        TooltipManager.Instance?.Hide();
+    }
+
     protected override void MouseEnterEffect()
     {
         base.MouseEnterEffect();

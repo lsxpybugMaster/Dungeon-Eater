@@ -1519,7 +1519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btn: {fileID: 116673110}
   shopCardCount: 5
-  shopFoodCount: 6
+  shopFoodCount: 14
   showShopCardUI: {fileID: 1728091433}
   showFoodListUI: {fileID: 335141490}
 --- !u!114 &185163428
@@ -9738,6 +9738,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipView: {fileID: 2003713605}
+  rightPivotThreshold: 0.8
+  downPivotThreshold: 0
 --- !u!114 &1665178173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11722,7 +11724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7647059}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
