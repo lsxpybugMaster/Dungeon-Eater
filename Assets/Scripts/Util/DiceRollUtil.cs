@@ -1,7 +1,23 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
+
+[Serializable]
+//使用特定结构封装掷骰,便于后续处理(如削弱伤害/增加伤害)
+public class DiceRollInfo
+{
+    //各种骰子数量
+    public int d4;
+    public int d6;
+    public int d8;
+    public int d10;
+    public int d12;
+    public int d20;
+    //固定点数的部分
+    public int fixedPoint;
+}
 
 /// <summary>
 /// 提供各类dnd掷骰结果

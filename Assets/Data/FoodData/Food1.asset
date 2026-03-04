@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Food1
   m_EditorClassIdentifier: 
   <Id>k__BackingField: Food1
+  <Description>k__BackingField: 
   <Image>k__BackingField: {fileID: -1564885656, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <Type>k__BackingField: 1
   <price>k__BackingField: 3

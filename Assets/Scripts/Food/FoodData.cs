@@ -12,9 +12,11 @@ public enum FoodType
 /// 道具系统
 /// </summary>
 [CreateAssetMenu(menuName = "Data/Food")]
-public class FoodData : ScriptableObject, IShopItem, IHaveKey<string>
+public class FoodData : ScriptableObject, IShopItem, IHaveKey<string>, IHaveTooltip
 {
     [field: SerializeField] public string Id { get; private set; } //唯一标识符
+
+    [field: SerializeField] public string Description { get; private set; }
 
     public string GetKey() => Id; //其作为数据库索引
 
@@ -29,6 +31,10 @@ public class FoodData : ScriptableObject, IShopItem, IHaveKey<string>
     [field: SerializeField] public PerkData perkData;
     [field:SerializeReference, SR] public ImmediateData ImmediateData;
 
+    public TooltipData GetTooltipData()
+    {
+        return new TooltipData(Id, Description);
+    }
 
 #if UNITY_EDITOR
     // Unity 的编辑器回调方法

@@ -17,10 +17,11 @@ public class TooltipData
 }
 
 
+
 /// <summary>
 /// 实现该接口的组件可以提供TooltipData数据, 以供TooltipManager显示
 /// </summary>
-public interface ITooltipProvider
+public interface IHaveTooltip
 {
     TooltipData GetTooltipData();
 }
@@ -39,9 +40,12 @@ public class TooltipManager : PersistentSingleton<TooltipManager>
     private RectTransform rect;
     private Canvas canvas;
 
+    bool isShow;
+
     protected override void Awake()
     {
         base.Awake();
+        isShow = false;
         rect = tooltipView.GetComponent<RectTransform>();
         canvas = GetComponentInParent<Canvas>();
         tooltipView.HideInstant();
@@ -50,18 +54,21 @@ public class TooltipManager : PersistentSingleton<TooltipManager>
 
     private void Update()
     {
-        FollowMouse();
+        if (isShow)
+            FollowMouse();
     }
 
 
     public void Show(TooltipData data)
     {
+        isShow = true;
         tooltipView.Refresh(data);
         tooltipView.Show();
     }
 
     public void Hide()
     {
+        isShow = false;
         tooltipView.Hide();
     }
 

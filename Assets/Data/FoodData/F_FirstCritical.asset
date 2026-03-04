@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: F_FirstCritical
   m_EditorClassIdentifier: 
   <Id>k__BackingField: F_FirstCritical
+  <Description>k__BackingField: 
   <Image>k__BackingField: {fileID: -1039123288, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <Type>k__BackingField: 0
   <price>k__BackingField: 40

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class FoodUI : ItemUI<FoodData>, ITooltipProvider
+public class FoodUI : ItemUI<FoodData>
 {
     //继承ItemUI的子类只需声明对应需要的属性然后在Refresh方法中实现数据与UI的绑定即可
     protected override void Refresh(FoodData data)
@@ -20,7 +20,7 @@ public class FoodUI : ItemUI<FoodData>, ITooltipProvider
     {
         base.MouseEnterEffect();
 
-        TooltipManager.Instance?.Show(GetTooltipData());
+        TooltipManager.Instance?.Show(Data.GetTooltipData());
     }
 
     protected override void MouseExitEffect()
@@ -28,13 +28,5 @@ public class FoodUI : ItemUI<FoodData>, ITooltipProvider
         base.MouseExitEffect();
 
         TooltipManager.Instance?.Hide();
-    }
-
-    public TooltipData GetTooltipData()
-    {
-        return new TooltipData(
-            Data.name,
-            "show description"
-        );
     }
 }
