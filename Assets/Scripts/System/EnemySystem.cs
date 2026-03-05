@@ -77,7 +77,15 @@ public class EnemySystem : Singleton<EnemySystem>
             yield break;
         }
 
-        string diceStr = ga.SkillType == EnemySkill.LightHit ? attacker.LightAttackPowerStr : attacker.HeavyAttackPowerStr;
+        //FIXME: 需要优化的代码
+        //string diceStr = ga.SkillType == EnemySkill.LightHit ? attacker.LightAttackPowerStr : attacker.HeavyAttackPowerStr;
+        string diceStr = ga.SkillType switch
+        {
+            EnemySkill.LightHit => attacker.LightAttackPowerStr,
+            EnemySkill.HeavyHit => attacker.HeavyAttackPowerStr,
+            EnemySkill.Attack => ga.AttackDamageDice,
+            _ => throw new System.ArgumentOutOfRangeException(nameof(ga.SkillType), ga.SkillType, "EnemySkill不是攻击类Skill")
+        };
 
         DealAttackGA dealAttackGA = new(diceStr, new() { HeroSystem.Instance.HeroView }, ga.Caster, null);
         ActionSystem.Instance.AddReaction(dealAttackGA);

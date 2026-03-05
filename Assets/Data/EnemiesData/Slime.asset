@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Slime
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 21300000, guid: c55bcef3840eeb242bb3c4fb2bc14755, type: 3}
-  <Health>k__BackingField: 11
-  <Proficiency>k__BackingField: 2
-  <Flexbility>k__BackingField: 1
+  <Health>k__BackingField: 6
+  <Proficiency>k__BackingField: 0
+  <Flexbility>k__BackingField: 0
   ID: Slime
   <Diffculty>k__BackingField: 1
   <AppearLevels>k__BackingField: 00000000
@@ -25,6 +25,7 @@ MonoBehaviour:
   <ConditionedIntendTable>k__BackingField: []
   <RandomIntendTable>k__BackingField:
   - rid: 5386319798658924563
+  - rid: 5600171287390453760
   references:
     version: 2
     RefIds:
@@ -42,3 +43,19 @@ MonoBehaviour:
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 0
+        attackDamageDice: 1d6
+    - rid: 5600171287390453760
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 5600171287390453761
+        P: 0
+    - rid: 5600171287390453761
+      type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 8
+        cardData:
+        - {fileID: 11400000, guid: 82282b7cd3517274cbdb53f43717089a, type: 2}
+        pileType: 1

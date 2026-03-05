@@ -70,6 +70,7 @@ MonoBehaviour:
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 1
+        attackDamageDice: 
     - rid: 4226095680224755718
       type: {class: ChangeAIContextIntend, ns: , asm: Assembly-CSharp}
       data:

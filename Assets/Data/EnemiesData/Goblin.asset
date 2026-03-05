@@ -56,6 +56,7 @@ MonoBehaviour:
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 1
+        attackDamageDice: 
     - rid: 5386319980480430085
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
@@ -77,3 +78,4 @@ MonoBehaviour:
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 0
+        attackDamageDice: 

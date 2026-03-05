@@ -8,6 +8,9 @@ using UnityEngine;
 public class CombatantView : MonoBehaviour
 {
     [SerializeField] private TMP_Text healthText;
+    [SerializeField] private TMP_Text profText;
+    [SerializeField] private TMP_Text flexText;
+
     //对象图片
     [SerializeField] private SpriteRenderer spriteRenderer;
 
@@ -33,6 +36,7 @@ public class CombatantView : MonoBehaviour
         spriteRenderer.sprite = image;
 
         UpdateHealthText(M.CurrentHealth, M.MaxHealth);
+        UpdateOtherText();
     }
 
     protected virtual CombatantView ReturnThis()
@@ -69,12 +73,26 @@ public class CombatantView : MonoBehaviour
 
     public virtual void UpdateHealthText(int CurrentHealth, int MaxHealth)
     {
-        healthText.text = $"HP: {CurrentHealth}";
+        healthText.text = $"{CurrentHealth}";
     }
+
+    public virtual void UpdateOtherText()
+    {
+        int prof = Mathf.Max(M.Proficiency + M.ProficiencyBuff, 0);
+        int flex = Mathf.Max(M.Flexbility + M.FlexbilityBuff, 0);
+
+        profText.text = $"{prof}";
+
+        flexText.text = $"{flex}";
+    }
+
 
     public void UpdateEffect(StatusEffectType type, int stacks)
     {
         statusEffectsUI.UpdateStatusEffectUI(type, stacks);
+
+        //生命之外的其他属性是通过状态来修改的,所以改变状态时跟着刷新一次即可
+        UpdateOtherText();
     }
 
     public void Shake()

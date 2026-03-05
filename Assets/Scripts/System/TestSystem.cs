@@ -18,13 +18,3 @@ public class TestSystem : MonoBehaviour
         }
     }
 }
-//TODO:
-//BUG:
-//FIXME:
-//OPTIMIZE:
-//NOTE:
-//DISCUSS:
-//STEP:
-//IMPORTANT:
-//IDEA:
-//DELETE:

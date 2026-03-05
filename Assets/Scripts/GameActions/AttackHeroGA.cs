@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class AttackHeroGA : GameAction, IHaveCaster
 {
+     public string AttackDamageDice { get; private set; }
+
      public EnemyView Attacker { get; private set; }
 
      //来自接口
@@ -12,10 +14,11 @@ public class AttackHeroGA : GameAction, IHaveCaster
 
      public EnemySkill SkillType { get; private set; }
 
-     public AttackHeroGA(EnemyView attacker, EnemySkill skillType)
+     public AttackHeroGA(EnemyView attacker, EnemySkill skillType, string attackDmgDice = null)
      {
          Attacker = attacker;
          Caster = Attacker;
          SkillType = skillType;
+         AttackDamageDice = attackDmgDice;
      }
 }

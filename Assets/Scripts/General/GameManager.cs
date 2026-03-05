@@ -1,6 +1,19 @@
 ﻿using System;
 using UnityEngine;
 
+/*
+注释标签
+//TODO:
+//BUG:
+//FIXME: 写的不好的MVP, 后期需要重构
+//OPTIMIZE:
+//NOTE:
+//DISCUSS:
+//STEP:
+//IMPORTANT:
+//IDEA:
+//DELETE:
+ */
 
 public enum Scene
 {

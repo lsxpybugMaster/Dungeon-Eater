@@ -25,7 +25,7 @@ public class EnemyView : CombatantView
         EnemyAI.OnEnemyAIUpdated += UpdateIntendText;
         EnemyAI.OnEnemyAIDone += ClearIntendText;
 
-        UpdateAttackText();
+        UpdateAttackText(null);
     }
 
     //TODO: 是否需要OnDisable也加入此逻辑？(如果使用对象池)
@@ -34,14 +34,28 @@ public class EnemyView : CombatantView
         EnemyAI.OnEnemyAIUpdated -= UpdateIntendText;
     }
 
-    private void UpdateAttackText()
+    private void UpdateAttackText(string attackInfoStr)
     {
-        attackText.text = "ATK: " + ((EnemyCombatant)M).FixedAttackPower;
+        if (string.IsNullOrEmpty(attackInfoStr))
+            attackText.text = "";
+        else
+            attackText.text = "< " + attackInfoStr + " >";
     }
 
     private void UpdateIntendText(EnemyIntend enemyIntend)
     {
         intendText.text = enemyIntend.Skill.ToString();
+
+        string dmgStr = enemyIntend.Skill switch
+        {
+            EnemySkill.LightHit => ((EnemyCombatant)M).LightAttackPowerStr,
+            EnemySkill.HeavyHit => ((EnemyCombatant)M).HeavyAttackPowerStr,
+            EnemySkill.Attack => enemyIntend is AttackIntend attackIntend ? attackIntend.GetDmgStr : $"Error: {enemyIntend.ToString()}",
+            EnemySkill.FixedHit => ((EnemyCombatant)M).FixedAttackPower.ToString(),
+            _ => ""
+        };
+
+        UpdateAttackText(dmgStr);
     }
 
     private void ClearIntendText()

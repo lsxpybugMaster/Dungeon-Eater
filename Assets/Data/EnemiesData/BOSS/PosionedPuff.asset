@@ -52,6 +52,7 @@ MonoBehaviour:
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 2
+        attackDamageDice: 
     - rid: 4226095564354486277
       type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
       data:
@@ -79,6 +80,7 @@ MonoBehaviour:
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 2
+        attackDamageDice: 
     - rid: 4226095588439752720
       type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
       data:
@@ -102,6 +104,7 @@ MonoBehaviour:
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 0
+        attackDamageDice: 
     - rid: 4226095588439752724
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
