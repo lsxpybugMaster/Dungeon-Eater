@@ -10,7 +10,7 @@ public class AddStatusEffectIntend : EnemyIntend
 
     [SerializeField] private int stackCount;
 
-    [field: SerializeReference, SR] private TargetMode targetMode;
+    [field: SerializeReference, SR] private TargetMode targetMode = new NoTM();
 
     public override GameAction GetGameAction(EnemyView enemy)
     {
@@ -22,5 +22,22 @@ public class AddStatusEffectIntend : EnemyIntend
             targets = targetMode.GetTargets(null);
             
         return new AddStatusEffectGA(statusEffectType, stackCount, targets);
+    }
+}
+
+public class AddRandomStatusEffectIntend : EnemyIntend
+{
+    [SerializeField] private StatusEffectType statusEffectType;
+
+    [SerializeField] private string stackCountDice;
+
+    [field: SerializeReference, SR] private TargetMode targetMode;
+
+    public override GameAction GetGameAction(EnemyView enemy)
+    {
+        //保证target不为null
+        List<CombatantView> targets = TargetMode.GetNotNullTargets(enemy, targetMode);
+
+        return new AddRandomStatusEffectGA(statusEffectType, stackCountDice, targets);
     }
 }

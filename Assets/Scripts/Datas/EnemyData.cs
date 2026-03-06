@@ -17,6 +17,8 @@ public class EnemyData : CombatantData, IHaveKey<string>
     public string GetKey() => ID;
 
     // 基本数据 => 已存储至 CombatantData
+    // 敌人开局就执行的天赋性效果
+    [field: SerializeReference, SR] public EnemyIntend PerkIntend { get; private set; } 
 
     //更细粒度的攻击数值
     [field: SerializeField] public int FixedAttack { get; private set; }

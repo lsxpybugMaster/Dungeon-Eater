@@ -42,7 +42,7 @@ MonoBehaviour:
     - rid: 5386320117043036160
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 0
+        skill: 1
         attackDamageDice: 1d6
     - rid: 5600171287390453760
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
@@ -55,7 +55,7 @@ MonoBehaviour:
     - rid: 5600171287390453761
       type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 8
+        skill: 9
         cardData:
         - {fileID: 11400000, guid: 82282b7cd3517274cbdb53f43717089a, type: 2}
         pileType: 1

@@ -10,50 +10,59 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
-  m_Name: RedSlime
+  m_Name: Assassin
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: 21300000, guid: 58e7bd1e9ad0bfd45aff4cd986d35613, type: 3}
-  <Health>k__BackingField: 12
-  <Proficiency>k__BackingField: 0
-  <Flexbility>k__BackingField: 2
-  ID: RedSlime
+  <Image>k__BackingField: {fileID: 1191365939, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Health>k__BackingField: 10
+  <Proficiency>k__BackingField: 2
+  <Flexbility>k__BackingField: 0
+  ID: HostileKnight
   <Diffculty>k__BackingField: 2
   <AppearLevels>k__BackingField: 000000000100000002000000
   <FixedAttack>k__BackingField: 5
   <LightAttackStr>k__BackingField: 1d8
   <HeavyAttackStr>k__BackingField: 1d20
-  <ConditionedIntendTable>k__BackingField: []
+  <ConditionedIntendTable>k__BackingField:
+  - rid: 5600171308721897475
   <RandomIntendTable>k__BackingField:
-  - rid: 5386319821270941696
   - rid: 5386319980480430088
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 5386319821270941696
-      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
-      data:
-        Condition:
-          rid: -2
-        Intend:
-          rid: 5386319821270941697
-        P: 0
-    - rid: 5386319821270941697
-      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
-      data:
-        skill: 1
-        attackDamageDice: 1d8
     - rid: 5386319980480430088
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
         Condition:
           rid: -2
         Intend:
-          rid: 5600171287390453762
+          rid: 5600171308721897473
         P: 0
-    - rid: 5600171287390453762
+    - rid: 5600171308721897473
+      type: {class: AddRandomStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 7
+        statusEffectType: 0
+        stackCountDice: 1d6
+        targetMode:
+          rid: 5600171308721897474
+    - rid: 5600171308721897474
+      type: {class: SelfTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5600171308721897475
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: 5600171308721897476
+        Intend:
+          rid: 5600171308721897477
+        P: 0.3
+    - rid: 5600171308721897476
+      type: {class: NoCondition, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5600171308721897477
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 4
-        attackDamageDice: 6
+        skill: 1
+        attackDamageDice: 6 + 1d6

@@ -13,6 +13,8 @@ public class EnemyView : CombatantView
 
     [field: SerializeField] public EnemyAI EnemyAI { get; private set; }
 
+    private EnemyIntend perkIntend;
+
     public void Setup(EnemyData enemyData, EnemyCombatant enemyCombatant)
     {
         //别忘记调用基类的初始化方法
@@ -26,7 +28,26 @@ public class EnemyView : CombatantView
         EnemyAI.OnEnemyAIDone += ClearIntendText;
 
         UpdateAttackText(null);
+
+        perkIntend = enemyData.PerkIntend;
+        PerkSetup(perkIntend);   
+      
     }
+
+    //敌人天赋的初始化
+    private void PerkSetup(EnemyIntend perkIntend)
+    {
+        if (perkIntend == null)
+            return;
+        ActionSystem.SubscribeReaction<BattleSetupGA>(PerkReaction, ReactionTiming.PRE);
+    }    
+
+    private void PerkReaction(BattleSetupGA ga)
+    {
+        GameAction perkGA = perkIntend.GetGameAction(this);
+        ActionSystem.Instance.AddReaction(perkGA);
+    }
+
 
     //TODO: 是否需要OnDisable也加入此逻辑？(如果使用对象池)
     private void OnDestroy()
