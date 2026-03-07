@@ -63,6 +63,10 @@ public class EnemyView : CombatantView
             attackText.text = "< " + attackInfoStr + " >";
     }
 
+    /// <summary>
+    /// 在这里更新敌人意图信息
+    /// </summary>
+    /// <param name="enemyIntend"></param>
     private void UpdateIntendText(EnemyIntend enemyIntend)
     {
         intendText.text = enemyIntend.Skill.ToString();
@@ -73,6 +77,7 @@ public class EnemyView : CombatantView
             EnemySkill.HeavyHit => ((EnemyCombatant)M).HeavyAttackPowerStr,
             EnemySkill.Attack => enemyIntend is AttackIntend attackIntend ? attackIntend.GetDmgStr : $"Error: {enemyIntend.ToString()}",
             EnemySkill.FixedHit => ((EnemyCombatant)M).FixedAttackPower.ToString(),
+            EnemySkill.SpecialAtk => enemyIntend is IHaveDmgInfo intend ? intend.dmgStrInfo : "Error of IHaveDmgInfo",
             _ => ""
         };
 

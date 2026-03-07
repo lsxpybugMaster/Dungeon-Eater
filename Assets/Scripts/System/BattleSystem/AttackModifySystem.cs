@@ -20,10 +20,13 @@ public class AttackModifySystem : IActionPerformerSystem
     private IEnumerator MagnifyAttackPerformer(MagnifyAttackGA ga)
     {
         //解析攻击倍率(初始时为0)
-        int muti = ga.Caster.M.GetStatusEffectStacks(StatusEffectType.MUTIATK) + 1;
+        //int muti = ga.Caster.M.GetStatusEffectStacks(StatusEffectType.MUTIATK) + 1;
 
         //组合攻击倍率字符串 nd[x] x为ga中数据
-        string dmg = muti.ToString() + "d" + ga.damageOnce.ToString();
+        //string dmg = muti.ToString() + "d" + ga.damageOnce.ToString();
+
+        //攻击字符串应当直接保留在ga中而非解析!!
+        string dmg = ga.dmgStrInfo;
 
         //最后都是变成 dealAttackGA
         DealAttackGA dealAttackGA = new(dmg, ga.Target, ga.Caster, null);

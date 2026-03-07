@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
   m_Name: Chipman
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: -1255387141, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
-  <Health>k__BackingField: 35
-  <Proficiency>k__BackingField: 1
-  <Flexbility>k__BackingField: 1
+  <Image>k__BackingField: {fileID: -1701041444, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Health>k__BackingField: 18
+  <Proficiency>k__BackingField: 3
+  <Flexbility>k__BackingField: 2
   ID: Chipman
   <Diffculty>k__BackingField: 1
   <AppearLevels>k__BackingField: 000000000100000002000000
@@ -44,7 +44,7 @@ MonoBehaviour:
     - rid: 4226095655406534656
       type: {class: MagniAttackIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 3
+        skill: 5
         dmgBase: 4
     - rid: 4226095655406534659
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
@@ -57,7 +57,7 @@ MonoBehaviour:
     - rid: 4226095655406534660
       type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 4
+        skill: 6
         statusEffectType: 8
         stackCount: 1
         targetMode:
