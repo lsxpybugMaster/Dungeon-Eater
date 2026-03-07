@@ -19,9 +19,14 @@ public class Combatant
     public int MaxHealth { get; protected set; }
     public int CurrentHealth { get; protected set; }
     public int Proficiency { get; protected set; }
-    public int ProficiencyBuff => GetStatusEffectStacks(StatusEffectType.PROFICIENCY);
     public int Flexbility { get; protected set; }
-    public int FlexbilityBuff => GetStatusEffectStacks(StatusEffectType.FLEXBILITY);
+
+    //最终的精通值/敏捷值
+    public int Prof => Proficiency + GetStatusEffectStacks(StatusEffectType.PROFICIENCY)
+                                   - GetStatusEffectStacks(StatusEffectType.DE_PROF);
+
+    public int Flex => Flexbility  + GetStatusEffectStacks(StatusEffectType.FLEXBILITY)
+                                   - GetStatusEffectStacks(StatusEffectType.DE_FLEX);
 
     //一些上下文,与子类的base的共同作用
     public CombatantContext Contexts { get; set; } = new();

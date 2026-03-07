@@ -19,6 +19,8 @@ MonoBehaviour:
   ID: BBQAngryman
   <Diffculty>k__BackingField: 1
   <AppearLevels>k__BackingField: 000000000100000002000000
+  <PerkIntend>k__BackingField:
+    rid: -2
   <FixedAttack>k__BackingField: 12
   <LightAttackStr>k__BackingField: 1d8
   <HeavyAttackStr>k__BackingField: 4d6

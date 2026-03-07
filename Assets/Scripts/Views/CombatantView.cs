@@ -78,8 +78,8 @@ public class CombatantView : MonoBehaviour
 
     public virtual void UpdateOtherText()
     {
-        int prof = Mathf.Max(M.Proficiency + M.ProficiencyBuff, 0);
-        int flex = Mathf.Max(M.Flexbility + M.FlexbilityBuff, 0);
+        int prof = M.Prof;
+        int flex = M.Flex;
 
         profText.text = $"{prof}";
 

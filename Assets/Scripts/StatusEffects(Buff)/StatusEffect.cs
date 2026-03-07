@@ -8,7 +8,9 @@ public enum StatusEffectType
     AMROR,
     BURN,
     PROFICIENCY, //临时熟练度
+
     FLEXBILITY, //临时敏捷度
+
     DIZZY,  //眩晕
     BLESS, //专注: 祝福术
     DRUNK, //醉酒: +1d10攻击掷骰 -5精通
@@ -16,6 +18,9 @@ public enum StatusEffectType
 
     MUTIATK, //累积的战斗倍率
     HEAVYHIT, //下次攻击必定重击
+
+    DE_PROF, //临时熟练度减值
+    DE_FLEX, //临时精通值减值
 }
 
 /*

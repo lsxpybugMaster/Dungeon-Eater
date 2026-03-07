@@ -19,6 +19,8 @@ MonoBehaviour:
   ID: PalatinCoco
   <Diffculty>k__BackingField: 1
   <AppearLevels>k__BackingField: 00000000
+  <PerkIntend>k__BackingField:
+    rid: -2
   <FixedAttack>k__BackingField: 10
   <LightAttackStr>k__BackingField: 6 + 1d8
   <HeavyAttackStr>k__BackingField: 8d8

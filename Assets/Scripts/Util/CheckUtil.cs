@@ -57,9 +57,9 @@ public static class CheckUtil
             return Result.Failure; //大失败不会对玩家造成额外影响
         }
 
-        //基本属性修正
-        int add = caster.M.Proficiency + caster.M.ProficiencyBuff;
-        int sub = target.M.Flexbility  + target.M.FlexbilityBuff;
+        //基本属性修正(Prof 和 Flex 已经计算了基本的修正)
+        int add = caster.M.Prof;
+        int sub = target.M.Flex;
 
         //额外的修正
         if (plus >= 0) add += plus;

@@ -10,55 +10,54 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
-  m_Name: Chipman
+  m_Name: ButterCar
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: -1255387141, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
-  <Health>k__BackingField: 35
-  <Proficiency>k__BackingField: 1
-  <Flexbility>k__BackingField: 1
-  ID: Chipman
+  <Image>k__BackingField: {fileID: 21300000, guid: c55bcef3840eeb242bb3c4fb2bc14755, type: 3}
+  <Health>k__BackingField: 6
+  <Proficiency>k__BackingField: 0
+  <Flexbility>k__BackingField: 0
+  ID: Slime
   <Diffculty>k__BackingField: 1
-  <AppearLevels>k__BackingField: 000000000100000002000000
+  <AppearLevels>k__BackingField: 00000000
   <PerkIntend>k__BackingField:
     rid: -2
-  <FixedAttack>k__BackingField: 12
+  <FixedAttack>k__BackingField: 5
   <LightAttackStr>k__BackingField: 1d8
-  <HeavyAttackStr>k__BackingField: 3d6
+  <HeavyAttackStr>k__BackingField: 1d20
   <ConditionedIntendTable>k__BackingField: []
   <RandomIntendTable>k__BackingField:
-  - rid: 2509721379855400960
-  - rid: 4226095655406534659
+  - rid: 5386319798658924563
+  - rid: 5600171287390453760
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 2509721379855400960
+    - rid: 5386319798658924563
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
         Condition:
           rid: -2
         Intend:
-          rid: 4226095655406534656
+          rid: 5386320117043036160
         P: 0
-    - rid: 4226095655406534656
-      type: {class: MagniAttackIntend, ns: , asm: Assembly-CSharp}
+    - rid: 5386320117043036160
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 3
-        dmgBase: 4
-    - rid: 4226095655406534659
+        skill: 1
+        attackDamageDice: 1d6
+    - rid: 5600171287390453760
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
         Condition:
           rid: -2
         Intend:
-          rid: 4226095655406534660
+          rid: 5600171287390453761
         P: 0
-    - rid: 4226095655406534660
-      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+    - rid: 5600171287390453761
+      type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 4
-        statusEffectType: 8
-        stackCount: 1
-        targetMode:
-          rid: -2
+        skill: 9
+        cardData:
+        - {fileID: 11400000, guid: 82282b7cd3517274cbdb53f43717089a, type: 2}
+        pileType: 1
