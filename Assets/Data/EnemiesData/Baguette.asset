@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
-  m_Name: BBQAngryman
+  m_Name: Baguette
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: -1037273704, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
-  <Health>k__BackingField: 35
-  <Proficiency>k__BackingField: 1
-  <Flexbility>k__BackingField: 1
-  ID: BBQAngryman
+  <Image>k__BackingField: {fileID: -1688518835, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Health>k__BackingField: 30
+  <Proficiency>k__BackingField: -1
+  <Flexbility>k__BackingField: -2
+  ID: Baguette
   <Diffculty>k__BackingField: 1
   <AppearLevels>k__BackingField: 000000000100000002000000
   <PerkIntend>k__BackingField:
@@ -58,13 +58,13 @@ MonoBehaviour:
     - rid: 4226095680224755715
       type: {class: ChangeAIContextIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 4
+        skill: 10
         contextUpdateNumber: 1
         contextType: 1
     - rid: 4226095680224755716
       type: {class: SequenceEnemyIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 1
+        skill: 5
         enemyIntendSeq:
         - rid: 4226095680224755717
         - rid: 4226095680224755718
@@ -72,7 +72,7 @@ MonoBehaviour:
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 1
-        attackDamageDice: 
+        attackDamageDice: 2d10
     - rid: 4226095680224755718
       type: {class: ChangeAIContextIntend, ns: , asm: Assembly-CSharp}
       data:

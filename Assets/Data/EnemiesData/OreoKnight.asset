@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
+  m_Name: OreoKnight
+  m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: 131729264, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Health>k__BackingField: 35
+  <Proficiency>k__BackingField: 1
+  <Flexbility>k__BackingField: 3
+  ID: OreoKnight
+  <Diffculty>k__BackingField: 2
+  <AppearLevels>k__BackingField: 000000000100000002000000
+  <PerkIntend>k__BackingField:
+    rid: -2
+  <FixedAttack>k__BackingField: 12
+  <LightAttackStr>k__BackingField: 1d8
+  <HeavyAttackStr>k__BackingField: 3d6
+  <ConditionedIntendTable>k__BackingField:
+  - rid: 5600171352564695049
+  <RandomIntendTable>k__BackingField:
+  - rid: 2509721379855400960
+  - rid: 2509721379855400962
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2509721379855400960
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 5600171352564695053
+        P: 0
+    - rid: 2509721379855400962
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 5600171352564695055
+        P: 0
+    - rid: 5600171352564695049
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: 5600171352564695060
+        Intend:
+          rid: 5600171352564695050
+        P: 0.3
+    - rid: 5600171352564695050
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 1
+        attackDamageDice: 8d4
+    - rid: 5600171352564695053
+      type: {class: AddRandomStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 7
+        statusEffectType: 0
+        stackCountDice: 2d6
+        targetMode:
+          rid: 5600171352564695054
+    - rid: 5600171352564695054
+      type: {class: SelfTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5600171352564695055
+      type: {class: SequenceEnemyIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 5
+        enemyIntendSeq:
+        - rid: 5600171352564695056
+        - rid: 5600171352564695059
+    - rid: 5600171352564695056
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 4
+        attackDamageDice: 10
+    - rid: 5600171352564695059
+      type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 9
+        cardData:
+        - {fileID: 11400000, guid: e8bd44f67b9c0934eb269fad6d48dfcf, type: 2}
+        pileType: 1
+    - rid: 5600171352564695060
+      type: {class: NoCondition, ns: , asm: Assembly-CSharp}
+      data: 

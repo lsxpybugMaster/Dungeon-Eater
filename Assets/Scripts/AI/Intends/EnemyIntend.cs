@@ -16,6 +16,7 @@ public enum EnemySkill
     Defence,
     Heal,
     AddCard, 
+    Charge, //该技能是其他技能的前置充能
 }
 
 //包装GameAction,作为敌人意图,成为AI行为序列的一个节点

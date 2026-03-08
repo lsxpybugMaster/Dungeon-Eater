@@ -68,6 +68,7 @@ public class EnemyView : CombatantView
     {
         intendText.text = enemyIntend.Skill.ToString();
 
+        //FIXME: 使用接口函数代替Switch
         string dmgStr = enemyIntend.Skill switch
         {
             EnemySkill.LightHit => ((EnemyCombatant)M).LightAttackPowerStr,
@@ -75,8 +76,7 @@ public class EnemyView : CombatantView
             EnemySkill.Attack => enemyIntend is AttackIntend attackIntend ? attackIntend.GetDmgStr : $"Error: {enemyIntend.ToString()}",
             EnemySkill.FixedHit => ((EnemyCombatant)M).FixedAttackPower.ToString(),
             //注意SpecialAtk的伤害信息可能十分复杂,所以此时传入EnemyView,自己去解析
-            EnemySkill.SpecialAtk => enemyIntend is IHaveDmgInfo intend ? intend.GetDmgInfo(this) : "Error of IHaveDmgInfo",
-            _ => ""
+            _ => enemyIntend is IHaveDmgInfo intend ? intend.GetDmgInfo(this) : "",
         };
 
         UpdateAttackText(dmgStr);
