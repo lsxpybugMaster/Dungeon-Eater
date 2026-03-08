@@ -7,5 +7,5 @@ using UnityEngine;
 /// </summary>
 public interface IHaveDmgInfo
 {
-    string dmgStrInfo { get; set; }
+    string GetDmgInfo(EnemyView enemyView);
 }

@@ -20,10 +20,10 @@ MonoBehaviour:
   <Diffculty>k__BackingField: 1
   <AppearLevels>k__BackingField: 000000000100000002000000
   <PerkIntend>k__BackingField:
-    rid: -2
+    rid: 5600171352564695040
   <FixedAttack>k__BackingField: 12
-  <LightAttackStr>k__BackingField: 1d8
-  <HeavyAttackStr>k__BackingField: 3d6
+  <LightAttackStr>k__BackingField: 6
+  <HeavyAttackStr>k__BackingField: 6
   <ConditionedIntendTable>k__BackingField: []
   <RandomIntendTable>k__BackingField:
   - rid: 2509721379855400960
@@ -62,3 +62,14 @@ MonoBehaviour:
         stackCount: 1
         targetMode:
           rid: -2
+    - rid: 5600171352564695040
+      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 6
+        statusEffectType: 8
+        stackCount: 1
+        targetMode:
+          rid: 5600171352564695042
+    - rid: 5600171352564695042
+      type: {class: SelfTM, ns: , asm: Assembly-CSharp}
+      data: 

@@ -1,34 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+
 
 /// <summary>
 /// 由Combantant.multi 控制攻击倍率 造成 n * 数值的伤害
 /// </summary>
-public class MagnifyAttackGA : GameAction, IHaveDmgInfo
-{
-    public int damageOnce { get; private set; }
-
+public class MagnifyAttackGA : GameAction
+{ 
     public List<CombatantView> Target { get; private set; }
     public CombatantView Caster { get; private set; }
 
 
-    public string dmgStrInfo
-    {
-        get
-        {
-            int muti = Caster.M.GetStatusEffectStacks(StatusEffectType.MUTIATK) + 1;
-            string dmg = muti.ToString() + "d" + damageOnce.ToString();
-            return dmg;
-        }
-        set { dmgStrInfo = value; }
-    }
+    public string DmgStr {  get; private set; }
 
-    public MagnifyAttackGA(List<CombatantView> target, CombatantView caster, int dmg)
+    public MagnifyAttackGA(List<CombatantView> target, CombatantView caster, string dmg)
     {
         Target = target;
         Caster = caster;
-        damageOnce = dmg;
+        DmgStr = dmg;
     }
 }

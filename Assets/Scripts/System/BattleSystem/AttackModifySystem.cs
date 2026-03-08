@@ -26,7 +26,7 @@ public class AttackModifySystem : IActionPerformerSystem
         //string dmg = muti.ToString() + "d" + ga.damageOnce.ToString();
 
         //攻击字符串应当直接保留在ga中而非解析!!
-        string dmg = ga.dmgStrInfo;
+        string dmg = ga.DmgStr; 
 
         //最后都是变成 dealAttackGA
         DealAttackGA dealAttackGA = new(dmg, ga.Target, ga.Caster, null);

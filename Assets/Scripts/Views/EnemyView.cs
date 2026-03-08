@@ -77,7 +77,8 @@ public class EnemyView : CombatantView
             EnemySkill.HeavyHit => ((EnemyCombatant)M).HeavyAttackPowerStr,
             EnemySkill.Attack => enemyIntend is AttackIntend attackIntend ? attackIntend.GetDmgStr : $"Error: {enemyIntend.ToString()}",
             EnemySkill.FixedHit => ((EnemyCombatant)M).FixedAttackPower.ToString(),
-            EnemySkill.SpecialAtk => enemyIntend is IHaveDmgInfo intend ? intend.dmgStrInfo : "Error of IHaveDmgInfo",
+            //注意SpecialAtk的伤害信息可能十分复杂,所以此时传入EnemyView,自己去解析
+            EnemySkill.SpecialAtk => enemyIntend is IHaveDmgInfo intend ? intend.GetDmgInfo(this) : "Error of IHaveDmgInfo",
             _ => ""
         };
 
