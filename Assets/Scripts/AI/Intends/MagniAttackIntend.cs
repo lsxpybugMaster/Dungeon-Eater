@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class MagniAttackIntend : EnemyIntend, IHaveDmgInfo
 {
-    [Header("»ù´¡¹¥»÷Öµ1dx, Ö»ĞèÌîĞ´x")]
+    [Header("åŸºç¡€æ”»å‡»å€¼1dx, åªéœ€å¡«å†™x")]
     public int dmgBase;
 
     public string GetDmgInfo(EnemyView enemyView)

@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
+  m_Name: BBQCook
+  m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: 924700719, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Health>k__BackingField: 8
+  <Proficiency>k__BackingField: 5
+  <Flexbility>k__BackingField: 0
+  ID: BBQCook
+  <Diffculty>k__BackingField: 1
+  <AppearLevels>k__BackingField: 00000000
+  <PerkIntend>k__BackingField:
+    rid: -2
+  <FixedAttack>k__BackingField: 5
+  <LightAttackStr>k__BackingField: 1d8
+  <HeavyAttackStr>k__BackingField: 1d20
+  <ConditionedIntendTable>k__BackingField: []
+  <RandomIntendTable>k__BackingField:
+  - rid: 5386319798658924563
+  - rid: 5600171287390453760
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 5386319798658924563
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 5600171352564695043
+        P: 0
+    - rid: 5600171287390453760
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 5600171352564695047
+        P: 0
+    - rid: 5600171352564695043
+      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 6
+        statusEffectType: 1
+        stackCount: 2
+        targetMode:
+          rid: 5600171352564695045
+    - rid: 5600171352564695045
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5600171352564695047
+      type: {class: CondAttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 5
+        dmgBase: 1d8
+        dmgBuff: 1d8
+        conditionTarget:
+          rid: 5600171352564695048
+        statusEffectCond: 1
+    - rid: 5600171352564695048
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
