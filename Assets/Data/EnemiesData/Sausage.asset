@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
-  m_Name: Goblin
+  m_Name: Sausage
   m_EditorClassIdentifier: 
-  <Image>k__BackingField: {fileID: -1085446695, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Image>k__BackingField: {fileID: -1106713471, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <Health>k__BackingField: 11
   <Proficiency>k__BackingField: 2
   <Flexbility>k__BackingField: 1
@@ -63,14 +63,10 @@ MonoBehaviour:
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
         Condition:
-          rid: 5386319980480430086
+          rid: 5600171377163763713
         Intend:
           rid: 5386319980480430090
         P: 0.9
-    - rid: 5386319980480430086
-      type: {class: HPCondition, ns: , asm: Assembly-CSharp}
-      data:
-        threshold: 0.5
     - rid: 5386319980480430090
       type: {class: HealIntend, ns: , asm: Assembly-CSharp}
       data:
@@ -81,3 +77,7 @@ MonoBehaviour:
       data:
         skill: 0
         attackDamageDice: 
+    - rid: 5600171377163763713
+      type: {class: HPCondition, ns: , asm: Assembly-CSharp}
+      data:
+        threshold: 0

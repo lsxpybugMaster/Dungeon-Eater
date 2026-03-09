@@ -342,10 +342,10 @@ public class CardSystem : Singleton<CardSystem>
             SpendOtherManaGA spendOtherManaGA = new(playCardGA.Card.Mana, cardView.Card.ManaType);
             ActionSystem.Instance.AddReaction(spendOtherManaGA);
         }
-
-
-            //当前的临时卡牌上下文
-            EffectContext context = new();
+        
+        //当前的临时卡牌上下文
+        EffectContext context = new();
+        
         //解析该卡牌的手动指示目标Effect
         if (playCardGA.Card.ManualTargetEffect != null)
         {
