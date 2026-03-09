@@ -6,7 +6,11 @@ using UnityEngine;
     调用时决定生成的敌人
     创建对象时绑定对应的敌人池
     敌人池由Gamemanger初始化
+
  */
+/// <summary>
+/// 由 <see cref="MapGenerator"> 负责绑定敌人
+/// </summary>
 public class EnemyGroupGenerator 
 {
     private System.Random rng;
@@ -50,10 +54,10 @@ public class EnemyGroupGenerator
     {
         List<EnemyData> group = new();
         
-        while(diff > 0)
+        while(group.Count < 3 && diff > 0)
         {
-            //难度目前只有1, 2
-            int enemyDiff = diff == 1? 1 : rng.Next(1, 3);
+            //难度目前只有1, 2, 3
+            int enemyDiff = Mathf.Min(diff, rng.Next(1, 4));
                    
             group.Add(enemyPool.GetEnemyByDifficulty(enemyDiff, rng));
 

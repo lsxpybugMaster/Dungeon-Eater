@@ -16,8 +16,8 @@ MonoBehaviour:
   <Health>k__BackingField: 10
   <Proficiency>k__BackingField: 2
   <Flexbility>k__BackingField: 0
-  ID: HostileKnight
-  <Diffculty>k__BackingField: 2
+  ID: BiscuitKnight
+  <Diffculty>k__BackingField: 1
   <AppearLevels>k__BackingField: 000000000100000002000000
   <PerkIntend>k__BackingField:
     rid: -2

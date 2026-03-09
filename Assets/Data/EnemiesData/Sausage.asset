@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Sausage
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: -1106713471, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
-  <Health>k__BackingField: 11
+  <Health>k__BackingField: 30
   <Proficiency>k__BackingField: 2
-  <Flexbility>k__BackingField: 1
-  ID: Goblin
-  <Diffculty>k__BackingField: 1
+  <Flexbility>k__BackingField: 3
+  ID: Sausage
+  <Diffculty>k__BackingField: 3
   <AppearLevels>k__BackingField: 0000000001000000
   <PerkIntend>k__BackingField:
     rid: -2
@@ -40,7 +40,7 @@ MonoBehaviour:
         Condition:
           rid: -2
         Intend:
-          rid: 5386320117043036160
+          rid: 5600171377163763714
         P: 0
     - rid: 5386319798658924564
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
@@ -49,35 +49,35 @@ MonoBehaviour:
           rid: 5386319798658924565
         Intend:
           rid: 5386319798658924570
-        P: 0.75
+        P: 1
     - rid: 5386319798658924565
       type: {class: HPCondition, ns: , asm: Assembly-CSharp}
       data:
-        threshold: 0.5
+        threshold: 0.1
     - rid: 5386319798658924570
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 1
-        attackDamageDice: 
+        attackDamageDice: 4d8
     - rid: 5386319980480430085
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
         Condition:
           rid: 5600171377163763713
         Intend:
-          rid: 5386319980480430090
-        P: 0.9
-    - rid: 5386319980480430090
-      type: {class: HealIntend, ns: , asm: Assembly-CSharp}
-      data:
-        skill: 4
-        healAmount: 10
-    - rid: 5386320117043036160
-      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
-      data:
-        skill: 0
-        attackDamageDice: 
+          rid: 5600171377163763715
+        P: 0.1
     - rid: 5600171377163763713
       type: {class: HPCondition, ns: , asm: Assembly-CSharp}
       data:
-        threshold: 0
+        threshold: 0.5
+    - rid: 5600171377163763714
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 1
+        attackDamageDice: 2d4
+    - rid: 5600171377163763715
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 1
+        attackDamageDice: 3d6
