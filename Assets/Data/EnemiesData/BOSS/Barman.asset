@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65928e7d2d7a790459f478210afaf06c, type: 3}
+  m_Name: Barman
+  m_EditorClassIdentifier: 
+  <Image>k__BackingField: {fileID: 1229898717, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Health>k__BackingField: 80
+  <Proficiency>k__BackingField: 4
+  <Flexbility>k__BackingField: 0
+  ID: Barman
+  <Diffculty>k__BackingField: 1
+  <AppearLevels>k__BackingField: 000000000100000002000000
+  <PerkIntend>k__BackingField:
+    rid: -2
+  <FixedAttack>k__BackingField: 10
+  <LightAttackStr>k__BackingField: 4d4
+  <HeavyAttackStr>k__BackingField: 3d6
+  <ConditionedIntendTable>k__BackingField:
+  - rid: 5600171400563261440
+  <RandomIntendTable>k__BackingField:
+  - rid: 4226095588439752717
+  - rid: 4226095588439752724
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 4226095588439752717
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 4226095588439752718
+        P: 0
+    - rid: 4226095588439752718
+      type: {class: SequenceEnemyIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 5
+        enemyIntendSeq:
+        - rid: 4226095588439752719
+        - rid: 5600171400563261449
+    - rid: 4226095588439752719
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 2
+        attackDamageDice: 1d4
+    - rid: 4226095588439752724
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: -2
+        Intend:
+          rid: 4226095588439752725
+        P: 0
+    - rid: 4226095588439752725
+      type: {class: HealIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 8
+        healAmount: 10
+    - rid: 5600171400563261440
+      type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
+      data:
+        Condition:
+          rid: 5600171400563261441
+        Intend:
+          rid: 5600171400563261442
+        P: 1
+    - rid: 5600171400563261441
+      type: {class: AICondition, ns: , asm: Assembly-CSharp}
+      data:
+        cond: 0
+        relation: 6
+        x: 5
+    - rid: 5600171400563261442
+      type: {class: SequenceEnemyIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 5
+        enemyIntendSeq:
+        - rid: 5600171400563261443
+        - rid: 5600171400563261446
+    - rid: 5600171400563261443
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 4
+        attackDamageDice: 
+    - rid: 5600171400563261446
+      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 6
+        statusEffectType: 6
+        stackCount: 2
+        targetMode:
+          rid: 5600171400563261448
+    - rid: 5600171400563261448
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5600171400563261449
+      type: {class: AddCardIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 9
+        cardData:
+        - {fileID: 11400000, guid: d229d2d14025023489529988777d8d1b, type: 2}
+        - {fileID: 11400000, guid: d229d2d14025023489529988777d8d1b, type: 2}
+        pileType: 0
