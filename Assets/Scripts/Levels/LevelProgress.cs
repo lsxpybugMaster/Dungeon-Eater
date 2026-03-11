@@ -5,13 +5,13 @@
 public class LevelProgress : IModelForUI<LevelProgress>
 {
     public int MaxLevel { get; set; }
-
     //当前关卡, 从 0 开始
     public int Level { get; private set; }
-  
-
     //当前轮次, 即该关卡走了多少房间
     public int Round { get; private set; }
+
+    //难度分数
+    public int Difficulty => Config.Instance.difficultScore + Round - 1;
 
     //传入level, Round 
     //public event Action<LevelProgress> OnProgressChanged;

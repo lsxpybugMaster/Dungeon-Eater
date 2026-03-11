@@ -53,6 +53,10 @@ MonoBehaviour:
     sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     effect:
       rid: 5600171330895609856
+  - Type: 9
+    sprite: {fileID: -1039123288, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+    effect:
+      rid: 5600171422895046656
   references:
     version: 2
     RefIds:
@@ -95,6 +99,11 @@ MonoBehaviour:
       data:
         decay: 1
         type: 11
+    - rid: 5600171422895046656
+      type: {class: DecayStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        decay: 1
+        type: 9
     - rid: 5827088989283942404
       type: {class: DecayStatusEffect, ns: , asm: Assembly-CSharp}
       data:

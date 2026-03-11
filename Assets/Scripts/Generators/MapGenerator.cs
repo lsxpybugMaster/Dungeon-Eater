@@ -23,18 +23,29 @@ public class MapGenerator
     //传入配置数据
     private MapData baseData;
     //从RNGSystem中获取随机数生成器
-    private System.Random rng;
+    //地图房间随机种子
+    private System.Random mapRng;
+    //地图敌人随机种子(仅提供种子不提供生成)
+    //OPTIMIZE: 现在的随机敌人生成策略: 一次生成静态种子 + 基于其他条件动态生成
+    //这样能够实现动态的敌人生成, 避免房间和敌人绑定
+    private System.Random enemyRng;
+
+    private System.Random bossRng;
 
     //同时准备一个敌人生成器,将敌人提前保存在房间中(为了确定性生成)
-    private EnemyGroupGenerator enemyGroupGenerator;
+    //private EnemyGroupGenerator enemyGroupGenerator;
 
     public MapGenerator(MapData mapData)
     {
         baseData = mapData;
         //以后使用"Map"索引随机流;
-        rng = GameManager.Instance.RogueController.GetStream("Map");
+        mapRng = GameManager.Instance.RogueController.GetStream("Map");
 
-        enemyGroupGenerator = new();
+        enemyRng = GameManager.Instance.RogueController.GetStream("Enemy");
+
+        bossRng = GameManager.Instance.RogueController.GetStream("Boss");
+
+        //enemyGroupGenerator = new();
     }
 
     /// <summary>
@@ -79,7 +90,7 @@ public class MapGenerator
         for (int i = 0; i < totalGrids; i++)
             indices.Add(i);
 
-        Shuffle(indices, rng);
+        Shuffle(indices, mapRng);
 
         // 分配房间
         int cursor = 0; //指向当前分配的房间索引
@@ -95,16 +106,20 @@ public class MapGenerator
         {
             if (grids[i].gridType != GridType.Enemy)
                 continue;
+
+            //不再静态生成敌人,而是根据种子和难度在进入房间时动态生成
+            //grids[i].roomEnemies = enemyGroupGenerator.GetEnemyGroup(Config.Instance.difficultScore);
             
-            grids[i].roomEnemies = enemyGroupGenerator.GetEnemyGroup(Config.Instance.difficultScore);
-            
+            grids[i].enemySeed = enemyRng.Next(); //为每个敌人房生成一个随机种子,后续根据难度生成敌人
+
             // 同时生成对应的boss代替信息
             var bossGrid = new MapGrid
             {
                 gridIndex = i,
                 gridType = GridType.Boss,
                 nextDirection = grids[i].nextDirection, // 需要拷贝当前敌人信息
-                roomEnemies = enemyGroupGenerator.GetBossGroup()
+                enemySeed = bossRng.Next() //现在boss也只保留种子
+                //roomEnemies = enemyGroupGenerator.GetBossGroup()
             };
 
             bossGridList.Add((i, bossGrid));

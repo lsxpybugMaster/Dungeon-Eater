@@ -24,4 +24,6 @@ public class MapGrid
 
     //如果需要,存取敌人
     public List<EnemyData> roomEnemies;
+
+    public int enemySeed; //现在不保存普通敌人了, 只保存种子，后期根据diff来动态生成
 }

@@ -104,18 +104,7 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
         HeroSystem.Instance.Setup(heroState);
 
         //初始化敌人信息
-        //使用专门的Generator
-        List<EnemyData> enemyDatas;
-        //这种情况只有直接从该场景开始(DEBUG)时才会出现
-        if (GameManager.Instance.EnemyPool.EnemiesBuffer.Count == 0)
-        {
-            enemyDatas = this.enemyDatas;
-        }   
-        else
-        {
-            Debug.Log($"DIFF: {GetDifficulty()}");
-            enemyDatas = GameManager.Instance.EnemyPool.GetEnemiesBuffer();
-        }
+        List<EnemyData> enemyDatas = GenerateEnemyDatas();
              
         //EnemyGroupDatabase.GetRandomGroupByLevel(1).Enemies
         EnemySystem.Instance.Setup(enemyDatas);
@@ -131,6 +120,21 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
         ManaSystem.Instance.Setup(heroState.MaxMana);
 
         OtherSetupLogic();
+    }
+
+    private List<EnemyData> GenerateEnemyDatas()
+    {
+        //使用专门的Generator
+        //这种情况只有直接从该场景开始(DEBUG)时才会出现
+        if (GameManager.Instance.EnemyPool.EnemiesBuffer.Count == 0)
+        {
+            Debug.LogWarning("现在是直接从配置生成敌人");
+            return this.enemyDatas;
+        }
+        else
+        {
+            return GameManager.Instance.EnemyPool.GetEnemiesBuffer();
+        }
     }
 
     /// <summary>
@@ -184,14 +188,5 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
     public static BattleType GetBattleMode()
     {
         return GameManager.Instance.BattleContext.Type;
-    }
-
-    /// <summary>
-    /// 获取动态的难度分数
-    /// </summary>
-    /// <returns>依据探索的房间数增加难度分数</returns>
-    private int GetDifficulty()
-    {
-        return Config.Instance.difficultScore + GameManager.Instance.LevelProgress.Round - 1;
     }
 }
