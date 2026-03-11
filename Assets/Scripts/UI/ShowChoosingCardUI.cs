@@ -189,17 +189,17 @@ public class ShowChoosingCardUI : ShowCardUIBase
 
         // 依序列播放放大、移动和缩小动画
         seq.Append(
-            rect.DOScale(originCardScale * 1.2f, 0.5f)
+            rect.DOScale(originCardScale * 1.2f, 0.25f)
                 .SetEase(Ease.OutBack)
         );
 
         seq.Append(
-            rect.DOAnchorPos(Vector2.zero, 0.5f)
+            rect.DOAnchorPos(Vector2.zero, 0.25f)
                 .SetEase(Ease.OutCubic)
         );
 
         seq.Append(
-            rect.DOScale(Vector3.zero, 0.5f)
+            rect.DOScale(Vector3.zero, 0.25f)
                 .SetEase(Ease.InBack)
         );
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GlobalConfigSO
   m_EditorClassIdentifier: 
   seed: 42
-  difficultScore: 9
+  difficultScore: 3
   basicReward: 3
   cardSize: 0.7
   cardShowSize: 0.8

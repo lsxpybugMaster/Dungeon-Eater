@@ -113,6 +113,7 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
         }   
         else
         {
+            Debug.Log($"DIFF: {GetDifficulty()}");
             enemyDatas = GameManager.Instance.EnemyPool.GetEnemiesBuffer();
         }
              
@@ -183,5 +184,14 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
     public static BattleType GetBattleMode()
     {
         return GameManager.Instance.BattleContext.Type;
+    }
+
+    /// <summary>
+    /// 获取动态的难度分数
+    /// </summary>
+    /// <returns>依据探索的房间数增加难度分数</returns>
+    private int GetDifficulty()
+    {
+        return Config.Instance.difficultScore + GameManager.Instance.LevelProgress.Round - 1;
     }
 }
