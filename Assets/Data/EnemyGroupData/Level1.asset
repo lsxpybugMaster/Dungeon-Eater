@@ -15,13 +15,22 @@ MonoBehaviour:
   levelId: 0
   <Groups>k__BackingField:
   - <Enemies>k__BackingField:
-    - {fileID: 11400000, guid: b1ad47719dc920b4191fd66ddb5f9c00, type: 2}
-    - {fileID: 11400000, guid: b1ad47719dc920b4191fd66ddb5f9c00, type: 2}
+    - {fileID: 11400000, guid: 8e4628ec52e667649b203d1b30df6866, type: 2}
+    - {fileID: 11400000, guid: 8e4628ec52e667649b203d1b30df6866, type: 2}
+    - {fileID: 11400000, guid: 8e4628ec52e667649b203d1b30df6866, type: 2}
+  - <Enemies>k__BackingField:
+    - {fileID: 11400000, guid: 097ae7afb9c514141b1f52d61e6d279e, type: 2}
+    - {fileID: 11400000, guid: 097ae7afb9c514141b1f52d61e6d279e, type: 2}
+    - {fileID: 11400000, guid: 097ae7afb9c514141b1f52d61e6d279e, type: 2}
   - <Enemies>k__BackingField:
     - {fileID: 11400000, guid: 10bc7e35f49c74449a00e3e0dc766504, type: 2}
-    - {fileID: 11400000, guid: 8e4628ec52e667649b203d1b30df6866, type: 2}
-    - {fileID: 11400000, guid: 8e4628ec52e667649b203d1b30df6866, type: 2}
+    - {fileID: 11400000, guid: 10bc7e35f49c74449a00e3e0dc766504, type: 2}
+    - {fileID: 11400000, guid: 10bc7e35f49c74449a00e3e0dc766504, type: 2}
   - <Enemies>k__BackingField:
-    - {fileID: 11400000, guid: 097ae7afb9c514141b1f52d61e6d279e, type: 2}
-    - {fileID: 11400000, guid: 097ae7afb9c514141b1f52d61e6d279e, type: 2}
-    - {fileID: 11400000, guid: 097ae7afb9c514141b1f52d61e6d279e, type: 2}
+    - {fileID: 11400000, guid: d1ffe53a7c1d9f94883655c2f2a1dc81, type: 2}
+    - {fileID: 11400000, guid: d1ffe53a7c1d9f94883655c2f2a1dc81, type: 2}
+    - {fileID: 11400000, guid: d1ffe53a7c1d9f94883655c2f2a1dc81, type: 2}
+  - <Enemies>k__BackingField:
+    - {fileID: 11400000, guid: 3f6d1e9d93e76d8499613500c5222f62, type: 2}
+    - {fileID: 11400000, guid: 3f6d1e9d93e76d8499613500c5222f62, type: 2}
+    - {fileID: 11400000, guid: 02208480b4c4e1347910669191622ce5, type: 2}

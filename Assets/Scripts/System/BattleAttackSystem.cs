@@ -116,16 +116,26 @@ public class BattleAttackSystem : Singleton<BattleAttackSystem>
     private void DealBeforeAttack(DealAttackGA dealAttackGA)
     {
         CombatantView caster = dealAttackGA.Caster;
-        dealAttackGA.DiceStr_Buff = "";
-        dealAttackGA.AttackThrowStr_Buff = "";
-        if (caster.M.GetStatusEffectStacks(StatusEffectType.BLESS) > 0)
-            dealAttackGA.DiceStr_Buff += "+1d4";
+        dealAttackGA.DiceStr_Buff = "";        //伤害掷骰修正值,如+1d4
+        dealAttackGA.AttackThrowStr_Buff = ""; //攻击掷骰修正值
+
+        //TODO: 将对应的更新逻辑绑定在状态上而非在使用时声明
 
         if (caster.M.GetStatusEffectStacks(StatusEffectType.DRUNK) > 0)
         {
             dealAttackGA.DiceStr_Buff += "+1d10";
-            dealAttackGA.AttackThrowStr_Buff += "-5";
+            dealAttackGA.AttackThrowStr_Buff += "-5"; 
         }
+
+      
+        int atkDiceAdd = caster.M.GetStatusEffectStacks(StatusEffectType.ATK_DICE_ADD);
+        if (atkDiceAdd > 0)
+            dealAttackGA.AttackThrowStr_Buff += $"1d{atkDiceAdd}";
+
+        int dmgDiceAdd = caster.M.GetStatusEffectStacks(StatusEffectType.DMG_DICE_ADD);
+        if (dmgDiceAdd > 0)
+            dealAttackGA.DiceStr_Buff += $"+1d{dmgDiceAdd}";
+
 
         if (caster.M.GetStatusEffectStacks(StatusEffectType.HEAVYHIT) > 0)
         {

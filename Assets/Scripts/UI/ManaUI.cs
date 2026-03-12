@@ -8,7 +8,7 @@ public enum ManaID
 {
     BasicMana = 999, //这个只作为基本的默认
     CombatMaster = 0,
-    Magic = 0,
+    //Magic = 0,
 }
 
 //TODO: 这块写的适配度较低,但是目前先以完成为主

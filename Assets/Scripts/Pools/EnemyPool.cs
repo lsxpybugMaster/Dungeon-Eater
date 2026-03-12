@@ -104,4 +104,22 @@ public class EnemyPool
 
         return tarGroup.GetRandom(rng).Enemies;
     }
+
+    /// <summary>
+    /// 通过难度系数获取随机敌人组合
+    /// </summary>
+    /// <param name="difficulty"></param>
+    /// <returns></returns>
+    public List<EnemyData> GetEnemyGroupByDiff(int difficulty)
+    {
+        if (EnemiesGroup == null || EnemiesGroup.Count == 0)
+        {
+            Debug.LogError($"敌人组合索引数据不合法");
+            return null;
+        }
+
+        int cnt = EnemiesGroup.Count;
+        int idx = Mathf.Min(cnt, difficulty / 2 - 1); //3,4,5,6,7,8,9
+        return EnemiesGroup[idx].Enemies;
+    }
 }

@@ -10,7 +10,7 @@ public enum StatusEffectType
     FLEXBILITY, //临时敏捷度
 
     DIZZY,  //眩晕
-    BLESS, //专注: 祝福术
+    //BLESS, //专注: 祝福术
     DRUNK, //醉酒: +1d10攻击掷骰 -5精通
     POSIONED, //中毒
 
@@ -19,6 +19,9 @@ public enum StatusEffectType
 
     DE_PROF, //临时熟练度减值
     DE_FLEX, //临时精通值减值
+
+    ATK_DICE_ADD, //攻击掷骰加值, 状态层数 x 会进行 1dx 的加值
+    DMG_DICE_ADD, //伤害掷骰加值, 状态层数 x 会进行 1dx 的加值
 }
 
 /*
@@ -30,6 +33,8 @@ public enum StatusEffectType
  *      激活时结算(主动)  如燃烧
  *      触发时结算(被动)  如反击
  */
+
+//TODO: 应该为每一个StatusEffect单独创建数据类
 
 [System.Serializable]
 public class StatusEffect : IHaveKey<StatusEffectType>

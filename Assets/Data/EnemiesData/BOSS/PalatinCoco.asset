@@ -81,16 +81,8 @@ MonoBehaviour:
         Condition:
           rid: -2
         Intend:
-          rid: 4226095541533016065
+          rid: 5600171444068155410
         P: 0
-    - rid: 4226095541533016065
-      type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
-      data:
-        skill: 6
-        statusEffectType: 5
-        stackCount: 2
-        targetMode:
-          rid: -2
     - rid: 4226095541533016066
       type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
       data:
@@ -99,3 +91,8 @@ MonoBehaviour:
         stackCount: 4
         targetMode:
           rid: -2
+    - rid: 5600171444068155410
+      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+      data:
+        skill: 1
+        attackDamageDice: 4d4

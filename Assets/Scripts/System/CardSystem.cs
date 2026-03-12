@@ -357,6 +357,8 @@ public class CardSystem : Singleton<CardSystem>
         //解析该卡牌的其余Effect并"执行"(因为不会立刻执行)
         foreach (var effectWrapper in playCardGA.Card.OtherEffects)
         {
+            Debug.Log(effectWrapper.Effect.ToString());
+
             List<CombatantView> targets = effectWrapper.TargetMode.GetTargets(playCardGA.ManualTarget);
 
             //IMPORTANT: 其中 context 会先被 ManualTargetEffect.GA 修改,实现 effect间通信

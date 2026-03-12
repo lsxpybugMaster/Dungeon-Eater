@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
-  m_Name: Combat_Ready
+  m_Name: CBM_BounsDmg
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: Combat_Ready
-  <Description>k__BackingField: change 2 act point to CombantMasterPoint
-  <SpendManaType>k__BackingField: 999
-  <Mana>k__BackingField: 2
-  <Image>k__BackingField: {fileID: -1688518835, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Id>k__BackingField: CBM_BounsDmg
+  <Description>k__BackingField: Add 1d4 dmg to all attack in this turn
+  <SpendManaType>k__BackingField: 0
+  <Mana>k__BackingField: 1
+  <Image>k__BackingField: {fileID: 654643611, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
   <ManualTargetEffect>k__BackingField:
     rid: -2
   <OtherEffects>k__BackingField:
   - <TargetMode>k__BackingField:
       rid: 4226095702526918658
     <Effect>k__BackingField:
-      rid: 4226095702526918659
+      rid: 5600171444068155409
   <DiscardEffects>k__BackingField: []
   <CardTags>k__BackingField: 
   <UpdateCardInfo>k__BackingField: []
@@ -36,8 +36,8 @@ MonoBehaviour:
     - rid: 4226095702526918658
       type: {class: HeroTM, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 4226095702526918659
-      type: {class: AddOtherManaEffect, ns: , asm: Assembly-CSharp}
+    - rid: 5600171444068155409
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
       data:
-        manaID: 0
-        addAmount: 1
+        statusEffectType: 12
+        stackCount: 4

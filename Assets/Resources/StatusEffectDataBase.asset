@@ -33,10 +33,6 @@ MonoBehaviour:
     sprite: {fileID: 21300108, guid: 09e4c6a7d75923945afe43953ef58ad2, type: 3}
     effect:
       rid: 2509721379855400969
-  - Type: 5
-    sprite: {fileID: 21300060, guid: 09e4c6a7d75923945afe43953ef58ad2, type: 3}
-    effect:
-      rid: 4226095520488620032
   - Type: 6
     sprite: {fileID: 21300064, guid: 09e4c6a7d75923945afe43953ef58ad2, type: 3}
     effect:
@@ -49,14 +45,18 @@ MonoBehaviour:
     sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     effect:
       rid: 5827088989283942404
-  - Type: 11
-    sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-    effect:
-      rid: 5600171330895609856
   - Type: 9
     sprite: {fileID: -1039123288, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
     effect:
       rid: 5600171422895046656
+  - Type: 11
+    sprite: {fileID: -1208265138, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+    effect:
+      rid: 5600171444068155404
+  - Type: 12
+    sprite: {fileID: 585722330, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+    effect:
+      rid: 5600171444068155408
   references:
     version: 2
     RefIds:
@@ -84,26 +84,26 @@ MonoBehaviour:
     - rid: 2509721379855400969
       type: {class: ApplyDizzyEffect, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 4226095520488620032
-      type: {class: DecayStatusEffect, ns: , asm: Assembly-CSharp}
-      data:
-        decay: 1
-        type: 5
     - rid: 4226095588439752708
       type: {class: DecayStatusEffect, ns: , asm: Assembly-CSharp}
       data:
         decay: 1
         type: 6
-    - rid: 5600171330895609856
-      type: {class: DecayStatusEffect, ns: , asm: Assembly-CSharp}
-      data:
-        decay: 1
-        type: 11
     - rid: 5600171422895046656
       type: {class: DecayStatusEffect, ns: , asm: Assembly-CSharp}
       data:
         decay: 1
         type: 9
+    - rid: 5600171444068155404
+      type: {class: DecayStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        decay: 999
+        type: 11
+    - rid: 5600171444068155408
+      type: {class: DecayStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        decay: 999
+        type: 12
     - rid: 5827088989283942404
       type: {class: DecayStatusEffect, ns: , asm: Assembly-CSharp}
       data:

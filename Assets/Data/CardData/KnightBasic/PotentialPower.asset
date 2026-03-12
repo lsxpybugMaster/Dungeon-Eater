@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
+  m_Name: PotentialPower
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField: PotentialPower
+  <Description>k__BackingField: Get 1 Action Point, Draw 1 Card
+  <SpendManaType>k__BackingField: 999
+  <Mana>k__BackingField: 0
+  <Image>k__BackingField: {fileID: 1351559378, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <ManualTargetEffect>k__BackingField:
+    rid: -2
+  <OtherEffects>k__BackingField:
+  - <TargetMode>k__BackingField:
+      rid: 5600171444068155398
+    <Effect>k__BackingField:
+      rid: 5600171444068155393
+  - <TargetMode>k__BackingField:
+      rid: 5600171444068155399
+    <Effect>k__BackingField:
+      rid: 5600171444068155401
+  <DiscardEffects>k__BackingField: []
+  <CardTags>k__BackingField: 
+  <UpdateCardInfo>k__BackingField:
+  - {fileID: 11400000, guid: 114543198a4dec74d9bbd3d9a0754002, type: 2}
+  <CardPrice>k__BackingField: 20
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 5600171444068155393
+      type: {class: AddManaEffect, ns: , asm: Assembly-CSharp}
+      data:
+        refill: 0
+        addAmount: 1
+    - rid: 5600171444068155398
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5600171444068155399
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5600171444068155401
+      type: {class: DrawCardsEffect, ns: , asm: Assembly-CSharp}
+      data:
+        drawAmount: 1

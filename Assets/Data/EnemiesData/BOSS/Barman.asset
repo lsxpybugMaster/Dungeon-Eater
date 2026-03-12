@@ -97,7 +97,7 @@ MonoBehaviour:
       type: {class: AddStatusEffectIntend, ns: , asm: Assembly-CSharp}
       data:
         skill: 6
-        statusEffectType: 6
+        statusEffectType: 5
         stackCount: 2
         targetMode:
           rid: 5600171400563261448

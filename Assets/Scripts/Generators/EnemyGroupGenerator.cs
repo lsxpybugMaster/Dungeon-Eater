@@ -36,7 +36,8 @@ public class EnemyGroupGenerator
         int fixedEnemy = room_rng.Next(0, 3);
         if (fixedEnemy == 0)
         {
-            return enemyPool.GetRandomEnemyGroup(BattleType.Normal, room_rng);
+            return enemyPool.GetEnemyGroupByDiff(difficulty);
+            //return enemyPool.GetRandomEnemyGroup(BattleType.Normal, room_rng);
         }
         //否则生成随机敌人组合
         else
