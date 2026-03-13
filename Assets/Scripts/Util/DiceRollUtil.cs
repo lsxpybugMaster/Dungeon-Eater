@@ -46,6 +46,13 @@ public static class DiceRollUtil
         return D(20); //左闭右开
     }
 
+
+    //注意 X 卡将 X 代替
+    public static string ReplaceX(this string expression, int x)
+    {
+        return expression.Replace("x", x.ToString());
+    }
+
     //10 + 2d10 + 1d6 => 10 + 2 * D10() + D6()
     public static int DfromString(string command)
     {
@@ -113,4 +120,6 @@ public static class DiceRollUtil
 
         return total;
     }
+
+  
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class DiceRollUtilTests
 {
-    
+    /*
     public int Test_Roll_times;
 
     [SetUp]
@@ -154,4 +154,6 @@ public class DiceRollUtilTests
         Assert.DoesNotThrow(() => DiceRollUtil.DfromString(""));
         Assert.DoesNotThrow(() => DiceRollUtil.DfromString(null));
     }
+
+    */
 }

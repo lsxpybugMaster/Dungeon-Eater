@@ -151,8 +151,13 @@ public class BattleAttackSystem : Singleton<BattleAttackSystem>
     /// </summary>
     private IEnumerator DealAttackPerformer(DealAttackGA ga)
     {
+        //X卡相关参数
+        int X = ManaSystem.Instance.CurMana;
+       
         //这里由于需要判定重击双倍伤害,所以没有直接使用封装好的工具类
-        int damageDice = DiceRollUtil.DfromString(ga.DiceStr);
+        //int damageDice = DiceRollUtil.DfromString(ga.DiceStr);
+        string finalDiceStr = ga.DiceStr.ReplaceX(X);
+        int damageDice = DiceRollUtil.DfromString(finalDiceStr);
 
         //计算攻击掷骰的修正值
         int attackThrowBuff = DiceRollUtil.DfromString(ga.AttackThrowStr_Buff);
@@ -173,12 +178,12 @@ public class BattleAttackSystem : Singleton<BattleAttackSystem>
         switch (res)
         {
             case Result.GiantSuccess:
-                BattleInfoUI.Instance.AddThrowResult(2 * damageDice, ga.DiceStr);
+                BattleInfoUI.Instance.AddThrowResult(2 * damageDice, finalDiceStr);
                 ActionSystem.Instance.AddReaction(new CriticalHitGA(damageDice * 2, ga.Targets, ga.Caster));
                 break;
 
             case Result.Success:
-                BattleInfoUI.Instance.AddThrowResult(damageDice, ga.DiceStr);
+                BattleInfoUI.Instance.AddThrowResult(damageDice, finalDiceStr);
                 ActionSystem.Instance.AddReaction(new NormalAttackGA(damageDice, ga.Targets, ga.Caster));
                 break;
 

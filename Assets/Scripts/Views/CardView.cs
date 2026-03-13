@@ -41,19 +41,19 @@ public class CardView : MonoBehaviour
         Card = card;
         title.text = card.Title;
         description.text = card.Description;
-        mana.text = ShowManaTextByType(card.ManaType, card.Mana); //card.Mana.ToString();
+        mana.text = ShowManaTextByType(card.ManaType, card.ManaStr); //card.Mana.ToString();
         imageSR.sprite = card.Image;
 
         cardTrigger = GetComponent<BoxCollider2D>();
     }
 
-    public string ShowManaTextByType(ManaID manaID, int mana)
+    public string ShowManaTextByType(ManaID manaID, string mana)
     {
         if (manaID == ManaID.CombatMaster)
         {
-            return mana.ToString().ColorTo("red"); 
+            return mana.ColorTo("red"); 
         }
-        return mana.ToString();
+        return mana;
     }
 
     public void EnableCardInteraction()

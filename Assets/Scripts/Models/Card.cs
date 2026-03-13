@@ -5,6 +5,7 @@ public enum CardTag
 {
     Exhaust, //消耗：使用后立刻从战斗牌库删除
     Status, //状态卡牌
+    X,  //消耗 X 资源的卡牌
 }
 
 /// <summary>
@@ -31,7 +32,15 @@ public class Card
 
     // 值型、会在运行时变化 —— 单独存储（深拷贝一份）
     // 需要生成隐藏字段，自动属性
-    public int Mana { get; private set;}
+    private int mana;
+    public int Mana {
+        get => HasTag(CardTag.X) ? ManaSystem.Instance.CurMana : mana; //如果是X卡牌
+        set => mana = value;
+    }
+
+    //由于引入了X费卡,所以费用数值需要特殊处理
+    public string ManaStr => HasTag(CardTag.X) ? "X" : Mana.ToString();
+
     public ManaID ManaType => data.SpendManaType; 
 
     public readonly CardData data;
@@ -39,7 +48,7 @@ public class Card
     public Card(CardData cardData)
     {
         data = cardData;      // 只读引用
-        Mana = cardData.Mana; // 拷贝初始值
+        mana = cardData.Mana; // 拷贝初始值
         CardTags = new(cardData.CardTags); //将列表转换成哈希集合
     }
 

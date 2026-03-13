@@ -103,6 +103,7 @@ public static class CheckUtil
     //提供一个数值,同时处理其UI显示
     public static int Throw(string diceStr, string addtionInfo)
     {
+
         int result = DiceRollUtil.DfromString(diceStr);
 
         BattleInfoUI.Instance.AddThrowResult(result, diceStr, addtionInfo);

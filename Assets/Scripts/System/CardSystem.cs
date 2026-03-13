@@ -330,19 +330,6 @@ public class CardSystem : Singleton<CardSystem>
         //处理卡牌Tag
         yield return DealWithCardTag(cardView);
 
-        //减少对应的法力值 
-        //TODO: 后期一定要优化这部分逻辑
-        if (cardView.Card.ManaType == ManaID.BasicMana)
-        {
-            SpendManaGA spendManaGA = new(playCardGA.Card.Mana);
-            ActionSystem.Instance.AddReaction(spendManaGA);
-        }
-        else if (cardView.Card.ManaType == ManaID.CombatMaster)
-        {
-            SpendOtherManaGA spendOtherManaGA = new(playCardGA.Card.Mana, cardView.Card.ManaType);
-            ActionSystem.Instance.AddReaction(spendOtherManaGA);
-        }
-        
         //当前的临时卡牌上下文
         EffectContext context = new();
         
@@ -367,6 +354,21 @@ public class CardSystem : Singleton<CardSystem>
 
             ActionSystem.Instance.AddReaction(performEffectGA);
         }
+
+        //FIXME: 为了使得X费卡能够正确发挥作用,牌要先用后付(否则牌打出后mana = 0,后续读取的都是0)
+        //减少对应的法力值 
+        //TODO: 后期一定要优化这部分逻辑
+        if (cardView.Card.ManaType == ManaID.BasicMana)
+        {
+            SpendManaGA spendManaGA = new(playCardGA.Card.Mana);
+            ActionSystem.Instance.AddReaction(spendManaGA);
+        }
+        else if (cardView.Card.ManaType == ManaID.CombatMaster)
+        {
+            SpendOtherManaGA spendOtherManaGA = new(playCardGA.Card.Mana, cardView.Card.ManaType);
+            ActionSystem.Instance.AddReaction(spendOtherManaGA);
+        }
+
     }
 
     //处理卡牌的特殊属性(消耗,复制等)

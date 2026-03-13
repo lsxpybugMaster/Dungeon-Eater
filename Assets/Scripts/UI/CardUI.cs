@@ -74,7 +74,7 @@ public class CardUI : MonoBehaviour
         cardViewImage = GetComponent<Image>();
         title.text = card.Title;
         description.text = card.Description;
-        mana.text = card.Mana.ToString();        
+        mana.text = card.ManaStr;//card.Mana.ToString();        
         image.sprite = card.Image;
 
         cardData = card;

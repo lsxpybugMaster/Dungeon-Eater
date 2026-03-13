@@ -8,7 +8,7 @@ public class ManaSystem : Singleton<ManaSystem>
 
     // 最基本的行动点
     private int maxMana = 3;
-    private int currentMana;
+    private int currentMana = 0;
 
     // 特殊行动点: 战斗大师点数: 只会获取无法补充
     // private int maxCombatMasterPoint = 5; 
@@ -17,6 +17,9 @@ public class ManaSystem : Singleton<ManaSystem>
     // 很后期的代码 : 法师的法术位 (可能无法实现)
     // private int maxMagic = 4;
     // private int curMagic;
+
+    public int MaxMana => maxMana;
+    public int CurMana => currentMana;
 
     /// <summary>
     /// 初始化能量
