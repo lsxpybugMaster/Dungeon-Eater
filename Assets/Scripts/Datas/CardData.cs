@@ -17,6 +17,8 @@ public class CardData : ScriptableObject, IHaveKey<string>
     [field: SerializeField] public string Id { get; private set; } //唯一标识符
     public string GetKey() => Id; //其作为数据库索引
 
+    //卡牌名和描述内容都是索引字符串,再由本地化模块解析成本地化语言文本
+    [field: SerializeField] public string title { get; private set; }
     [field: SerializeField] public string Description { get; private set; }
 
     // SpendManaType 会确定具体消耗什么类型的

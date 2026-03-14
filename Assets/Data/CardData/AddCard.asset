@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AddCard
   m_EditorClassIdentifier: 
   <Id>k__BackingField: AddCard
+  <title>k__BackingField: 
   <Description>k__BackingField: Add some cards to your DrawPile
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 0

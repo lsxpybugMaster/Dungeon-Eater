@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PotentialPower
   m_EditorClassIdentifier: 
   <Id>k__BackingField: PotentialPower
+  <title>k__BackingField: 
   <Description>k__BackingField: Get 1 Action Point, Draw 1 Card
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 0

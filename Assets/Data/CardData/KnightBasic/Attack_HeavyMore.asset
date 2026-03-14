@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Attack_HeavyMore
   m_EditorClassIdentifier: 
   <Id>k__BackingField: Attack_HeavyMore
+  <title>k__BackingField: 
   <Description>k__BackingField: Deal 1d16 damage
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 1

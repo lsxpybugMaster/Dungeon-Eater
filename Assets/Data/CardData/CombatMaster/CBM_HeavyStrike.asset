@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CBM_HeavyStrike
   m_EditorClassIdentifier: 
   <Id>k__BackingField: CBM_HeavyStrike
+  <title>k__BackingField: 
   <Description>k__BackingField: deal 3d8 attack
   <SpendManaType>k__BackingField: 0
   <Mana>k__BackingField: 2

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CBM_Accuracy
   m_EditorClassIdentifier: 
   <Id>k__BackingField: CBM_Accuracy
+  <title>k__BackingField: 
   <Description>k__BackingField: Add 1d4 attack throw to next attack
   <SpendManaType>k__BackingField: 0
   <Mana>k__BackingField: 1

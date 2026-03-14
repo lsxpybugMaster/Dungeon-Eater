@@ -1,0 +1,14 @@
+Key,EN,CN
+scene_1,Picnic Forest,野炊森林
+scene_x,Endless Void,无尽的虚空
+ui_day,Day {0},第 {0} 天
+ui_deck,Deck,牌组
+,Null,空
+card_atk,Strike,攻击
+card_atk_desc,Deal 1d8 damage,造成 1d8 伤害
+card_atk_acc,Precision Strike,精确打击
+card_atk_acc_desc,Deal 6 damage [Definitely hit],造成 6 伤害 [必定命中]
+card_flex,Parry,招架
+card_flex_desc,Add 2 Flexbility,增加 2 敏捷加值
+card_prof,Focus,集中
+card_prof_desc,Add 2 Proficiency,增加 2 熟练度加值
