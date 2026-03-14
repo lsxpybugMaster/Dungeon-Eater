@@ -12,3 +12,18 @@ card_flex,Parry,招架
 card_flex_desc,Add 2 Flexbility,增加 2 敏捷加值
 card_prof,Focus,集中
 card_prof_desc,Add 2 Proficiency,增加 2 熟练度加值
+card_defence,Defence,防御
+card_defence_desc,Add 1d6 Defence,增加 1d6 防御
+card_deputy,Deputy Strike,副手攻击
+card_pommel,Pommel Strike,剑柄打击
+card_potential,Unleash potential,激发潜能
+food_starfruit,StarFruit,杨桃
+food_starfruit_desc,Add 1 addtional mana,增加一点最大行动值
+food_pudding,Pudding,布丁
+food_pudding_desc,Counter Attack,反击敌人攻击
+food_pomegranate,Pomegranate,石榴
+food_pomegranate_desc,"When get damaged, draw 1 card","受到伤害时,抽 1 张牌"
+food_beer,Beer,啤酒
+food_beer_desc,The first attack in battle is definitely HeavyHit,每次战斗的第一次伤害一定是重击
+food_golden_apple,Gloden Apple,金苹果
+food_golden_apple_desc,Get 100 Coins when eaten,立刻获取 100 金币

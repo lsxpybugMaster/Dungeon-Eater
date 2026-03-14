@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc84693b7e6cb8445954284c58308040, type: 3}
+  m_Name: F_CounterAttack
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField: F_CounterAttack
+  <NameKey>k__BackingField: food_pudding
+  <DescriptionKey>k__BackingField: food_pudding_desc
+  <Image>k__BackingField: {fileID: 551666372, guid: 516820b9294b72b4e8dbcc4f2f27e2b1, type: 3}
+  <Type>k__BackingField: 0
+  <price>k__BackingField: 33
+  perkData: {fileID: 11400000, guid: 2ad045eb17163a349894181fbed1d3ad, type: 2}
+  ImmediateData:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

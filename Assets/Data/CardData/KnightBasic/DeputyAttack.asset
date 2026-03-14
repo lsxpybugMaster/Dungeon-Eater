@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DeputyAttack
   m_EditorClassIdentifier: 
   <Id>k__BackingField: DeputyAttack
-  <title>k__BackingField: 
+  <title>k__BackingField: card_deputy
   <Description>k__BackingField: Deal 1d4 damage ; [Bouns Action]
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 0

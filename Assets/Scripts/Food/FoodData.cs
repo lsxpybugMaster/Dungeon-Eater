@@ -16,7 +16,11 @@ public class FoodData : ScriptableObject, IShopItem, IHaveKey<string>, IHaveTool
 {
     [field: SerializeField] public string Id { get; private set; } //唯一标识符
 
-    [field: SerializeField] public string Description { get; private set; }
+    [field: SerializeField] public string NameKey { get; private set; }
+    [field: SerializeField] public string DescriptionKey { get; private set; }
+
+    public string Name => LocalizationManager.Instance.Get(NameKey);
+    public string Desc => LocalizationManager.Instance.Get(DescriptionKey);
 
     public string GetKey() => Id; //其作为数据库索引
 
@@ -33,7 +37,7 @@ public class FoodData : ScriptableObject, IShopItem, IHaveKey<string>, IHaveTool
 
     public TooltipData GetTooltipData()
     {
-        return new TooltipData(Id, Description);
+        return new TooltipData(Name, Desc);
     }
 
 #if UNITY_EDITOR

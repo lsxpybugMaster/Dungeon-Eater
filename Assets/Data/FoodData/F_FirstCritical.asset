@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: F_FirstCritical
   m_EditorClassIdentifier: 
   <Id>k__BackingField: F_FirstCritical
-  <Description>k__BackingField: "\u6BCF\u6B21\u6218\u6597\u7B2C\u4E00\u6B21\u653B\u51FB\u66B4\u51FB"
-  <Image>k__BackingField: {fileID: -1039123288, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <NameKey>k__BackingField: food_beer
+  <DescriptionKey>k__BackingField: food_beer_desc
+  <Image>k__BackingField: {fileID: 1751893556, guid: 516820b9294b72b4e8dbcc4f2f27e2b1, type: 3}
   <Type>k__BackingField: 0
   <price>k__BackingField: 40
   perkData: {fileID: 11400000, guid: a1b9ef2988996774d9c74e6a879fd2f4, type: 2}

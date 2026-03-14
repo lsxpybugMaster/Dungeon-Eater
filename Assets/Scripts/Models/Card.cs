@@ -18,9 +18,17 @@ public class Card
     /// </summary>
     //编译器不生成隐藏字段,直接从对象获取，适用与不需额外存储进行更新的属性
     public string Title => //data.title; //获取的是本地化字典索引 //data.name;
-        LocalizationManager.Instance.Get(data.title);
+        GetTitle();
     public string Description => //data.Description;
         LocalizationManager.Instance.Get(data.Description);
+
+    //临时函数,在title为空时返回之前的值
+    private string GetTitle()
+    {
+        if (string.IsNullOrEmpty(data.title))
+            return data.name;
+        return LocalizationManager.Instance.Get(data.title);
+    }
 
     public Sprite Image => data.Image;
 

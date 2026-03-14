@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Armor Up
   m_EditorClassIdentifier: 
   <Id>k__BackingField: Armor Up
-  <title>k__BackingField: 
-  <Description>k__BackingField: Add 1d6 Armor
+  <title>k__BackingField: card_defence
+  <Description>k__BackingField: card_defence_desc
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 1
   <Image>k__BackingField: {fileID: 21300000, guid: 0a2c0895084dff442982047574702fad, type: 3}
