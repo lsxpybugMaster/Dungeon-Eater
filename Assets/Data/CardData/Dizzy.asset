@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dizzy
   m_EditorClassIdentifier: 
   <Id>k__BackingField: Dizzy
+  <title>k__BackingField: 
   <Description>k__BackingField: Dizzy, Play this card to Exhaust
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 1

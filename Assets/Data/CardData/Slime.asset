@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Slime
   m_EditorClassIdentifier: 
   <Id>k__BackingField: Slime
+  <title>k__BackingField: 
   <Description>k__BackingField: Slime is Angry!
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 99

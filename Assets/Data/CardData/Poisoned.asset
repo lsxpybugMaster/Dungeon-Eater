@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Poisoned
   m_EditorClassIdentifier: 
   <Id>k__BackingField: Poisoned
+  <title>k__BackingField: 
   <Description>k__BackingField: Poisoned, when discard, get 1d6 damage,Exhausted
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 1

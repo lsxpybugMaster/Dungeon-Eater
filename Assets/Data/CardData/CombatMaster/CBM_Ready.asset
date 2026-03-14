@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CBM_Ready
   m_EditorClassIdentifier: 
   <Id>k__BackingField: CBM_Ready
+  <title>k__BackingField: 
   <Description>k__BackingField: change 2 act point to CombantMasterPoint
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 2

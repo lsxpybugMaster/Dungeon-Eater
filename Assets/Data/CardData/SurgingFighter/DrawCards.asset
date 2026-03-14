@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DrawCards
   m_EditorClassIdentifier: 
   <Id>k__BackingField: DrawCards
+  <title>k__BackingField: 
   <Description>k__BackingField: Draw 2 Cards
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 1

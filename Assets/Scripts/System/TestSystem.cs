@@ -16,5 +16,12 @@ public class TestSystem : MonoBehaviour
         {
             GameManager.Instance.HeroState.GainCoins(5);
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LocalizationManager localizationManager = LocalizationManager.Instance;
+            Language lang = localizationManager.CurrentLanguage;
+            localizationManager.ChangeLanguage(lang == Language.CN ? Language.EN : Language.CN);
+        }
     }
 }

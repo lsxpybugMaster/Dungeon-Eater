@@ -13,7 +13,23 @@ public class LevelProgressUI : TextUI<LevelProgress>
 
     protected override void UpdateTxt(LevelProgress model)
     {
-        txt.text = $"Level: {model.Level + 1} : Round {model.Round}";
+        //txt.text = $"Level: {model.Level + 1} : Round {model.Round}";
+        //string levelStr = model.Level + 1 == 1 ? "野炊森林" : "无尽的虚空";
+        //txt.text = $"{levelStr} \n第 {model.Round + 1} 天";
+
+        string levelKey = model.Level + 1 == 1
+            ? "scene_1"
+            : "scene_x";
+
+        // 根据键值去寻找对应的本地化内容
+        string levelStr = LocalizationManager.Instance.Get(levelKey);
+
+        string dayStr = LocalizationManager.Instance.Get(
+            "ui_day",
+             model.Round + 1
+        );
+
+        txt.text = levelStr + "\n" + dayStr;
     }
 
     ////存储UI文本

@@ -12,22 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
   m_Name: XStrike
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: GodHit
-  <Description>k__BackingField: Deal 36 damage
+  <Id>k__BackingField: XStrike
+  <title>k__BackingField: 
+  <Description>k__BackingField: Deal Xd10 damage
   <SpendManaType>k__BackingField: 999
-  <Mana>k__BackingField: 5
-  <Image>k__BackingField: {fileID: -1039123288, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Mana>k__BackingField: 0
+  <Image>k__BackingField: {fileID: 21300106, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
   <ManualTargetEffect>k__BackingField:
-    rid: 5600171445911552004
+    rid: 5600171465129852929
   <OtherEffects>k__BackingField: []
   <DiscardEffects>k__BackingField: []
-  <CardTags>k__BackingField: 
+  <CardTags>k__BackingField: 02000000
   <UpdateCardInfo>k__BackingField: []
-  <CardPrice>k__BackingField: 12
+  <CardPrice>k__BackingField: 30
   references:
     version: 2
     RefIds:
-    - rid: 5600171445911552004
-      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
+    - rid: 5600171465129852929
+      type: {class: DealRandomDmgEffect, ns: , asm: Assembly-CSharp}
       data:
-        damageAmount: 36
+        diceString: xd10

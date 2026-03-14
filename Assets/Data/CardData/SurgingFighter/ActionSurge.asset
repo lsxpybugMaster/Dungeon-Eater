@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ActionSurge
   m_EditorClassIdentifier: 
   <Id>k__BackingField: ActionSurge
+  <title>k__BackingField: 
   <Description>k__BackingField: Add Mana to max Mana  [Exhaust]
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 0

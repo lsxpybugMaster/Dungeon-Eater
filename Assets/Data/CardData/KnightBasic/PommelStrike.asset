@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PommelStrike
   m_EditorClassIdentifier: 
   <Id>k__BackingField: PommelStrike
+  <title>k__BackingField: 
   <Description>k__BackingField: deal 1d4 damage, if meet will give dizzy effect
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 2

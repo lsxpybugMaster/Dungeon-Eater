@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CBM_MustHit
   m_EditorClassIdentifier: 
   <Id>k__BackingField: CBM_MustHit
+  <title>k__BackingField: 
   <Description>k__BackingField: '[Must Hit] deal 12 attack'
   <SpendManaType>k__BackingField: 0
   <Mana>k__BackingField: 1
