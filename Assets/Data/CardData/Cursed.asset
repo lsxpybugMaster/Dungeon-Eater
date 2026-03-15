@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Cursed
   m_EditorClassIdentifier: 
   <Id>k__BackingField: Cursed
+  <title>k__BackingField: 
   <Description>k__BackingField: Cursed, when discard, get 10d4 damage
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 1

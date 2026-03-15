@@ -1759,7 +1759,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -2499,6 +2499,7 @@ GameObject:
   m_Component:
   - component: {fileID: 656023568}
   - component: {fileID: 656023567}
+  - component: {fileID: 656023569}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -2547,8 +2548,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -99
-  m_Sprite: {fileID: 21300000, guid: 5c9078658e2dc3342bfaf04d8e373555, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5ad1b385a85684240b61a7379a5b53d1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.64705884}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2568,11 +2569,26 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.0047, y: -0.0144, z: 0}
-  m_LocalScale: {x: 0.46289557, y: 0.4631381, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.45, y: 1.4507598, z: 3.132456}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &656023569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 656023566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aa08b25c9e7d124a907d31f7823f6ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundSprites:
+  - {fileID: 21300000, guid: 5ad1b385a85684240b61a7379a5b53d1, type: 3}
+  - {fileID: 21300000, guid: 51e4f16290ed28946893cfa31285fa1f, type: 3}
 --- !u!1 &666828295
 GameObject:
   m_ObjectHideFlags: 0
@@ -5988,6 +6004,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: edd4a767a314c1b4897509d49f4f80b6, type: 2}
   - {fileID: 11400000, guid: edd4a767a314c1b4897509d49f4f80b6, type: 2}
   - {fileID: 11400000, guid: edd4a767a314c1b4897509d49f4f80b6, type: 2}
+  battleBackGround: {fileID: 656023569}
 --- !u!1 &1567808580
 GameObject:
   m_ObjectHideFlags: 0
@@ -8164,6 +8181,10 @@ PrefabInstance:
     - target: {fileID: 80758856762697572, guid: ac080c1bc41090e4982001fbd0b35e87, type: 3}
       propertyPath: m_Name
       value: HeroView
+      objectReference: {fileID: 0}
+    - target: {fileID: 4643417951199571147, guid: ac080c1bc41090e4982001fbd0b35e87, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4917211796957012765, guid: ac080c1bc41090e4982001fbd0b35e87, type: 3}
       propertyPath: m_LocalPosition.x

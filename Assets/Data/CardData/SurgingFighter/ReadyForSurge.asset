@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
   m_Name: ReadyForSurge
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: GodHit
+  <Id>k__BackingField: ReadyForSurge
+  <title>k__BackingField: 
   <Description>k__BackingField: Deal 36 damage
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 5
-  <Image>k__BackingField: {fileID: -1039123288, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Image>k__BackingField: {fileID: 567883824, guid: 8aa5a56118cb48449a33fcde962c9ef7, type: 3}
   <ManualTargetEffect>k__BackingField:
     rid: 5600171445911552004
   <OtherEffects>k__BackingField: []

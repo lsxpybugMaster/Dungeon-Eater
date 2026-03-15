@@ -17,7 +17,7 @@ MonoBehaviour:
   <Description>k__BackingField: Deal 1d16 damage
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 1
-  <Image>k__BackingField: {fileID: 21300000, guid: 182d4995aa60fe1408e7d76d63bf6a21, type: 3}
+  <Image>k__BackingField: {fileID: -623368366, guid: 8aa5a56118cb48449a33fcde962c9ef7, type: 3}
   <ManualTargetEffect>k__BackingField:
     rid: 2509721132496322560
   <OtherEffects>k__BackingField: []

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Knight
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 1351559378, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
-  <Health>k__BackingField: 150
+  <Health>k__BackingField: 1
   <Proficiency>k__BackingField: 4
   <Flexbility>k__BackingField: 0
   <initialCoins>k__BackingField: 15
@@ -30,7 +30,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 11b16000ff00e5a4faa56826d9c5ead3, type: 2}
   - {fileID: 11400000, guid: 12c0d5dd4727c164aaed6ebe5fa79da6, type: 2}
   - {fileID: 11400000, guid: 814fdb8669c635742b98982eac8acdec, type: 2}
-  - {fileID: 11400000, guid: 7363437c3ba05dd45a878daf0fa5e90c, type: 2}
-  - {fileID: 11400000, guid: 7363437c3ba05dd45a878daf0fa5e90c, type: 2}
+  - {fileID: 11400000, guid: cc67c0c693eff9a4bb8b7a1560ff8f06, type: 2}
   <InitPerkData>k__BackingField: []
   <InitFoodDatas>k__BackingField: []

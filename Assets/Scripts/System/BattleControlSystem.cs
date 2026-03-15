@@ -16,6 +16,8 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
 
     [SerializeField] private List<EnemyData> enemyDatas;
 
+    [SerializeField] private BattleBackGroundSystem battleBackGround;
+
     //[SerializeField] private PerkData perkData;
 
 
@@ -159,6 +161,8 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
 
         //ActionSystem.Instance.Perform(performAllGA);
 
+        //决定背景
+        battleBackGround.ChangeBackground(GetBattleMode() == BattleType.Boss);
 
         ActionSystem.Instance.Perform(new BattleSetupGA());
     }
@@ -168,6 +172,8 @@ public class BattleControlSystem : MonoBehaviour, IRequireGameManager
     /// </summary>
     private void BattleWin(KillAllEnemyGA killAllEnemyGA)
     {
+        //Debug.Log($"BATTLEMODE: {GetBattleMode()}");
+
         //最终胜利条件: 最后一关的Boss敌人被击杀
         if (GetBattleMode() == BattleType.Boss && GameManager.Instance.LevelProgress.IsFinalLevel())
         {

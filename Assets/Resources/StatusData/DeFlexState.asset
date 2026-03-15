@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 9
   sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  <NameKey>k__BackingField: 
-  <DescriptionKey>k__BackingField: 
+  <NameKey>k__BackingField: status_panic
+  <DescriptionKey>k__BackingField: status_panic_desc
   effectOnTurnEnd:
     rid: -2
   references:

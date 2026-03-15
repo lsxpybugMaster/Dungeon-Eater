@@ -17,7 +17,7 @@ MonoBehaviour:
   <Description>k__BackingField: Deal Xd10 damage
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 0
-  <Image>k__BackingField: {fileID: 21300106, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+  <Image>k__BackingField: {fileID: -1678790444, guid: 8aa5a56118cb48449a33fcde962c9ef7, type: 3}
   <ManualTargetEffect>k__BackingField:
     rid: 5600171465129852929
   <OtherEffects>k__BackingField: []

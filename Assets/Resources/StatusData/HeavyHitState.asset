@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 8
   sprite: {fileID: -1208265138, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
-  <NameKey>k__BackingField: 
-  <DescriptionKey>k__BackingField: 
+  <NameKey>k__BackingField: status_heavyhit
+  <DescriptionKey>k__BackingField: status_heavyhit_desc
   effectOnTurnEnd:
     rid: -2
   references:

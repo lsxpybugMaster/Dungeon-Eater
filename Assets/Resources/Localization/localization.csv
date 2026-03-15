@@ -35,3 +35,19 @@ status_prof,Temp Proficiency,临时熟练项加值
 status_prof_desc,"Get {0} addtional Proficiency, decay 1 per turn","获得 {0} 临时熟练项加成, 每回合减少 1 点"
 status_flex,Temp Flexbility,临时敏捷加值
 status_flex_desc,"Get {0} addtional Flexbility, decay 1 per turn","获得 {0} 临时敏捷加成, 每回合减少 1 点"
+status_bless,Bless,祝福
+status_bless_desc,Get 1d{0} additional damage throw,获得 1d{0} 额外伤害掷骰加成
+status_guide,Guidance,神导术
+status_guide_desc,Get 1d{0} additional attack throw,获得 1d{0} 额外攻击掷骰加成
+status_confuse,Confused,困惑
+status_confuse_desc,Get {0} additional Proficiency decrease,熟练项加成减少 {0}
+status_panic,Panic,恐慌
+status_panic_desc,"Get {0} Flexbility decrease ",敏捷减少 {0}
+status_dizzy,Dizzy,眩晕
+status_dizzy_desc,Unable to act next turn,下一回合无法做出行动
+status_drunk,Drunk,醉酒
+status_drunk_desc,Attack Roll -5 Damage Roll +10,攻击掷骰 -5 伤害掷骰 +10
+status_heavyhit,Heavy Hit,蓄力
+status_heavyhit_desc,"If the next attack requires an attack roll, it will be a critical hit",下一次攻击若需要攻击掷骰 必定为重击
+status_multiatk,Multi-Attack,多重攻击
+status_multiatk_desc,Next attack will strike {0} times consecutively,下次会连续攻击 {0} 次

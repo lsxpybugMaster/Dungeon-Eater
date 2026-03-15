@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EnemyRoomData
   m_EditorClassIdentifier: 
   <RoomType>k__BackingField: 0
-  <RoomColor>k__BackingField: {r: 0.91823894, g: 0.4648945, b: 0.4648945, a: 1}
+  <RoomColor>k__BackingField: {r: 0.8679245, g: 0.30841336, b: 0.30841336, a: 1}
   battleType: 1

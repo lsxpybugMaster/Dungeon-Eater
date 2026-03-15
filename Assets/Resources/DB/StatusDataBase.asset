@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: StatusDataBase
-  m_EditorClassIdentifier: Assembly-CSharp::StatusDatabase
+  m_Script: {fileID: 11500000, guid: 2276df6ab5a2d8a4ba4823392bc36bd2, type: 3}
+  m_Name: StatusDatabase
+  m_EditorClassIdentifier: 
   datas:
   - {fileID: 11400000, guid: e6e8c3c621a03bc43b589e023dae2530, type: 2}
   - {fileID: 11400000, guid: b381e8bdffa22e246a715ca5a38d9032, type: 2}
   - {fileID: 11400000, guid: 9b3fb4c5d6ca20e44b3cc1d65a3983e2, type: 2}
+  - {fileID: 11400000, guid: 24ca81cf3f4e9484d8fff14cb1ffe37b, type: 2}
+  - {fileID: 11400000, guid: f6ed7d37d67b37147b7790f3ce62aa49, type: 2}
   - {fileID: 11400000, guid: 8a065a771cd0b8f4689fb580df5fa900, type: 2}
   - {fileID: 11400000, guid: 9ecb2292ef5f82447ae99136d574ecdd, type: 2}
   - {fileID: 11400000, guid: 65c764843a322c043a729dddf190bb1e, type: 2}

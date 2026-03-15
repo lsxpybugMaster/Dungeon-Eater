@@ -15,9 +15,13 @@ using UnityEngine;
 //DELETE:
  */
 
+
+/// <summary>
+//IMPORTANT: 一定与Build中的序号相同
+/// </summary>
 public enum Scene
 {
-    MAP, BATTLE, TITLE
+    TITLE, BATTLE, MAP
 }
 
 public enum GameState

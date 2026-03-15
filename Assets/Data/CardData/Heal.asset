@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Heal
   m_EditorClassIdentifier: 
   <Id>k__BackingField: Heal
+  <title>k__BackingField: 
   <Description>k__BackingField: Add life
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 0
-  <Image>k__BackingField: {fileID: 21300020, guid: 09e4c6a7d75923945afe43953ef58ad2, type: 3}
+  <Image>k__BackingField: {fileID: 1647427532, guid: 516820b9294b72b4e8dbcc4f2f27e2b1, type: 3}
   <ManualTargetEffect>k__BackingField:
     rid: -2
   <OtherEffects>k__BackingField:

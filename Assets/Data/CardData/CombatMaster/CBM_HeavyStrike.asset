@@ -17,7 +17,7 @@ MonoBehaviour:
   <Description>k__BackingField: deal 3d8 attack
   <SpendManaType>k__BackingField: 0
   <Mana>k__BackingField: 2
-  <Image>k__BackingField: {fileID: 924700719, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
+  <Image>k__BackingField: {fileID: -1367099558, guid: 065692e91d91c414587152072c30f02e, type: 3}
   <ManualTargetEffect>k__BackingField:
     rid: 5600171444068155403
   <OtherEffects>k__BackingField: []

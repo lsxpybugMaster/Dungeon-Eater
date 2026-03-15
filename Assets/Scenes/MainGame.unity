@@ -5342,8 +5342,8 @@ SpriteRenderer:
   m_SortingLayerID: -14043589
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5c9078658e2dc3342bfaf04d8e373555, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 92baa5f22afb18e44aa9cffc862f107f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.44313726}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5363,8 +5363,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4644776, y: 0.46466506, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.41, y: 1.4105691, z: 3.0356684}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9757,8 +9757,8 @@ Camera:
   m_GameObject: {fileID: 1814279323}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.10062885, g: 0.10062885, b: 0.10062885, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
