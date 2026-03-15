@@ -5,8 +5,12 @@ public class StatusEffectsUI : MonoBehaviour
 {
     [SerializeField] private StatusEffectUI statusEffectUIPrefab;
 
+    [SerializeField] private StatusUI statusUIPrefab;
+
     //UI对象字典
-    private Dictionary<StatusEffectType, StatusEffectUI> statusEffectUIs = new();
+    //private Dictionary<StatusEffectType, StatusEffectUI> statusEffectUIs = new();
+
+    private Dictionary<StatusEffectType, StatusUI> statusUIList = new();
 
     /// <summary>
     /// 根据状态层数及时更新UI图标
@@ -15,22 +19,26 @@ public class StatusEffectsUI : MonoBehaviour
     {
         if (stackCount == 0)
         {
-            if (statusEffectUIs.ContainsKey(statusEffectType))
+            if (statusUIList.ContainsKey(statusEffectType))
             {
-                StatusEffectUI statusEffectUI = statusEffectUIs[statusEffectType];
-                statusEffectUIs.Remove(statusEffectType);
+                StatusUI statusEffectUI = statusUIList[statusEffectType];
+                statusUIList.Remove(statusEffectType);
                 Destroy(statusEffectUI.gameObject);
             }
         }
         else
         {
-            if (!statusEffectUIs.ContainsKey(statusEffectType))
+            if (!statusUIList.ContainsKey(statusEffectType))
             {
-                StatusEffectUI statusEffectUI = Instantiate(statusEffectUIPrefab, transform);
-                statusEffectUIs.Add(statusEffectType, statusEffectUI);
+                StatusUI statusEffectUI = Instantiate(statusUIPrefab, transform);
+                statusUIList.Add(statusEffectType, statusEffectUI);
             }
-            Sprite sprite = GetSpriteByType(statusEffectType);
-            statusEffectUIs[statusEffectType].Set(sprite, stackCount);
+
+            //Sprite sprite = GetSpriteByType(statusEffectType);
+            //statusUIList[statusEffectType].Set(sprite, stackCount);
+            var ui = statusUIList[statusEffectType];
+            ui.SetStackCount(stackCount);
+            ui.Setup(StatusDatabase.GetStatusData(statusEffectType));
         }
     }
 

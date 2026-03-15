@@ -399,6 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusEffectUIPrefab: {fileID: 1999905645298965869, guid: e6c2ce60aaf6fd141b897df8a40f402d, type: 3}
+  statusUIPrefab: {fileID: 8320492746408729615, guid: 1e07891381d3ee7479dac30eaef13673, type: 3}
 --- !u!114 &6049996781991580453
 MonoBehaviour:
   m_ObjectHideFlags: 0

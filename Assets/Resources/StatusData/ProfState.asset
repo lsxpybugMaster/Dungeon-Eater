@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd087750b80dbb4f83a2e0cb4da8311, type: 3}
+  m_Name: ProfState
+  m_EditorClassIdentifier: 
+  Type: 2
+  sprite: {fileID: 21300000, guid: 182d4995aa60fe1408e7d76d63bf6a21, type: 3}
+  <NameKey>k__BackingField: status_prof
+  <DescriptionKey>k__BackingField: status_prof_desc
+  effectOnTurnEnd:
+    rid: 5600171508485849090
+  references:
+    version: 2
+    RefIds:
+    - rid: 5600171508485849090
+      type: {class: DecayStatusEffect, ns: , asm: Assembly-CSharp}
+      data:
+        decay: 1
+        type: 2

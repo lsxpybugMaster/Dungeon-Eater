@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 // DataBase配置<Type,Class> => Class 存储相关函数以及数值
 
 /// <summary>
@@ -55,6 +53,40 @@ public class StatusEffectDataBase : DataBase<StatusEffectType, StatusEffect>
 
     /// <summary> 通过卡牌ID查找模板 </summary>
     public static StatusEffect GetEffect(StatusEffectType effectType)
+    {
+        return I.idLookup.TryGetValue(effectType, out var e)
+            ? e
+            : null;
+    }
+
+}
+
+
+[CreateAssetMenu(menuName = "DataBase/StatusDatabase")]
+public class StatusDatabase : DataBase<StatusEffectType, StatusData>
+{
+    // --------------------- 单例访问 ---------------------
+    private static StatusDatabase _instance;
+    public static StatusDatabase I
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = Resources.Load<StatusDatabase>("DB/StatusDataBase");
+                if (_instance == null)
+                    Debug.LogError("StatusDataBase.asset not found in Resources folder!");
+                else
+                    _instance.Init();
+            }
+            return _instance;
+        }
+    }
+
+    // --------------------- 查询接口 ---------------------
+
+    /// <summary> 通过卡牌ID查找模板 </summary>
+    public static StatusData GetStatusData(StatusEffectType effectType)
     {
         return I.idLookup.TryGetValue(effectType, out var e)
             ? e

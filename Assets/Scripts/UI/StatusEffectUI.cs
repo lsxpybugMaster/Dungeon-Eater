@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
 public class StatusEffectUI : MonoBehaviour
 {
     [SerializeField] private Image image;

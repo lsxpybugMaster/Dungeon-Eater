@@ -1,0 +1,71 @@
+﻿using SerializeReferenceEditor;
+using UnityEngine;
+
+public enum StatusEffectType
+{
+    AMROR,
+    BURN,
+    PROFICIENCY, //临时熟练度
+
+    FLEXBILITY, //临时敏捷度
+
+    DIZZY,  //眩晕
+    //BLESS, //专注: 祝福术
+    DRUNK, //醉酒: +1d10攻击掷骰 -5精通
+    POSIONED, //中毒
+
+    MUTIATK, //累积的战斗倍率
+    HEAVYHIT, //下次攻击必定重击
+
+    DE_PROF, //临时熟练度减值
+    DE_FLEX, //临时精通值减值
+
+    ATK_DICE_ADD, //攻击掷骰加值, 状态层数 x 会进行 1dx 的加值
+    DMG_DICE_ADD, //伤害掷骰加值, 状态层数 x 会进行 1dx 的加值
+}
+
+/*
+ * 通用的状态,包含一些共通的更新逻辑
+ * 每一个类映射对应的函数
+ * 
+ * Buff 结算条件:
+ *      自动结算(标志型效果) 如护盾,临时精通值
+ *      激活时结算(主动)  如燃烧
+ *      触发时结算(被动)  如反击
+ */
+
+//TODO: 应该为每一个StatusEffect单独创建数据类
+
+[System.Serializable]
+public class StatusEffect : IHaveKey<StatusEffectType>
+{
+    public StatusEffectType Type;
+    public StatusEffectType GetKey() => Type;
+
+    public Sprite sprite;
+
+    //支持外部数据配置
+    [field: SerializeReference, SR] public Effect effect;
+
+    /// <summary>
+    /// 该状态在回合开始时造成的影响(燃烧,眩晕)
+    /// </summary>
+    /// <param name="c"></param>
+    public virtual void OnTurnStart(Combatant c)
+    {  
+    }
+
+    /// <summary>
+    /// 该状态在回合结束时造成的影响(回复生命,结算状态)
+    /// </summary>
+    /// <param name="c"></param>
+    public virtual void OnTurnEnd(Combatant c) 
+    {
+        if (effect != null)
+        {
+            GameAction ga = effect.GetGameAction(new() { c.__view__ }, c.__view__ , null);
+            // 该函数会在其他Performer中执行,所以需要加Reaction而非Performer
+            ActionSystem.Instance.AddReaction(ga);
+        }
+    }
+}

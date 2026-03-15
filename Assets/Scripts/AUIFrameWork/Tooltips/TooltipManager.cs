@@ -23,13 +23,17 @@ public class TooltipData
 /// </summary>
 public interface IHaveTooltip
 {
-    TooltipData GetTooltipData();
+    //其可以支持多个参数
+    TooltipData GetTooltipData(params object[] args);
 }
 
 
 public class TooltipManager : PersistentSingleton<TooltipManager>
 {
     [SerializeField] private TooltipView tooltipView;
+
+    [Header("鼠标位置与UI的偏移,防止光标挡住UI")]
+    [SerializeField] Vector2 offset; 
 
     [Header("位置占右侧多大比例时, 将UI朝向左侧")]
     [SerializeField][Range(0,1)] private float rightPivotThreshold = 0.5f;
@@ -97,6 +101,6 @@ public class TooltipManager : PersistentSingleton<TooltipManager>
             isTop ? 1 : 0
         );
 
-        rect.position = mouse;
+        rect.position = mouse + offset;
     }
 }

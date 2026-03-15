@@ -27,3 +27,11 @@ food_beer,Beer,啤酒
 food_beer_desc,The first attack in battle is definitely HeavyHit,每次战斗的第一次伤害一定是重击
 food_golden_apple,Gloden Apple,金苹果
 food_golden_apple_desc,Get 100 Coins when eaten,立刻获取 100 金币
+status_amror,Amror,护甲
+status_amror_desc,Decrease {0} damage,减少 {0} 受到的伤害
+status_burn,Burn,燃烧
+status_burn_desc,"Take 4 damage at the start of the turn ",回合开始时受到 4 点伤害
+status_prof,Temp Proficiency,临时熟练项加值
+status_prof_desc,"Get {0} addtional Proficiency, decay 1 per turn","获得 {0} 临时熟练项加成, 每回合减少 1 点"
+status_flex,Temp Flexbility,临时敏捷加值
+status_flex_desc,"Get {0} addtional Flexbility, decay 1 per turn","获得 {0} 临时敏捷加成, 每回合减少 1 点"

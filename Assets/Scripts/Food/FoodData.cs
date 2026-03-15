@@ -35,7 +35,8 @@ public class FoodData : ScriptableObject, IShopItem, IHaveKey<string>, IHaveTool
     [field: SerializeField] public PerkData perkData;
     [field:SerializeReference, SR] public ImmediateData ImmediateData;
 
-    public TooltipData GetTooltipData()
+
+    public TooltipData GetTooltipData(params object[] args)
     {
         return new TooltipData(Name, Desc);
     }
