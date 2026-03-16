@@ -27,7 +27,8 @@ MonoBehaviour:
       rid: 2509721198799355906
   <DiscardEffects>k__BackingField: []
   <CardTags>k__BackingField: 
-  <UpdateCardInfo>k__BackingField: []
+  <UpdateCardInfo>k__BackingField:
+  - {fileID: 11400000, guid: 18fd25bd043a03546ab68901e0354e9f, type: 2}
   <CardPrice>k__BackingField: 5
   references:
     version: 2

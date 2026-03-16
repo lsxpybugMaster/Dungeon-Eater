@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BonusCombat
   m_EditorClassIdentifier: 
   <Id>k__BackingField: BonusCombat
+  <title>k__BackingField: 
   <Description>k__BackingField: Get  2 attack Action Point [Bonus Act]
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 0

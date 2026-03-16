@@ -46,10 +46,13 @@ public class EffectPerformSystem : MonoBehaviour
     private IEnumerator ApplyCardStatusPerformer(ApplyCardDiscardedEffectGA ga)
     {
         var target = HeroSystem.Instance.HeroView;
-        Instantiate(ga.VFX, target.transform.position, Quaternion.identity);
-        
-        target.M.Damage(ga.Damage);
 
+        Instantiate(ga.VFX, target.transform.position, Quaternion.identity);
+
+        // target.M.Damage(ga.Damage);
+        ActionSystem.Instance.AddReaction(new DealDamageGA(target, ga.Damage));
+
+        
         yield return new WaitForSeconds(Config.Instance.effectTime);
     }
 

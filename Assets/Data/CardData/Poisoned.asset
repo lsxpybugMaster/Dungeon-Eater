@@ -41,5 +41,5 @@ MonoBehaviour:
       type: {class: ApplyStatusCardEffect, ns: , asm: Assembly-CSharp}
       data:
         damage: 6
-        cardStatusEffectType: 7
+        cardStatusEffectType: 6
         statusVFX: {fileID: 1524533970525000399, guid: 1133dff0b5fda2e4295d301899b1582d, type: 3}

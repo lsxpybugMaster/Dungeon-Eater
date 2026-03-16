@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Id>k__BackingField: PotentialPower
   <title>k__BackingField: card_potential
-  <Description>k__BackingField: Get 1 Action Point, Draw 1 Card
+  <Description>k__BackingField: Get 1 Action Point, Draw 1 Card [Exhausted]
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 0
   <Image>k__BackingField: {fileID: 1351559378, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
@@ -30,7 +30,7 @@ MonoBehaviour:
     <Effect>k__BackingField:
       rid: 5600171444068155401
   <DiscardEffects>k__BackingField: []
-  <CardTags>k__BackingField: 
+  <CardTags>k__BackingField: 00000000
   <UpdateCardInfo>k__BackingField:
   - {fileID: 11400000, guid: 114543198a4dec74d9bbd3d9a0754002, type: 2}
   - {fileID: 11400000, guid: e8d6237b8ad0f0f4daf8e0e2dab962c0, type: 2}

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Thief
   m_EditorClassIdentifier: 
   <Image>k__BackingField: {fileID: 725558701, guid: b9ea619df7417224f8086476a0205c4d, type: 3}
-  <Health>k__BackingField: 35
-  <Proficiency>k__BackingField: 1
-  <Flexbility>k__BackingField: 1
+  <Health>k__BackingField: 20
+  <Proficiency>k__BackingField: 0
+  <Flexbility>k__BackingField: 3
   ID: Thief
-  <Diffculty>k__BackingField: 1
+  <Diffculty>k__BackingField: 2
   <AppearLevels>k__BackingField: 000000000100000002000000
   <PerkIntend>k__BackingField:
     rid: -2
@@ -44,18 +44,18 @@ MonoBehaviour:
     - rid: 2509721379855400961
       type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 0
-        attackDamageDice: 
+        skill: 1
+        attackDamageDice: 2d4
     - rid: 2509721379855400962
       type: {class: EnemyIntendNode, ns: , asm: Assembly-CSharp}
       data:
         Condition:
           rid: -2
         Intend:
-          rid: 2509721379855400963
+          rid: 5600171535587082242
         P: 0
-    - rid: 2509721379855400963
-      type: {class: AttackIntend, ns: , asm: Assembly-CSharp}
+    - rid: 5600171535587082242
+      type: {class: HealIntend, ns: , asm: Assembly-CSharp}
       data:
-        skill: 1
-        attackDamageDice: 
+        skill: 8
+        healAmount: 6

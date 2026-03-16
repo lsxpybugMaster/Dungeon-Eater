@@ -146,7 +146,8 @@ public class Combatant
 
         foreach (var type in keysSnapshot)
         {
-            StatusEffectDataBase.GetEffect(type).OnTurnStart(this);
+            StatusDatabase.GetStatusData(type).OnTurnStart(this);
+            //StatusEffectDataBase.GetEffect(type).OnTurnStart(this);
         }
     }
 
@@ -159,7 +160,8 @@ public class Combatant
         
         foreach (var type in keysSnapshot)
         {
-            StatusEffectDataBase.GetEffect(type).OnTurnEnd(this);
+            StatusDatabase.GetStatusData(type).OnTurnEnd(this);
+            //StatusEffectDataBase.GetEffect(type).OnTurnEnd(this);
         }
     }
     

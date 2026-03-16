@@ -8,12 +8,18 @@ card_atk,Strike,攻击
 card_atk_desc,Deal 1d8 damage,造成 1d8 伤害
 card_atk_acc,Precision Strike,精确打击
 card_atk_acc_desc,Deal 6 damage [Definitely hit],造成 6 伤害 [必定命中]
+card_atk_acc+,Confident Strike,自信打击
+card_atk_acc+_desc,Deal 10 damage [Definitely hit],造成 10 伤害 [必定命中]
 card_flex,Parry,招架
 card_flex_desc,Add 2 Flexbility,增加 2 敏捷加值
 card_prof,Focus,集中
 card_prof_desc,Add 2 Proficiency,增加 2 熟练度加值
 card_defence,Defence,防御
 card_defence_desc,Add 1d6 Defence,增加 1d6 防御
+card_def_acc,Iron Defence,钢铁防御
+card_def_acc_desc,Add 5 Defence,增加 5 防御
+card_def+,Hero Defence,坚信防御
+card_def+_desc,Add 1d10 Defence,增加 1d10 防御
 card_deputy,Deputy Strike,副手攻击
 card_pommel,Pommel Strike,剑柄打击
 card_potential,Unleash potential,激发潜能

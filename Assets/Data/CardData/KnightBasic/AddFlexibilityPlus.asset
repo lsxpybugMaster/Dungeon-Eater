@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b73cfdf9574baa44ad5bcbbe8f4eb58, type: 3}
+  m_Name: AddFlexibilityPlus
+  m_EditorClassIdentifier: 
+  <Id>k__BackingField: AddFlexibilityPlus
+  <title>k__BackingField: 
+  <Description>k__BackingField: Add 3 Flexbility
+  <SpendManaType>k__BackingField: 999
+  <Mana>k__BackingField: 2
+  <Image>k__BackingField: {fileID: -1838222401, guid: 065692e91d91c414587152072c30f02e, type: 3}
+  <ManualTargetEffect>k__BackingField:
+    rid: -2
+  <OtherEffects>k__BackingField:
+  - <TargetMode>k__BackingField:
+      rid: 2509721198799355907
+    <Effect>k__BackingField:
+      rid: 2509721198799355906
+  <DiscardEffects>k__BackingField: []
+  <CardTags>k__BackingField: 
+  <UpdateCardInfo>k__BackingField: []
+  <CardPrice>k__BackingField: 12
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2509721198799355906
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 3
+        stackCount: 3
+    - rid: 2509721198799355907
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 

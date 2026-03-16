@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FireStorm
   m_EditorClassIdentifier: 
   <Id>k__BackingField: FireStorm
+  <title>k__BackingField: 
   <Description>k__BackingField: Add 3 Burn Effect
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 2

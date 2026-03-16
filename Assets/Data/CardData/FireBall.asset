@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FireBall
   m_EditorClassIdentifier: 
   <Id>k__BackingField: FireBall
+  <title>k__BackingField: 
   <Description>k__BackingField: Deal 3 + 2d6 damage
   <SpendManaType>k__BackingField: 999
   <Mana>k__BackingField: 1
