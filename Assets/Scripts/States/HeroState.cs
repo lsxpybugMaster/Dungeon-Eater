@@ -15,6 +15,15 @@ public class HeroState : BaseState<HeroData>
     //------------------------动态数据---------------------------
     public int MaxHealth { get; private set; }
     public int CurrentHealth { get; private set; }
+
+    //在非战斗中恢复声明的方法, 注意还有Combant.Heal的方法
+    //NOTE: 后期若有与恢复相关的反应,注意有两种恢复(局外恢复/局内恢复)
+    public void HealOutsideBattle(int amount)
+    {
+        CurrentHealth = Mathf.Min(CurrentHealth + amount, MaxHealth);
+        GameManager.Instance.PersistUIController.TopUI.UpdateHeroHp(CurrentHealth, MaxHealth);
+    }
+
     public int Proficiency { get; private set; }
     public int Flexbility { get; private set; }
     public int MaxMana { get; private set; }

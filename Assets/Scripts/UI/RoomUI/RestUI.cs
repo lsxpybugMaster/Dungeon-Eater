@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class RestUI : RoomUI
 {
+    [SerializeField] private int restHealAmount = 10;
+
     //[SerializeField] private ShowDeckUI showDeckUI;
     private UpdateCardMenu updateCardMenu;
     private UpdateCardMenu deleteCardMenu;
@@ -12,6 +14,7 @@ public class RestUI : RoomUI
     //按钮组合
     [SerializeField] private Button updateCardChoiceBtn;
     [SerializeField] private Button deleteCardChoiceBtn;
+    [SerializeField] private Button recoverLifeBtn;
 
     protected override void OnShow()
     {
@@ -49,6 +52,13 @@ public class RestUI : RoomUI
             HideAllBtns();
         });
         //showDeckUI.Show();
+
+        recoverLifeBtn.onClick.AddListener(() =>
+        {
+            GameManager.Instance.HeroState.HealOutsideBattle(restHealAmount);
+            recoverLifeBtn.gameObject.SetActive(false);
+            HideAllBtns();
+        });
     }
 
     private void ShowAllBtns()

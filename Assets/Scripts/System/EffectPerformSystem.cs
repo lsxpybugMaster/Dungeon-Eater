@@ -57,8 +57,11 @@ public class EffectPerformSystem : MonoBehaviour
     {
         CombatantView target = applyBurnGA.Target;
         Instantiate(burnVFX, target.transform.position, Quaternion.identity);
-        target.M.Damage(applyBurnGA.BurnDamage);
         
+        //target.M.Damage(applyBurnGA.BurnDamage);
+        //注意所有受到伤害的事件都要通过GA来结算,以便后续添加反伤/死亡等机制
+        ActionSystem.Instance.AddReaction(new DealDamageGA(target, applyBurnGA.BurnDamage));
+
         //结算状态
         target.M.RemoveStatusEffect(StatusEffectType.BURN, 1);
         
